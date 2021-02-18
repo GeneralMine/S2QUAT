@@ -43,7 +43,7 @@ services:
             - frontend
             - backend
     db:
-        container_name: db
+        container_name: s2quat-db
         restart: always
         image: mariadb:latest
         volumes: 
