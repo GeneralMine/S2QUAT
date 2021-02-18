@@ -1,7 +1,16 @@
-#S2QUAT-Backend
-#S2QUAT-Frontend
-#S2QUAT-Landing
 .internal
 db
 # REST file
 test.rest
+
+# Frontend
+frontend/.DS_Store
+frontend/node_modules/
+frontend/src/node_modules/@sapper/
+frontend/yarn-error.log
+frontend/__sapper__/
+frontend/test.rest
+
+# Backend
+backend/node_modules/
+backend/test.rest
