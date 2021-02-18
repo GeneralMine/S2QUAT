@@ -1,0 +1,38 @@
+{
+  "name": "s2quat-backend",
+  "version": "1.2.5",
+  "description": "Backend for S2QUAT an Integrative Quality Framework for Developing Industrial Smart Services",
+  "keywords": [],
+  "homepage": "https://github.com/GeneralMine/S2QUAT-Backend#readme",
+  "bugs": {
+    "url": "https://github.com/GeneralMine/S2QUAT-Backend/issues"
+  },
+  "license": "GPL-3.0-or-later",
+  "author": "Marvin Raiser <marvin@raiser.dev> (https://github.com/GeneralMine)",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GeneralMine/S2QUAT-Backend.git"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "mocha --timeout 10000"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mariadb": "^2.5.3",
+    "node-fetch": "^2.6.1",
+    "proxy-cutter": "^1.0.4",
+    "sequelize": "^6.5.0"
+  },
+  "devDependencies": {
+    "mocha": "^8.3.0",
+    "nodemon": "^2.0.7"
+  }
+}
