@@ -18,8 +18,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: Use Node.js latest
       uses: actions/setup-node@v1
-    - run: cd backend
-    - run: npm install
+    - name: Install dependencies
+      run: npm install
+      working-directory: backend
     - uses: getong/mariadb-action@v1.1
       with:
         host port: 3306 # Optional, default value is 3306. The port of host
@@ -29,9 +30,13 @@ jobs:
         mariadb version: '10.4.10' # Optional, default value is "latest". The version of the MariaDB
         mysql database: 'some_test' # Optional, default value is "test". The specified database which will be create
         mysql root password: 'password' # Required if "mysql user" is empty, default is empty. The root superuser password
-    - run: (npm run start&)
-    - name: Sleep for 20 seconds
+    - name: Run in background
+      run: (npm run start&)
+      working-directory: backend
+    - name: Wait for startup
       uses: jakejarvis/wait-action@master
       with:
         time: '20s'
-    - run: npm test
+    - name: Test backend
+      run: npm test
+      working-directory: backend
