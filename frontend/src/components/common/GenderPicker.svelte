@@ -1,0 +1,21 @@
+<script>
+    import { createEventDispatcher } from "svelte";
+
+    export let name;
+    export let value;
+
+    const dispatch = createEventDispatcher();
+    const options = ["M", "W", "D"];
+</script>
+
+<select bind:value {name}>
+    {#each options as o}
+        <option>{o}</option>
+    {/each}
+</select>
+
+<style>
+    select {
+        width: 3rem;
+    }
+</style>
