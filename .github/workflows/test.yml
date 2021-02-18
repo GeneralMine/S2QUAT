@@ -21,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: npm install
       working-directory: backend
-    - name: startup testing database
+    - name: Start testing database
       uses: getong/mariadb-action@v1.1
       with:
         host port: 3306 # Optional, default value is 3306. The port of host
