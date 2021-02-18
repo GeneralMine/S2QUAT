@@ -1,0 +1,7 @@
+#S2QUAT-Backend
+#S2QUAT-Frontend
+#S2QUAT-Landing
+.internal
+db
+# REST file
+test.rest
