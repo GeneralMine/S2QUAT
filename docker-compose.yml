@@ -1,0 +1,58 @@
+version: "3"
+
+services:
+    frontend:
+        container_name: s2quat-frontend
+        restart: always
+        image: 127.0.0.1:5000/s2quat-frontend
+        build: ./frontend
+        environment: 
+            - "PORT=${FRONTEND_PORT}"
+            - "ROOT_DOMAIN=${ROOT_DOMAIN}"
+            - "DOMAIN=${FRONTEND_DOMAIN}"
+            - "PROTOCOL_PREFIX=${PROTOCOL_PREFIX}"
+            - "BACKEND_DOMAIN=${BACKEND_DOMAIN}"
+            - "BACKEND_PORT=${BACKEND_PORT}"
+            - "TOKEN_SECRET=${TOKEN_SECRET}"
+        ports: 
+            - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+        networks: 
+            - frontend
+            - backend
+    backend:
+        container_name: s2quat-backend
+        restart: always
+        image: 127.0.0.1:5000/s2quat-backend
+        build: ./backend
+        environment: 
+            - "PORT=${BACKEND_PORT}"
+            - "ROOT_DOMAIN=${ROOT_DOMAIN}"
+            - "DOMAIN=${BACKEND_DOMAIN}"
+            - "PROTOCOL_PREFIX=${PROTOCOL_PREFIX}"
+            - "FRONTEND_DOMAIN=${FRONTEND_DOMAIN}"
+            - "DATABASE_HOST=db"
+            - "DATABASE_PORT=${DATABASE_PORT}"
+            - "DATABASE_USERNAME=${DATABASE_USERNAME}"
+            - "DATABASE_PASSWORD=${DATABASE_PASSWORD}"
+            - "TOKEN_SECRET=${TOKEN_SECRET}"
+        ports: 
+            - "${BACKEND_PORT}:${BACKEND_PORT}"
+        depends_on:
+            - "db"
+        networks:
+            - frontend
+            - backend
+    db:
+        container_name: db
+        restart: always
+        image: mariadb:latest
+        volumes: 
+            - ./db:/var/lib/mysql
+        environment: 
+            - "MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}"
+        networks:
+            - backend
+
+networks: 
+    frontend:
+    backend:
