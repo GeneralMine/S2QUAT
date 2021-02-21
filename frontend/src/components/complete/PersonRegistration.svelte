@@ -5,9 +5,16 @@
     import { clickOutside } from "../utils/click_outside";
     import { person } from "./person";
 
-    export let name = $person.name === undefined ? "" : $person.name;
-    export let age = $person.age === undefined ? 0 : $person.age;
-    export let gender = $person.gender === undefined ? "M" : $person.gender;
+    export let name =
+        $person === undefined || $person.name === undefined ? "" : $person.name;
+
+    export let age =
+        $person === undefined || $person.age === undefined ? 0 : $person.age;
+
+    export let gender =
+        $person === undefined || $person.gender === undefined
+            ? "M"
+            : $person.gender;
 
     export let closed = true;
 
