@@ -15,7 +15,7 @@
     import { onMount } from "svelte";
     import Surface from "../../components/common/Surface.svelte";
     let questions = [];
-    let entitiesMap;
+    let questionsMap;
     let selectedID;
     //const colors = [];
     const colors = ["9,176,56", "9,186,110", "9,164,186", "9,111,176"];
@@ -29,8 +29,8 @@
         const url = BACKEND_URL + "/questions";
         questions = await (await getData(url)).json();
         console.log("Data got", questions);
-        entitiesMap = remodel(questions);
-        console.log("remodeled", entitiesMap);
+        questionsMap = remodel(questions);
+        console.log("remodeled", questionsMap);
     }
     function onSelect(ev) {
         selectedID = ev.detail.id;
@@ -61,10 +61,10 @@
     </Surface>
 
     <Surface>
-        {#if entitiesMap !== undefined && entitiesMap != null && entitiesMap.length !== 0}
+        {#if questionsMap !== undefined && questionsMap != null && questionsMap.length !== 0}
             <DataTreeList on:update={reloadData} extended={true} indented={false}>
-                {#each entitiesMap[null] as root}
-                    <DataTree on:update={reloadData} {selectedID} on:select={onSelect} {entitiesMap} node={createNode(root, entitiesMap)} extended={false} depth={0} {colors} />
+                {#each questionsMap[null] as root}
+                    <DataTree on:update={reloadData} {selectedID} on:select={onSelect} {questionsMap} node={createNode(root, questionsMap)} extended={false} depth={0} {colors} />
                     <DataTreeAdd on:update={reloadData} id={root.id} parent={root.parent != null ? root.parent.id : null} depth={0} {colors} />
                 {/each}
             </DataTreeList>
