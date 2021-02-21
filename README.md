@@ -1,4 +1,5 @@
 # S2QUAT
+![Test](https://github.com/GeneralMine/S2QUAT/workflows/Test/badge.svg)
 
 
 ## Database
