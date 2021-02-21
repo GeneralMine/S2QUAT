@@ -15,6 +15,7 @@
         $person === undefined || $person.gender === undefined
             ? "M"
             : $person.gender;
+
     export let closed = true;
 
     function save() {
