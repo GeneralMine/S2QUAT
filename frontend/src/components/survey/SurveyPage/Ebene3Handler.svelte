@@ -3,6 +3,8 @@
     import Tab from "./Tab.svelte";
 
     export let ebene3;
+
+    $: console.log("Ebene3Handler", ebene3);
 </script>
 
 {#if ebene3.children.length > 1}
@@ -11,6 +13,8 @@
             <QuestionView question={q} />
         {/each}
     </Tab>
+{:else if ebene3.children}
+    <QuestionView question={ebene3} />
 {:else}
     <QuestionView question={ebene3.children[0]} />
 {/if}

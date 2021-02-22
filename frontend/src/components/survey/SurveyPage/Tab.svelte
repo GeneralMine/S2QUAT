@@ -11,17 +11,21 @@
 </script>
 
 <div class="container">
-    <div on:click={() => (extended = !extended)} class="box_dropdownIcon">
-        <DropDownIcon bind:expanded={extended} />
-    </div>
-    <div class="box_title">
-        <span>{title}</span>
-    </div>
-    {#if extended}
-        <div class="box_content">
-            <slot />
+    <div class="tabHeader">
+        <div on:click={() => (extended = !extended)} class="box_dropdownIcon">
+            <DropDownIcon bind:expanded={extended} />
         </div>
-    {/if}
+        <div class="box_title">
+            <span>{title}</span>
+        </div>
+    </div>
+    <div class="tabContent">
+        {#if extended}
+            <div class="box_content">
+                <slot />
+            </div>
+        {/if}
+    </div>
 </div>
 
 <style>
@@ -31,7 +35,15 @@
         display: flex;
         flex-direction: column;
     }
-
+    .tabHeader {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+    .tabContent {
+        padding-left: 1em;
+    }
     .box_dropdownIcon {
         width: 30px;
         height: 30px;
