@@ -45,7 +45,7 @@ module.exports = async (req, res) => {
     var date = new Date();
     date.setDate(date.getDate() + 7);
     res.cookie("token", token, {
-        domain: process.env.BACKEND_DOMAIN,
+        domain: process.env.ROOT_DOMAIN,
         expires: date,
         //maxAge: date,
         secure: true
