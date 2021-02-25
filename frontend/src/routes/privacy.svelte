@@ -8,7 +8,7 @@
 </svelte:head>
 
 <div class="page backgroundColor">
-    <a href="/" class="logoContainer">
+    <a href="/login" class="logoContainer">
         <img class="image" src="logo-width.png" alt="S2QUAT Logo" />
     </a>
 
