@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-const url = "http://localhost:21021"
+const url = "http://localhost:23011"
 
 inserts = [
     // Companies
