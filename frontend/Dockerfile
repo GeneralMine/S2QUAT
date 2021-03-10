@@ -1,6 +1,6 @@
 FROM node:latest
 
-EXPOSE 21020
+EXPOSE 23010
 
 RUN mkdir /app
 WORKDIR /app

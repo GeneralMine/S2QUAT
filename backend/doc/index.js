@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 
 const entities = ["companies", "employees", "models", "projects", "questionAnswers", "questions", "scenarios", "surveyResponses", "testPersons", "users"];
 
-const serviceURL = "http://localhost:21021/";
+const serviceURL = "http://localhost:23011/";
 
 const testCases = [
     /**
