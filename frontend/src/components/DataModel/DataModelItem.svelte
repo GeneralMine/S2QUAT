@@ -16,8 +16,8 @@
     .grid-item {
         display: flex;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        font-size: 25px;
         align-items: center;
+        font-size: 1.6rem;
         justify-content: center;
     }
     .text {

@@ -37,7 +37,9 @@
         console.log("Loaded:", entityObject);
     }
 
-    async function conductSurvey() {}
+    async function conductSurvey() {
+        await goto("/" + entity + "/" + id + "/survey");
+    }
 </script>
 
 <svelte:head>
