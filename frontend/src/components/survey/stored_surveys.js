@@ -4,7 +4,6 @@ import { mapObjectToLocalStorage } from "../utils/localStorageMapper";
 export const scenarios = mapObjectToLocalStorage("stored_scenarios");
 export const models = mapObjectToLocalStorage("stored_models");
 
-const localstorage_prefix_scenario = "ss_";
 const localstorage_prefix_model = "mo_";
 
 function load(key) {
@@ -26,15 +25,10 @@ export function loadModel(id) {
 }
 
 export function storeScenario(scenario, model) {
-    const key = localstorage_prefix_scenario + scenario.id;
-
-    // store the scenario
-    localStorage.setItem(key, JSON.stringify(scenario));
-
     // store the model
     storeModel(model);
 
-    // remember we saved this scenario
+    // store scenario
     get(scenarios)[scenario.id] = scenario;
 }
 
@@ -45,5 +39,5 @@ export function storeModel(model) {
     localStorage.setItem(key, JSON.stringify(model));
 
     // remember we saved this model
-    get(models)[model.id] = model;
+    models.set(get(models).filter(el => el !== model.id).push(model.id));
 }
