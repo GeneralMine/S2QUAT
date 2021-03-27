@@ -17,7 +17,7 @@ function load(key) {
 }
 
 export function loadScenario(id) {
-    return load(localstorage_prefix_scenario + id);
+    return get(scenarios)[id];
 }
 
 export function loadModel(id) {
