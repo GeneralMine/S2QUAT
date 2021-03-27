@@ -7,43 +7,29 @@ export const models = mapObjectToLocalStorage("stored_models");
 const localstorage_prefix_scenario = "ss_";
 const localstorage_prefix_model = "mo_";
 
-function load(key) {
-    let item = localStorage.getItem(key);
-
-    if (item === null) {
-        throw new Error("Model was not saved!");
+async function fml() {
+    try {
+        let a = getStoredScenario(12345);
+    } catch (err) {
+        alert("I'm fucked");
     }
-
-    return JSON.parse(item);
 }
 
-export function loadScenario(id) {
-    return load(localstorage_prefix_scenario + id);
+export function getStoredScenario(id) {
+    return new Promise((resolve, reject) => {
+        let item = localStorage.getItem(localstorage_prefix_scenario + id)
+
+        if (item === null) {
+            return reject("Scenario wasn't saved!");
+        }
+
+        return resolve(JSON.parse(item));
+    });
 }
 
-export function loadModel(id) {
-    return load(localstorage_prefix_model + id)
-}
+export function storeScenario(id, scenario, model) {
+    scenario.model = scenario.model.id;
+    localStorage.setItem(id, JSON.stringify(scenario));
 
-export function storeScenario(scenario, model) {
-    const key = localstorage_prefix_scenario + scenario.id;
-
-    // store the scenario
-    localStorage.setItem(key, JSON.stringify(scenario));
-
-    // store the model
-    storeModel(model);
-
-    // remember we saved this scenario
-    get(scenarios)[scenario.id] = scenario;
-}
-
-export function storeModel(model) {
-    const key = localstorage_prefix_model + model.id;
-
-    // store the model
-    localStorage.setItem(key, JSON.stringify(model));
-
-    // remember we saved this model
-    get(models)[model.id] = model;
+    scenarios.set([...get(scenarios), id]);
 }
