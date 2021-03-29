@@ -16,6 +16,7 @@
     import { postData, getData, capitalizeFirstLetter } from "../../../lib";
     import SendPage from "../../../components/survey/SendPage.svelte";
     import SurveyPage from "../../../components/survey/SurveyPage.svelte";
+    import Footer from "../../../components/common/Footer.svelte";
     import { loadModel, loadScenario, storeModel, storeScenario } from "../../../components/survey/stored_surveys";
     import { onMount, onDestroy } from "svelte";
 
@@ -52,8 +53,6 @@
     let scenario;
     let model = [];
     let questionsMap = [];
-    $: console.log("page_index", page_index);
-    $: console.log("max_index", max_index);
 
     onMount(async () => {
         try {
@@ -75,7 +74,7 @@
             console.log("Loaded questionsMap", questionsMap);
 
             if (questionsMap[null] !== undefined && Array.isArray(questionsMap[null])) {
-                max_index += questionsMap[null].length - 1;
+                max_index += questionsMap[null].length;
             }
         }
     });
@@ -106,9 +105,9 @@
             {:else if page_index === max_index - 1}
                 <SendPage bind:name bind:age bind:gender bind:signature />
             {:else if questionsMap !== undefined}
-                {#each questionsMap[null] as a, index}
+                {#each questionsMap[null] as rootQuestion, index}
                     {#if page_index === index + 1}
-                        <SurveyPage number={index} />
+                        <SurveyPage bind:questionAnswers {rootQuestion} {questionsMap} number={index} />
                     {/if}
                 {/each}
             {:else}
@@ -122,6 +121,7 @@
             <Button active={page_index < max_index - 1 || signature} on:click={forward} title={signature && page_index === max_index - 1 ? "Send" : "Weiter"} />
         </div>
     </div>
+    <Footer />
 </div>
 
 <style>
@@ -129,7 +129,11 @@
         height: 100vh;
         width: 100vw;
         display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-content: center;
+        justify-items: center;
+        align-items: center;
     }
     .surface {
         width: 770px;
