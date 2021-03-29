@@ -158,7 +158,9 @@ module.exports = {
         ],
         categories: {
             Allgemein: [
-                { name: "score", type: "number" }
+                { name: "type", type: "type" },
+                { name: "score", type: "number" },
+                { name: "text", type: "text" }
             ],
             SurveyResponse:
                 { name: "surveyResponse", type: "list", entity: "surveyResponses" }

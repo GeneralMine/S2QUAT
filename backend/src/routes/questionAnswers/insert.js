@@ -6,14 +6,14 @@ module.exports = async (req, res) => {
     }
 
     const userID = req.user !== undefined ? req.user.id : undefined;
-    const { score } = req.body;
+    const { type, score, text } = req.body;
 
     if (score == null || score === "") {
         return res.status(400).send();
     }
 
     try {
-        return res.json({ id: await controller.insert(userID, { score }) });
+        return res.json({ id: await controller.insert(userID, { type, score, text }) });
     } catch (error) {
         return res.status(500).send();
     }
