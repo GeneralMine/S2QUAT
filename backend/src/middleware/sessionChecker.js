@@ -1,6 +1,8 @@
 const userController = require("../controller/users");
 const jwt = require("jsonwebtoken");
 
+const TOKEN_SECRET = process.env.TOKEN_SECRET || "d3ac10209c78b071e9a00791904cabe21fe5f0fdc2a91a9a6b54ec0ebe2b8e8b275dc7c7579a85468e4abd7b1c18c38a0f8889668e9ec66cf58245bd5b0b665e";
+
 module.exports = async (req, res, next) => {
     if (req.url === ("/users/login" || req.url === "/users/register")) {
         return next();
@@ -13,7 +15,7 @@ module.exports = async (req, res, next) => {
     }
 
     try {
-        const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+        const decodedToken = jwt.verify(token, TOKEN_SECRET);
 
         if (decodedToken === undefined) {
             console.error("AUTH: decodedToken is null!");
