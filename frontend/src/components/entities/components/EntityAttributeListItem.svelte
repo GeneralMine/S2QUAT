@@ -1,8 +1,22 @@
 <script>
     import { capitalizeFirstLetter } from "../../../lib/";
+
     export let key;
     export let value;
     export let isEditMode = false;
+
+    const fookin_ugly = (el) => {
+        let parsed_value = JSON.parse(value);
+        let value_keys = Object.keys();
+
+        if (parsed_value[parseKey] !== "" && parsed_value[parseKey] !== null) {
+            if (typeof parsed_value[parseKey] === "object") {
+                return parsed_value[parseKey][Object.keys(parsed_value[parseKey])];
+            }
+            return parsed_value[parseKey];
+        }
+        return "-";
+    };
 </script>
 
 <div class="container">
@@ -21,7 +35,7 @@
                     <div class="valueJSONHeaderValue">Value</div>
                 </div>
                 <div class="valueJSONList">
-                    {#each Object.keys(JSON.parse(value)) as parseKey}
+                    {#each value_keys as parseKey}
                         <div class="valueJSONItem">
                             <div class="valueJSONItemContainerKey">
                                 <p class="valueJSONItemContainerKeyText">
@@ -30,11 +44,12 @@
                             </div>
                             <div class="valueJSONItemContainerValue">
                                 <p class="valueJSONItemContainerValueText">
-                                    {JSON.parse(value)[parseKey] !== "" && JSON.parse(value)[parseKey] !== null
-                                        ? typeof JSON.parse(value)[parseKey] === "object"
-                                            ? JSON.parse(value)[parseKey][Object.keys(JSON.parse(value)[parseKey])]
-                                            : JSON.parse(value)[parseKey]
-                                        : "-"}
+                                    {fookin_ugly(parseKey)}
+                                    <!-- {parsed_value[parseKey] !== "" && parsed_value[parseKey] !== null
+                                        ? typeof parsed_value[parseKey] === "object"
+                                            ? parsed_value[parseKey][Object.keys(parsed_value[parseKey])]
+                                            : parsed_value[parseKey]
+                                        : "-"} -->
                                 </p>
                             </div>
                         </div>
@@ -43,7 +58,7 @@
             </div>
         {:else}
             <p class="valueText">
-                {typeof value === "object" ? value.name : value}
+                {value !== null ? (typeof value === "object" ? (value.name !== null ? value.name : "-") : value) : "-"}
             </p>
         {/if}
     </div>

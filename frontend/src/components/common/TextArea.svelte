@@ -6,6 +6,7 @@
     export let revealed = false;
     export let placeholder = "";
     export let color = "gray";
+    export let locked = false;
 
     let textareaElement;
     $: height = textareaElement !== undefined ? textareaElement.scrollHeight : 30;
@@ -31,6 +32,7 @@
 {/if}
 <div class="container">
     <textarea
+        class:locked
         class="container textarea autoresizing"
         bind:this={textareaElement}
         {id}
@@ -64,5 +66,11 @@
         display: block;
         overflow: hidden;
         resize: none;
+    }
+    .locked {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 </style>

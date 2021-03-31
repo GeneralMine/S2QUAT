@@ -15,7 +15,7 @@ export const mapObjectToLocalStorage = (key) => {
         initialObj = JSON.parse(initialValue);
     } catch (err) {
         // json parse errors result in overridden localStorage
-        initialObj = null;
+        initialObj = undefined;
     }
 
     // initializing store
@@ -40,7 +40,7 @@ export const mapStringToLocalStorage = (key) => {
 
     if (initialValue == undefined) {
         // write null for any nullish value
-        store = writable(null);
+        store = writable(undefined);
     } else {
         // write initial value if present
         store = writable(initialValue);

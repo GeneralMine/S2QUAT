@@ -24,7 +24,7 @@ module.exports = {
             throw new Error(error);
         }
     },
-    async getInModel(model, include, forExternalGet, userID, id) {
+    async getInModel(model, include, forExternalGet, userID = -1, id) {
         const actionID = await this.logAction("get", userID, model.name, id, -1, {}, {}, {});
         try {
             const item = await model.findOne({ where: { id }, include });
@@ -40,7 +40,9 @@ module.exports = {
             throw new Error(error);
         }
     },
-    async updateInModel(model, include, userID, id, data) {
+    async updateInModel(model, include, userID = -1, id, data) {
+        console.log("--->", data);
+
         const actionID = await this.logAction("update", userID, model.name, id, -1, {}, data, {});
         try {
             let item = await model.findOne({ where: { id }, include });
@@ -78,6 +80,7 @@ module.exports = {
                         let relationshipObject = dataEntryValue !== null ? await database.db.model(tempEntityName).findOne({ where: { id: dataEntryValue } }) : null;
                         //console.log("Found relationship object", relationshipObject);
                         //console.log("Calling: ", "set" + lib.capitalizeFirstLetter(key));
+                        //console.log(lib.getMethods(item));
                         await item["set" + lib.capitalizeFirstLetter(key)](relationshipObject);
                         //console.log("set " + dataEntryValue + " as " + key);
                         //console.log(item);
@@ -105,7 +108,7 @@ module.exports = {
             throw new Error(error);
         }
     },
-    async removeInModel(model, userID, id) {
+    async removeInModel(model, userID = -1, id) {
         const actionID = await this.logAction("remove", userID, model.name, id, -1, {}, {}, {});
 
         try {
@@ -126,7 +129,7 @@ module.exports = {
             throw new Error(error);
         }
     },
-    async listModel(model, includes, forExternalList, userID) {
+    async listModel(model, includes, forExternalList, userID = -1) {
         const actionID = await this.logAction("list", userID, model.name, null, -1, {}, {}, {});
         try {
             const all = await model.findAll({

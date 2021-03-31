@@ -42,12 +42,12 @@ async function startup() {
     await entityHandler.startupEntity(model);
 }
 
-function forExternalList({ id, name, scenario, questions }) {
-    return { id, name, scenario, questions };
+function forExternalList({ id, type, name, scenario, questions }) {
+    return { id, type, name, scenario, questions };
 }
 
-function forExternalGet({ id, name, scenario, questions }) {
-    return { id, name, scenario, questions };
+function forExternalGet({ id, type, name, scenario, questions }) {
+    return { id, type, name, scenario, questions };
 }
 
 /**

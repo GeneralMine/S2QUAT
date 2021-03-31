@@ -9,14 +9,14 @@
     export let colors;
     export let selection;
     export let selectedID;
-    export let entitiesMap;
+    export let questionsMap;
     export let isEditable = true;
     export let isSelectionMode = false;
 
     export let extended;
     export let selected;
 
-    let isLast = node.children !== undefined && node.children.length > 0;
+    $: isLast = node.children !== undefined && node.children.length > 0;
 
     function toggle() {
         if (node.children !== undefined && node.children.length > 0) {
@@ -89,7 +89,7 @@
     </div>
     <DataTreeList {extended}>
         {#each node.children as element}
-            <svelte:self on:select on:selectionChange on:update={reloadData} node={element} depth={depth + 1} {isSelectionMode} {isEditable} {selectedID} {selection} {entitiesMap} {colors} />
+            <svelte:self on:select on:selectionChange on:update={reloadData} node={element} depth={depth + 1} {isSelectionMode} {isEditable} {selectedID} {selection} {questionsMap} {colors} />
             {#if isEditable && !isSelectionMode}
                 <DataTreeAdd on:update={reloadData} id={element.id} parent={element.parent != null ? element.parent.id : null} depth={depth + 1} {colors} />
             {/if}

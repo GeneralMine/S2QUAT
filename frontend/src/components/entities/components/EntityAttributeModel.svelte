@@ -6,7 +6,7 @@
 
 model here...
 <div>
-    <DataModel entitiesMap={remodel(entities)} />
+    <DataModel questionsMap={remodel(entities)} />
 </div>
 
 <style>

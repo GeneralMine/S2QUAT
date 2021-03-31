@@ -14,7 +14,7 @@
 
     const colors = ["9,176,56", "9,186,110", "9,164,186", "9,111,176"];
 
-    let entitiesMap = {};
+    let questionsMap = {};
     let selectedID;
 
     $: console.log("selectedNodes", selection);
@@ -30,8 +30,8 @@
 
     async function reloadData() {
         console.log("Data got", entities);
-        entitiesMap = remodel(entities);
-        console.log("remodeled", entitiesMap);
+        questionsMap = remodel(entities);
+        console.log("remodeled", questionsMap);
     }
 
     function onSelect(ev) {
@@ -55,20 +55,20 @@
 
 <div>
     <DataTreeList on:update={reloadData} extended={true} indented={false}>
-        {#if Array.isArray(entitiesMap[null])}
-            {#each entitiesMap[null] as root}
+        {#if Array.isArray(questionsMap[null])}
+            {#each questionsMap[null] as root}
                 <DataTree
                     on:update={reloadData}
                     on:select={onSelect}
                     on:selectionChange={selectionChanged}
-                    node={createNode(root, entitiesMap)}
+                    node={createNode(root, questionsMap)}
                     extended={false}
                     depth={0}
                     {isEditable}
                     {isSelectionMode}
                     {selection}
                     {selectedID}
-                    {entitiesMap}
+                    {questionsMap}
                     {colors}
                 />
                 {#if isEditable && !isSelectionMode}

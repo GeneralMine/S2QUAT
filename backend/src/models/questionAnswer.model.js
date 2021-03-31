@@ -5,6 +5,10 @@ module.exports =
     db.define("questionAnswer", {
         score: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
+        },
+        text: {
+            type: DataTypes.TEXT,
+            allowNull: true
         },
     });

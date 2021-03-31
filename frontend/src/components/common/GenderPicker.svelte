@@ -1,11 +1,8 @@
 <script>
-    import { createEventDispatcher } from "svelte";
-
     export let name;
     export let value;
 
-    const dispatch = createEventDispatcher();
-    const options = ["M", "W", "D"];
+    const options = ["male", "female", "divers"];
 </script>
 
 <select bind:value {name}>
@@ -16,6 +13,7 @@
 
 <style>
     select {
-        width: 3rem;
+        width: 100%;
+        height: 100%;
     }
 </style>

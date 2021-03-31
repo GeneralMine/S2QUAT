@@ -1,12 +1,14 @@
 <script>
     export let title;
+    export let active = true;
 </script>
 
-<div class="button" on:click|preventDefault>{title}</div>
+<div class:active class="button" on:click|preventDefault>{title}</div>
 
 <style>
     .button {
-        background-color: #35a8e0;
+        user-select: none;
+        background-color: #888888;
         border-radius: 0.5rem;
         height: 2.25rem;
         padding-left: 1.5rem;
@@ -18,6 +20,10 @@
         text-decoration: none;
         font-weight: 800;
         color: white;
+    }
+
+    .active {
         cursor: pointer;
+        background-color: #35a8e0;
     }
 </style>

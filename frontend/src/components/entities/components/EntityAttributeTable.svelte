@@ -6,7 +6,7 @@
     $: BACKEND_URL = $session.BACKEND_URL;
     /*******************************************/
 
-    import { postData, getData, deleteData, capitalizeFirstLetter, parseSingular } from "../../../lib";
+    import { postData, getData, deleteData, capitalizeFirstLetter, parseSingular, parsePlural } from "../../../lib";
     import IconButton from "../../common/IconButton.svelte";
     import Checkbox from "../../common/Checkbox.svelte";
     import SearchBar from "../../common/SearchBar.svelte";
@@ -117,6 +117,8 @@
                                     <p class="text-left">
                                         <img style="height: 25px; width: auto;object-fit: contain;" src={"entityFiles/" + attribute.name + "s/" + item[attribute.name]} alt={item[attribute.name]} />
                                     </p>
+                                {:else if attribute.type === "relationLink" && item[attribute.name] !== null}
+                                    <a href={parsePlural(attribute.name) + "/" + item[attribute.name].id}>{attribute.name + item[attribute.name].id}</a>
                                 {:else}
                                     <div>
                                         <span style="white-space: nowrap;"

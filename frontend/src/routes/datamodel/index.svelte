@@ -8,16 +8,16 @@
     import { postData, getData, capitalizeFirstLetter } from "../../lib";
     import { onMount, onDestroy } from "svelte";
     import DataModel from "../../components/DataModel/DataModel.svelte";
-    import { remodel, createNode } from "../../lib/treeLib";
+    import { remodel } from "../../lib/treeLib";
     let questions = [];
-    let entitiesMap = [];
+    let questionsMap = [];
 
     onMount(async () => {
         const url = BACKEND_URL + "/questions";
         questions = await (await getData(url)).json();
         console.log("Loaded:", questions);
-        entitiesMap = remodel(questions);
-        console.log(entitiesMap);
+        questionsMap = remodel(questions);
+        console.log(questionsMap);
     });
 </script>
 
@@ -26,7 +26,7 @@
 </svelte:head>
 
 <div class="page">
-    <DataModel {entitiesMap} />
+    <DataModel {questionsMap} />
 </div>
 
 <style>
