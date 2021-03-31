@@ -15,6 +15,7 @@ jobs:
         uses: fifsky/ssh-action@master
         with:
           command: |
+            cd services/S2QUAT
             git pull
             restart
           host: ${{ secrets.HOST }}
