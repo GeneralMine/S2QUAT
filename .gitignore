@@ -12,8 +12,12 @@ frontend/src/node_modules/@sapper/
 frontend/yarn-error.log
 frontend/__sapper__/
 frontend/test.rest
+frontend/package-lock.json
 
 # Backend
 backend/.env
+frontend/.DS_Store
 backend/node_modules/
+frontend/yarn-error.log
 backend/test.rest
+backend/package-lock.json
