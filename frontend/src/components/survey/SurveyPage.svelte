@@ -5,6 +5,7 @@
     export let rootQuestion;
     export let questionsMap;
     export let type = 0;
+    export let isSend;
 </script>
 
 <div class="">
@@ -12,7 +13,7 @@
     <p>{rootQuestion.description}</p>
     {#if questionsMap[rootQuestion.id] !== undefined}
         {#each questionsMap[rootQuestion.id] as category}
-            <Category on:update_answer {type} node={createNode(category, questionsMap)} />
+            <Category bind:isSend on:update_answer {type} node={createNode(category, questionsMap)} />
         {/each}
     {/if}
 </div>

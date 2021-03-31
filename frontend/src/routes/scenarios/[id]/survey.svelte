@@ -69,6 +69,8 @@
     // functionalitiy
     let page_index = 0;
     export let max_index = 2;
+    let isSend = false;
+    let surveyResponseId;
 
     // data from Database
     export let scenario;
@@ -107,8 +109,11 @@
         let url = BACKEND_URL + "/surveys";
         let data = { questionAnswers: $questionAnswers, name, age, gender, signature, scenarioId: scenario.id };
         console.log("Sending form to " + url, data);
-        let surveyResponseId = await postData(url, data);
-        console.log(surveyResponseId);
+        let response = await (await postData(url, data)).json();
+        console.log(response);
+        surveyResponseId = response.id;
+        console.log("Got surveyResponseId", surveyResponseId);
+        isSend = true;
     }
 
     function updateAnswer(ev) {
@@ -127,11 +132,11 @@
             {#if page_index === 0}
                 <ScenarioPage title={scenario !== undefined ? scenario.name : "Test"} description={scenario !== undefined ? scenario.description : "Test"} />
             {:else if page_index === max_index - 1}
-                <SendPage bind:name bind:age bind:gender bind:signature />
+                <SendPage bind:surveyResponseId bind:isSend bind:name bind:age bind:gender bind:signature />
             {:else if questionsMap !== undefined}
                 {#each questionsMap[null] as rootQuestion, index}
                     {#if page_index === index + 1}
-                        <SurveyPage on:update_answer={updateAnswer} type={model.type} {rootQuestion} {questionsMap} />
+                        <SurveyPage bind:isSend on:update_answer={updateAnswer} type={model.type} {rootQuestion} {questionsMap} />
                     {/if}
                 {/each}
             {:else}
@@ -142,7 +147,7 @@
         <div class="button_group">
             <Button active={page_index > 0} on:click={back} title="Zurück" />
             <PageViewIndicator bind:count={max_index} bind:selected={page_index} />
-            <Button active={page_index < max_index - 1 || signature} on:click={forward} title={signature && page_index === max_index - 1 ? "Send" : "Weiter"} />
+            <Button active={page_index < max_index - 1 || (signature && !isSend)} on:click={forward} title={signature && page_index === max_index - 1 ? "Send" : "Weiter"} />
         </div>
     </div>
     <Footer />

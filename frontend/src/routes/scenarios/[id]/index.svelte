@@ -7,7 +7,7 @@
 <script>
     /********************************************
      * Gettieng denv variables from session store */
-    import { stores } from "@sapper/app";
+    import { stores, goto } from "@sapper/app";
     const { session } = stores();
     $: BACKEND_URL = $session.BACKEND_URL;
     /*******************************************/
@@ -38,7 +38,8 @@
     }
 
     async function conductSurvey() {
-        await goto("/" + entity + "/" + id + "/survey");
+        console.log("Conducting a survey for id", id);
+        goto("/" + entity + "/" + id + "/survey", { replaceState: true });
     }
 </script>
 

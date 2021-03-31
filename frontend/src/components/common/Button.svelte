@@ -20,10 +20,10 @@
         text-decoration: none;
         font-weight: 800;
         color: white;
-        cursor: pointer;
     }
 
     .active {
+        cursor: pointer;
         background-color: #35a8e0;
     }
 </style>

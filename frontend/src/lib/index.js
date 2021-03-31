@@ -93,6 +93,17 @@ export function parseSingular(str) {
     return str;
 }
 
+export function parsePlural(str) {
+    if (!str.endsWith("s") && !str.endsWith("y")) {
+        str += "s";
+    }
+    if (str.endsWith("y")) {
+        str = str.slice(0, -2);
+        str += "ie";
+    }
+    return str;
+}
+
 export function lowerFirstLetter(string) {
     if (string === undefined) {
         return "undefined";

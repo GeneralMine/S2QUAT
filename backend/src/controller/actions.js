@@ -56,7 +56,11 @@ async function insert(actionName, user, entityName, entityID, status, original, 
 }
 
 async function list() {
-    const all = await model.findAll();
+    const all = await model.findAll({
+        limit: 50,
+        order: [
+            ['id', 'DESC']]
+    });
     console.log("List: got all " + all.length + " actions");
 
     let externalList = [];

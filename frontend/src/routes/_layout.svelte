@@ -1,5 +1,5 @@
 <script context="module">
-	export function prefetch(page) {
+	export function preload(page) {
 		return { url_path: page.path };
 	}
 </script>
@@ -7,8 +7,8 @@
 <script>
 	import NavDrawer from "../components/NavDrawer/NavDrawer.svelte";
 	import NavStatus from "../components/NavStatus/NavStatus.svelte";
-	import Footer from "../components/common/Footer.svelte";
 	import RainbowBox from "../components/common/RainbowBox.svelte";
+	import Footer from "../components/common/Footer.svelte";
 
 	import { stores } from "@sapper/app";
 	const { page } = stores();
@@ -16,15 +16,16 @@
 	import { is_loading } from "../components/still_loading.js";
 
 	export let segment;
-	let url_path = $page.path;
+	$: url_path = $page.path;
 
 	let layoutFreeSites = ["login", "register", "impressum", "about", "privacy"];
 
-	function shouldBeLayoutFree(s) {
-		if (url_path.endsWith("/survey") && url_path.startsWith("/scenarios")) {
+	function shouldBeLayoutFree(s, url_path) {
+		if ((url_path.endsWith("/survey") && url_path.startsWith("/scenarios")) || layoutFreeSites.includes(s)) {
 			return true;
+		} else {
+			return false;
 		}
-		layoutFreeSites.includes(s);
 	}
 
 	$: selected = segment === undefined ? "dashboard" : segment;
@@ -36,8 +37,7 @@
 			<RainbowBox />
 		</div>
 	{/if}
-
-	{#if shouldBeLayoutFree(segment)}
+	{#if shouldBeLayoutFree(segment, url_path)}
 		<slot class="background" />
 	{:else}
 		<div class="layoutContainer">
