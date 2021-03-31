@@ -2,14 +2,13 @@ FROM node:latest
 
 EXPOSE 23010
 
-RUN mkdir /app
 WORKDIR /app
 
-COPY package.json /app/package.json
-COPY package-lock.json /app/package-lock.json
-RUN npm install && npm ls
+COPY package.json .
 
-COPY . /app
+RUN npm install
+
+COPY . .
 
 RUN npm run build
 
