@@ -9,7 +9,7 @@ module.exports =
         },
         user: {
             type: DataTypes.INTEGER,
-            allowNull: true
+            allowNull: false
         },
         entityName: {
             type: DataTypes.TEXT,

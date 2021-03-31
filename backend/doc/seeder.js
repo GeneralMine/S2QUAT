@@ -110,36 +110,42 @@ inserts = [
     {
         entity: "models",
         data: {
+            type: 0,
             name: "Pinguine bei Fütterung",
         },
     },
     {
         entity: "models",
         data: {
+            type: 1,
             name: "Menschensklaven",
         },
     },
     {
         entity: "models",
         data: {
+            type: 2,
             name: "TestModel",
         },
     },
     {
         entity: "models",
         data: {
+            type: 0,
             name: "TestModel",
         },
     },
     {
         entity: "models",
         data: {
+            type: 1,
             name: "TestModel",
         },
     },
     {
         entity: "models",
         data: {
+            type: 2,
             name: "TestModel",
         },
     },
@@ -217,7 +223,6 @@ inserts = [
     {
         entity: "questionAnswers",
         data: {
-            type: 0,
             score: 5,
             text: "Gängige Praxis bei uns"
         },
@@ -225,21 +230,18 @@ inserts = [
     {
         entity: "questionAnswers",
         data: {
-            type: 1,
             score: 2,
         },
     },
     {
         entity: "questionAnswers",
         data: {
-            type: 2,
             text: "Das Team hat es nicht gut aufgenommen",
         },
     },
     {
         entity: "questionAnswers",
         data: {
-            type: 0,
             score: 3,
             text: "Ganz okay"
         },
@@ -247,14 +249,12 @@ inserts = [
     {
         entity: "questionAnswers",
         data: {
-            type: 1,
             score: 4,
         },
     },
     {
         entity: "questionAnswers",
         data: {
-            type: 2,
             text: "Exzellent",
         },
     },
@@ -422,25 +422,15 @@ inserts = [
             name: "Hans Peter Mustermann",
             signature: 1,
             age: 18,
-            gender: "female"
+            gender: "male"
         },
     },
     {
         entity: "testPersons",
         data: {
-            name: "Hans Peter Mustermann",
+            name: "Laura Musterfrau",
             signature: 1,
-            age: 18,
-            gender: "female"
-        },
-    },
-
-    {
-        entity: "testPersons",
-        data: {
-            name: "Hans Peter Mustermann",
-            signature: 1,
-            age: 18,
+            age: 42,
             gender: "female"
         },
     },
@@ -448,9 +438,19 @@ inserts = [
     {
         entity: "testPersons",
         data: {
-            name: "Hans Peter Mustermann",
+            name: "Günter Andersch",
             signature: 1,
-            age: 18,
+            age: 33,
+            gender: "male"
+        },
+    },
+
+    {
+        entity: "testPersons",
+        data: {
+            name: "Julia Unbekannt",
+            signature: 1,
+            age: 20,
             gender: "female"
         },
     },
@@ -458,9 +458,9 @@ inserts = [
     {
         entity: "testPersons",
         data: {
-            name: "Hans Peter Mustermann",
+            name: "Lisa Neumann",
             signature: 1,
-            age: 18,
+            age: 50,
             gender: "female"
         },
     },
@@ -468,55 +468,15 @@ inserts = [
     {
         entity: "testPersons",
         data: {
-            name: "Hans Peter Mustermann",
+            name: "Karl Jung",
             signature: 1,
-            age: 18,
-            gender: "female"
+            age: 16,
+            gender: "male"
         },
     },
 
 
     // Users
-    {
-        entity: "users",
-        data: {
-            name: "GeneralMine",
-            password: "Tester123",
-            email: "marvin_raiser@web.de"
-        },
-    },
-    {
-        entity: "users",
-        data: {
-            name: "GeneralMine",
-            password: "Tester123",
-            email: "marvin_raiser@web.de"
-        },
-    },
-    {
-        entity: "users",
-        data: {
-            name: "GeneralMine",
-            password: "Tester123",
-            email: "marvin_raiser@web.de"
-        },
-    },
-    {
-        entity: "users",
-        data: {
-            name: "GeneralMine",
-            password: "Tester123",
-            email: "marvin_raiser@web.de"
-        },
-    },
-    {
-        entity: "users",
-        data: {
-            name: "GeneralMine",
-            password: "Tester123",
-            email: "marvin_raiser@web.de"
-        },
-    },
     {
         entity: "users",
         data: {

@@ -91,7 +91,8 @@ module.exports = {
         ],
         categories: {
             Allgemein: [
-                { name: "name", type: "text" }
+                { name: "name", type: "text" },
+                { name: "type", type: "type" }
             ],
             Scenario:
                 { name: "scenario", type: "list", entity: "scenarios" }
@@ -158,7 +159,6 @@ module.exports = {
         ],
         categories: {
             Allgemein: [
-                { name: "type", type: "type" },
                 { name: "score", type: "number" },
                 { name: "text", type: "text" }
             ],

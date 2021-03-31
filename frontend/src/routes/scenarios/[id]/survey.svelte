@@ -1,6 +1,50 @@
 <script context="module">
-    export function preload({ params }, session) {
-        return { id: params.id };
+    import { loadModel, loadScenario, storeModel, storeScenario } from "../../../components/survey/stored_surveys";
+
+    export async function preload({ params }, session) {
+        const BACKEND_URL = session.BACKEND_URL;
+        const id = params.id;
+
+        const cool_fetch = async (my_url) => (await getDataInPreload(this, my_url)).json();
+
+        let model, scenario, questionsMap, max_index;
+
+        try {
+            if (typeof window === "undefined") {
+                throw new Error("Caching only on client-side");
+            }
+            model = loadModel(id);
+            scenario = loadScenario(id);
+        } catch (err) {
+            const scenarioURL = BACKEND_URL + "/scenarios/" + id;
+
+            scenario = await cool_fetch(scenarioURL);
+
+            const modelURL = BACKEND_URL + "/models/" + scenario.model.id;
+
+            model = await cool_fetch(modelURL);
+
+            questionsMap = remodel(model.questions);
+
+            if (questionsMap[null] !== undefined && Array.isArray(questionsMap[null])) {
+                max_index = 2 + questionsMap[null].length;
+            }
+        }
+
+        return { /* id, */ model, scenario, max_index, questionsMap };
+    }
+
+    async function getDataInPreload(instance, url) {
+        let response = await instance.fetch(url, {
+            method: "GET", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors", // no-cors, *cors, same-origin
+            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            credentials: "include", // include, *same-origin, omit
+            redirect: "follow", // manual, *follow, error
+            referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        });
+
+        return response;
     }
 </script>
 
@@ -13,71 +57,38 @@
     /*******************************************/
     import Button from "../../../components/common/Button.svelte";
     import ScenarioPage from "../../../components/survey/ScenarioPage.svelte";
-    import { postData, getData, capitalizeFirstLetter } from "../../../lib";
     import SendPage from "../../../components/survey/SendPage.svelte";
     import SurveyPage from "../../../components/survey/SurveyPage.svelte";
     import Footer from "../../../components/common/Footer.svelte";
-    import { loadModel, loadScenario, storeModel, storeScenario } from "../../../components/survey/stored_surveys";
-    import { onMount, onDestroy } from "svelte";
-
     import { remodel, createNode } from "../../../lib/treeLib";
     import PageViewIndicator from "../../../components/Navigation/PageViewIndicator.svelte";
-    export let id;
+    import { postData, getData, capitalizeFirstLetter } from "../../../lib";
 
-    /*
+    import { questionAnswers } from "../../../components/survey/SurveyPage/question_answer";
 
-    /scenarios/id/survey
+    // functionalitiy
+    let page_index = 0;
+    export let max_index = 2;
 
-    1. Vom Scenario, dessen Model, dessen questions
+    // data from Database
+    export let scenario;
+    export let model = [];
+    export let questionsMap = {};
 
-    Nur Fragebögen sind offline gespeichert!
-
-    0 -> ScenarioPage: Scenrio wird erklärt und so
-    0 < x < max -> jedes Feld (1.L) bekommt eigene Seite
-    max -> SendPage: Fragen zur Person (TestPerson creation)
-    
-    */
-
-    // SurveyData
-    let questionAnswers = [];
+    // data to submit
+    /**
+     * map {
+     *   categoryId: {
+     *     questionId: {score, text}
+     *   }
+     * }
+     */
     let name;
     let age;
     let gender;
     let signature = false;
 
-    // functionalitiy
-    let page_index = 0;
-    let max_index = 2;
-
-    // Data
-    let scenario;
-    let model = [];
-    let questionsMap = [];
-
-    onMount(async () => {
-        try {
-            model = loadModel(id);
-            scenario = loadScenario(id);
-        } catch (err) {
-            const scenarioURL = BACKEND_URL + "/scenarios/" + id;
-            scenario = await (await getData(scenarioURL)).json();
-
-            const modelURL = BACKEND_URL + "/models/" + scenario.model.id;
-            model = await (await getData(modelURL)).json();
-
-            questionsMap = remodel(model.questions);
-
-            console.log(questionsMap, model.questions);
-
-            console.log("Loaded Scenario", scenario);
-            console.log("Loaded Model", model);
-            console.log("Loaded questionsMap", questionsMap);
-
-            if (questionsMap[null] !== undefined && Array.isArray(questionsMap[null])) {
-                max_index += questionsMap[null].length;
-            }
-        }
-    });
+    $: console.log(questionAnswers);
 
     function back() {
         if (--page_index < 0) {
@@ -93,7 +104,20 @@
         }
     }
     async function sendSurvey() {
-        console.log("Sending form...", { questionAnswers, name, age, gender, signature });
+        let url = BACKEND_URL + "/surveys";
+        let data = { questionAnswers: $questionAnswers, name, age, gender, signature, scenarioId: scenario.id };
+        console.log("Sending form to " + url, data);
+        let surveyResponseId = await postData(url, data);
+        console.log(surveyResponseId);
+    }
+
+    function updateAnswer(ev) {
+        // questionAnswers STORE
+        const { id, text, score } = ev.detail;
+        const tmp = { ...$questionAnswers };
+        tmp[id] = { text, score };
+
+        $questionAnswers = tmp;
     }
 </script>
 
@@ -107,7 +131,7 @@
             {:else if questionsMap !== undefined}
                 {#each questionsMap[null] as rootQuestion, index}
                     {#if page_index === index + 1}
-                        <SurveyPage bind:questionAnswers {rootQuestion} {questionsMap} number={index} />
+                        <SurveyPage on:update_answer={updateAnswer} type={model.type} {rootQuestion} {questionsMap} />
                     {/if}
                 {/each}
             {:else}
@@ -126,7 +150,6 @@
 
 <style>
     .surveyContainer {
-        height: 100vh;
         width: 100vw;
         display: flex;
         flex-direction: column;
@@ -137,7 +160,6 @@
     }
     .surface {
         width: 770px;
-        height: 75%;
 
         margin-top: 2rem;
         padding: 2rem;

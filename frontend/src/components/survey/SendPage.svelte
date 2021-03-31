@@ -1,7 +1,11 @@
 <script>
+    // TODO: store person's details
+    // import { mapStringToLocalStorage } from "../utils/localStorageMapper";
+
     import Checkbox from "../common/Checkbox.svelte";
     import GenderPicker from "../common/GenderPicker.svelte";
     import TextField from "../common/TextField.svelte";
+
     export let name;
     export let signature = false;
     export let age;

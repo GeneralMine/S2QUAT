@@ -6,14 +6,14 @@ module.exports = async (req, res) => {
     }
 
     const userID = req.user !== undefined ? req.user.id : undefined;
-    const { name } = req.body;
+    const { type, name } = req.body;
 
     if (name == null || name === "") {
         return res.status(400).send();
     }
 
     try {
-        return res.json({ id: await controller.insert(userID, { name }) });
+        return res.json({ id: await controller.insert(userID, { type, name }) });
     } catch (error) {
         return res.status(500).send();
     }

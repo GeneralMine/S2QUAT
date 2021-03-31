@@ -1,21 +1,18 @@
 <script>
-    export let number;
-    export let questionAnswers;
+    import Category from "./SurveyPage/Category.svelte";
+    import { createNode } from "../../lib/treeLib";
+
     export let rootQuestion;
     export let questionsMap;
+    export let type = 0;
 </script>
 
 <div class="">
-    <!-- {number}
-    {JSON.stringify(rootQuestion, null, 4)}
-    {questionsMap} -->
-
+    <h2>{rootQuestion.name}</h2>
+    <p>{rootQuestion.description}</p>
     {#if questionsMap[rootQuestion.id] !== undefined}
         {#each questionsMap[rootQuestion.id] as category}
-            {category.name}
-            {#each questionsMap[category.id] as question}
-                {question.name}
-            {/each}
+            <Category on:update_answer {type} node={createNode(category, questionsMap)} />
         {/each}
     {/if}
 </div>

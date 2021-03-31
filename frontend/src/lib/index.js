@@ -34,7 +34,7 @@ export async function postData(url = '', data = {}) {
 export async function getData(url = '') {
     // Default options are marked with *
     is_loading.set(true);
-    await sleep(2000);
+
     let response = await fetch(url, {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
@@ -51,7 +51,6 @@ export async function getData(url = '') {
 
 export async function deleteData(url = '') {
     // Default options are marked with *
-
     is_loading.set(true);
 
     let response = await fetch(url, {

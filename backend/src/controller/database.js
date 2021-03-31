@@ -63,9 +63,10 @@ module.exports = {
         for (const controller of controllers) {
             await controller.startup();
         }
+        console.log("Database: Startup complete!");
         await this.db.sync();
 
-        console.log("Database: Startup complete!");
+        console.log("Database: Sync complete!");
 
         controllers.forEach(async (controller) => { console.log(await controller.getStatistics()) });
     },

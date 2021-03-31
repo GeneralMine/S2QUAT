@@ -5,7 +5,7 @@ module.exports =
     db.define("testPerson", {
         name: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: true
         },
         signature: {
             type: DataTypes.BOOLEAN,
