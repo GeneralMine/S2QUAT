@@ -1,26 +1,43 @@
+<script context="module">
+	export function preload(page) {
+		return { url_path: page.path };
+	}
+</script>
+
 <script>
 	import NavDrawer from "../components/NavDrawer/NavDrawer.svelte";
 	import NavStatus from "../components/NavStatus/NavStatus.svelte";
-	import Footer from "../components/common/Footer.svelte";
 	import RainbowBox from "../components/common/RainbowBox.svelte";
+	import Footer from "../components/common/Footer.svelte";
+
+	import { stores } from "@sapper/app";
+	const { page } = stores();
 
 	import { is_loading } from "../components/still_loading.js";
 
 	export let segment;
+	$: url_path = $page.path;
 
-	let layoutFreeSites = ["login", "register", "impressum", "about", "privacy", "complete"];
+	let layoutFreeSites = ["login", "register", "impressum", "about", "privacy"];
+
+	function shouldBeLayoutFree(s, url_path) {
+		if ((url_path.endsWith("/survey") && url_path.startsWith("/scenarios")) || layoutFreeSites.includes(s)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	$: selected = segment === undefined ? "dashboard" : segment;
 </script>
 
-<div>
+<div class="root">
 	{#if $is_loading}
 		<div class="loader">
 			<RainbowBox />
 		</div>
 	{/if}
-
-	{#if layoutFreeSites.includes(segment)}
+	{#if shouldBeLayoutFree(segment, url_path)}
 		<slot class="background" />
 	{:else}
 		<div class="layoutContainer">
@@ -46,6 +63,10 @@
 </div>
 
 <style>
+	.root {
+		width: 100%;
+		height: 100%;
+	}
 	.loader {
 		z-index: 99999;
 		position: fixed;

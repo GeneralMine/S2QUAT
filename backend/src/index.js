@@ -133,6 +133,9 @@ async function startup() {
     app.post("/users/:id/logout", require("./routes/users/logout"));
     app.delete("/users/:id", require("./routes/users/remove"));
 
+    // surveys
+    app.post("/surveys", require("./routes/surveys/insert"));
+
     app.listen(port, () => {
         console.log(`Listening on http://localhost:${port}`);
     });

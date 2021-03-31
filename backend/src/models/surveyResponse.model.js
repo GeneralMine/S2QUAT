@@ -11,7 +11,7 @@ module.exports =
         },
         date: {
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: true
         },
         place: {
             type: DataTypes.TEXT,

@@ -23,10 +23,10 @@
     };
 </script>
 
-{#if label !== undefined && label !== ""}
-    <label for={id}>{label}</label>
-{/if}
 <div class="container">
+    {#if label !== undefined && label !== ""}
+        <label for={id}>{label}</label>
+    {/if}
     <input class="container textfield" style="border: 1px solid {color};" {id} {type} {value} {placeholder} on:keyup|preventDefault on:input={handleInput} />
 </div>
 

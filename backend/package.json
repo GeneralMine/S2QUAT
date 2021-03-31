@@ -17,7 +17,8 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "mocha --timeout 10000"
+    "test": "mocha --timeout 10000",
+    "seed": "node doc/seeder.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
