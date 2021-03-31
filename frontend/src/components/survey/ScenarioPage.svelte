@@ -23,7 +23,7 @@
     .dataModel {
         width: 100%;
         height: 350px;
-        scale: 0.5;
+        -webkit-transform: scale(0.5);
         display: flex;
         flex-direction: column;
         align-content: center;
