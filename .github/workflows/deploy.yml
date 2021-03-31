@@ -20,4 +20,4 @@ jobs:
           host: ${{ secrets.HOST }}
           port: ${{ secrets.PORT }}
           user: ${{ secrets.USER }}
-          key: ${{ secrets.PRIVATE_KEY}}
+          pass: ${{ secrets.PASSWORD}}
