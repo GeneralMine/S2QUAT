@@ -4,7 +4,7 @@ EXPOSE 23011
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package.json .
 
 RUN npm install
 
