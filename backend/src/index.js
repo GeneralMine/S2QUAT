@@ -2,11 +2,13 @@ require("dotenv").config();
 const express = require('express');
 const app = express();
 const cors = require("cors");
-const port = process.env.PORT || 8080;
 const cookieParser = require("cookie-parser");
 const database = require("./controller/database");
 
-const isDebug = process.env.FRONTEND_DOMAIN.startsWith("localhost");
+// env
+const BACKEND_PORT = process.env.PORT || 8080;
+const FRONTEND_DOMAIN = process.env.FRONTEND_DOMAIN || "localhost";
+const isDebug = FRONTEND_DOMAIN.startsWith("localhost");
 
 startup()
     .catch(err => {
@@ -136,7 +138,7 @@ async function startup() {
     // surveys
     app.post("/surveys", require("./routes/surveys/insert"));
 
-    app.listen(port, () => {
-        console.log(`Listening on http://localhost:${port}`);
+    app.listen(BACKEND_PORT, () => {
+        console.log(`Listening on http://localhost:${BACKEND_PORT}`);
     });
 }

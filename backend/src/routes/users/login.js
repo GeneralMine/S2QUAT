@@ -2,6 +2,9 @@ const controller = require("../../controller/users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const TOKEN_SECRET = process.env.TOKEN_SECRET || "d3ac10209c78b071e9a00791904cabe21fe5f0fdc2a91a9a6b54ec0ebe2b8e8b275dc7c7579a85468e4abd7b1c18c38a0f8889668e9ec66cf58245bd5b0b665e";
+const ROOT_DOMAIN = process.env.ROOT_DOMAIN || "localhost";
+
 module.exports = async (req, res) => {
     const { name, password } = req.body;
 
@@ -40,12 +43,12 @@ module.exports = async (req, res) => {
     const externalUser = controller.forExternalLogin(user);
 
     // generate json web token
-    const token = jwt.sign(externalUser, process.env.TOKEN_SECRET);
+    const token = jwt.sign(externalUser, TOKEN_SECRET);
 
     var date = new Date();
     date.setDate(date.getDate() + 7);
     res.cookie("token", token, {
-        domain: process.env.ROOT_DOMAIN,
+        domain: ROOT_DOMAIN,
         expires: date,
         //maxAge: date,
         secure: true

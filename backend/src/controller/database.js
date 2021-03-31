@@ -1,19 +1,25 @@
 const { Sequelize } = require('sequelize');
 const { sleep } = require('../lib/utils');
 
+const DATABASE_DATABASENAME = process.env.DATABASE_DATABASENAME || "s2quat";
+const DATABASE_USERNAME = process.env.DATABASE_USERNAME || "root";
+const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD || "password";
+const DATABASE_HOST = process.env.DATABASE_HOST || "localhost";
+const DATABASE_PORT = process.env.DATABASE_PORT || "3306";
+const DATABASE_DIALECT = process.env.DATABASE_DIALECT || "mariadb";
 module.exports = {
     db: undefined,
 
     async startup() {
         let connected = false;
         while (!connected) {
-            console.log("Database: Trying to connect to db at " + process.env.DATABASE_DIALECT + "://" + process.env.DATABASE_USERNAME + ":" + process.env.DATABASE_PASSWORD + "@" + process.env.DATABASE_HOST + ":" + process.env.DATABASE_PORT);
+            console.log("Database: Trying to connect to db at " + DATABASE_DIALECT + "://" + DATABASE_USERNAME + ":" + DATABASE_PASSWORD + "@" + DATABASE_HOST + ":" + DATABASE_PORT);
 
             try {
-                this.db = new Sequelize(process.env.DATABASE_DATABASENAME, process.env.DATABASE_USERNAME, process.env.DATABASE_PASSWORD, {
-                    host: process.env.DATABASE_HOST,
-                    port: process.env.DATABASE_PORT,
-                    dialect: process.env.DATABASE_DIALECT,
+                this.db = new Sequelize(DATABASE_DATABASENAME, DATABASE_USERNAME, DATABASE_PASSWORD, {
+                    host: DATABASE_HOST,
+                    port: DATABASE_PORT,
+                    dialect: DATABASE_DIALECT,
                     logging: false,
                 });
 
@@ -23,14 +29,14 @@ module.exports = {
                 connected = true;
             } catch (error) {
                 try {
-                    this.db = new Sequelize('', process.env.DATABASE_USERNAME, process.env.DATABASE_PASSWORD, {
-                        host: process.env.DATABASE_HOST,
-                        port: process.env.DATABASE_PORT,
-                        dialect: process.env.DATABASE_DIALECT,
+                    this.db = new Sequelize('', DATABASE_USERNAME, DATABASE_PASSWORD, {
+                        host: DATABASE_HOST,
+                        port: DATABASE_PORT,
+                        dialect: DATABASE_DIALECT,
                         logging: false
                     });
-                    await this.db.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DATABASE_DATABASENAME}`);
-                    await this.db.query(`USE ${process.env.DATABASE_DATABASENAME}`);
+                    await this.db.query(`CREATE DATABASE IF NOT EXISTS ${DATABASE_DATABASENAME}`);
+                    await this.db.query(`USE ${DATABASE_DATABASENAME}`);
                     console.log("Database: Connected to create database. Reconnecting...");
                 } catch (error) {
                     console.error('Unable to connect to the database');
@@ -71,6 +77,6 @@ module.exports = {
         controllers.forEach(async (controller) => { console.log(await controller.getStatistics()) });
     },
     async use() {
-        await this.db.query("USE " + process.env.DATABASE_DATABASENAME);
+        await this.db.query("USE " + DATABASE_DATABASENAME);
     },
 }
