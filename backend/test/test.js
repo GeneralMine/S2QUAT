@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const doDelete = true;
 
-const serviceURL = "http://localhost:21021";
+const serviceURL = "http://localhost:23011";
 const testingTypes = [
     "unit",
     "integration",
