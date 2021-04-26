@@ -12,6 +12,7 @@ module.exports = {
                 {
                     name: "valid full input",
                     testData: {
+                        type: 1,
                         name: "Kaiserpinguine",
                     },
                     expectedCode: 200,
@@ -22,6 +23,7 @@ module.exports = {
                 {
                     name: "valid required input",
                     testData: {
+                        type: 2,
                         name: "Königspinguin",
                     },
                     expectedCode: 200,
@@ -32,6 +34,7 @@ module.exports = {
                 {
                     name: "empty input",
                     testData: {
+                        type: "",
                         name: "",
                     },
                     expectedCode: 400,
@@ -45,6 +48,7 @@ module.exports = {
                 {
                     name: "wrong keys input",
                     testData: {
+                        types: 2,
                         names: "Test",
                     },
                     expectedCode: 400,
@@ -65,6 +69,7 @@ module.exports = {
                     expectedCode: 200,
                     expectedOutput: {
                         id: 1,
+                        type: 1,
                         name: "Kaiserpinguine",
                         questions: [],
                         scenario: null,
@@ -76,6 +81,7 @@ module.exports = {
                     expectedCode: 200,
                     expectedOutput: {
                         id: 2,
+                        type: 2,
                         name: "Königspinguin",
                         questions: [],
                         scenario: null,
@@ -99,6 +105,7 @@ module.exports = {
                 {
                     name: "entire entry",
                     testData: {
+                        type: 0,
                         name: "Müllentsorger",
                     },
                     url: "2",
@@ -110,6 +117,7 @@ module.exports = {
                 {
                     name: "only name",
                     testData: {
+                        type: 2,
                         name: "Stadtverwaltung",
                     },
                     url: "1",
@@ -143,6 +151,7 @@ module.exports = {
                     expectedCode: 200,
                     expectedOutput: {
                         id: 1,
+                        type: 2,
                         name: "Stadtverwaltung",
                         questions: [],
                         scenario: null,
@@ -154,6 +163,7 @@ module.exports = {
                     expectedCode: 200,
                     expectedOutput: {
                         id: 2,
+                        type: 0,
                         name: "Müllentsorger",
                         questions: [],
                         scenario: null,
@@ -175,12 +185,14 @@ module.exports = {
                     expectedOutput: [
                         {
                             id: 1,
+                            type: 2,
                             name: "Stadtverwaltung",
                             questions: [],
                             scenario: null,
                         },
                         {
                             id: 2,
+                            type: 0,
                             name: "Müllentsorger",
                             questions: [],
                             scenario: null,
