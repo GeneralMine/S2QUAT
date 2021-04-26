@@ -17,6 +17,7 @@
             answeredQuestionsArray = [...answeredQuestionsArray, node.id];
         }
         console.log(answeredQuestionsArray);
+        console.log("Question got " + score + " and text " + text);
         dispatch("update_answer", { id: node.id, text, score });
     }
 </script>

@@ -8,6 +8,10 @@
     export let color = "gray";
     export let locked = false;
 
+    import { createEventDispatcher } from "svelte";
+
+    const dispatch = createEventDispatcher();
+
     let textareaElement;
     $: height = textareaElement !== undefined ? textareaElement.scrollHeight : 30;
     const revealToggle = (event) => {
@@ -24,6 +28,8 @@
     const handleInput = (event) => {
         value = event.target.value;
         height = textareaElement.scrollHeight;
+
+        dispatch("changed", value);
     };
 </script>
 
@@ -42,7 +48,6 @@
         border-color={color}
         style="height: {height}px; border: 1px solid {color};"
         on:keyup|preventDefault
-        on:input={handleInput}
     />
 </div>
 
@@ -73,4 +78,5 @@
         -ms-user-select: none;
         user-select: none;
     }
+</style>
 </style>

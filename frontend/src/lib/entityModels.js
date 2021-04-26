@@ -154,6 +154,7 @@ module.exports = {
         listAttributes: [
             { name: 'id', type: "number" },
             { name: 'score', type: "number" },
+            { name: 'text', type: "text" },
             { name: 'questions', type: "count" },
             { name: 'surveyResponse', type: "relationName" }
         ],
