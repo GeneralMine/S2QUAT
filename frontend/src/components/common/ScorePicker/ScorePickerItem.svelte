@@ -44,6 +44,4 @@
         background-color: #2e5bff;
         color: white;
     }
-    .text {
-    }
 </style>

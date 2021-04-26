@@ -14,7 +14,7 @@
         <a href="privacy">Datenschutz</a>
         <a href="about">Über uns</a>
     </div>
-    <p class="copyright">© 2020 Fraunhofer IAO - Nobelstraße 12, 70569 Stuttgart</p>
+    <p class="copyright">© 2021 Fraunhofer IAO - Nobelstraße 12, 70569 Stuttgart</p>
 </div>
 
 <style>

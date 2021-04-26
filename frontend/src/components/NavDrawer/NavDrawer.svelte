@@ -20,7 +20,7 @@
 			<NavDrawerSeperator title="Database" />
 			<NavDrawerItem {selected} title="datatree" url={"/datatree"} />
 			<NavDrawerItem {selected} title="datamodel" url={"/datamodel"} />
-			<NavDrawerItem {selected} title="demo" url={"/demo"} />
+			<!-- <NavDrawerItem {selected} title="demo" url={"/demo"} /> -->
 
 			<NavDrawerSeperator title="Entities" />
 			{#each entities as entity}

@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     const userID = req.user !== undefined ? req.user.id : undefined;
     const { score, text } = req.body;
 
-    if (score == null || score === "") {
+    if ((score == null || score === "") && (text == null)) {
         return res.status(400).send();
     }
 

@@ -8,14 +8,14 @@ module.exports = async (req, res) => {
     const { id } = req.params;
     const userID = req.user !== undefined ? req.user.id : undefined;
 
-    const { score, questions, surveyResponse } = req.body;
+    const { score, text, questions, surveyResponse } = req.body;
 
     if (id == null || id === "") {
         return res.status(400).send();
     }
 
     try {
-        return res.json({ id: await controller.update(userID, id, { score, questions, surveyResponse }) });
+        return res.json({ id: await controller.update(userID, id, { score, text, questions, surveyResponse }) });
     } catch (error) {
         return res.status(500).send();
     }

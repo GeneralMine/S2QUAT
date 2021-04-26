@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     const userID = req.user !== undefined ? req.user.id : undefined;
     const { type, name } = req.body;
 
-    if (name == null || name === "") {
+    if (name == null || name === "" || type == null || type == "") {
         return res.status(400).send();
     }
 

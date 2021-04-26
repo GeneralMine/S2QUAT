@@ -179,8 +179,6 @@
         border-color: #2e5bff;
         border-radius: 12px;
     }
-    .content {
-    }
     .button_group {
         display: flex;
         flex-direction: row;

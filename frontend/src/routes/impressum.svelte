@@ -69,6 +69,11 @@
                 <br />
                 <b> Verantwortlicher Redakteur: </b>
                 <br />
+                Jens Neuhüttler
+                <br />
+                jens.neuhuettler@iao.fraunhofer.de
+                <br />
+                <br />
                 Marvin Raiser
                 <br />
                 marvin_raiser@web.de

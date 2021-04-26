@@ -54,9 +54,6 @@
 </div>
 
 <style>
-    .sendPageContainer {
-    }
-
     .testPersonForm {
         display: flex;
         flex-direction: column;
