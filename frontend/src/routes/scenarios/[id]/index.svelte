@@ -36,11 +36,6 @@
         entityObject = await (await getData(url)).json();
         console.log("Loaded:", entityObject);
     }
-
-    async function conductSurvey() {
-        console.log("Conducting a survey for id", id);
-        goto("/" + entity + "/" + id + "/survey", { replaceState: true });
-    }
 </script>
 
 <svelte:head>
@@ -52,6 +47,5 @@
         <NumberCard title="SurveyResponses" value={cardFunctions.lengthOfKey(entityObject, "surveyResponses")} icon="surveyResponses" />
         <NumberCard title="Score" value={0} icon="questionAnswers" />
     </CardRow>
-    <EntityDetails {entity} {entityObject} {categories} on:update={reloadData} />
-    <Button title="Conduct a survey" on:click={conductSurvey} />
+    <EntityDetails {entity} {entityObject} {categories} enableSurveyButton={true} on:update={reloadData} />
 </div>

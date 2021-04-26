@@ -46,8 +46,8 @@ function forExternalList({ id, type, name, scenario, questions }) {
     return { id, type, name, scenario, questions };
 }
 
-function forExternalGet({ id, type, name, scenario, questions }) {
-    return { id, type, name, scenario, questions };
+function forExternalGet({ id, type, name, scenario, questions, createdAt, updatedAt }) {
+    return { id, type, name, scenario, questions, createdAt, updatedAt };
 }
 
 /**

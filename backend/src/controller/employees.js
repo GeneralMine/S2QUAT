@@ -61,8 +61,8 @@ function forExternalList({ id, name, email, phoneNumber, company, project, subst
     return { id, name, email, phoneNumber, company, project, substitutedBy, substitutes };
 }
 
-function forExternalGet({ id, name, email, phoneNumber, company, project, substitutedBy, substitutes }) {
-    return { id, name, email, phoneNumber, company, project, substitutedBy, substitutes };
+function forExternalGet({ id, name, email, phoneNumber, company, project, substitutedBy, substitutes, createdAt, updatedAt }) {
+    return { id, name, email, phoneNumber, company, project, substitutedBy, substitutes, createdAt, updatedAt };
 }
 
 /**

@@ -45,8 +45,8 @@ function forExternalList({ id, status, name, email, roles, projects }) {
     return { id, status, name, email, roles, projects };
 }
 
-function forExternalGet({ id, status, name, email, roles, projects }) {
-    return { id, status, name, email, roles, projects };
+function forExternalGet({ id, status, name, email, roles, projects, createdAt, updatedAt }) {
+    return { id, status, name, email, roles, projects, createdAt, updatedAt };
 }
 
 function forExternalLogin({ id, status, name, email, roles, session }) {

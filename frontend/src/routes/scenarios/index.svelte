@@ -36,8 +36,7 @@
 <div class="page">
     <CardRow>
         <NumberCard title="Anzahl" value={entities.length} icon="amount" />
-        <NumberCard title="SurveyResponses" value={cardFunctions.sumOfKeys(entities, "surveyResponses")} icon="surveyResponses" />
-        <PieCard title="Projektverteilung" data={Object.values(cardFunctions.countBy(entities, "project"))} labels={Object.keys(cardFunctions.countBy(entities, "project"))} icon="projects" />
+        <NumberCard title="SurveyResponses" value={cardFunctions.sumOfKeyElements(entities, "surveyResponses")} icon="surveyResponses" />
     </CardRow>
     <EntityView {entity} {entities} entitiesAttributes={listAttributes} on:update={reloadData} />
 </div>

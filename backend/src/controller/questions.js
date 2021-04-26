@@ -54,8 +54,8 @@ function forExternalList({ id, name, description, depth, parent, models, questio
     return { id, name, description, depth, parent, models, questionAnswers };
 }
 
-function forExternalGet({ id, name, description, depth, parent, models, questionAnswers }) {
-    return { id, name, description, depth, parent, models, questionAnswers };
+function forExternalGet({ id, name, description, depth, parent, models, questionAnswers, createdAt, updatedAt }) {
+    return { id, name, description, depth, parent, models, questionAnswers, createdAt, updatedAt };
 }
 
 /**

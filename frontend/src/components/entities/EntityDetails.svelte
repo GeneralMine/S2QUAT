@@ -6,6 +6,7 @@
     export let entityObject;
     export let categories;
     export let isNew = false;
+    export let enableSurveyButton = false;
 
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
@@ -19,6 +20,6 @@
 
 {#if entityObject !== undefined}
     <Surface title={capitalizeFirstLetter(entity) + " Details"}>
-        <EntityAttributeList {entity} {entityObject} {categories} {isNew} on:update={dispatchUpdate} />
+        <EntityAttributeList {entity} {entityObject} {categories} {isNew} {enableSurveyButton} on:update={dispatchUpdate} />
     </Surface>
 {/if}
