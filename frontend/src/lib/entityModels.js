@@ -6,7 +6,7 @@ module.exports = {
         listAttributes: [
             { name: 'id', type: "number" },
             { name: 'action', type: "text" },
-            { name: 'user', type: "relationLink" },
+            { name: 'user', type: "relationName" },
             { name: 'entityName', type: "text" },
             { name: 'status', type: "status" },
             { name: 'updatedAt', type: "date" }
@@ -49,8 +49,8 @@ module.exports = {
         listAttributes: [
             { name: 'id', type: "number" },
             { name: 'name', type: "text" },
-            { name: 'company', type: "relationLink" },
-            { name: 'project', type: "relationLink" },
+            { name: 'company', type: "relationLogo" },
+            { name: 'project', type: "relationName" },
             { name: 'phoneNumber', type: "text" },
             { name: 'email', type: "email" }
         ],
@@ -86,7 +86,7 @@ module.exports = {
         listAttributes: [
             { name: 'id', type: "number" },
             { name: 'name', type: "text" },
-            { name: 'scenario', type: "relationLink" },
+            { name: 'scenario', type: "relationName" },
             { name: 'questions', type: "count" }
         ],
         categories: {
@@ -115,7 +115,7 @@ module.exports = {
             { name: 'id', type: "number" },
             { name: 'status', type: "status" },
             { name: 'name', type: "text" },
-            { name: 'company', type: "relationLink" },
+            { name: 'company', type: "relationLogo" },
             { name: 'projectStart', type: "date" },
             { name: 'projectEnd', type: "date" }
         ],
@@ -155,7 +155,7 @@ module.exports = {
             { name: 'id', type: "number" },
             { name: 'score', type: "number" },
             { name: 'questions', type: "count" },
-            { name: 'surveyResponse', type: "relationLink" }
+            { name: 'surveyResponse', type: "relationName" }
         ],
         categories: {
             Allgemein: [
@@ -183,7 +183,7 @@ module.exports = {
             { name: 'id', type: "number" },
             { name: 'depth', type: "number" },
             { name: 'name', type: "text" },
-            { name: 'parent', type: "relationLink", entity: "questions" }
+            { name: 'parent', type: "relationName", entity: "questions" }
         ],
         categories: {
             Allgemein: [
@@ -215,8 +215,8 @@ module.exports = {
             { name: 'id', type: "number" },
             { name: 'name', type: "text" },
             { name: 'description', type: "text" },
-            { name: 'project', type: "relationLink" },
-            { name: 'model', type: "relationLink" }
+            { name: 'project', type: "relationName" },
+            { name: 'model', type: "relationName" }
         ],
         categories: {
             Allgemein: [
@@ -247,7 +247,7 @@ module.exports = {
         listAttributes: [
             { name: 'id', type: "number" },
             { name: 'valid', type: "status" },
-            { name: 'scenario', type: "relationLink" },
+            { name: 'scenario', type: "relationName" },
             { name: 'date', type: "date" },
             { name: 'place', type: "text" },
             { name: 'feedbackNotes', type: "text" },

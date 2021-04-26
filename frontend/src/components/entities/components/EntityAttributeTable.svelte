@@ -119,6 +119,12 @@
                                     </p>
                                 {:else if attribute.type === "relationLink" && item[attribute.name] !== null}
                                     <a href={parsePlural(attribute.name) + "/" + item[attribute.name].id}>{attribute.name + item[attribute.name].id}</a>
+                                {:else if attribute.type === "relationName" && item[attribute.name] !== null}
+                                    <p>{item[attribute.name] !== undefined ? item[attribute.name].name : "-"}</p>
+                                {:else if attribute.type === "relationLogo" && item[attribute.name] !== null}
+                                    <p class="text-left">
+                                        <img style="height: 25px; width: auto;object-fit: contain;" src={"entityFiles/logos/" + item[attribute.name].logo} alt={item[attribute.name].name} />
+                                    </p>
                                 {:else}
                                     <div>
                                         <span style="white-space: nowrap;"
