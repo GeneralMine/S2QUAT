@@ -46,8 +46,8 @@ function forExternalList({ id, score, text, questions, surveyResponse }) {
     return { id, score, text, questions, surveyResponse };
 }
 
-function forExternalGet({ id, score, text, questions, surveyResponse }) {
-    return { id, score, text, questions, surveyResponse };
+function forExternalGet({ id, score, text, questions, surveyResponse, createdAt, updatedAt }) {
+    return { id, score, text, questions, surveyResponse, createdAt, updatedAt };
 }
 
 /**

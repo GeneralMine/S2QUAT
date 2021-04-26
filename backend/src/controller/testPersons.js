@@ -37,8 +37,8 @@ function forExternalList({ id, name, signature, age, gender, surveyResponse }) {
     return { id, name, signature, age, gender, surveyResponse };
 }
 
-function forExternalGet({ id, name, signature, age, gender, surveyResponse }) {
-    return { id, name, signature, age, gender, surveyResponse };
+function forExternalGet({ id, name, signature, age, gender, surveyResponse, createdAt, updatedAt }) {
+    return { id, name, signature, age, gender, surveyResponse, createdAt, updatedAt };
 }
 
 /**

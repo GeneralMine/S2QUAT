@@ -64,8 +64,8 @@ function forExternalList({ id, name, status, projectStart, projectEnd, users, co
     return { id, name, status, projectStart, projectEnd, users, company, employee, scenarios };
 }
 
-function forExternalGet({ id, name, status, projectStart, projectEnd, goal, description, users, company, employee, scenarios }) {
-    return { id, name, status, projectStart, projectEnd, goal, description, users, company, employee, scenarios };
+function forExternalGet({ id, name, status, projectStart, projectEnd, goal, description, users, company, employee, scenarios, createdAt, updatedAt }) {
+    return { id, name, status, projectStart, projectEnd, goal, description, users, company, employee, scenarios, createdAt, updatedAt };
 }
 
 /**

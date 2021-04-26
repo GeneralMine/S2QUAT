@@ -55,8 +55,8 @@ function forExternalList({ id, valid, date, place, feedbackNotes, personalNotes,
     return { id, valid, date, place, feedbackNotes, personalNotes, scenario, questionAnswers, testPerson };
 }
 
-function forExternalGet({ id, valid, date, place, feedbackNotes, personalNotes, scenario, questionAnswers, testPerson }) {
-    return { id, valid, date, place, feedbackNotes, personalNotes, scenario, questionAnswers, testPerson };
+function forExternalGet({ id, valid, date, place, feedbackNotes, personalNotes, scenario, questionAnswers, testPerson, createdAt, updatedAt }) {
+    return { id, valid, date, place, feedbackNotes, personalNotes, scenario, questionAnswers, testPerson, createdAt, updatedAt };
 }
 
 /**

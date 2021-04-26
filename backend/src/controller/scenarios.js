@@ -55,8 +55,8 @@ function forExternalList({ id, name, description, project, model, surveyResponse
     return { id, name, description, project, model, surveyResponses };
 }
 
-function forExternalGet({ id, name, description, project, model, surveyResponses }) {
-    return { id, name, description, project, model, surveyResponses };
+function forExternalGet({ id, name, description, project, model, surveyResponses, createdAt, updatedAt }) {
+    return { id, name, description, project, model, surveyResponses, createdAt, updatedAt };
 }
 
 /**
