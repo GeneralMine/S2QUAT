@@ -57,7 +57,6 @@ async function insert(actionName, user, entityName, entityID, status, original, 
 
 async function list() {
     const all = await model.findAll({
-        limit: 50,
         order: [
             ['id', 'DESC']]
     });
