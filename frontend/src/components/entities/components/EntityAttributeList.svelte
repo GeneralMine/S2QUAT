@@ -177,7 +177,7 @@
                     {category}
                 </div>
             {/each}
-            
+
             <div class="listTabsItemSpacer" />
 
             {#if enableSurveyButton}
@@ -185,7 +185,7 @@
                     <Button title={"Conduct a survey"} on:click={conductSurvey} />
                 </div>
             {/if}
-            
+
             {#if enableEditButton}
                 <div class="listTabsItemButton">
                     <Button title={isEditMode ? "Save Changes" : "Edit " + capitalizeFirstLetter(parseSingular(entity))} on:click={editButtonPressed} />
