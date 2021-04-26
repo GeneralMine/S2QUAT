@@ -20,6 +20,7 @@
     export let entity;
     export let entityObject;
     export let enableEditButton = true;
+    export let enableSurveyButton = false;
     // Object Map key = category name, value= list of attribute names of entityObject
     export let categories = null;
     export let isEditMode = entityObject !== null ? false : true;
@@ -161,6 +162,11 @@
 
         return temp.map((el) => el.id);
     }
+
+    async function conductSurvey() {
+        console.log("Conducting a survey for id", entityObject.id);
+        goto("/" + entity + "/" + entityObject.id + "/survey", { replaceState: true });
+    }
 </script>
 
 <div class="container">
@@ -171,12 +177,20 @@
                     {category}
                 </div>
             {/each}
+            
             <div class="listTabsItemSpacer" />
-            <div class="listTabsItemEdit">
-                {#if enableEditButton}
+
+            {#if enableSurveyButton}
+                <div class="listTabsItemButton">
+                    <Button title={"Conduct a survey"} on:click={conductSurvey} />
+                </div>
+            {/if}
+            
+            {#if enableEditButton}
+                <div class="listTabsItemButton">
                     <Button title={isEditMode ? "Save Changes" : "Edit " + capitalizeFirstLetter(parseSingular(entity))} on:click={editButtonPressed} />
-                {/if}
-            </div>
+                </div>
+            {/if}
         </div>
     {/if}
 
@@ -297,7 +311,7 @@
         -webkit-box-flex: 1;
         flex: 1;
     }
-    .listTabsItemEdit {
+    .listTabsItemButton {
         border-bottom: 2px solid rgb(170, 170, 170);
         display: flex;
         align-items: center;
