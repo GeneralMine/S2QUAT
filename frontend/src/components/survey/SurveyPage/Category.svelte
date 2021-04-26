@@ -26,7 +26,7 @@
         </div>
         <h3 class="title">
             {node.name}
-            {arrayLength}/{node.children.reduce((acc, item) => acc + (item.children === undefined ? 1 : item.children.length), 0)}
+            {arrayLength}/{node.children.reduce((acc, item) => acc + (item.children.length === 0 ? 1 : item.children.length), 0)}
         </h3>
     </div>
     {#if expanded}
