@@ -1,0 +1,52 @@
+name: Deploy_Production
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  testing:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js latest
+      uses: actions/setup-node@v1
+    - name: Install dependencies
+      run: npm install
+      working-directory: backend
+    - name: Start testing database
+      uses: getong/mariadb-action@v1.1
+      with:
+        host port: 3306
+        container port: 3306
+        character set server: 'utf8'
+        collation server: 'utf8_general_ci'
+        mysql root password: 'password'
+    - name: Run in background
+      run: (npm run start&)
+      working-directory: backend
+    - name: Wait for startup
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '20s'
+    - name: Test backend
+      run: npm test
+      working-directory: backend
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: deploy using ssh
+        uses: fifsky/ssh-action@master
+        with:
+          command: |
+            cd services/S2QUAT
+            git pull
+            docker-compose down;docker-compose up -d --build --remove-orphans
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          user: ${{ secrets.USER }}
+          pass: ${{ secrets.PASSWORD}}
