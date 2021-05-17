@@ -16,4 +16,8 @@ module.exports =
             type: DataTypes.TEXT,
             allowNull: false
         },
+        isTemplate: {
+            type: DataTypes.INTEGER,
+            allowNull: true
+        }
     });

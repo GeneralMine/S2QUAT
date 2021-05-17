@@ -29,14 +29,6 @@ const include = [
         model: projectModel,
         as: "project"
     },
-    {
-        model: model,
-        as: "substitutedBy"
-    },
-    {
-        model: model,
-        as: "substitutes"
-    }
 ]
 
 async function startup() {
@@ -48,12 +40,6 @@ async function startup() {
         foreignKey: "supervising"
     });
 
-    model.hasOne(model, {
-        as: "substitutedBy"
-    });
-    model.belongsTo(model, {
-        as: "substitutes"
-    });
     await entityHandler.startupEntity(model);
 }
 

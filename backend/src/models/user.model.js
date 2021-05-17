@@ -17,14 +17,14 @@ module.exports =
             allowNull: false,
             unique: true
         },
-        password: {
-            type: DataTypes.TEXT,
-            allowNull: false
-        },
         email: {
             type: DataTypes.TEXT,
             allowNull: false,
             unique: true
+        },
+        password: {
+            type: DataTypes.TEXT,
+            allowNull: false
         },
         roles: {
             type: DataTypes.TEXT,
