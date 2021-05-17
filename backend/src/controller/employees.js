@@ -1,6 +1,6 @@
 const model = require("../models/employee.model");
 
-const companieModel = require("../models/companie.model");
+const companieModel = require("../models/company.model");
 const projectModel = require("../models/project.model");
 
 const entityHandler = require("../lib/entityHandler");

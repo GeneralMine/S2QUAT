@@ -1,6 +1,6 @@
 const model = require("../models/project.model");
 
-const companieModel = require("../models/companie.model");
+const companieModel = require("../models/company.model");
 const employeeModel = require("../models/employee.model");
 const scenarioModel = require("../models/scenario.model");
 const userModel = require("../models/user.model");

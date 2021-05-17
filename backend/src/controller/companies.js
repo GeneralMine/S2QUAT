@@ -1,4 +1,4 @@
-const model = require("../models/companie.model");
+const model = require("../models/company.model");
 
 const employeeModel = require("../models/employee.model");
 const projectModel = require("../models/project.model");
