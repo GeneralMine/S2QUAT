@@ -1,6 +1,6 @@
 <script>
 	export let name;
-	$: src = 'icons/' + name + '.svg';
+	$: src = '/icons/' + name + '.svg';
 	$: alt = name + ' icon';
 
 	export let width;
