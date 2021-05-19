@@ -1,8 +1,7 @@
 <script>
+	import '../app.css';
 	import Footer from '$lib/common/Footer.svelte';
 	import Nav from '$lib/Nav.svelte';
-
-	import '../app.css';
 
 	let width;
 </script>
