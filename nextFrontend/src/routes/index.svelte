@@ -1,7 +1,30 @@
 <script>
-	import CardRow from '$lib/Cards/CardRow.svelte';
+	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
+	import CompanyCard from '$lib/Cards/CompanyCard.svelte';
 
-	import NumberCard from '$lib/Cards/NumberCard.svelte';
+	let companies = [
+		{
+			id: 0,
+			name: 'Penguin',
+			logo: 'default',
+			employees: 4,
+			projects: 2
+		},
+		{
+			id: 1,
+			name: 'Fraunhofer',
+			logo: 'fraunhofer',
+			employees: 1,
+			projects: 3
+		},
+		{
+			id: 2,
+			name: 'Flughafen Stuttgart',
+			logo: 'StuttgartAirport',
+			employees: 1,
+			projects: 2
+		}
+	];
 </script>
 
 <svelte:head>
@@ -10,7 +33,9 @@
 
 <div>
 	<CardRow>
-		<NumberCard title="Test" value="1337" icon="home" />
+		{#each companies as company}
+			<CompanyCard {company} />
+		{/each}
 	</CardRow>
 </div>
 
