@@ -1,6 +1,6 @@
-<div class="logoContainer">
-	<img src="logo-width.png" alt="logo" />
-</div>
+<a class="logoContainer" href="/">
+	<img src="/logo-width.png" alt="logo" />
+</a>
 
 <style>
 	.logoContainer {
