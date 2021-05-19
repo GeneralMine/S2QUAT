@@ -2,6 +2,9 @@
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
 	import CompanyCard from '$lib/Cards/CompanyCard.svelte';
 
+	import { crumbs } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	$crumbs = [];
+
 	let companies = [
 		{
 			id: 0,
@@ -28,11 +31,21 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>Home | S2QUAT</title>
 </svelte:head>
 
 <div>
-	<CardRow>
+	<CardRow title="Unternehmen" url="/companies">
+		{#each companies as company}
+			<CompanyCard {company} />
+		{/each}
+	</CardRow>
+	<CardRow title="Modell" url="/model">
+		{#each companies as company}
+			<CompanyCard {company} />
+		{/each}
+	</CardRow>
+	<CardRow title="Vorlagen" url="/templates">
 		{#each companies as company}
 			<CompanyCard {company} />
 		{/each}

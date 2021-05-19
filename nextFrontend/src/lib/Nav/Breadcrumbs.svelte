@@ -2,16 +2,13 @@
 	import BreadcrumbsItem from '$lib/Nav/Breadcrumbs/BreadcrumbsItem.svelte';
 	import BreadcrumbsSeperator from '$lib/Nav/Breadcrumbs/BreadcrumbsSeperator.svelte';
 
-	//TODO: build from breadcrumbs.js store
-
-	export let crumbs = [];
+	import { crumbs } from '$lib/Nav/Breadcrumbs/breadcrumbs';
 </script>
 
 <div class="breadcrumbsContainer">
-	<BreadcrumbsItem name="home" is_last={crumbs.length > 0} />
-	{#each crumbs as crumb, i}
+	{#each $crumbs as crumb}
 		<BreadcrumbsSeperator />
-		<BreadcrumbsItem name={crumb} />
+		<BreadcrumbsItem crumb={crumb.page} />
 	{/each}
 </div>
 
