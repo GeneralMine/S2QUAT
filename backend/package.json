@@ -29,6 +29,7 @@
     "jsonwebtoken": "^8.5.1",
     "mariadb": "^2.5.3",
     "node-fetch": "^2.6.1",
+    "prisma": "^2.25.0",
     "proxy-cutter": "^1.0.4",
     "sequelize": "^6.5.0"
   },

@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  email       String   @id
+  name        String
+  password    String
+  last_logout DateTime @default(now())
+
+  //TODO: add roles (+ clarify what roles are used for)
+
+  projects Project[]
+}
+
+model Project {
+  project_id      Int      @id
+  company_id      Int
+  name            String
+  status          String
+  description     String
+  goal            String
+  project_start   DateTime
+  project_end     DateTime
+  supervisorEmail String
+  workers         User[]
+  company         Company  @relation(fields: [company_id], references: [id])
+  supervisor      Employee @relation(fields: [supervisorEmail, company_id], references: [email, company_id])
+
+  //TODO: add scenario or remodel that part
+
+  @@unique([company_id, name])
+}
+
+model Company {
+  id   Int    @id @default(autoincrement())
+  name String
+  logo String
+
+  projects  Project[]
+  employees Employee[]
+}
+
+model Employee {
+  company_id Int
+  name       String
+  phone      String
+  email      String
+
+  // btw this only allows substitutes from the same company
+  substituteEmail String?
+
+  Company    Company   @relation(fields: [company_id], references: [id])
+  substitute Employee? @relation("EmployeeToSubstitute", fields: [substituteEmail, company_id], references: [email, company_id])
+
+  Employee Employee[] @relation("EmployeeToSubstitute")
+  Project  Project[]
+  @@id([email, company_id])
+}
+
+//TODO: finish datastructure!
