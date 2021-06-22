@@ -40,7 +40,7 @@
 			<CompanyCard {company} />
 		{/each}
 	</CardRow>
-	<CardRow title="Modell" url="/model">
+	<CardRow title="Qualitätsmodell" url="/model">
 		{#each companies as company}
 			<CompanyCard {company} />
 		{/each}
