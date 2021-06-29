@@ -23,7 +23,7 @@ model Action {
   changes   String?
   exception String?
 
-  status      ActionStatus
+  status      ActionStatus   @default(FEHLER)
   entitiyName ActionEntitiy?
 }
 
@@ -34,22 +34,22 @@ enum ActionStatus {
 }
 
 enum ActionEntitiy {
-  USER
-  PROJEKT
-  SZENARIO
-  UNTERNEHMEN
-  FRAGEBOGEN
-  SEITE
-  KATEGORIE
-  FRAGE
-  VORLAGE
-  FELD
-  MERKMAL
-  FAKTOR
-  KRITERIUM
-  ANTWORT
-  FRAGEANTWORT
+  ANSWER
+  ATTRIBUTE
+  CATEGORY
+  COMPANY
+  CRITERIA
+  FACTOR
+  FIELD
+  PAGE
+  PROJECT
+  QUESTION
+  RESPONSE
+  SCENARIO
+  SURVEY
+  TEMPLATE
   TESTPERSON
+  USER
 }
 
 // User
@@ -64,8 +64,8 @@ model User {
   password    String
   last_logout DateTime @default(now())
 
-  status UserStatus
-  rolle  UserRolle
+  status UserStatus @default(AKTIV)
+  rolle  UserRolle  @default(USER)
 
 }
 
@@ -81,9 +81,9 @@ enum UserRolle {
   ADMIN
 }
 
-// Projekt
+// Project
 
-model Projekt {
+model Project {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -91,21 +91,21 @@ model Projekt {
   name          String
   beschreibung  String?
   ziel          String?
-  Projekt_start DateTime
-  Projekt_end   DateTime
+  Project_start DateTime
+  Project_end   DateTime
 
-  status ProjektStatus
+  status ProjectStatus @default(AKTIV)
 }
 
-enum ProjektStatus {
+enum ProjectStatus {
   AKTIV
   INAKTIV
   ARCHIVIERT
 }
 
-// Unternehmen
+// Company
 
-model Unternehmen {
+model Company {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -114,9 +114,9 @@ model Unternehmen {
   logo String?
 }
 
-// Szenario
+// Scenario
 
-model Szenario {
+model Scenario {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -125,9 +125,9 @@ model Szenario {
   beschreibung String?
 }
 
-// Fragebogen
+// Survey
 
-model Fragebogen {
+model Survey {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -136,20 +136,47 @@ model Fragebogen {
   beschreibung String?
   reihenfolge  Int     @default(0)
 
-  status FragebogenStatus
+  status SurveyStatus @default(AKTIV)
 }
 
-enum FragebogenStatus {
-  VALIDE
-  INVALIDE
+enum SurveyStatus {
+  AKTIV
+  GESCHLOSSEN
 }
 
-// Antwort
-model Antwort {
+// Response
+
+model Response {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  datum DateTime @default(now())
+  ort      String?
+  feedback String?
+  notizen  String?
 
+  typ ResponseType @default(VALID)
+}
+
+enum ResponseType {
+  VALID
+  INVALID
+}
+
+// TestPerson
+
+model TestPerson {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name      String
+  signature Boolean
+  age       Int?
+}
+
+enum TestPersonSex {
+  MALE
+  FEMALE
+  NOT_BINARY
 }
