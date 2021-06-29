@@ -8,24 +8,24 @@
 		name: 'Penguin',
 		logo: 'default',
 		employees: 4,
-		projects: 2
+		projekte: 2
 	};
 </script>
 
 <Card>
 	<div class="container">
-		<a class="header clickArea" href="/companies/{company.id}">
+		<a class="header clickArea" href="/unternehmen/{company.id}">
 			<img class="logoImg" src="logos/{company.logo}.png" alt="{company.name}s logo" />
 		</a>
 		<div class="cardSeperator seperator" />
 		<div class="body">
-			<a class="employees bodyhalf clickArea" href="/companies/{company.id}/employees">
+			<a class="employees bodyhalf clickArea" href="/unternehmen/{company.id}/employees">
 				<CardNumber value={company.employees} />
 				<CardSubtitle title="Mitarbeiter" />
 			</a>
 			<div class="bodySeperator seperator" />
-			<a class="projects bodyhalf clickArea" href="/companies/{company.id}/projects">
-				<CardNumber value={company.projects} />
+			<a class="projekte bodyhalf clickArea" href="/unternehmen/{company.id}/projekte">
+				<CardNumber value={company.projekte} />
 				<CardSubtitle title="Projekte" />
 			</a>
 		</div>

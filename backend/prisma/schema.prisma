@@ -10,60 +10,146 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// Action
+
+model Action {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  action    String
+  entitiyID Int?
+  original  String?
+  changes   String?
+  exception String?
+
+  status      ActionStatus
+  entitiyName ActionEntitiy?
+}
+
+enum ActionStatus {
+  ERFOLG
+  FEHLER
+  LAUFEND
+}
+
+enum ActionEntitiy {
+  USER
+  PROJEKT
+  SZENARIO
+  UNTERNEHMEN
+  FRAGEBOGEN
+  SEITE
+  KATEGORIE
+  FRAGE
+  VORLAGE
+  FELD
+  MERKMAL
+  FAKTOR
+  KRITERIUM
+  ANTWORT
+  FRAGEANTWORT
+  TESTPERSON
+}
+
+// User
+
 model User {
-  email       String   @id
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  email       String   @unique
   name        String
   password    String
   last_logout DateTime @default(now())
 
-  //TODO: add roles (+ clarify what roles are used for)
+  status UserStatus
+  rolle  UserRolle
 
-  projects Project[]
 }
 
-model Project {
-  project_id      Int      @id
-  company_id      Int
-  name            String
-  status          String
-  description     String
-  goal            String
-  project_start   DateTime
-  project_end     DateTime
-  supervisorEmail String
-  workers         User[]
-  company         Company  @relation(fields: [company_id], references: [id])
-  supervisor      Employee @relation(fields: [supervisorEmail, company_id], references: [email, company_id])
-
-  //TODO: add scenario or remodel that part
-
-  @@unique([company_id, name])
+enum UserStatus {
+  AKTIV
+  DEAKTIVIERT
+  NICHT_VERIFIZIERT
 }
 
-model Company {
-  id   Int    @id @default(autoincrement())
+enum UserRolle {
+  USER
+  EDITOR
+  ADMIN
+}
+
+// Projekt
+
+model Projekt {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name          String
+  beschreibung  String?
+  ziel          String?
+  Projekt_start DateTime
+  Projekt_end   DateTime
+
+  status ProjektStatus
+}
+
+enum ProjektStatus {
+  AKTIV
+  INAKTIV
+  ARCHIVIERT
+}
+
+// Unternehmen
+
+model Unternehmen {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   name String
-  logo String
-
-  projects  Project[]
-  employees Employee[]
+  logo String?
 }
 
-model Employee {
-  company_id Int
-  name       String
-  phone      String
-  email      String
+// Szenario
 
-  // btw this only allows substitutes from the same company
-  substituteEmail String?
+model Szenario {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  Company    Company   @relation(fields: [company_id], references: [id])
-  substitute Employee? @relation("EmployeeToSubstitute", fields: [substituteEmail, company_id], references: [email, company_id])
-
-  Employee Employee[] @relation("EmployeeToSubstitute")
-  Project  Project[]
-  @@id([email, company_id])
+  name         String
+  beschreibung String?
 }
 
-//TODO: finish datastructure!
+// Fragebogen
+
+model Fragebogen {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name         String
+  beschreibung String?
+  reihenfolge  Int     @default(0)
+
+  status FragebogenStatus
+}
+
+enum FragebogenStatus {
+  VALIDE
+  INVALIDE
+}
+
+// Antwort
+model Antwort {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  datum DateTime @default(now())
+
+}

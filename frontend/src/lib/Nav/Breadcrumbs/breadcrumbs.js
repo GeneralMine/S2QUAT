@@ -43,30 +43,30 @@ export class CrumbBuilder {
 }
 
 // export const lookup = {
-//     model: {
-//         name: "Modell",
-//         icon: "model",
-//         url: "model"
+//     modell: {
+//         name: "modelll",
+//         icon: "modell",
+//         url: "modell"
 //     },
-//     templates: {
+//     vorlagen: {
 //         name: "Vorlagen",
-//         icon: "templates",
-//         url: "templates"
+//         icon: "vorlagen",
+//         url: "vorlagen"
 //     },
-//     companies: {
+//     unternehmen: {
 //         name: "Unternehmen",
-//         icon: "companies",
-//         url: "companies"
+//         icon: "unternehmen",
+//         url: "unternehmen"
 //     },
 //     employees: {
 //         name: "Ansprechpartner",
 //         icon: "employees",
 //         url: "employees"
 //     },
-//     projects: {
+//     projekte: {
 //         name: "Projekte",
-//         icon: "projects",
-//         url: "projects"
+//         icon: "projekte",
+//         url: "projekte"
 //     },
 //     users: {
 //         name: "Bearbeiter",
