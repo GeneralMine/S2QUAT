@@ -1,48 +1,56 @@
 <script>
-	/********************************************
-	 * Getting env variables from session store */
-	import { stores } from "@sapper/app";
-	const { session } = stores();
-	$: BACKEND_URL = $session.BACKEND_URL;
-	$: user = $session.user;
-	/*******************************************/
-	import CardRow from "../components/Cards/CardRow.svelte";
-	import NumberCard from "../components/Cards/NumberCard.svelte";
-	import PieCard from "../components/Cards/PieCard.svelte";
-	import { postData, getData, capitalizeFirstLetter } from "../lib";
-	import cardFunctions from "../lib/cardFunctions";
-	import { onMount, onDestroy } from "svelte";
+	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
+	import CompanyCard from '$lib/Cards/CompanyCard.svelte';
 
-	let entities = ["actions", "companies", "employees", "models", "projects", "questionAnswers", "questions", "scenarios", "surveyResponses", "testPersons", "users"];
-	let entitiesData = {};
+	import { crumbs } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	$crumbs = [];
 
-	onMount(async () => {
-		entities.forEach(async (entity) => {
-			const url = BACKEND_URL + "/" + entity;
-			entitiesData[entity] = await (await getData(url)).json();
-			console.log("Loaded:", entity);
-		});
-		console.log("Loaded all data", entitiesData);
-	});
+	let companies = [
+		{
+			id: 0,
+			name: 'Penguin',
+			logo: 'default',
+			employees: 4,
+			projects: 2
+		},
+		{
+			id: 1,
+			name: 'Fraunhofer',
+			logo: 'fraunhofer',
+			employees: 1,
+			projects: 3
+		},
+		{
+			id: 2,
+			name: 'Flughafen Stuttgart',
+			logo: 'StuttgartAirport',
+			employees: 1,
+			projects: 2
+		}
+	];
 </script>
 
 <svelte:head>
-	<title>Dashboard</title>
+	<title>Home | S2QUAT</title>
 </svelte:head>
 
-<div class="pageContainer">
-	<CardRow>
-		{#if Object.keys(entitiesData).length === entities.length}
-			{#each entities as entity}
-				<NumberCard title={"Anzahl " + capitalizeFirstLetter(entity)} value={entitiesData[entity].length} icon={entity} />
-			{/each}
-		{:else}{Object.keys(entitiesData)}{/if}
+<div>
+	<CardRow title="Unternehmen" url="/companies">
+		{#each companies as company}
+			<CompanyCard {company} />
+		{/each}
+	</CardRow>
+	<CardRow title="Qualitätsmodell" url="/model">
+		{#each companies as company}
+			<CompanyCard {company} />
+		{/each}
+	</CardRow>
+	<CardRow title="Vorlagen" url="/templates">
+		{#each companies as company}
+			<CompanyCard {company} />
+		{/each}
 	</CardRow>
 </div>
 
 <style>
-	.pageContainer {
-	}
-	.cardContainer {
-	}
 </style>
