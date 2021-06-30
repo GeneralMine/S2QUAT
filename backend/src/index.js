@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const database = require("./controller/database");
 
 // env
 const BACKEND_PORT = process.env.PORT || 8080;
@@ -22,7 +21,7 @@ const corsOptionsProduction = {
     origin: ["https://raiser.dev", /\.raiser\.dev$/]
 };
 const corsOptionsDebug = {
-    origin: function (origin, callback) { return callback(null, true); },
+    origin: function(origin, callback) { return callback(null, true); },
     optionsSuccessStatus: 200,
     credentials: true
 };
@@ -47,14 +46,15 @@ async function startup() {
 
     /*
      * Public Routes
-    */
+     */
 
-    app.post("/users", require("./routes/users/insert"));
-    app.post("/users/login", require("./routes/users/login"));
+    app.post("/auth/register", require("./routes/auth/register"));
+    app.post("/auth/login", require("./routes/auth/login"));
+    app.post("/auth/logout", require("./routes/auth/logout"));
 
     /*
      * Private Routes
-    */
+     */
 
     if (!isDebug) {
         console.log("***** Production Mode *****");
