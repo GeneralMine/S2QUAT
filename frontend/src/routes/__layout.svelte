@@ -1,17 +1,28 @@
+<script context="module">
+	export function load(page) {
+		return { url_path: page.path };
+	}
+</script>
+
 <script>
 	import '../app.css';
+	import { navigating } from '$app/stores';
 	import Footer from '$lib/common/Footer.svelte';
 	import Nav from '$lib/Nav.svelte';
-
+	import PreloadingIndicator from '$lib/PreloadingIndicator.svelte';
 	let width;
 </script>
 
 <svelte:window bind:innerWidth={width} />
 
 <div id="layout">
+	{#if $navigating}
+		<PreloadingIndicator />
+	{/if}
+
 	<Nav />
 
-	<main class="mainContainer">
+	<main>
 		<slot />
 	</main>
 
@@ -19,7 +30,7 @@
 </div>
 
 <style>
-	.mainContainer {
+	main {
 		grid-area: main;
 		padding: 3rem;
 	}

@@ -3,8 +3,8 @@
 	import ProjectCard from '$lib/Cards/ProjectCard.svelte';
 	import TemplateCard from '$lib/Cards/TemplateCard.svelte';
 
-	import { crumbs } from '$lib/Nav/Breadcrumbs/breadcrumbs';
-	$crumbs = [];
+	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	$crumbs = [CrumbBuilder.create('Home', '/', 'home').build()];
 
 	let projects = [
 		{

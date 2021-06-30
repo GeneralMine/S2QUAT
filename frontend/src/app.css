@@ -1,25 +1,62 @@
-@import '@fontsource/nunito';
-
+@import '@fontsource/nunito-sans';
 :root {
-	font-family: Nunito, system-ui, BlinkMacSystemFont, -apple-system,
-            sans-serif;
-	--font-mono: 'Fira Mono', monospace;
-	--surface-color: #ffffff;
-	--background-color: #f4f4f4; /* #f8f8f8 */
-	--primary-color: #b9c6d2;
-	--secondary-color: #d0dde9;
-	--tertiary-color: #edf0f8;
-	--accent-color: #35a8e0;
-	--heading-color: rgba(0, 0, 0, 0.7);
-	--text-color: #444444;
-	--background-without-opacity: rgba(255, 255, 255, 0.7);
-	--column-width: 42rem;
-	--column-margin-top: 4rem;
+    font-family: Nunito, system-ui, BlinkMacSystemFont, -apple-system, sans-serif;
+    --font-mono: 'Fira Mono', monospace;
+    --surface-color: #ffffff;
+    --background-color: #f4f4f4;
+    /* #f8f8f8 */
+    --primary-color: #b9c6d2;
+    --secondary-color: #d0dde9;
+    --tertiary-color: #edf0f8;
+    --accent-color: #35a8e0;
+    --heading-color: rgba(0, 0, 0, 0.7);
+    --text-color: #444444;
+    --background-without-opacity: rgba(255, 255, 255, 0.7);
+    --column-width: 42rem;
+    --column-margin-top: 4rem;
 }
 
 body {
-	background-color: #f8f8f8;
-	margin: 0;
-	width: 100%;
-	height: 100%;
+    background-color: #f8f8f8;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+button {
+    background-color: #35a8e0;
+    border: none;
+    color: white;
+    padding: 12px 26px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 4px 2px;
+    transition-duration: 0.3s;
+    cursor: pointer;
+    border-radius: 0.5rem;
+}
+
+button:hover {
+    color: #35a8e0;
+    background-color: white;
+    -webkit-box-shadow: inset 0px 0px 0px 2px #35a8e0;
+    -moz-box-shadow: inset 0px 0px 0px 2px #35a8e0;
+    box-shadow: inset 0px 0px 0px 2px #35a8e0;
+}
+
+input {
+    width: 100%;
+    padding: 8px 16px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+label {
+    text-align: left;
 }

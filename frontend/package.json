@@ -30,7 +30,8 @@
     "svelte": "^3.34.0"
   },
   "dependencies": {
-    "@fontsource/nunito": "^4.3.0"
+    "@fontsource/nunito-sans": "^4.4.5",
+    "cookie": "^0.4.1"
   },
   "type": "module"
 }
