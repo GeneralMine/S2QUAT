@@ -9,14 +9,15 @@
 </footer>
 
 <style>
-	.footerContainer {
+	footer {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		padding: 3.125rem;
-		padding-bottom: 0rem;
+		padding: 2rem;
+		padding-bottom: unset;
 		align-items: center;
 		grid-area: footer;
+		width: auto;
+		height: auto;
 	}
 	.linkContainer {
 		display: flex;

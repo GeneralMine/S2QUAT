@@ -73,12 +73,4 @@
 		align-items: center;
 		justify-content: space-evenly;
 	}
-	.clickArea {
-		text-decoration: none;
-		touch-action: manipulation;
-		color: black;
-	}
-	.clickArea:hover {
-		background-color: #2e5bff25;
-	}
 </style>

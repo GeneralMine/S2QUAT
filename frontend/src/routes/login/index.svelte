@@ -22,15 +22,14 @@
 	let errors = null;
 
 	async function submit(event) {
-		console.log('Try to login...');
-		const response = await post(`auth/login`, { email, password });
-		if (response.err) {
-			errors = response.err;
-		} else {
-			response = response.res;
+		console.log('Trying to login...');
+		const { res, err } = await post(`auth/login`, { email, password });
+		if (err) {
+			errors = err;
+			return;
 		}
-		if (response.user) {
-			$session.user = response.user;
+		if (res.user) {
+			$session.user = res.user;
 			goto('/');
 		}
 	}
@@ -53,14 +52,20 @@
 
 		<form on:submit|preventDefault={submit}>
 			<label for="femail">Email</label>
-			<input id="femail" type="email" required placeholder="Email" bind:value={email} />
+			<input id="femail" type="email" required placeholder="test@tester.com" bind:value={email} />
 
 			<label for="fpassword">Password</label>
-			<input id="fpassword" type="password" required placeholder="Password" bind:value={password} />
+			<input
+				id="fpassword"
+				type="password"
+				required
+				placeholder="not123456"
+				bind:value={password}
+			/>
 
 			<button type="submit"> Sign in </button>
 		</form>
-		<p>New here? <a href="/register">Register here</a></p>
+		<a class="requestAccess" href="/register">Request access</a>
 
 		<div class="spacer" />
 
@@ -94,6 +99,7 @@
 	form {
 		display: flex;
 		flex-direction: column;
+		width: 80%;
 	}
 	.logo {
 		max-height: 100px;
@@ -115,5 +121,10 @@
 	}
 	.spacer {
 		flex: 1;
+	}
+	.requestAccess {
+		color: var(--accent-color);
+		padding-top: 0.5rem;
+		text-decoration: none;
 	}
 </style>

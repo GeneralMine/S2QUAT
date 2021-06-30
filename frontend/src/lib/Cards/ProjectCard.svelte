@@ -105,14 +105,7 @@
 		justify-content: center;
 		align-items: center;
 	}
-	.clickArea {
-		text-decoration: none;
-		touch-action: manipulation;
-		color: black;
-	}
-	.clickArea:hover {
-		background-color: #2e5bff25;
-	}
+
 	.bodySeperator {
 		width: 1px;
 		height: 80%;

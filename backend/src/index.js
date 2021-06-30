@@ -9,11 +9,6 @@ const BACKEND_PORT = process.env.PORT || 8080;
 const FRONTEND_DOMAIN = process.env.FRONTEND_DOMAIN || "localhost";
 const isDebug = FRONTEND_DOMAIN.startsWith("localhost");
 
-startup()
-    .catch(err => {
-        console.error(err);
-    });
-
 const corsOptionsProduction = {
     methods: "GET, OPTIONS, POST, DELETE",
     credentials: true,
@@ -21,14 +16,12 @@ const corsOptionsProduction = {
     origin: ["https://raiser.dev", /\.raiser\.dev$/]
 };
 const corsOptionsDebug = {
-    origin: function(origin, callback) { return callback(null, true); },
+    origin: function (origin, callback) { return callback(null, true); },
     optionsSuccessStatus: 200,
     credentials: true
 };
 
 async function startup() {
-    await database.startup();
-
     app.enable('trust proxy');
     app.use(express.json());
     if (!isDebug) {
@@ -39,9 +32,7 @@ async function startup() {
         console.log("CORS loaded in debug!");
     }
     app.use(cookieParser());
-    if (!isDebug) {
-        app.use(require("./middleware/sessionChecker"));
-    }
+    app.use(require("./middleware/sessionChecker"));
     app.options("*", cors());
 
     /*
@@ -62,8 +53,14 @@ async function startup() {
     }
 
     app.get("/user/:userId/projects", require("./routes/user/projects"));
+    app.get("/model/field/:fieldId", require("./routes/model/field"));
 
     app.listen(BACKEND_PORT, () => {
         console.log(`Listening on http://localhost:${BACKEND_PORT}`);
     });
 }
+
+startup()
+    .catch(err => {
+        console.error(err);
+    });

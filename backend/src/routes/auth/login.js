@@ -8,7 +8,8 @@ const TOKEN_SECRET = process.env.TOKEN_SECRET;
 const ROOT_DOMAIN = process.env.ROOT_DOMAIN;
 
 module.exports = async (req, res) => {
-    const { email, password } = req.body;
+    let { email, password } = req.body;
+    email = email.trim();
 
     if (email == null || email === "" || password == null || password === "") {
         console.error("LOGIN: email or password is null!");
@@ -30,24 +31,27 @@ module.exports = async (req, res) => {
     // Passwords match!
 
     switch (user.status) {
-        case 0:
+        case "ACTIVE":
             // User is active
             break;
-        case 1:
+        case "DEACTIVATED":
             // User is deactivated
             console.error("LOGIN: user is deactivated!");
             return res.status(410).send();
-        case 2:
+        case "NOT_VERIFIED":
             // User is not verified  ja der loggt net aus. Wir müssen also in der middleware checken!
             console.error("LOGIN: user is not verified!");
             return res.status(403).send();
         default:
             // Wtf shouldnt happen lol
-            console.error("Unknown error at routes/users/login.js");
+            console.error("Unknown error at routes/auth/login.js");
             return res.status(418).send();
     }
 
-    const externalUser = controller.forExternalLogin(user);
+    const externalUser = forExternal(user);
+
+    // last_logout => TIMESTAMP
+    // TOKENS < TIMESTAMP => INVALID
 
     // generate json web token
     const token = jwt.sign(externalUser, TOKEN_SECRET);
@@ -63,4 +67,15 @@ module.exports = async (req, res) => {
 
     res.json({ user: externalUser });
     console.log("LOGIN: User " + user.name + " logged in successfully!");
+}
+
+function forExternal({ id, email, name, last_logout, status, role, }) {
+    return {
+        id,
+        email,
+        name,
+        last_logout,
+        status,
+        role,
+    }
 }

@@ -1,12 +1,13 @@
 <script>
 	import Icon from '$lib/common/Icon.svelte';
+	import { session } from '$app/stores';
 </script>
 
 <div class="accountDisplayContainer">
 	<Icon name="account_circle" />
 
 	<div class="textContainer">
-		<p class="text">Marvin</p>
+		<p class="text">{$session?.user?.name}</p>
 	</div>
 </div>
 

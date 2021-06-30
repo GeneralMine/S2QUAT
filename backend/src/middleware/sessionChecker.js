@@ -1,61 +1,70 @@
-const userController = require("../controller/users");
 const jwt = require("jsonwebtoken");
 
-const TOKEN_SECRET = process.env.TOKEN_SECRET || "d3ac10209c78b071e9a00791904cabe21fe5f0fdc2a91a9a6b54ec0ebe2b8e8b275dc7c7579a85468e4abd7b1c18c38a0f8889668e9ec66cf58245bd5b0b665e";
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
+const TOKEN_SECRET = process.env.TOKEN_SECRET;
+
+/** @type {import("express").Handler} */
 module.exports = async (req, res, next) => {
-    if (req.url === ("/users/login" || req.url === "/users/register")) {
-        return next();
-    }
     const { token } = req.cookies;
 
     if (token === undefined) {
         console.error("AUTH: User does not have a token, he may not be logged in!");
-        return res.status(404).send();
+        return next();
     }
 
     try {
         const decodedToken = jwt.verify(token, TOKEN_SECRET);
 
         if (decodedToken === undefined) {
-            console.error("AUTH: decodedToken is null!");
-            return res.status(404).send();
-        }
-        const userFromDB = await userController.getLogin(decodedToken.id, decodedToken.id);
-
-        if (userFromDB === undefined) {
-            console.error("AUTH: userFromDB is null!");
-            return res.status(404).send();
+            console.error("AUTH: User is not logged in (failed to decode)!");
+            resetToken();
+            return next();
         }
 
-        if (decodedToken.session === userFromDB.session) {
-            switch (userFromDB.status) {
-                case 0:
+        const my_user = await prisma.user.findUnique({ where: { id: decodedToken.id }, select: { password: false } });
+
+        if (my_user === undefined) {
+            console.error("AUTH: User does not exist!");
+            resetToken();
+            return next();
+        }
+
+        if (my_user.last_logout.valueOf() < decodedToken.iat) {
+            switch (my_user.status) {
+                case "ACTIVE":
                     // User is active
                     break;
-                case 1:
+                case "DEACTIVATED":
                     // User is deactivated
                     console.error("LOGIN: user is deactivated!");
+                    resetToken();
                     return res.status(410).send();
-                case 2:
+                case "NOT_VERIFIED":
                     // User is not verified  ja der loggt net aus. Wir müssen also in der middleware checken!
                     console.error("LOGIN: user is not verified!");
+                    resetToken();
                     return res.status(403).send();
                 default:
                     // Wtf shouldnt happen lol
-                    console.error("Unknown error at routes/users/login.js");
+                    console.error("Unknown error at routes/auth/login.js");
                     return res.status(418).send();
             }
 
-            req.user = userFromDB;
+            req.user = my_user;
             console.log("AUTH: User logged in!");
         } else {
             console.error("AUTH: session invalid!");
-            return res.status(401).send();
+            resetToken();
         }
     } catch (error) {
         console.error("[ERROR]", error.message);
-        return res.status(404).send();
     }
+
+    function resetToken() {
+        res.clearCookie("token");
+    }
+
     return next();
 }
