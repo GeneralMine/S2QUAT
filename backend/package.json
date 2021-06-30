@@ -21,6 +21,7 @@
     "seed": "node doc/seeder.js"
   },
   "dependencies": {
+    "@prisma/client": "^2.26.0",
     "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
@@ -33,8 +34,8 @@
     "sequelize": "^6.5.0"
   },
   "devDependencies": {
-    "prisma": "^2.25.0",
     "mocha": "^8.3.0",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "prisma": "^2.26.0"
   }
 }
