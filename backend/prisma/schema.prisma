@@ -25,6 +25,9 @@ model Action {
 
   status      ActionStatus   @default(ERROR)
   entitiyName ActionEntitiy?
+
+  userId Int?
+  User   User? @relation(fields: [userId], references: [id])
 }
 
 enum ActionStatus {
@@ -52,6 +55,18 @@ enum ActionEntitiy {
   USER
 }
 
+// Company
+
+model Company {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name    String
+  logo    String?
+  Project Project[]
+}
+
 // User
 
 model User {
@@ -65,7 +80,12 @@ model User {
   last_logout DateTime @default(now())
 
   status UserStatus @default(ACTIVE)
-  role   UserRolle  @default(USER)
+  role   UserRole   @default(USER)
+
+  projectId Int?
+  Project   Project? @relation(fields: [projectId], references: [id])
+
+  Actions Action[]
 }
 
 enum UserStatus {
@@ -74,7 +94,7 @@ enum UserStatus {
   NOT_VERIFIED
 }
 
-enum UserRolle {
+enum UserRole {
   USER
   EDITOR
   ADMIN
@@ -94,23 +114,17 @@ model Project {
   project_end   DateTime
 
   status ProjectStatus @default(ACTIVE)
+
+  companyId Int
+  Company   Company    @relation(fields: [companyId], references: [id])
+  Users     User[]
+  Scenario  Scenario[]
 }
 
 enum ProjectStatus {
   ACTIVE
   INACTIVE
   ARCHIVED
-}
-
-// Company
-
-model Company {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  name String
-  logo String?
 }
 
 // Scenario
@@ -122,6 +136,11 @@ model Scenario {
 
   name        String
   description String?
+
+  Survey Survey[]
+
+  projectId Int
+  Project   Project @relation(fields: [projectId], references: [id])
 }
 
 // Survey
@@ -136,11 +155,41 @@ model Survey {
   order       Int     @default(0)
 
   status SurveyStatus @default(ACTIVE)
+
+  Templates Template[]
+  Responses Response[]
+
+  Pages      Page[]
+  Categories Category[]
+  Questions  Question[]
+
+  scenarioId Int
+  Scenario   Scenario @relation(fields: [scenarioId], references: [id])
 }
 
 enum SurveyStatus {
   ACTIVE
   CLOSED
+}
+
+// TestPerson
+
+model TestPerson {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name      String
+  signature Boolean
+  age       Int?
+
+  Response Response?
+}
+
+enum TestPersonSex {
+  MALE
+  FEMALE
+  NOT_BINARY
 }
 
 // Response
@@ -155,6 +204,14 @@ model Response {
   notes    String?
 
   typ ResponseType @default(VALID)
+
+  surveyId Int?
+  Survey   Survey? @relation(fields: [surveyId], references: [id])
+
+  testPersonId Int?
+  Person       TestPerson? @relation(fields: [testPersonId], references: [id])
+
+  Answers Answer[]
 }
 
 enum ResponseType {
@@ -162,20 +219,122 @@ enum ResponseType {
   INVALID
 }
 
-// TestPerson
+model Page {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
 
-model TestPerson {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  name      String
-  signature Boolean
-  age       Int?
+  Categories Category[]
+  Survey     Survey     @relation(fields: [surveyId], references: [id])
+  surveyId   Int
 }
 
-enum TestPersonSex {
-  MALE
-  FEMALE
-  NOT_BINARY
+model Category {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+
+  Questions Question[]
+
+  pageId Int?
+  Page   Page? @relation(fields: [pageId], references: [id])
+
+  surveyId Int
+  Survey   Survey @relation(fields: [surveyId], references: [id])
+}
+
+model Question {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  typeOptions String[]
+
+  Answer Answer?
+
+  categoryId Int?
+  Category   Category? @relation(fields: [categoryId], references: [id])
+  surveyId   Int?
+  Survey     Survey?   @relation(fields: [surveyId], references: [id])
+}
+
+enum QuestionType {
+  SCORE
+  TEXT
+  SCORE_TEXT
+  BOOLEAN
+  CHECKBOX
+  RADIOBUTTON
+}
+
+model Answer {
+  id          Int       @id @default(autoincrement())
+  score       Int?
+  text        String?
+  boolean     Boolean?
+  checkbox    Boolean[]
+  radiobutton Int?
+
+  questionId Int
+  Question   Question @relation(fields: [questionId], references: [id])
+
+  responseId Int
+  Response   Response @relation(fields: [responseId], references: [id])
+}
+
+model Template {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  Fields     Field[]
+  Attributes Attribute[]
+  Factors    Factor[]
+  Criteria   Criteria[]
+
+  surveyId Int?
+  Survey   Survey? @relation(fields: [surveyId], references: [id])
+}
+
+model Field {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+
+  attributes Attribute[]
+
+  Templates Template[]
+}
+
+model Attribute {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  factors     Factor[]
+
+  fieldId Int?
+  field   Field? @relation(fields: [fieldId], references: [id])
+
+  Templates Template[]
+}
+
+model Factor {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String?
+  criteras    Criteria[]
+
+  attributeId Int?
+  Attribute   Attribute? @relation(fields: [attributeId], references: [id])
+
+  Templates Template[]
+}
+
+model Criteria {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+
+  factorId Int?
+  Factor   Factor? @relation(fields: [factorId], references: [id])
+
+  Templates Template[]
 }
