@@ -23,14 +23,14 @@ model Action {
   changes   String?
   exception String?
 
-  status      ActionStatus   @default(FEHLER)
+  status      ActionStatus   @default(ERROR)
   entitiyName ActionEntitiy?
 }
 
 enum ActionStatus {
-  ERFOLG
-  FEHLER
-  LAUFEND
+  SUCCESS
+  ERROR
+  RUNNING
 }
 
 enum ActionEntitiy {
@@ -64,15 +64,14 @@ model User {
   password    String
   last_logout DateTime @default(now())
 
-  status UserStatus @default(AKTIV)
-  rolle  UserRolle  @default(USER)
-
+  status UserStatus @default(ACTIVE)
+  role   UserRolle  @default(USER)
 }
 
 enum UserStatus {
-  AKTIV
-  DEAKTIVIERT
-  NICHT_VERIFIZIERT
+  ACTIVE
+  DEACTIVATED
+  NOT_VERIFIED
 }
 
 enum UserRolle {
@@ -89,18 +88,18 @@ model Project {
   updatedAt DateTime @updatedAt
 
   name          String
-  beschreibung  String?
-  ziel          String?
-  Project_start DateTime
-  Project_end   DateTime
+  description   String?
+  goal          String?
+  project_start DateTime
+  project_end   DateTime
 
-  status ProjectStatus @default(AKTIV)
+  status ProjectStatus @default(ACTIVE)
 }
 
 enum ProjectStatus {
-  AKTIV
-  INAKTIV
-  ARCHIVIERT
+  ACTIVE
+  INACTIVE
+  ARCHIVED
 }
 
 // Company
@@ -121,8 +120,8 @@ model Scenario {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name         String
-  beschreibung String?
+  name        String
+  description String?
 }
 
 // Survey
@@ -132,16 +131,16 @@ model Survey {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name         String
-  beschreibung String?
-  reihenfolge  Int     @default(0)
+  name        String
+  description String?
+  order       Int     @default(0)
 
-  status SurveyStatus @default(AKTIV)
+  status SurveyStatus @default(ACTIVE)
 }
 
 enum SurveyStatus {
-  AKTIV
-  GESCHLOSSEN
+  ACTIVE
+  CLOSED
 }
 
 // Response
@@ -151,9 +150,9 @@ model Response {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  ort      String?
+  location String?
   feedback String?
-  notizen  String?
+  notes    String?
 
   typ ResponseType @default(VALID)
 }
