@@ -1,8 +1,8 @@
 <script>
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [
-		CrumbBuilder.create('Unternehmen ID', '/unternehmen/ID', 'unternehmen').build(),
-		CrumbBuilder.create('Projekt ID', '/unternehmen/ID/projekte/ID', 'projekte').build()
+		CrumbBuilder.create('Flughafen Stuttgart', '/company/ID', 'company').build(),
+		CrumbBuilder.create('Projekt ID', '/company/ID/project/ID', 'project').build()
 	];
 </script>
 

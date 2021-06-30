@@ -10,7 +10,7 @@
 
 <a class="breadcrumbsItemContainer" sveltekit:prefetch href={crumb.url}>
 	<Icon name={crumb.icon} />
-	<span class="breadcrumbsItemText">{crumb.name}</span>
+	<span class="breadcrumbsItemText">{crumb.name.substring(0, 12)}</span>
 </a>
 
 <style>

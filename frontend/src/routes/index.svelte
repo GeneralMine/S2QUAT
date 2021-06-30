@@ -1,11 +1,48 @@
 <script>
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
-	import CompanyCard from '$lib/Cards/CompanyCard.svelte';
+	import ProjectCard from '$lib/Cards/ProjectCard.svelte';
+	import TemplateCard from '$lib/Cards/TemplateCard.svelte';
 
 	import { crumbs } from '$lib/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [];
 
-	let unternehmen = [
+	let projects = [
+		{
+			id: 0,
+			name: 'Pinguinkolonie',
+			company: {
+				id: 0,
+				name: 'Pinguland',
+				logo: 'default'
+			},
+			scenarios: 1,
+			users: 2
+		},
+		{
+			id: 1,
+			name: 'S2QUAT Tool',
+			company: {
+				id: 1,
+				name: 'Fraunhofer',
+				logo: 'fraunhofer'
+			},
+			scenarios: 3,
+			users: 5
+		},
+		{
+			id: 2,
+			name: 'Anderes Projekt',
+			company: {
+				id: 2,
+				name: 'Flughafen Stuttgart',
+				logo: 'StuttgartAirport'
+			},
+			scenarios: 2,
+			users: 1
+		}
+	];
+
+	let templates = [
 		{
 			id: 0,
 			name: 'Penguin',
@@ -19,13 +56,6 @@
 			logo: 'fraunhofer',
 			employees: 1,
 			projekte: 3
-		},
-		{
-			id: 2,
-			name: 'Flughafen Stuttgart',
-			logo: 'StuttgartAirport',
-			employees: 1,
-			projekte: 2
 		}
 	];
 </script>
@@ -35,19 +65,15 @@
 </svelte:head>
 
 <div>
-	<CardRow title="Unternehmen" url="/unternehmen">
-		{#each unternehmen as company}
-			<CompanyCard {company} />
+	<CardRow title="Projekte" url="/company">
+		{#each projects as project}
+			<ProjectCard {project} />
 		{/each}
 	</CardRow>
-	<CardRow title="Qualitätsmodelll" url="/modelll">
-		{#each unternehmen as company}
-			<CompanyCard {company} />
-		{/each}
-	</CardRow>
-	<CardRow title="Vorlagen" url="/vorlagen">
-		{#each unternehmen as company}
-			<CompanyCard {company} />
+	<CardRow title="Qualitätsmodell" url="/model" />
+	<CardRow title="Vorlagen" url="/template">
+		{#each templates as template}
+			<TemplateCard {template} />
 		{/each}
 	</CardRow>
 </div>

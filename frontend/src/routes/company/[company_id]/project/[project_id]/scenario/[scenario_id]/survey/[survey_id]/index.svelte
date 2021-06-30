@@ -1,11 +1,11 @@
 <script>
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [
-		CrumbBuilder.create('Unternehmen ID', '/unternehmen/ID', 'unternehmen').build(),
-		CrumbBuilder.create('Projekt ID', '/unternehmen/ID/projekte/ID', 'projekte').build(),
+		CrumbBuilder.create('Unternehmen ID', '/company/ID', 'company').build(),
+		CrumbBuilder.create('Projekt ID', '/company/ID/project/ID', 'project').build(),
 		CrumbBuilder.create(
 			'Fragebogen ID',
-			'/unternehmen/ID/projekte/ID/szenarien/ID/frageboegen/ID',
+			'/company/ID/project/ID/scenario/ID/survey/ID',
 			'frageboegen'
 		).build()
 	];

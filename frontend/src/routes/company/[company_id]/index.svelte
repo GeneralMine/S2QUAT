@@ -1,6 +1,6 @@
 <script>
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
-	$crumbs = [CrumbBuilder.create('Unternehmen ID', '/unternehmen/ID', 'unternehmen').build()];
+	$crumbs = [CrumbBuilder.create('Unternehmen ID', '/company/ID', 'company').build()];
 </script>
 
 <svelte:head>

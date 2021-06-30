@@ -2,34 +2,26 @@
 	import Card from '$lib/Cards/CardComponents/Card.svelte';
 	import CardNumber from '$lib/Cards/CardComponents/CardNumber.svelte';
 	import CardSubtitle from '$lib/Cards/CardComponents/CardSubtitle.svelte';
+	import Icon from '$lib/common/Icon.svelte';
 
-	export let company = {
+	export let template = {
 		id: 0,
 		name: 'Penguin',
-		logo: 'default',
-		employees: 4,
 		projekte: 2
 	};
 </script>
 
 <Card>
-	<div class="container">
-		<a class="header clickArea" href="/unternehmen/{company.id}">
-			<img class="logoImg" src="logos/{company.logo}.png" alt="{company.name}s logo" />
-		</a>
+	<a class="container clickArea" href="/template/{template.id}">
+		<div class="header">
+			<p class="templateName">{template.name}</p>
+		</div>
 		<div class="cardSeperator seperator" />
 		<div class="body">
-			<a class="employees bodyhalf clickArea" href="/unternehmen/{company.id}/employees">
-				<CardNumber value={company.employees} />
-				<CardSubtitle title="Mitarbeiter" />
-			</a>
-			<div class="bodySeperator seperator" />
-			<a class="projekte bodyhalf clickArea" href="/unternehmen/{company.id}/projekte">
-				<CardNumber value={company.projekte} />
-				<CardSubtitle title="Projekte" />
-			</a>
+			<CardNumber value={template.projekte} />
+			<CardSubtitle title="verwendet in Projekten" />
 		</div>
-	</div>
+	</a>
 </Card>
 
 <style>
@@ -45,12 +37,21 @@
 	.header {
 		height: 29%;
 		width: 100%;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
 	}
-
-	.logoImg {
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
+	.icon {
+		width: 30%;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		padding-right: 1rem;
+	}
+	.templateName {
+		font-weight: 500;
+		font-size: 1.15rem;
 	}
 
 	.seperator {
@@ -68,18 +69,9 @@
 		height: 62%;
 		width: 100%;
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		align-items: center;
 		justify-content: space-evenly;
-	}
-	.bodyhalf {
-		width: 49%;
-		height: 100%;
-		text-align: center;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
 	}
 	.clickArea {
 		text-decoration: none;
@@ -88,9 +80,5 @@
 	}
 	.clickArea:hover {
 		background-color: #2e5bff25;
-	}
-	.bodySeperator {
-		width: 1px;
-		height: 80%;
 	}
 </style>
