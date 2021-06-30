@@ -61,6 +61,8 @@ async function startup() {
         app.use(require("./middleware/loggedInChecker"));
     }
 
+    app.get("/user/:userId/projects", require("./routes/user/projects"));
+
     app.listen(BACKEND_PORT, () => {
         console.log(`Listening on http://localhost:${BACKEND_PORT}`);
     });
