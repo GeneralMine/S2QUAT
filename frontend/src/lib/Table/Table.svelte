@@ -1,12 +1,14 @@
 <script>
-	import TableOptions from './TableOptions.svelte';
+	import TableFooter from './TableFooter.svelte';
+	import TableHeader from './TableHeader.svelte';
 </script>
 
 <div class="tableContainer">
-	<TableOptions />
+	<TableHeader />
 	<table class="table" cellspacing="0" cellpadding="0">
 		<slot />
 	</table>
+	<TableFooter />
 </div>
 
 <style>

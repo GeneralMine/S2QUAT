@@ -27,13 +27,13 @@
 	import Table from '$lib/Table/Table.svelte';
 	import Surface from '$lib/Common/Surface.svelte';
 	import TableBody from '$lib/Table/TableBody.svelte';
-	import TableHeader from '$lib/Table/TableHeader.svelte';
+	import TableAttributes from '$lib/Table/TableAttributes.svelte';
 	import ProjectCard from '$lib/Cards/ProjectCard.svelte';
 	import TemplateCard from '$lib/Cards/TemplateCard.svelte';
 	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
 	import TableBodyItem from '$lib/Table/TableBodyItem.svelte';
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
-	import TableHeaderItem from '$lib/Table/TableHeaderItem.svelte';
+	import TableAttributesItem from '$lib/Table/TableAttributesItem.svelte';
 	export let projects = [];
 	export let templates = [];
 </script>
@@ -45,21 +45,21 @@
 <div>
 	<Surface title="Projekte">
 		<Table>
-			<TableHeader>
-				<TableHeaderItem>ID</TableHeaderItem>
-				<TableHeaderItem>Unternehmen</TableHeaderItem>
-				<TableHeaderItem>Status</TableHeaderItem>
-				<TableHeaderItem>Name</TableHeaderItem>
-				<TableHeaderItem>Beschreibung</TableHeaderItem>
-			</TableHeader>
+			<TableAttributes>
+				<TableAttributesItem>ID</TableAttributesItem>
+				<TableAttributesItem>Unternehmen</TableAttributesItem>
+				<TableAttributesItem>Status</TableAttributesItem>
+				<TableAttributesItem>Name</TableAttributesItem>
+				<TableAttributesItem>Beschreibung</TableAttributesItem>
+			</TableAttributes>
 			<TableBody>
 				{#each projects as project}
-					<TableBodyRow
-						on:click={async () =>
-							await goto('/company/' + project.company.id + '/project/' + project.id)}
-					>
+					<TableBodyRow on:click={async () => await goto('/project/' + project.id)}>
 						<TableBodyItem>{project.id}</TableBodyItem>
-						<TableBodyItem type="img" imgName={project.company.logo} />
+						<TableBodyItem
+							type="img"
+							imgName={project.company !== null ? project.company.logo : '-'}
+						/>
 						<TableBodyItem>{project.status}</TableBodyItem>
 						<TableBodyItem>{project.name}</TableBodyItem>
 						<TableBodyItem>{project.description}</TableBodyItem>

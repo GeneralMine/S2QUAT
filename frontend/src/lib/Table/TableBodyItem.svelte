@@ -35,7 +35,7 @@
 </script>
 
 <td>
-	{#if type === 'img'}
+	{#if type === 'img' && imgName !== '-'}
 		<img src="/logos/{imgName}.png" alt={imgName} />
 	{:else}
 		<span bind:this={item} class="item">

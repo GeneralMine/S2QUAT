@@ -1,10 +1,7 @@
 <script>
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
-	$crumbs = [
-		CrumbBuilder.create('Unternehmen ID', '/company/ID', 'company').build(),
-		CrumbBuilder.create('Projekte', '/company/ID/project', 'project').build()
-	];
+	$crumbs = [CrumbBuilder.create('Projekte', '/project', 'project').build()];
 	/*******************************************/
 </script>
 
@@ -12,4 +9,4 @@
 	<title>Projekte | S2QUAT</title>
 </svelte:head>
 
-Unternehmen Projekte
+Projekte

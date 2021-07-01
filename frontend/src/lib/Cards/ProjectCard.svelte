@@ -18,28 +18,24 @@
 
 <Card>
 	<div class="container">
-		<a class="header clickArea" href="/company/{project.company.id}/project/{project.id}">
-			<img
-				class="logoImg"
-				src="logos/{project.company.logo}.png"
-				alt="{project.company.name}s logo"
-			/>
+		<a class="header clickArea" href="/project/{project.id}">
+			{#if project.company !== null}
+				<img
+					class="logoImg"
+					src="logos/{project.company.logo}.png"
+					alt="{project.company.name}s logo"
+				/>
+			{/if}
 			<p class="projectName">{project.name}</p>
 		</a>
 		<div class="cardSeperator seperator" />
 		<div class="body">
-			<a
-				class="users bodyhalf clickArea"
-				href="/company/{project.company.id}/project/{project.id}/scenario"
-			>
+			<a class="users bodyhalf clickArea" href="/project/{project.id}/scenario">
 				<CardNumber value={project.scenarios ? project.scenarios.length : 0} />
 				<CardSubtitle title="Szenarien" />
 			</a>
 			<div class="bodySeperator seperator" />
-			<a
-				class="projects bodyhalf clickArea"
-				href="/company/{project.company.id}/project/{project.id}/users"
-			>
+			<a class="projects bodyhalf clickArea" href="/project/{project.id}/users">
 				<CardNumber value={project.users ? project.users.length : 0} />
 				<CardSubtitle title="Verantwortliche" />
 			</a>

@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
     try {
         userId = parseInt(userId);
 
-        const projects = await prisma.project.findMany(
+        let projects = await prisma.project.findMany(
             {
                 include: {
                     company: true,
@@ -27,6 +27,14 @@ module.exports = async (req, res) => {
                     }
                 }
             });
+        projects = projects.map(el => {
+            el.users.map(usr => {
+                delete usr.password;
+                delete usr.last_logout;
+                return usr;
+            })
+            return el;
+        })
         return res.json({ projects });
     } catch (err) {
         return res.status(400).send();
