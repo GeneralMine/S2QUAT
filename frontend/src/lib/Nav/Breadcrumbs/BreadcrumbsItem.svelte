@@ -46,6 +46,7 @@
 		font-weight: 500;
 		letter-spacing: 0.00714em;
 		text-transform: inherit;
+		margin-right: 16px;
 	}
 	.isLast {
 		background-color: #2e5bff25;
