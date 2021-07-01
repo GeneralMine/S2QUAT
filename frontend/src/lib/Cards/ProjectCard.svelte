@@ -6,23 +6,23 @@
 	export let project = {
 		id: 0,
 		name: 'Penguin',
-		Company: {
+		company: {
 			id: 0,
 			name: 'Company',
 			logo: 'default'
 		},
-		Scenarios: [],
-		Users: []
+		scenarios: [],
+		users: []
 	};
 </script>
 
 <Card>
 	<div class="container">
-		<a class="header clickArea" href="/company/{project.Company.id}/project/{project.id}">
+		<a class="header clickArea" href="/company/{project.company.id}/project/{project.id}">
 			<img
 				class="logoImg"
-				src="logos/{project.Company.logo}.png"
-				alt="{project.Company.name}s logo"
+				src="logos/{project.company.logo}.png"
+				alt="{project.company.name}s logo"
 			/>
 			<p class="projectName">{project.name}</p>
 		</a>
@@ -30,17 +30,17 @@
 		<div class="body">
 			<a
 				class="users bodyhalf clickArea"
-				href="/company/{project.Company.id}/project/{project.id}/scenario"
+				href="/company/{project.company.id}/project/{project.id}/scenario"
 			>
-				<CardNumber value={project.Scenarios ? project.Scenarios.length : 0} />
+				<CardNumber value={project.scenarios ? project.scenarios.length : 0} />
 				<CardSubtitle title="Szenarien" />
 			</a>
 			<div class="bodySeperator seperator" />
 			<a
 				class="projects bodyhalf clickArea"
-				href="/company/{project.Company.id}/project/{project.id}/users"
+				href="/company/{project.company.id}/project/{project.id}/users"
 			>
-				<CardNumber value={project.Users ? project.Users.length : 0} />
+				<CardNumber value={project.users ? project.users.length : 0} />
 				<CardSubtitle title="Verantwortliche" />
 			</a>
 		</div>

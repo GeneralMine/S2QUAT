@@ -68,10 +68,10 @@ model Answer {
   radiobutton Int?
 
   questionId Int
-  Question   Question @relation(fields: [questionId], references: [id])
+  question   Question @relation(fields: [questionId], references: [id])
 
   responseId Int
-  Response   Response @relation(fields: [responseId], references: [id])
+  response   Response @relation(fields: [responseId], references: [id])
 }
 
 // Attribute
@@ -84,7 +84,7 @@ model Attribute {
   name        String
   description String?
   factors     Factor[]
-  Templates   Template[]
+  templates   Template[]
 
   fieldId Int?
   field   Field? @relation(fields: [fieldId], references: [id])
@@ -99,13 +99,13 @@ model Category {
 
   name        String
   description String?
-  Questions   Question[]
+  questions   Question[]
 
   pageId Int?
-  Page   Page? @relation(fields: [pageId], references: [id])
+  page   Page? @relation(fields: [pageId], references: [id])
 
   surveyId Int
-  Survey   Survey @relation(fields: [surveyId], references: [id])
+  survey   Survey @relation(fields: [surveyId], references: [id])
 }
 
 // Company
@@ -117,7 +117,7 @@ model Company {
 
   name     String
   logo     String?
-  Projects Project[]
+  projects Project[]
 }
 
 // Criteria
@@ -129,10 +129,10 @@ model Criteria {
 
   name        String
   description String?
-  Templates   Template[]
+  templates   Template[]
 
   factorId Int?
-  Factor   Factor? @relation(fields: [factorId], references: [id])
+  factor   Factor? @relation(fields: [factorId], references: [id])
 }
 
 // Factor
@@ -145,10 +145,10 @@ model Factor {
   name        String
   description String?
   criterias   Criteria[]
-  Templates   Template[]
+  templates   Template[]
 
   attributeId Int?
-  Attribute   Attribute? @relation(fields: [attributeId], references: [id])
+  attribute   Attribute? @relation(fields: [attributeId], references: [id])
 }
 
 // Field
@@ -161,7 +161,7 @@ model Field {
   name        String
   description String?
   attributes  Attribute[]
-  Templates   Template[]
+  templates   Template[]
 }
 
 // Page
@@ -173,10 +173,10 @@ model Page {
 
   name        String
   description String?
-  Categories  Category[]
+  categories  Category[]
 
   surveyId Int
-  Survey   Survey @relation(fields: [surveyId], references: [id])
+  survey   Survey @relation(fields: [surveyId], references: [id])
 }
 
 // Project
@@ -191,12 +191,12 @@ model Project {
   goal          String?
   project_start DateTime?
   project_end   DateTime?
-  Users         User[]
-  Scenarios     Scenario[]
+  users         User[]
+  scenarios     Scenario[]
   status        ProjectStatus @default(ACTIVE)
 
   companyId Int?
-  Company   Company? @relation(fields: [companyId], references: [id])
+  company   Company? @relation(fields: [companyId], references: [id])
 }
 
 enum ProjectStatus {
@@ -215,14 +215,14 @@ model Question {
   name        String
   description String?
   typeOptions String[]
-  Answer      Answer?
+  answer      Answer?
   typ         QuestionType @default(SCORE)
 
   categoryId Int?
-  Category   Category? @relation(fields: [categoryId], references: [id])
+  category   Category? @relation(fields: [categoryId], references: [id])
 
   surveyId Int?
-  Survey   Survey? @relation(fields: [surveyId], references: [id])
+  survey   Survey? @relation(fields: [surveyId], references: [id])
 }
 
 enum QuestionType {
@@ -244,17 +244,17 @@ model Response {
   location String?
   feedback String?
   notes    String?
-  Answers  Answer[]
+  answers  Answer[]
   typ      ResponseType @default(VALID)
 
   userId Int
   user   User @relation(fields: [userId], references: [id])
 
   surveyId Int?
-  Survey   Survey? @relation(fields: [surveyId], references: [id])
+  survey   Survey? @relation(fields: [surveyId], references: [id])
 
   testPersonId Int?
-  Person       TestPerson? @relation(fields: [testPersonId], references: [id])
+  person       TestPerson? @relation(fields: [testPersonId], references: [id])
 }
 
 enum ResponseType {
@@ -271,10 +271,10 @@ model Scenario {
 
   name        String
   description String?
-  Survey      Survey[]
+  survey      Survey[]
 
   projectId Int
-  Project   Project @relation(fields: [projectId], references: [id])
+  project   Project @relation(fields: [projectId], references: [id])
 }
 
 // Survey
@@ -288,16 +288,16 @@ model Survey {
   description String?
   order       Int          @default(0)
   status      SurveyStatus @default(ACTIVE)
-  Responses   Response[]
-  Pages       Page[]
-  Categories  Category[]
-  Questions   Question[]
+  responses   Response[]
+  pages       Page[]
+  categories  Category[]
+  questions   Question[]
 
   scenarioId Int
-  Scenario   Scenario @relation(fields: [scenarioId], references: [id])
+  scenario   Scenario @relation(fields: [scenarioId], references: [id])
 
   templateId Int?
-  Tempalte   Template? @relation(fields: [templateId], references: [id])
+  tempalte   Template? @relation(fields: [templateId], references: [id])
 }
 
 enum SurveyStatus {
@@ -313,11 +313,11 @@ model Template {
   updatedAt DateTime @updatedAt
 
   name       String
-  Fields     Field[]
-  Attributes Attribute[]
-  Factors    Factor[]
-  Criteria   Criteria[]
-  Survey     Survey?
+  fields     Field[]
+  attributes Attribute[]
+  factors    Factor[]
+  criteria   Criteria[]
+  survey     Survey?
 }
 
 // TestPerson
@@ -330,7 +330,7 @@ model TestPerson {
   name          String
   signature     Boolean
   age           Int?
-  Response      Response?
+  response      Response?
   testPersonSex TestPersonSex?
 }
 
@@ -353,9 +353,9 @@ model User {
   last_logout DateTime   @default(now())
   status      UserStatus @default(NOT_VERIFIED)
   role        UserRole   @default(USER)
-  Actions     Action[]
-  Project     Project[]
-  Response    Response[]
+  actions     Action[]
+  project     Project[]
+  response    Response[]
 }
 
 enum UserStatus {

@@ -28,12 +28,12 @@
 	import Surface from '$lib/Common/Surface.svelte';
 	import TableBody from '$lib/Table/TableBody.svelte';
 	import TableHeader from '$lib/Table/TableHeader.svelte';
+	import ProjectCard from '$lib/Cards/ProjectCard.svelte';
+	import TemplateCard from '$lib/Cards/TemplateCard.svelte';
 	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
 	import TableBodyItem from '$lib/Table/TableBodyItem.svelte';
-	import TableHeaderItem from '$lib/Table/TableHeaderItem.svelte';
-	import TemplateCard from '$lib/Cards/TemplateCard.svelte';
-	import ProjectCard from '$lib/Cards/ProjectCard.svelte';
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
+	import TableHeaderItem from '$lib/Table/TableHeaderItem.svelte';
 	export let projects = [];
 	export let templates = [];
 </script>
@@ -47,7 +47,7 @@
 		<Table>
 			<TableHeader>
 				<TableHeaderItem>ID</TableHeaderItem>
-				<TableHeaderItem>Company</TableHeaderItem>
+				<TableHeaderItem>Unternehmen</TableHeaderItem>
 				<TableHeaderItem>Status</TableHeaderItem>
 				<TableHeaderItem>Name</TableHeaderItem>
 				<TableHeaderItem>Beschreibung</TableHeaderItem>
@@ -56,10 +56,10 @@
 				{#each projects as project}
 					<TableBodyRow
 						on:click={async () =>
-							await goto('/company/' + project.Company.id + '/project/' + project.id)}
+							await goto('/company/' + project.company.id + '/project/' + project.id)}
 					>
 						<TableBodyItem>{project.id}</TableBodyItem>
-						<TableBodyItem type="img" imgName={project.Company.logo} />
+						<TableBodyItem type="img" imgName={project.company.logo} />
 						<TableBodyItem>{project.status}</TableBodyItem>
 						<TableBodyItem>{project.name}</TableBodyItem>
 						<TableBodyItem>{project.description}</TableBodyItem>

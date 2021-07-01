@@ -12,9 +12,9 @@
 
 <script>
 	import '../app.css';
+	import Nav from '$lib/Nav.svelte';
 	import { navigating } from '$app/stores';
 	import Footer from '$lib/Common/Footer.svelte';
-	import Nav from '$lib/Nav.svelte';
 	import PreloadingIndicator from '$lib/PreloadingIndicator.svelte';
 	let width;
 </script>

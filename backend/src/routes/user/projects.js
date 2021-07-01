@@ -15,12 +15,12 @@ module.exports = async (req, res) => {
         const projects = await prisma.project.findMany(
             {
                 include: {
-                    Company: true,
-                    Scenarios: true,
-                    Users: true
+                    company: true,
+                    scenarios: true,
+                    users: true
                 },
                 where: {
-                    Users: {
+                    users: {
                         some: {
                             id: userId
                         }

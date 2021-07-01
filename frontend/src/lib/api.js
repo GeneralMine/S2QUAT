@@ -39,6 +39,7 @@ export async function roflul(func) {
     }
 }
 
+/*
 export function loader(data, f = fetch) {
     async function l(method, ...urls) {
         try {
@@ -56,3 +57,4 @@ export function loader(data, f = fetch) {
         PUT: l("PUT"),
     }
 }
+*/

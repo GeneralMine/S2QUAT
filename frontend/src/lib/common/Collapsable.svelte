@@ -14,17 +14,19 @@
 			<DropDownIcon {expanded} />
 			<p class="title">{title}</p>
 		</div>
-		<div class="buttons">
-			<div class="add button clickArea" on:click={() => dispatch('add', {})}>
-				<Icon name="add" />
+		{#if expanded}
+			<div class="buttons">
+				<div class="add button clickArea" on:click={() => dispatch('add', {})}>
+					<Icon name="add" />
+				</div>
+				<div class="edit button clickArea" on:click={() => dispatch('edit', {})}>
+					<Icon name="edit" />
+				</div>
+				<div class="delete button clickArea" on:click={() => dispatch('delete', {})}>
+					<Icon name="delete" />
+				</div>
 			</div>
-			<div class="edit button clickArea" on:click={() => dispatch('edit', {})}>
-				<Icon name="edit" />
-			</div>
-			<div class="delete button clickArea" on:click={() => dispatch('delete', {})}>
-				<Icon name="delete" />
-			</div>
-		</div>
+		{/if}
 	</div>
 	<div class="content">
 		{#if expanded}

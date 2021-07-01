@@ -11,11 +11,9 @@
 </script>
 
 <script>
-	import { session } from '$app/stores';
-	import { goto } from '$app/navigation';
 	import { post } from '$lib/api.js';
-	import ListErrors from '$lib/ListErrors.svelte';
 	import Footer from '$lib/Common/Footer.svelte';
+	import ListErrors from '$lib/ListErrors.svelte';
 
 	let name = '';
 	let email = '';
