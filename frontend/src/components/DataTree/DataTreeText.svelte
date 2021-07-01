@@ -118,7 +118,7 @@
     .container {
         display: flex;
         flex-direction: row;
-        user-select: none;
+        /* user-select: none; */
         width: 100%;
     }
     .textBox {
