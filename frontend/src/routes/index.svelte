@@ -98,6 +98,3 @@
 		{/each}
 	</CardRow>
 </div>
-
-<style>
-</style>
