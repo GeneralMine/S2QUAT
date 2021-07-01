@@ -1,6 +1,6 @@
 <script>
-	import Surface from '$lib/common/Surface.svelte';
-	import Footer from '$lib/common/Footer.svelte';
+	import Surface from '$lib/Common/Surface.svelte';
+	import Footer from '$lib/Common/Footer.svelte';
 </script>
 
 <svelte:head>

@@ -1,5 +1,5 @@
 <script>
-	import Icon from '$lib/common/Icon.svelte';
+	import Icon from '$lib/Common/Icon.svelte';
 
 	export let crumb = {
 		name: 'Home',
@@ -9,7 +9,7 @@
 	export let isLast = false;
 </script>
 
-<a class:isLast class="breadcrumbsItemContainer" sveltekit:prefetch href={crumb.url}>
+<a class:isLast class="breadcrumbsItemContainer clickArea" sveltekit:prefetch href={crumb.url}>
 	<Icon name={crumb.icon} />
 	<span class="breadcrumbsItemText">{crumb.name.substring(0, 12)}</span>
 </a>
@@ -20,7 +20,7 @@
 		justify-content: center;
 		align-items: center;
 		border-radius: 25px;
-		border: 2px solid #707070;
+		/* border: 2px solid #707070; */
 		flex-direction: row;
 		user-select: none;
 		margin-top: 0.5rem;

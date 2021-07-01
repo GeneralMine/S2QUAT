@@ -1,6 +1,6 @@
 <script>
 	import Factor from './Factor.svelte';
-	import Collapsable from '$lib/common/Collapsable.svelte';
+	import Collapsable from '$lib/Common/Collapsable.svelte';
 
 	export let attribute;
 

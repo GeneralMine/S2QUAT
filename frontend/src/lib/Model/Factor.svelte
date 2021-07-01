@@ -1,6 +1,6 @@
 <script>
 	import Criteria from './Criteria.svelte';
-	import Collapsable from '$lib/common/Collapsable.svelte';
+	import Collapsable from '$lib/Common/Collapsable.svelte';
 
 	export let factor;
 </script>

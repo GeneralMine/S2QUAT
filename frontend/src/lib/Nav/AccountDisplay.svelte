@@ -1,5 +1,5 @@
 <script>
-	import Icon from '$lib/common/Icon.svelte';
+	import Icon from '$lib/Common/Icon.svelte';
 	import { session } from '$app/stores';
 </script>
 

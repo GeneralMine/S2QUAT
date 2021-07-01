@@ -1,4 +1,5 @@
 <script>
+	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [
 		CrumbBuilder.create('Unternehmen ID', '/company/ID', 'company').build(),
@@ -14,6 +15,7 @@
 			'evaluation'
 		).build()
 	];
+	/*******************************************/
 </script>
 
 <svelte:head>

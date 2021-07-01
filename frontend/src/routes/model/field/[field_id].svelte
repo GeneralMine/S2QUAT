@@ -17,14 +17,16 @@
 </script>
 
 <script>
-	import Field from '$lib/Model/Field.svelte';
-	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
 	export let field = {};
+	/*******************************************/
+	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [
 		CrumbBuilder.create('Home', '/', 'home').build(),
 		CrumbBuilder.create('Modell', '/model', 'model').build(),
 		CrumbBuilder.create('Feld ' + field.id, '/model', 'model').build()
 	];
+	/*******************************************/
+	import Field from '$lib/Model/Field.svelte';
 	$: console.log(field);
 </script>
 

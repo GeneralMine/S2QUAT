@@ -17,7 +17,7 @@
 }
 
 body {
-    background-color: #f8f8f8;
+    background-color: var(--background-color);
     margin: 0;
     width: 100%;
     height: 100%;
@@ -27,6 +27,10 @@ body {
 a{
     color: black;
 }
+
+/* 
+    Button
+*/
 
 button {
     background-color: #35a8e0;
@@ -56,6 +60,10 @@ button:disabled {
     background-color: #444444;
 }
 
+/* 
+    Input
+*/
+
 input {
     width: 100%;
     padding: 8px 16px;
@@ -66,9 +74,17 @@ input {
     box-sizing: border-box;
 }
 
+/* 
+    Label
+*/
+
 label {
     text-align: left;
 }
+
+/* 
+    clickArea
+*/
 
 .clickArea {
     text-decoration: none;
@@ -79,7 +95,49 @@ label {
     background-color: #35a7e00e;
 }
 
+/* 
+    Text
+*/
+
 .textBlock {
     hyphens: none; 
 	text-align: justify;
+}
+
+/* 
+    Tables
+*/
+
+table {
+    width: 100%;
+    display: table;
+    overflow: hidden;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+table td {
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.9);
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-color: rgba(0, 0, 0, 0.5);
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    min-width: 56px;
+    height: 3.8125rem;
+}
+table td,
+table th {
+    vertical-align: middle;
+}
+table th {
+    background-color: #f0f0f0;
+    font-weight: 800;
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.8);
+    text-transform: uppercase;
+    border-bottom-width: 2px;
+    border-color: rgba(0, 0, 0, 0.5);
+    padding: 0.75rem;
+    letter-spacing: 0.05em;
 }

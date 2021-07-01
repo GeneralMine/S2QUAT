@@ -1,7 +1,7 @@
 <script>
-	import Surface from '$lib/common/Surface.svelte';
+	import Surface from '$lib/Common/Surface.svelte';
 	import Attribute from './Attribute.svelte';
-	import Collapsable from '$lib/common/Collapsable.svelte';
+	import Collapsable from '$lib/Common/Collapsable.svelte';
 
 	export let field;
 

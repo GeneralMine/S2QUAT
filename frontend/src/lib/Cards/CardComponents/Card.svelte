@@ -1,5 +1,5 @@
 <script>
-	import Surface from '$lib/common/Surface.svelte';
+	import Surface from '$lib/Common/Surface.svelte';
 </script>
 
 <Surface>

@@ -18,67 +18,24 @@
 </script>
 
 <script>
-	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
-	import ProjectCard from '$lib/Cards/ProjectCard.svelte';
-	import TemplateCard from '$lib/Cards/TemplateCard.svelte';
-
+	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [CrumbBuilder.create('Home', '/', 'home').build()];
+	/*******************************************/
+	import { goto } from '$app/navigation';
 
+	import Table from '$lib/Table/Table.svelte';
+	import Surface from '$lib/Common/Surface.svelte';
+	import TableBody from '$lib/Table/TableBody.svelte';
+	import TableHeader from '$lib/Table/TableHeader.svelte';
+	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
+	import TableBodyItem from '$lib/Table/TableBodyItem.svelte';
+	import TableHeaderItem from '$lib/Table/TableHeaderItem.svelte';
+	import TemplateCard from '$lib/Cards/TemplateCard.svelte';
+	import ProjectCard from '$lib/Cards/ProjectCard.svelte';
+	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
 	export let projects = [];
-
-	let projects_mock = [
-		{
-			id: 0,
-			name: 'Pinguinkolonie',
-			company: {
-				id: 0,
-				name: 'Pinguland',
-				logo: 'default'
-			},
-			scenarios: 1,
-			users: 2
-		},
-		{
-			id: 1,
-			name: 'S2QUAT Tool',
-			company: {
-				id: 1,
-				name: 'Fraunhofer',
-				logo: 'fraunhofer'
-			},
-			scenarios: 3,
-			users: 5
-		},
-		{
-			id: 2,
-			name: 'Anderes Projekt',
-			company: {
-				id: 2,
-				name: 'Flughafen Stuttgart',
-				logo: 'StuttgartAirport'
-			},
-			scenarios: 2,
-			users: 1
-		}
-	];
-
-	let templates = [
-		{
-			id: 0,
-			name: 'Penguin',
-			logo: 'default',
-			employees: 4,
-			projekte: 2
-		},
-		{
-			id: 1,
-			name: 'Fraunhofer',
-			logo: 'fraunhofer',
-			employees: 1,
-			projekte: 3
-		}
-	];
+	export let templates = [];
 </script>
 
 <svelte:head>
@@ -86,6 +43,32 @@
 </svelte:head>
 
 <div>
+	<Surface title="Projekte">
+		<Table>
+			<TableHeader>
+				<TableHeaderItem>ID</TableHeaderItem>
+				<TableHeaderItem>Company</TableHeaderItem>
+				<TableHeaderItem>Status</TableHeaderItem>
+				<TableHeaderItem>Name</TableHeaderItem>
+				<TableHeaderItem>Beschreibung</TableHeaderItem>
+			</TableHeader>
+			<TableBody>
+				{#each projects as project}
+					<TableBodyRow
+						on:click={async () =>
+							await goto('/company/' + project.Company.id + '/project/' + project.id)}
+					>
+						<TableBodyItem>{project.id}</TableBodyItem>
+						<TableBodyItem type="img" imgName={project.Company.logo} />
+						<TableBodyItem>{project.status}</TableBodyItem>
+						<TableBodyItem>{project.name}</TableBodyItem>
+						<TableBodyItem>{project.description}</TableBodyItem>
+					</TableBodyRow>
+				{/each}
+			</TableBody>
+		</Table>
+	</Surface>
+
 	<CardRow title="Projekte" url="/company">
 		{#each projects as project}
 			<ProjectCard {project} />

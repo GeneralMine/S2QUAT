@@ -2,7 +2,7 @@
 	import Card from '$lib/Cards/CardComponents/Card.svelte';
 	import CardNumber from '$lib/Cards/CardComponents/CardNumber.svelte';
 	import CardSubtitle from '$lib/Cards/CardComponents/CardSubtitle.svelte';
-	import Icon from '$lib/common/Icon.svelte';
+	import Icon from '$lib/Common/Icon.svelte';
 
 	export let template = {
 		id: 0,
