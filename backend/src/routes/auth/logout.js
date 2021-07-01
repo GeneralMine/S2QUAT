@@ -1,5 +1,5 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+/** @type {import("@prisma/client").PrismaClient} */
+const db = require("../../lib/db");
 
 /** @type {import("express").RequestHandler} */
 module.exports = async (req, res) => {

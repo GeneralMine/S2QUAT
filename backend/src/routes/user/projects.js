@@ -1,6 +1,7 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+/** @type {import("@prisma/client").PrismaClient} */
+const prisma = require("../../lib/db");
 
+/** @type {import("express").RequestHandler} */
 module.exports = async (req, res) => {
     let { userId } = req.params;
 
@@ -8,7 +9,26 @@ module.exports = async (req, res) => {
         return res.status(400).send();
     }
 
-    const projects = await prisma.project.findMany({ include: { Company: true }, where: { Users: { some: { id: userId } } } });
+    try {
+        userId = parseInt(userId);
 
-    return res.json({ projects });
+        const projects = await prisma.project.findMany(
+            {
+                include: {
+                    Company: true,
+                    Scenarios: true,
+                    Users: true
+                },
+                where: {
+                    Users: {
+                        some: {
+                            id: userId
+                        }
+                    }
+                }
+            });
+        return res.json({ projects });
+    } catch (err) {
+        return res.status(400).send();
+    }
 }

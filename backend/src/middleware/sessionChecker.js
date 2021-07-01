@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+/** @type {import("@prisma/client").PrismaClient} */
+const prisma = require("../lib/db");
 
 const TOKEN_SECRET = process.env.TOKEN_SECRET;
 

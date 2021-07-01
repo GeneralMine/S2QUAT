@@ -1,5 +1,5 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+/** @type {import("@prisma/client").PrismaClient} */
+const prisma = require("../../lib/db");
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const TOKEN_SECRET = process.env.TOKEN_SECRET;
 const ROOT_DOMAIN = process.env.ROOT_DOMAIN;
 
+/** @type {import("express").RequestHandler} */
 module.exports = async (req, res) => {
     let { email, password } = req.body;
     email = email.trim();

@@ -1,8 +1,9 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+/** @type {import("@prisma/client").PrismaClient} */
+const prisma = require("../../lib/db");
 
 const bcrypt = require("bcrypt");
 
+/** @type {import("express").RequestHandler} */
 module.exports = async (req, res) => {
     let { name, password, email } = req.body;
     name = name.trim();
