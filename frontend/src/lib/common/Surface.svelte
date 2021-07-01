@@ -53,12 +53,14 @@
 		background-color: var(--surface-color);
 	}
 	.buttons {
-		flex-shrink: 1;
 		display: flex;
 		flex-direction: row;
-		padding-right: 1rem;
+		justify-content: center;
+		align-items: center;
+		padding-right: 3rem;
 	}
 	.button {
+		margin-right: 1rem;
 		padding: 0.5rem;
 		display: flex;
 		justify-content: center;

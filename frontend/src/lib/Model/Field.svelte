@@ -5,16 +5,31 @@
 
 	export let field;
 
-	function add() {}
-	function edit() {}
-	function remove() {}
+	const newAttribute = {
+		name: 'Name',
+		description: 'Beschreibung',
+		factors: []
+	};
+	function fieldAdd() {
+		console.log('Add new attribute');
+		field.attributes.push(newAttribute);
+	}
+	function fieldEdit() {}
+	function attributeAdd() {}
+	function attributeEdit() {}
+	function attributeRemove() {}
 </script>
 
-<Surface title={field.name} add={true} edit={true}>
+<Surface title={field.name} add={true} edit={true} on:add={fieldAdd} on:edit={fieldEdit}>
 	<div class="container">
 		<p class="textBlock">{field.description}</p>
 		{#each field.attributes as attribute}
-			<Collapsable on:add={add} on:edit={edit} on:delete={remove} title={attribute.name}>
+			<Collapsable
+				on:add={attributeAdd}
+				on:edit={attributeEdit}
+				on:delete={attributeRemove}
+				title={attribute.name}
+			>
 				<Attribute {attribute} />
 			</Collapsable>
 		{/each}

@@ -11,8 +11,8 @@
 			name: 'Company',
 			logo: 'default'
 		},
-		scenarios: 3,
-		users: 5
+		Scenarios: [],
+		Users: []
 	};
 </script>
 
@@ -32,7 +32,7 @@
 				class="users bodyhalf clickArea"
 				href="/company/{project.Company.id}/project/{project.id}/scenario"
 			>
-				<CardNumber value={project.scenarios} />
+				<CardNumber value={project.Scenarios ? project.Scenarios.length : 0} />
 				<CardSubtitle title="Szenarien" />
 			</a>
 			<div class="bodySeperator seperator" />
@@ -40,7 +40,7 @@
 				class="projects bodyhalf clickArea"
 				href="/company/{project.Company.id}/project/{project.id}/users"
 			>
-				<CardNumber value={project.users} />
+				<CardNumber value={project.Users ? project.Users.length : 0} />
 				<CardSubtitle title="Verantwortliche" />
 			</a>
 		</div>
