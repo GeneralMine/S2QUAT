@@ -1,3 +1,22 @@
+<script context="module">
+	import { get, roflul } from '$lib/api';
+
+	export async function load({ session }) {
+		if (session.user !== undefined) {
+			let { res, err } = await roflul(() => get(`user/${session.user.id}/projects`));
+
+			if (res) {
+				console.log(res);
+				console.log(res.projects);
+
+				return { props: { projects: res.projects } };
+			}
+		}
+
+		return { status: 400, error: new Error('yeeto? ' + `user/${session.user.id}/projects`) };
+	}
+</script>
+
 <script>
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
 	import ProjectCard from '$lib/Cards/ProjectCard.svelte';
@@ -6,7 +25,9 @@
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [CrumbBuilder.create('Home', '/', 'home').build()];
 
-	let projects = [
+	export let projects = [];
+
+	let projects_mock = [
 		{
 			id: 0,
 			name: 'Pinguinkolonie',

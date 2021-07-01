@@ -6,9 +6,10 @@
 		icon: 'home',
 		url: '/'
 	};
+	export let isLast = false;
 </script>
 
-<a class="breadcrumbsItemContainer" sveltekit:prefetch href={crumb.url}>
+<a class:isLast class="breadcrumbsItemContainer" sveltekit:prefetch href={crumb.url}>
 	<Icon name={crumb.icon} />
 	<span class="breadcrumbsItemText">{crumb.name.substring(0, 12)}</span>
 </a>
@@ -28,6 +29,10 @@
 		margin-bottom: 0.5rem;
 		text-decoration: none;
 		color: inherit;
+	}
+	.isLast {
+		background-color: #6eccfc;
+		color: white;
 	}
 	.breadcrumbsItemText {
 		padding-left: 0.2rem;

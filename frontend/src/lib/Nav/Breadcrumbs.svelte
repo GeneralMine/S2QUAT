@@ -6,9 +6,9 @@
 </script>
 
 <div class="breadcrumbsContainer">
-	{#each $crumbs as crumb}
+	{#each $crumbs as crumb, i}
 		<BreadcrumbsSeperator />
-		<BreadcrumbsItem crumb={crumb.page} />
+		<BreadcrumbsItem crumb={crumb.page} isLast={$crumbs.length - 1 === i} />
 	{/each}
 </div>
 

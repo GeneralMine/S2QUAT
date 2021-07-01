@@ -1,14 +1,22 @@
 <script>
 	import Factor from './Factor.svelte';
+	import Collapsable from '$lib/common/Collapsable.svelte';
 
 	export let attribute;
 </script>
 
-<h2>{attribute.name}</h2>
-{#if attribute.description !== undefined}
-	<p>{attribute.description}</p>
-{/if}
-<hr />
-{#each attribute.factors as factor}
-	<Factor {factor} />
-{/each}
+<div class="container">
+	<p class="textBlock">{attribute.description}</p>
+	{#each attribute.factors as factor}
+		<Collapsable title={factor.name}>
+			<Factor {factor} />
+		</Collapsable>
+	{/each}
+</div>
+
+<style>
+	.container {
+		display: flex;
+		flex-direction: column;
+	}
+</style>

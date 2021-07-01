@@ -16,21 +16,32 @@
 	import { post } from '$lib/api.js';
 	import ListErrors from '$lib/ListErrors.svelte';
 	import Footer from '$lib/common/Footer.svelte';
+	import Error from '../__error.svelte';
 
 	let email = '';
 	let password = '';
 	let errors = null;
+	let disabled = false;
 
 	async function submit(event) {
 		console.log('Trying to login...');
-		const { res, err } = await post(`auth/login`, { email, password });
-		if (err) {
-			errors = err;
-			return;
-		}
-		if (res.user) {
-			$session.user = res.user;
-			goto('/');
+		disabled = true;
+		let response;
+		try {
+			response = await post(`auth/login`, { email, password });
+			console.log(response);
+			if (response.user) {
+				errors = null;
+				$session.user = response.user;
+				goto('/');
+			} else {
+				throw new Error('Backend did not send a user back!');
+			}
+		} catch (error) {
+			errors = response !== undefined && response.errors !== undefined ? response.errors : {};
+			errors[''] = error;
+
+			disabled = false;
 		}
 	}
 </script>
@@ -48,7 +59,7 @@
 
 		<h2>Login</h2>
 
-		<ListErrors {errors} />
+		<ListErrors bind:errors />
 
 		<form on:submit|preventDefault={submit}>
 			<label for="femail">Email</label>
@@ -62,8 +73,7 @@
 				placeholder="not123456"
 				bind:value={password}
 			/>
-
-			<button type="submit"> Sign in </button>
+			<button {disabled} type="submit"> Sign in </button>
 		</form>
 		<a class="requestAccess" href="/register">Request access</a>
 

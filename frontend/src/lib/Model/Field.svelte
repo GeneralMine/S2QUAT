@@ -4,24 +4,30 @@
 	import Collapsable from '$lib/common/Collapsable.svelte';
 
 	export let field;
-	let expanded = false;
+
+	function add() {}
+	function edit() {}
+	function remove() {}
 </script>
 
-<Surface title={field.name}>
+<Surface title={field.name} add={true} edit={true}>
 	<div class="container">
-		{#if field.description !== undefined}
-			<p>{field.description}</p>
-		{/if}
-		<Collapsable bind:expanded>
-			{#each field.attributes as attribute}
+		<p class="textBlock">{field.description}</p>
+		{#each field.attributes as attribute}
+			<Collapsable on:add={add} on:edit={edit} on:delete={remove} title={attribute.name}>
 				<Attribute {attribute} />
-			{/each}
-		</Collapsable>
+			</Collapsable>
+		{/each}
 	</div>
 </Surface>
 
 <style>
 	.container {
-		padding: 1rem;
+		padding-top: 1rem;
+		padding-bottom: 1rem;
+		display: flex;
+		flex-direction: column;
+		padding-left: 2rem;
+		padding-right: 2rem;
 	}
 </style>

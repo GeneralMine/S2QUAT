@@ -1,4 +1,4 @@
-@import '@fontsource/nunito-sans';
+ @import '@fontsource/nunito-sans';
 :root {
     font-family: Nunito, system-ui, BlinkMacSystemFont, -apple-system, sans-serif;
     --font-mono: 'Fira Mono', monospace;
@@ -44,12 +44,16 @@ button {
     border-radius: 0.5rem;
 }
 
-button:hover {
+button:active:hover {
     color: #35a8e0;
     background-color: white;
     -webkit-box-shadow: inset 0px 0px 0px 2px #35a8e0;
     -moz-box-shadow: inset 0px 0px 0px 2px #35a8e0;
     box-shadow: inset 0px 0px 0px 2px #35a8e0;
+}
+
+button:disabled {
+    background-color: #444444;
 }
 
 input {
@@ -73,4 +77,9 @@ label {
 }
 .clickArea:hover {
     background-color: #35a7e00e;
+}
+
+.textBlock {
+    hyphens: none; 
+	text-align: justify;
 }

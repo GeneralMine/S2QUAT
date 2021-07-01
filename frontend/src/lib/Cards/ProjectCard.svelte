@@ -6,7 +6,7 @@
 	export let project = {
 		id: 0,
 		name: 'Penguin',
-		company: {
+		Company: {
 			id: 0,
 			name: 'Company',
 			logo: 'default'
@@ -18,11 +18,11 @@
 
 <Card>
 	<div class="container">
-		<a class="header clickArea" href="/company/{project.company.id}/project/{project.id}">
+		<a class="header clickArea" href="/company/{project.Company.id}/project/{project.id}">
 			<img
 				class="logoImg"
-				src="logos/{project.company.logo}.png"
-				alt="{project.company.name}s logo"
+				src="logos/{project.Company.logo}.png"
+				alt="{project.Company.name}s logo"
 			/>
 			<p class="projectName">{project.name}</p>
 		</a>
@@ -30,7 +30,7 @@
 		<div class="body">
 			<a
 				class="users bodyhalf clickArea"
-				href="/company/{project.company.id}/project/{project.id}/scenario"
+				href="/company/{project.Company.id}/project/{project.id}/scenario"
 			>
 				<CardNumber value={project.scenarios} />
 				<CardSubtitle title="Szenarien" />
@@ -38,7 +38,7 @@
 			<div class="bodySeperator seperator" />
 			<a
 				class="projects bodyhalf clickArea"
-				href="/company/{project.company.id}/project/{project.id}/users"
+				href="/company/{project.Company.id}/project/{project.id}/users"
 			>
 				<CardNumber value={project.users} />
 				<CardSubtitle title="Verantwortliche" />

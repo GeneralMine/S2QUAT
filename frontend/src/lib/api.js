@@ -11,14 +11,7 @@ async function send({ method, path, data, f = fetch }) {
     }
 
     return f(`${base}/${path}`, opts)
-        .then((r) => r.text())
-        .then((json) => {
-            try {
-                return { res: JSON.parse(json) };
-            } catch (err) {
-                return { err };
-            }
-        });
+        .then((r) => r.json());
 }
 
 export function get(path, f) {
@@ -35,4 +28,31 @@ export function post(path, data, f) {
 
 export function put(path, data, f) {
     return send({ method: 'PUT', path, data, f });
+}
+
+export async function roflul(func) {
+    try {
+        let res = await func()
+        return { res };
+    } catch (err) {
+        return { err };
+    }
+}
+
+export function loader(data, f = fetch) {
+    async function l(method, ...urls) {
+        try {
+            let a = await Promise.all(urls.map(el => send({ method, el, data, f })));
+            return { res: a };
+        } catch (err) {
+            return { err }
+        }
+    }
+
+    return {
+        GET: l("GET"),
+        DEL: l("DEL"),
+        POST: l("POST"),
+        PUT: l("PUT"),
+    }
 }

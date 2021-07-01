@@ -21,15 +21,22 @@
 	let email = '';
 	let password = '';
 	let errors = null;
+	let disabled = false;
 
 	async function submit(event) {
 		console.log('Try to register...');
-		let { res, err } = await post(`auth/register`, { name, email, password });
-		if (err) {
-			errors = err;
-			return;
+		disabled = true;
+
+		let response;
+		try {
+			response = await post(`auth/register`, { name, email, password });
+			if (response.status === 200) errors = 'Please wait until an admin has approved your request!';
+			errors = null;
+		} catch (error) {
+			errors = response !== undefined && response.errors !== undefined ? response.errors : {};
+			errors[''] = error;
+			disabled = false;
 		}
-		errors = 'Please wait until an admin has approved your request!';
 	}
 </script>
 
@@ -64,7 +71,7 @@
 				bind:value={password}
 			/>
 
-			<button type="submit"> Request Access </button>
+			<button {disabled} type="submit"> Request Access </button>
 		</form>
 		<a class="login" href="/login">Login</a>
 
