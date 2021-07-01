@@ -20,7 +20,7 @@
 <script>
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
-	$crumbs = [CrumbBuilder.create('Home', '/', 'home').build()];
+	$crumbs = [];
 	/*******************************************/
 	import { goto } from '$app/navigation';
 

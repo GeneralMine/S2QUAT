@@ -1,9 +1,5 @@
-<div class="breadcrumbsSeperatorContainer" />
+<script>
+	import Icon from '$lib/Common/Icon.svelte';
+</script>
 
-<style>
-	.breadcrumbsSeperatorContainer {
-		width: 2px;
-		height: 10px;
-		background-color: gray;
-	}
-</style>
+<Icon name="expand" />

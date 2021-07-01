@@ -9,33 +9,47 @@
 	export let isLast = false;
 </script>
 
-<a class:isLast class="breadcrumbsItemContainer clickArea" sveltekit:prefetch href={crumb.url}>
-	<Icon name={crumb.icon} />
-	<span class="breadcrumbsItemText">{crumb.name.substring(0, 12)}</span>
+<a class="item" class:isLast href={crumb.url}>
+	<div class="icon">
+		<Icon name={crumb.icon} />
+	</div>
+	<span class="text">{crumb.name}</span>
 </a>
 
 <style>
-	.breadcrumbsItemContainer {
+	.item {
 		display: flex;
-		justify-content: center;
+		justify-content: flex-start;
 		align-items: center;
-		border-radius: 25px;
-		/* border: 2px solid #707070; */
 		flex-direction: row;
-		user-select: none;
-		margin-top: 0.5rem;
-		padding-right: 0.5rem;
-		padding-left: 0.5rem;
-		margin-bottom: 0.5rem;
 		text-decoration: none;
-		color: inherit;
+		height: 56px;
+		width: 100%;
+		line-height: 1.375rem;
+		font-size: 0.95rem;
+		font-weight: 500;
+	}
+	.item:hover {
+		background-color: #2e5bff25;
+	}
+	.icon {
+		margin-left: 16px;
+		margin-right: 16px;
+		width: 24px;
+		height: 24px;
+		line-height: 1;
+	}
+	.text {
+		text-decoration: none;
+		font-size: 0.95rem;
+		line-height: 1.375rem;
+		font-weight: 500;
+		letter-spacing: 0.00714em;
+		text-transform: inherit;
 	}
 	.isLast {
-		background-color: #6eccfc;
-		color: white;
-	}
-	.breadcrumbsItemText {
-		padding-left: 0.2rem;
-		padding-right: 0.2rem;
+		background-color: #2e5bff25;
+		color: #2e5bff;
+		border-left: 6px solid #2e5bff;
 	}
 </style>

@@ -7,6 +7,9 @@
 
 <div class="breadcrumbsContainer">
 	{#each $crumbs as crumb, i}
+		{#if i === 0}
+			<div class="spacer" />
+		{/if}
 		<BreadcrumbsSeperator />
 		<BreadcrumbsItem crumb={crumb.page} isLast={$crumbs.length - 1 === i} />
 	{/each}
@@ -18,5 +21,9 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		width: 100%;
+	}
+	.spacer {
+		height: 8px;
 	}
 </style>

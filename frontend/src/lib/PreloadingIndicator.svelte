@@ -13,6 +13,16 @@
 	});
 </script>
 
+{#if visible}
+	<div class="progress-container">
+		<div class="progress" style="width: {p * 100}%" />
+	</div>
+{/if}
+
+{#if p >= 0.4}
+	<div class="fade" />
+{/if}
+
 <style>
 	.progress-container {
 		position: absolute;
@@ -28,7 +38,7 @@
 		left: 0;
 		top: 0;
 		height: 100%;
-		background-color: #5cb85c;
+		background-color: var(--accent-color);
 		transition: width 0.4s;
 	}
 
@@ -42,10 +52,6 @@
 		animation: fade 0.4s;
 	}
 
-	:global(html).dark .fade {
-		background-color: rgba(0, 0, 0, 0.3);
-	}
-
 	@keyframes fade {
 		from {
 			opacity: 0;
@@ -55,13 +61,3 @@
 		}
 	}
 </style>
-
-{#if visible}
-	<div class="progress-container">
-		<div class="progress" style="width: {p * 100}%" />
-	</div>
-{/if}
-
-{#if p >= 0.4}
-	<div class="fade" />
-{/if}

@@ -23,6 +23,7 @@
 		margin-top: auto;
 		padding-right: 0.5rem;
 		margin-bottom: 1rem;
+		visibility: hidden;
 	}
 
 	.textContainer {

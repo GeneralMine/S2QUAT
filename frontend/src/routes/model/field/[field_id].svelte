@@ -21,9 +21,8 @@
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [
-		CrumbBuilder.create('Home', '/', 'home').build(),
 		CrumbBuilder.create('Modell', '/model', 'model').build(),
-		CrumbBuilder.create('Feld ' + field.id, '/model', 'model').build()
+		CrumbBuilder.create('Feld ' + field.id, '/model/field/' + field.id, 'field').build()
 	];
 	/*******************************************/
 	import Field from '$lib/Model/Field.svelte';

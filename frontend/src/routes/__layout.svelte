@@ -25,7 +25,6 @@
 	{#if $navigating}
 		<PreloadingIndicator />
 	{/if}
-
 	<Nav />
 
 	<main>
