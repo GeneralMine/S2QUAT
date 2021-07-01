@@ -1,17 +1,17 @@
-<div class="tableHeader">
-	<div class="tableHeaderPrevious">
+<div class="tableFooter">
+	<div class="tableFooterPrevious">
 		<span class="pageButton">Previous</span>
 	</div>
-	<div class="tableHeaderPages">
-		<span>Pages</span>
+	<div class="tableFooterPages">
+		<span>1-25 of 54</span>
 	</div>
-	<div class="tableHeaderNext">
+	<div class="tableFooterNext">
 		<span class="pageButton">Next</span>
 	</div>
 </div>
 
 <style>
-	.tableHeader {
+	.tableFooter {
 		align-items: center;
 		-webkit-box-align: center;
 		display: flex;
@@ -21,9 +21,9 @@
 		border-color: rgba(0, 0, 0, 0.5);
 		line-height: 1;
 	}
-	.tableHeaderPrevious {
-	}
-	.tableHeaderNext {
+	.tableFooterPages {
+		display: flex;
+		justify-content: center;
 		flex: 1;
 	}
 	.pageButton {
@@ -37,10 +37,5 @@
 		cursor: pointer;
 		-webkit-appearance: button;
 		color: var(--accent-color);
-	}
-	.tableHeaderCreate {
-		flex-shrink: 0;
-		padding-left: 0.75rem;
-		padding-right: 0.75rem;
 	}
 </style>

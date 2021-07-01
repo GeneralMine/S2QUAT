@@ -1,6 +1,8 @@
 <script>
 	import TableFooter from './TableFooter.svelte';
 	import TableHeader from './TableHeader.svelte';
+
+	export let count = null;
 </script>
 
 <div class="tableContainer">
@@ -8,7 +10,9 @@
 	<table class="table" cellspacing="0" cellpadding="0">
 		<slot />
 	</table>
-	<TableFooter />
+	{#if count}
+		<TableFooter />
+	{/if}
 </div>
 
 <style>

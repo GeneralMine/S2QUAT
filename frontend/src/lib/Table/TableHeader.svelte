@@ -38,7 +38,6 @@
 		flex: 1;
 	}
 	.tableHeaderCreate {
-		flex-shrink: 0;
 		padding-left: 0.75rem;
 		padding-right: 0.75rem;
 	}
