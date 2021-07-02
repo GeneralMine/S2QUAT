@@ -3,10 +3,13 @@
 	import TableHeader from './TableHeader.svelte';
 
 	export let count = null;
+	export let hasHeader = true;
 </script>
 
 <div class="tableContainer">
-	<TableHeader />
+	{#if hasHeader}
+		<TableHeader />
+	{/if}
 	<table class="table" cellspacing="0" cellpadding="0">
 		<slot />
 	</table>

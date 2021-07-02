@@ -9,41 +9,47 @@
 	export let remove = false;
 </script>
 
-<div class="header">
-	{#if title}
-		<h1>{title}</h1>
-	{/if}
-	{#if add || edit || remove}
-		<div class="buttons">
-			{#if add}
-				<div class="add button clickArea" on:click={() => dispatch('add', {})}>
-					<Icon name="add" />
-				</div>
-			{/if}
-			{#if edit}
-				<div class="edit button clickArea" on:click={() => dispatch('edit', {})}>
-					<Icon name="edit" />
-				</div>
-			{/if}
-			{#if remove}
-				<div class="delete button clickArea" on:click={() => dispatch('delete', {})}>
-					<Icon name="delete" />
-				</div>
-			{/if}
-		</div>
-	{/if}
-</div>
 <div class="surfaceContainer">
-	<slot />
+	<div class="header">
+		{#if title}
+			<h1>{title}</h1>
+		{/if}
+		{#if add || edit || remove}
+			<div class="buttons">
+				{#if add}
+					<div class="add button clickArea" on:click={() => dispatch('add', {})}>
+						<Icon name="add" />
+					</div>
+				{/if}
+				{#if edit}
+					<div class="edit button clickArea" on:click={() => dispatch('edit', {})}>
+						<Icon name="edit" />
+					</div>
+				{/if}
+				{#if remove}
+					<div class="delete button clickArea" on:click={() => dispatch('delete', {})}>
+						<Icon name="delete" />
+					</div>
+				{/if}
+			</div>
+		{/if}
+	</div>
+	<div class="surfaceContent">
+		<slot />
+	</div>
 </div>
 
 <style>
+	.surfaceContainer {
+		display: flex;
+		flex-direction: column;
+	}
 	.header {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 	}
-	.surfaceContainer {
+	.surfaceContent {
 		border-width: 1px;
 		border-color: #2e5bff;
 		margin-bottom: 1em;

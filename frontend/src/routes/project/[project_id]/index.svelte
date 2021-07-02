@@ -1,23 +1,20 @@
 <script context="module">
-	import { get } from '$lib/api.js';
-	export async function load({ page }) {
-		let response;
-		try {
-			response = await get('project/' + page.params.project_id);
-			console.log(response);
-			if (response.field) {
-				return { props: { project: response.project } };
-			} else {
-				throw new Error('Backend ');
+	import { get, roflul } from '$lib/api';
+	export async function load({ session, page }) {
+		if (session.user !== undefined) {
+			let { res, err } = await roflul(() => get(`user/${session.user.id}/projects`));
+			console.log('fetch', res);
+			if (res) {
+				return { props: { project: res.projects[page.params.project_id] } };
 			}
-		} catch (error) {
-			console.log(error);
 		}
+		return { status: 400, error: new Error('yeeto? ' + `user/${session.user.id}/projects`) };
 	}
 </script>
 
 <script>
 	export let project;
+	import Surface from '$lib/Common/Surface.svelte';
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
 
@@ -28,10 +25,74 @@
 	}
 	$crumbs.push(CrumbBuilder.create(project.name, '/project/' + project.id, 'project').build());
 	/*******************************************/
+	import { goto } from '$app/navigation';
+
+	import Table from '$lib/Table/Table.svelte';
+	import TableAttributes from '$lib/Table/TableAttributes.svelte';
+	import TableAttributesItem from '$lib/Table/TableAttributesItem.svelte';
+	import TableBody from '$lib/Table/TableBody.svelte';
+	import TableBodyItem from '$lib/Table/TableBodyItem.svelte';
+	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
 </script>
 
 <svelte:head>
 	<title>Projekt ID | S2QUAT</title>
 </svelte:head>
 
-(Unternehmen) Projekte ID
+<div class="projectContainer">
+	<div class="projectDetails" />
+	<div class="row">
+		<Surface title="Scenarios">
+			<Table>
+				<TableAttributes>
+					<TableAttributesItem>ID</TableAttributesItem>
+					<TableAttributesItem>Name</TableAttributesItem>
+					<TableAttributesItem>Beschreibung</TableAttributesItem>
+				</TableAttributes>
+				<TableBody>
+					{#each project.scenarios as scenario}
+						<TableBodyRow
+							on:click={async () =>
+								await goto('/project/' + project.id + '/scenario/' + scenario.id)}
+						>
+							<TableBodyItem>{scenario.id}</TableBodyItem>
+							<TableBodyItem>{scenario.name}</TableBodyItem>
+							<TableBodyItem>{scenario.description}</TableBodyItem>
+						</TableBodyRow>
+					{/each}
+				</TableBody>
+			</Table>
+		</Surface>
+		<Surface title="Verantwortliche">
+			<Table>
+				<TableAttributes>
+					<TableAttributesItem>ID</TableAttributesItem>
+					<TableAttributesItem>Name</TableAttributesItem>
+					<TableAttributesItem>Email</TableAttributesItem>
+				</TableAttributes>
+				<TableBody>
+					{#each project.users as user}
+						<TableBodyRow>
+							<TableBodyItem>{user.id}</TableBodyItem>
+							<TableBodyItem>{user.name}</TableBodyItem>
+							<TableBodyItem>{user.description}</TableBodyItem>
+						</TableBodyRow>
+					{/each}
+				</TableBody>
+			</Table>
+		</Surface>
+	</div>
+</div>
+
+<style>
+	.projectContainer {
+		display: flex;
+		flex-direction: column;
+	}
+	.projectDetails {
+	}
+	.row {
+		display: flex;
+		flex-direction: row;
+	}
+</style>
