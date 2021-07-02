@@ -23,5 +23,5 @@ module.exports = async function () {
 }
 
 async function countEntitiy(entity) {
-    console.log("\t- " + entity + ": " + (await prisma[entity].findMany()).length);
+    console.log("\t- " + entity + ": \t" + (await prisma[entity].findMany()).length);
 }
