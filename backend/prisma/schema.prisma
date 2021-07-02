@@ -254,7 +254,7 @@ model Response {
   survey   Survey? @relation(fields: [surveyId], references: [id])
 
   testPersonId Int?
-  person       TestPerson? @relation(fields: [testPersonId], references: [id])
+  person       Testperson? @relation(fields: [testPersonId], references: [id])
 }
 
 enum ResponseType {
@@ -322,7 +322,7 @@ model Template {
 
 // TestPerson
 
-model TestPerson {
+model Testperson {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -331,10 +331,10 @@ model TestPerson {
   signature     Boolean
   age           Int?
   response      Response?
-  testPersonSex TestPersonSex?
+  testPersonSex TestpersonSex?
 }
 
-enum TestPersonSex {
+enum TestpersonSex {
   MALE
   FEMALE
   NOT_BINARY

@@ -5,7 +5,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const db = require("./lib/db");
-
+const dbtester = require("./lib/dbtester");
 // env
 const BACKEND_PORT = process.env.PORT || 8080;
 const FRONTEND_DOMAIN = process.env.FRONTEND_DOMAIN || "localhost";
@@ -24,6 +24,7 @@ const corsOptionsDebug = {
 };
 
 async function startup() {
+    await dbtester();
     app.enable('trust proxy');
     app.use(express.json());
     if (!isDebug) {
