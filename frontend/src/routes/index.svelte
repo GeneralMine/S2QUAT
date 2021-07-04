@@ -29,6 +29,7 @@
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
 	import TableAttributesItem from '$lib/Table/TableAttributesItem.svelte';
 	import ProjectModal from '$lib/Prompt/ProjectPrompt.svelte';
+	import NumberCard from '$lib/Cards/NumberCard.svelte';
 
 	export let projects = [];
 	export let templates = [];
@@ -81,12 +82,12 @@
 		</CardRow>
 	{/if}
 
-	<CardRow
-		title="Qualitätsmodell"
-		on:click={() => {
-			goto('/model');
-		}}
-	/>
+	<CardRow title="Qualitätsmodell" on:click={() => goto('/model')}>
+		<NumberCard title="Felder" value={12} />
+		<NumberCard title="Felder" value={33} />
+		<NumberCard title="Felder" value={100} />
+		<NumberCard title="Felder" value={300} />
+	</CardRow>
 	<CardRow title="Vorlagen">
 		{#each templates as template}
 			<TemplateCard {template} />
