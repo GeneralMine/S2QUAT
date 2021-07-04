@@ -32,7 +32,7 @@ module.exports = async (req, res, next) => {
             return next();
         }
 
-        if (my_user.last_logout.getTime() < decodedToken.iat) {
+        if (my_user.last_logout.valueOf() / 1000 < decodedToken.iat) {
             switch (my_user.status) {
                 case "ACTIVE":
                     // User is active
