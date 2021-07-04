@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
         const result = await prisma.user.update({ where: { id: current_user.id }, data: { name, email, password } });
 
         if (current_user.name !== result.name || current_user.email !== result.email) {
-            return perform_login(res, updated);
+            return perform_login(res, result);
         }
     } catch (err) {
         console.error("while trying to update:", err);
