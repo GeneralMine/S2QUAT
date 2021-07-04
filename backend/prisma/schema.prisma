@@ -1,0 +1,371 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Action
+
+model Action {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  action      String
+  entitiyID   Int?
+  original    String?
+  changes     String?
+  exception   String?
+  status      ActionStatus   @default(ERROR)
+  entitiyName ActionEntitiy?
+
+  userId Int?
+  User   User? @relation(fields: [userId], references: [id])
+}
+
+enum ActionStatus {
+  SUCCESS
+  ERROR
+  RUNNING
+}
+
+enum ActionEntitiy {
+  ANSWER
+  ATTRIBUTE
+  CATEGORY
+  COMPANY
+  CRITERIA
+  FACTOR
+  FIELD
+  PAGE
+  PROJECT
+  QUESTION
+  RESPONSE
+  SCENARIO
+  SURVEY
+  TEMPLATE
+  TESTPERSON
+  USER
+}
+
+// Answer
+
+model Answer {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  score       Int?
+  text        String?
+  boolean     Boolean?
+  checkbox    Boolean[]
+  radiobutton Int?
+
+  questionId Int
+  question   Question @relation(fields: [questionId], references: [id])
+
+  responseId Int
+  response   Response @relation(fields: [responseId], references: [id])
+}
+
+// Attribute
+
+model Attribute {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  description String?
+  factors     Factor[]
+  templates   Template[]
+
+  fieldId Int?
+  field   Field? @relation(fields: [fieldId], references: [id])
+}
+
+// Category
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  description String?
+  questions   Question[]
+
+  pageId Int?
+  page   Page? @relation(fields: [pageId], references: [id])
+
+  surveyId Int
+  survey   Survey @relation(fields: [surveyId], references: [id])
+}
+
+// Company
+
+model Company {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name     String
+  logo     String?
+  projects Project[]
+}
+
+// Criteria
+
+model Criteria {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  description String?
+  templates   Template[]
+
+  factorId Int?
+  factor   Factor? @relation(fields: [factorId], references: [id])
+}
+
+// Factor
+
+model Factor {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  description String?
+  criterias   Criteria[]
+  templates   Template[]
+
+  attributeId Int?
+  attribute   Attribute? @relation(fields: [attributeId], references: [id])
+}
+
+// Field
+
+model Field {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  description String?
+  attributes  Attribute[]
+  templates   Template[]
+}
+
+// Page
+
+model Page {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  description String?
+  categories  Category[]
+
+  surveyId Int
+  survey   Survey @relation(fields: [surveyId], references: [id])
+}
+
+// Project
+
+model Project {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name          String
+  description   String?
+  goal          String?
+  project_start DateTime?
+  project_end   DateTime?
+  users         User[]
+  scenarios     Scenario[]
+  status        ProjectStatus @default(ACTIVE)
+
+  companyId Int?
+  company   Company? @relation(fields: [companyId], references: [id])
+}
+
+enum ProjectStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+// Question
+
+model Question {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  description String?
+  typeOptions String[]
+  answer      Answer?
+  typ         QuestionType @default(SCORE)
+
+  categoryId Int?
+  category   Category? @relation(fields: [categoryId], references: [id])
+
+  surveyId Int?
+  survey   Survey? @relation(fields: [surveyId], references: [id])
+}
+
+enum QuestionType {
+  SCORE
+  TEXT
+  SCORE_TEXT
+  BOOLEAN
+  CHECKBOX
+  RADIOBUTTON
+}
+
+// Response
+
+model Response {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  location String?
+  feedback String?
+  notes    String?
+  answers  Answer[]
+  typ      ResponseType @default(VALID)
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  surveyId Int?
+  survey   Survey? @relation(fields: [surveyId], references: [id])
+
+  testPersonId Int?
+  person       Testperson? @relation(fields: [testPersonId], references: [id])
+}
+
+enum ResponseType {
+  VALID
+  INVALID
+}
+
+// Scenario
+
+model Scenario {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  description String?
+  survey      Survey[]
+
+  projectId Int
+  project   Project @relation(fields: [projectId], references: [id])
+}
+
+// Survey
+
+model Survey {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  description String?
+  order       Int          @default(0)
+  status      SurveyStatus @default(ACTIVE)
+  responses   Response[]
+  pages       Page[]
+  categories  Category[]
+  questions   Question[]
+
+  scenarioId Int
+  scenario   Scenario @relation(fields: [scenarioId], references: [id])
+
+  templateId Int?
+  tempalte   Template? @relation(fields: [templateId], references: [id])
+}
+
+enum SurveyStatus {
+  ACTIVE
+  CLOSED
+}
+
+// Template
+
+model Template {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name       String
+  fields     Field[]
+  attributes Attribute[]
+  factors    Factor[]
+  criteria   Criteria[]
+  survey     Survey?
+}
+
+// TestPerson
+
+model Testperson {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name          String
+  signature     Boolean
+  age           Int?
+  response      Response?
+  testPersonSex TestpersonSex?
+}
+
+enum TestpersonSex {
+  MALE
+  FEMALE
+  NOT_BINARY
+}
+
+// User
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  email       String     @unique
+  name        String
+  password    String
+  last_logout DateTime   @default(now())
+  status      UserStatus @default(NOT_VERIFIED)
+  role        UserRole   @default(USER)
+  actions     Action[]
+  project     Project[]
+  response    Response[]
+}
+
+enum UserStatus {
+  ACTIVE
+  DEACTIVATED
+  NOT_VERIFIED
+}
+
+enum UserRole {
+  USER
+  EDITOR
+  ADMIN
+}

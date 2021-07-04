@@ -1,4 +1,14 @@
 module.exports = {
+    forExternal({ id, email, name, last_logout, status, role, }) {
+        return {
+            id,
+            email,
+            name,
+            last_logout,
+            status,
+            role,
+        }
+    },
     sleep(milliseconds) {
         return new Promise(resolve => {
             setTimeout(() => {
