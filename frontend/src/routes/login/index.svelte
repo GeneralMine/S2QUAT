@@ -16,7 +16,6 @@
 	import { post } from '$lib/api.js';
 	import ListErrors from '$lib/ListErrors.svelte';
 	import Footer from '$lib/Common/Footer.svelte';
-	import Error from '../__error.svelte';
 
 	let email = '';
 	let password = '';
@@ -62,12 +61,20 @@
 		<ListErrors bind:errors />
 
 		<form on:submit|preventDefault={submit}>
-			<label for="femail">Email</label>
-			<input id="femail" type="email" required placeholder="test@tester.com" bind:value={email} />
-
-			<label for="fpassword">Password</label>
+			<label for="email">Email</label>
 			<input
-				id="fpassword"
+				autocomplete="email"
+				id="email"
+				type="email"
+				required
+				placeholder="test@tester.com"
+				bind:value={email}
+			/>
+
+			<label for="password">Password</label>
+			<input
+				autocomplete="current-password"
+				id="password"
 				type="password"
 				required
 				placeholder="not123456"

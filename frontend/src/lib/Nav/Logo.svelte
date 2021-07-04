@@ -1,4 +1,4 @@
-<a class="logoContainer" href="/">
+<a class="logoContainer clickArea" href="/">
 	<img src="/logo-width.png" alt="logo" />
 </a>
 

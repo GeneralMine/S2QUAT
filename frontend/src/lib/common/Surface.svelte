@@ -10,7 +10,7 @@
 </script>
 
 <div class="surfaceContainer">
-	<div class="header">
+	<div class="surfaceHeader">
 		{#if title}
 			<h1>{title}</h1>
 		{/if}
@@ -44,7 +44,7 @@
 		display: flex;
 		flex-direction: column;
 	}
-	.header {
+	.surfaceHeader {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;

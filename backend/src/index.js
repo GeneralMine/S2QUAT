@@ -9,7 +9,7 @@ const dbtester = require("./lib/dbtester");
 // env
 const BACKEND_PORT = process.env.PORT || 8080;
 const FRONTEND_DOMAIN = process.env.FRONTEND_DOMAIN || "localhost";
-const isDebug = FRONTEND_DOMAIN.startsWith("localhost");
+const isDebug = FRONTEND_DOMAIN.startsWith("localhost") || FRONTEND_DOMAIN === "127.0.0.1";
 
 const corsOptionsProduction = {
     methods: "GET, OPTIONS, POST, DELETE",
@@ -55,6 +55,7 @@ async function startup() {
         app.use(require("./middleware/loggedInChecker"));
     }
 
+    app.post("/user/update", require("./routes/user/update"));
     app.get("/user/:userId/projects", require("./routes/user/projects"));
     app.get("/model/field/:fieldId", require("./routes/model/field"));
 

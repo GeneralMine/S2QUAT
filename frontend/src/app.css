@@ -48,7 +48,7 @@ button {
     border-radius: 0.5rem;
 }
 
-button:active:hover {
+button:hover:not(:disabled) {
     color: #35a8e0;
     background-color: white;
     -webkit-box-shadow: inset 0px 0px 0px 2px #35a8e0;
