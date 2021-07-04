@@ -28,10 +28,13 @@
 	import TableBodyItem from '$lib/Table/TableBodyItem.svelte';
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
 	import TableAttributesItem from '$lib/Table/TableAttributesItem.svelte';
+	import ProjectModal from '$lib/Prompt/ProjectPrompt.svelte';
+
 	export let projects = [];
 	export let templates = [];
 
 	let projectsExpanded = false;
+	let projectPrompt = false;
 </script>
 
 <svelte:head>
@@ -40,7 +43,12 @@
 
 <div>
 	{#if projectsExpanded}
-		<Surface title="Projekte" on:click={() => (projectsExpanded = !projectsExpanded)}>
+		<Surface
+			add={true}
+			on:add={() => (projectPrompt = true)}
+			title="Projekte"
+			on:click={() => (projectsExpanded = !projectsExpanded)}
+		>
 			<Table>
 				<TableAttributes>
 					<TableAttributesItem>ID</TableAttributesItem>
@@ -73,10 +81,17 @@
 		</CardRow>
 	{/if}
 
-	<CardRow title="Qualitätsmodell" />
+	<CardRow
+		title="Qualitätsmodell"
+		on:click={() => {
+			goto('/model');
+		}}
+	/>
 	<CardRow title="Vorlagen">
 		{#each templates as template}
 			<TemplateCard {template} />
 		{/each}
 	</CardRow>
+
+	<ProjectModal open={projectPrompt} />
 </div>

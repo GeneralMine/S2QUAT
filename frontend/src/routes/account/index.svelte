@@ -10,7 +10,7 @@
 	import List from '$lib/List/List.svelte';
 	import ListItemRow from '$lib/List/ListItemRow.svelte';
 	import { parseEnumToEmoji } from '$lib/textParser';
-	import { token } from '$lib/session_storage';
+	import { token, stored_user } from '$lib/session_storage';
 
 	let name = $session.user.name;
 	let email = $session.user.email;
@@ -32,6 +32,7 @@
 			password = '********';
 			if (response.user) {
 				$session.user = response.user;
+				$stored_user = response.user;
 				$token = response.token;
 				goto('/account');
 			} else {
@@ -52,6 +53,7 @@
 		// TODO: maybe set NULL if not works
 		$token = '';
 		delete $session.user;
+		$stored_user = undefined;
 		goto('/login');
 	}
 </script>

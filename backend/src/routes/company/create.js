@@ -16,14 +16,26 @@ const bcrypt = require("bcrypt");
  * @param {Response} response
  */
 module.exports = async (request, response) => {
-    let { name, email, password } = request.body;
+    let {
+        projectName,
+        projectDescription,
+        projectGoal,
+        company,
+        status,
+        projectStart,
+        projectEnd
+    } = request.body;
 
     try {
-        let current_user = request.user;
-        let data = {};
-        if (name) data.name = name;
-        if (email) data.email = email;
-        if (password) data.password = await bcrypt.hash(password, 10);
+        const data = {};
+
+        if (projectName !== undefined) data.projectName = projectName;
+        if (projectDescription !== undefined) data.projectDescription = projectDescription;
+        if (projectGoal !== undefined) data.projectGoal = projectGoal;
+        if (company !== undefined) data.company = company;
+        if (status !== undefined) data.status = status;
+        if (projectStart !== undefined) data.projectStart = projectStart;
+        if (projectEnd !== undefined) data.projectEnd = projectEnd;
 
         const updatedUser = await prisma.user.update({ where: { id: current_user.id }, data });
 

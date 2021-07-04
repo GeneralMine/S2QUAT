@@ -58,6 +58,8 @@ async function startup() {
     app.get("/user/:userId/projects", require("./routes/user/projects"));
     app.get("/model/field/:fieldId", require("./routes/model/field"));
 
+    app.get("/company/all", require("./routes/company/all"));
+
     app.listen(BACKEND_PORT, () => {
         console.log(`Listening on http://localhost:${BACKEND_PORT}`);
     });
