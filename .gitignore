@@ -1,6 +1,7 @@
 .internal
 .env
 db
+db copy
 # REST file
 test.rest
 
