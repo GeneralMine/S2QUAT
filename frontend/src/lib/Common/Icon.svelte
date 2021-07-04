@@ -2,12 +2,9 @@
 	export let name;
 	$: src = '/icons/' + name + '.svg';
 	$: alt = name + ' icon';
-
-	export let width;
-	export let height;
 </script>
 
-<img style="width: {width}; height: {height};" {src} {alt} />
+<img {src} {alt} />
 
 <style>
 	img {

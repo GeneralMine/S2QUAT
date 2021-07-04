@@ -4,13 +4,12 @@
 	$crumbs = [];
 	/*******************************************/
 	import { session } from '$app/stores';
-	import { goto } from '$app/navigation';
+	import { goto, prefetch } from '$app/navigation';
 	import Surface from '$lib/Common/Surface.svelte';
 	import { post } from '$lib/api.js';
 	import List from '$lib/List/List.svelte';
 	import ListItemRow from '$lib/List/ListItemRow.svelte';
 	import { parseEnumToEmoji } from '$lib/textParser';
-	import { token, stored_user } from '$lib/session_storage';
 
 	let name = $session.user.name;
 	let email = $session.user.email;
@@ -32,8 +31,6 @@
 			password = '********';
 			if (response.user) {
 				$session.user = response.user;
-				$stored_user = response.user;
-				$token = response.token;
 				goto('/account');
 			} else {
 				throw new Error('Backend did not send a user back!');
@@ -51,9 +48,7 @@
 			console.log('Logout wasnt successful!');
 		}
 		// TODO: maybe set NULL if not works
-		$token = '';
 		delete $session.user;
-		$stored_user = undefined;
 		goto('/login');
 	}
 </script>

@@ -28,6 +28,7 @@
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "jsonwebtoken": "^8.5.1",
+        "ms": "^2.0.0",
         "node-fetch": "^2.6.1",
         "proxy-cutter": "^1.0.4"
     },

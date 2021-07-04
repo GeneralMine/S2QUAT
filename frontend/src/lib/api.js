@@ -1,13 +1,9 @@
 import { dev } from '$app/env';
-import { token } from './session_storage';
-import { get as get_store_value } from "svelte/store";
 
 const base = dev ? 'http://localhost:8080' : 'https://api.raiser.dev';
 
 async function send({ method, path, data, f = fetch }) {
     const opts = { method, headers: {} };
-
-    opts.headers['Authorization'] = get_store_value(token);
 
     if (data) {
         opts.headers['Content-Type'] = 'application/json';

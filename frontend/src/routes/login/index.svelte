@@ -17,8 +17,6 @@
 	import ListErrors from '$lib/ListErrors.svelte';
 	import Footer from '$lib/Common/Footer.svelte';
 
-	import { token, stored_user } from '$lib/session_storage';
-
 	let email = '';
 	let password = '';
 	let errors = null;
@@ -34,8 +32,6 @@
 			if (response.user) {
 				errors = null;
 				$session.user = response.user;
-				$stored_user = response.user;
-				$token = response.token;
 				goto('/');
 			} else {
 				throw new Error('Backend did not send a user back!');

@@ -20,8 +20,6 @@
 	let projectStart;
 	let projectEnd;
 
-	$: console.log(companies);
-
 	onMount(async () => {
 		companies = await fetchCompanies();
 	});

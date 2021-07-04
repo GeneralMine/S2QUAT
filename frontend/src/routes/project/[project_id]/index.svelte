@@ -17,13 +17,16 @@
 	import Surface from '$lib/Common/Surface.svelte';
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
-
-	if (project.company !== undefined && project.company !== null) {
-		$crumbs.push(
+	if (project.company) {
+		$crumbs = [
+			...$crumbs,
 			CrumbBuilder.create(project.company.name, '/company/' + project.company.id, 'company').build()
-		);
+		];
 	}
-	$crumbs.push(CrumbBuilder.create(project.name, '/project/' + project.id, 'project').build());
+	$crumbs = [
+		...$crumbs,
+		CrumbBuilder.create(project.name, '/project/' + project.id, 'project').build()
+	];
 	/*******************************************/
 	import { goto } from '$app/navigation';
 
@@ -33,6 +36,11 @@
 	import TableBody from '$lib/Table/TableBody.svelte';
 	import TableBodyItem from '$lib/Table/TableBodyItem.svelte';
 	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
+	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
+	import NumberCard from '$lib/Cards/NumberCard.svelte';
+	import PieCard from '$lib/Cards/PieCard.svelte';
+
+	$: console.log('Project:', project);
 </script>
 
 <svelte:head>
@@ -40,7 +48,11 @@
 </svelte:head>
 
 <div class="projectContainer">
-	<div class="projectDetails" />
+	<CardRow>
+		<NumberCard title="Szenarien" icon="scenario" />
+		<PieCard />
+	</CardRow>
+
 	<div class="row">
 		<Surface title="Scenarios">
 			<Table>
@@ -88,8 +100,6 @@
 	.projectContainer {
 		display: flex;
 		flex-direction: column;
-	}
-	.projectDetails {
 	}
 	.row {
 		display: flex;
