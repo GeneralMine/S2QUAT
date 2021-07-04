@@ -5,38 +5,38 @@ on:
     branches: [ master ]
 
 jobs:
-  test:
+  # test:
 
-    runs-on: ubuntu-latest
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js latest
-      uses: actions/setup-node@v1
-    - name: Install dependencies
-      run: npm install
-      working-directory: backend
-    - name: Start testing database
-      uses: getong/mariadb-action@v1.1
-      with:
-        host port: 3306
-        container port: 3306
-        character set server: 'utf8'
-        collation server: 'utf8_general_ci'
-        mysql root password: 'password'
-    - name: Run in background
-      run: (npm run start&)
-      working-directory: backend
-    - name: Wait for startup
-      uses: jakejarvis/wait-action@master
-      with:
-        time: '20s'
-    - name: Test backend
-      run: npm test
-      working-directory: backend
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Use Node.js latest
+  #     uses: actions/setup-node@v1
+  #   - name: Install dependencies
+  #     run: npm install
+  #     working-directory: backend
+  #   - name: Start testing database
+  #     uses: getong/mariadb-action@v1.1
+  #     with:
+  #       host port: 3306
+  #       container port: 3306
+  #       character set server: 'utf8'
+  #       collation server: 'utf8_general_ci'
+  #       mysql root password: 'password'
+  #   - name: Run in background
+  #     run: (npm run start&)
+  #     working-directory: backend
+  #   - name: Wait for startup
+  #     uses: jakejarvis/wait-action@master
+  #     with:
+  #       time: '20s'
+  #   - name: Test backend
+  #     run: npm test
+  #     working-directory: backend
 
   deploy:
-    needs: [test]
+    # needs: [test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
