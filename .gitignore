@@ -13,4 +13,3 @@ frontend/.DS_Store
 backend/node_modules/
 frontend/yarn-error.log
 backend/test.rest
-backend/package-lock.json

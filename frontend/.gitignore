@@ -5,4 +5,3 @@ build
 functions
 test.rest
 .env
-package-lock.json

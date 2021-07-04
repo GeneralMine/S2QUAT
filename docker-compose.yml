@@ -16,9 +16,6 @@ services:
             - "TOKEN_SECRET=${TOKEN_SECRET}"
         ports: 
             - "${FRONTEND_PORT}:${FRONTEND_PORT}"
-        networks: 
-            - frontend
-            - backend
     backend:
         container_name: s2quat-backend
         restart: always
@@ -40,7 +37,6 @@ services:
         depends_on:
             - "db"
         networks:
-            - frontend
             - backend
     db:
         container_name: s2quat-db
@@ -52,9 +48,6 @@ services:
             - "POSTGRES_PASSWORD=${DATABASE_PASSWORD}"
         networks:
             - backend
-        ports: 
-            - "5432:5432"
 
 networks: 
-    frontend:
     backend:
