@@ -41,14 +41,6 @@
 		flex-direction: row;
 		align-items: center;
 	}
-	.icon {
-		width: 30%;
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		padding-right: 1rem;
-	}
 	.templateName {
 		font-weight: 500;
 		font-size: 1.15rem;

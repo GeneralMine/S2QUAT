@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { forExternal } = require("../../lib/utils");
+const { forExternal } = require("./utils");
 
 const TOKEN_SECRET = process.env.TOKEN_SECRET;
 const ROOT_DOMAIN = "." + process.env.ROOT_DOMAIN;
