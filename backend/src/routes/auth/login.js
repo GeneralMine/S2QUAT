@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const { forExternal } = require("../../lib/utils");
 
 const TOKEN_SECRET = process.env.TOKEN_SECRET;
-const ROOT_DOMAIN = process.env.ROOT_DOMAIN;
+const ROOT_DOMAIN = "." + process.env.ROOT_DOMAIN;
 
 /** @type {import("express").RequestHandler} */
 module.exports = async (req, res) => {
