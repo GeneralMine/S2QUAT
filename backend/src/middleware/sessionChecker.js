@@ -31,6 +31,8 @@ module.exports = async (req, res, next) => {
             resetToken();
             return next();
         }
+        // kleiner => länger her
+        console.log(my_user.last_logout.valueOf(), decodedToken.iat, "???", my_user.last_logout.valueOf() < decodedToken.iat);
 
         if (my_user.last_logout.valueOf() < decodedToken.iat) {
             switch (my_user.status) {
