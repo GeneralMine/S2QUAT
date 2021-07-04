@@ -7,7 +7,7 @@ const base = dev ? 'http://localhost:8080' : 'https://api.raiser.dev';
 async function send({ method, path, data, f = fetch }) {
     const opts = { method, headers: {} };
 
-    opts.headers['Authentication'] = get_store_value(token);
+    opts.headers['Authorization'] = get_store_value(token);
 
     if (data) {
         opts.headers['Content-Type'] = 'application/json';
