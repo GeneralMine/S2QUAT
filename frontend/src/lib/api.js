@@ -14,6 +14,7 @@ async function send({ method, path, data, f = fetch }) {
         opts.body = JSON.stringify(data);
     }
 
+    // TODO: Fix error handling here! In case of 401 no data was returned so the json parsing fails and throws an error!
     return f(`${base}/${path}`, opts)
         .then((r) => r.json());
 }

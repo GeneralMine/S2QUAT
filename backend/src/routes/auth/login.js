@@ -19,7 +19,6 @@ module.exports = async (req, res) => {
             email
         }
     });
-    console.log("Got user", user);
 
     if (user == null || !(await bcrypt.compare(password, user.password))) {
         // if passwords not matching!

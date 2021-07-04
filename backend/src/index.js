@@ -4,7 +4,6 @@ const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
-const db = require("./lib/db");
 const dbtester = require("./lib/dbtester");
 // env
 const BACKEND_PORT = process.env.PORT || 8080;

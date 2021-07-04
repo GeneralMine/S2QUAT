@@ -3,7 +3,7 @@ const prisma = require("../../lib/db");
 
 const { forExternal } = require("../../lib/utils");
 const { perform_login } = require("../../lib/_login_util");
-
+const bcrypt = require("bcrypt");
 /**
  * @typedef {object} ExtendWithUser
  * @property {import("@prisma/client").User} user
@@ -12,23 +12,24 @@ const { perform_login } = require("../../lib/_login_util");
  */
 
 /**
- * @param {ExtendWithUser} req
- * @param {Response} res
+ * @param {ExtendWithUser} request
+ * @param {Response} response
  */
-module.exports = async (req, res) => {
-    let { email, password, name } = req.body;
-
-    console.log(req.user);
+module.exports = async (request, response) => {
+    let { name, email, password } = request.body;
 
     try {
-        let current_user = req.user;
-        const result = await prisma.user.update({ where: { id: current_user.id }, data: { name, email, password } });
+        let current_user = request.user;
+        let data = {};
+        if (name) data.name = name;
+        if (email) data.email = email;
+        if (password) data.password = await bcrypt.hash(password, 10);
 
-        if (current_user.name !== result.name || current_user.email !== result.email) {
-            return perform_login(res, result);
-        }
+        const updatedUser = await prisma.user.update({ where: { id: current_user.id }, data });
+
+        return perform_login(response, updatedUser);
     } catch (err) {
         console.error("while trying to update:", err);
-        return res.status(401).send();
+        return response.status(401).send();
     }
 }
