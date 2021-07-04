@@ -45,6 +45,9 @@ services:
             - "POSTGRES_PASSWORD=${DATABASE_PASSWORD}"
         networks:
             - backend
+        ports: 
+            - "5432:5432"
+            - "5555:5555"
 
 networks: 
     backend:
