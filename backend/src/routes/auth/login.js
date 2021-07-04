@@ -64,7 +64,8 @@ module.exports = async (req, res) => {
         domain: ROOT_DOMAIN,
         expires: date,
         //maxAge: date,
-        secure: true
+        secure: true,
+        httpOnly: true,
     });
 
     res.json({ user: externalUser });
