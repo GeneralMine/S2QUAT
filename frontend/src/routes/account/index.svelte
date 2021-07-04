@@ -10,6 +10,7 @@
 	import List from '$lib/List/List.svelte';
 	import ListItemRow from '$lib/List/ListItemRow.svelte';
 	import { parseEnumToEmoji } from '$lib/textParser';
+	import { token } from '$lib/session_storage';
 
 	let name = $session.user.name;
 	let email = $session.user.email;
@@ -29,6 +30,7 @@
 			response = await post(`user/update`, data);
 			if (response.user) {
 				$session.user = response.user;
+				$token = response.token;
 				goto('/account');
 			} else {
 				throw new Error('Backend did not send a user back!');
@@ -48,6 +50,7 @@
 			console.log('Logout wasnt successful!');
 		}
 		// TODO: maybe set NULL if not works
+		$token = '';
 		delete $session.user;
 		goto('/login');
 	}

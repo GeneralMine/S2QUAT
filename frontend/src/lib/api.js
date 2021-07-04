@@ -1,9 +1,13 @@
 import { dev } from '$app/env';
+import { token } from './session_storage';
+import { get as get_store_value } from "svelte/store";
 
 const base = dev ? 'http://localhost:8080' : 'https://api.raiser.dev';
 
 async function send({ method, path, data, f = fetch }) {
     const opts = { method, headers: {} };
+
+    opts.headers['Authentication'] = get_store_value(token);
 
     if (data) {
         opts.headers['Content-Type'] = 'application/json';
@@ -38,23 +42,3 @@ export async function roflul(func) {
         return { err };
     }
 }
-
-/*
-export function loader(data, f = fetch) {
-    async function l(method, ...urls) {
-        try {
-            let a = await Promise.all(urls.map(el => send({ method, el, data, f })));
-            return { res: a };
-        } catch (err) {
-            return { err }
-        }
-    }
-
-    return {
-        GET: l("GET"),
-        DEL: l("DEL"),
-        POST: l("POST"),
-        PUT: l("PUT"),
-    }
-}
-*/

@@ -7,9 +7,9 @@ const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
 /** @type {import("express").Handler} */
 module.exports = async (req, res, next) => {
-    const { token } = req.cookies;
+    const token = req.headers["Authentication"];
 
-    if (token === undefined) {
+    if (token === undefined || token === "") {
         console.error("AUTH: User does not have a token, he may not be logged in!");
         return next();
     }

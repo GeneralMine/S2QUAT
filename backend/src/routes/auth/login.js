@@ -2,11 +2,7 @@
 const prisma = require("../../lib/db");
 
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { forExternal } = require("../../lib/utils");
-
-const TOKEN_SECRET = process.env.TOKEN_SECRET;
-const ROOT_DOMAIN = "." + process.env.ROOT_DOMAIN;
+const { perform_login } = require("../../lib/_login_util");
 
 /** @type {import("express").RequestHandler} */
 module.exports = async (req, res) => {
@@ -50,24 +46,7 @@ module.exports = async (req, res) => {
             return res.status(418).send();
     }
 
-    const externalUser = forExternal(user);
+    perform_login(res, user);
 
-    // last_logout => TIMESTAMP
-    // TOKENS < TIMESTAMP => INVALID
-
-    // generate json web token
-    const token = jwt.sign(externalUser, TOKEN_SECRET);
-
-    let date = new Date();
-    date.setDate(date.getDate() + 7);
-    res.cookie("token", token, {
-        domain: ROOT_DOMAIN,
-        expires: date,
-        //maxAge: date,
-        secure: true,
-        httpOnly: true,
-    });
-
-    res.json({ user: externalUser });
     console.log("LOGIN: User " + user.name + " logged in successfully!");
 }
