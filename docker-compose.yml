@@ -31,6 +31,7 @@ services:
             - "TOKEN_SECRET=${TOKEN_SECRET}"
         ports: 
             - "${BACKEND_PORT}:${BACKEND_PORT}"
+            - "5555:5555"
         depends_on:
             - "db"
         networks:
@@ -47,7 +48,6 @@ services:
             - backend
         ports: 
             - "5432:5432"
-            - "5555:5555"
 
 networks: 
     backend:
