@@ -90,6 +90,7 @@ label {
     text-decoration: none;
     cursor: pointer;
     touch-action: manipulation;
+    user-select: none;
 }
 .clickArea:hover {
     background-color: #35a7e00e;

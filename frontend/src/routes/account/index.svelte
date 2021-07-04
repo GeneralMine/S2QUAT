@@ -18,16 +18,18 @@
 	let role = $session.user.role;
 	$: disabled =
 		name === $session.user.name && email === $session.user.email && password === '********';
+	$: console.log(disabled);
 
 	async function save() {
 		let data = {};
 		if (name !== $session.user.name) data.name = name;
-		if (email !== $session.user.email) data.email = name;
-		if (password !== '********') data.password = name;
+		if (email !== $session.user.email) data.email = email;
+		if (password !== '********') data.password = password;
 
 		let response;
 		try {
 			response = await post(`user/update`, data);
+			password = '********';
 			if (response.user) {
 				$session.user = response.user;
 				$token = response.token;
@@ -38,8 +40,6 @@
 		} catch (error) {
 			console.log('Save wasnt successful!');
 		}
-		// TODO: maybe set NULL if not works
-		delete $session.user;
 	}
 
 	async function logout() {

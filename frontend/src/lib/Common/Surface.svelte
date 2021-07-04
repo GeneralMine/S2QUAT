@@ -12,7 +12,7 @@
 <div class="surfaceContainer">
 	<div class="surfaceHeader">
 		{#if title}
-			<h1>{title}</h1>
+			<h1 class="clickArea" on:click>{title}</h1>
 		{/if}
 		{#if add || edit || remove}
 			<div class="buttons">
@@ -52,10 +52,10 @@
 	.surfaceContent {
 		border-width: 1px;
 		border-color: #2e5bff;
+		border-radius: 12px;
 		margin-bottom: 1em;
 		margin-left: 1em;
 		margin-right: 1em;
-		border-radius: 12px;
 		background-color: var(--surface-color);
 	}
 	.buttons {

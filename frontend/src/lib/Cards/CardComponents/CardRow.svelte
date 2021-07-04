@@ -1,13 +1,12 @@
 <script>
 	export let title;
-	export let url;
 </script>
 
 <div class="cardRowContainer">
-	<a class="cardRowTitleLink" href={url}>
-		<h2 class="cardRowTitle">{title} ></h2>
-	</a>
-	<div class="cardRow">
+	<div class="cardRowHeader">
+		<h1 class="clickArea" on:click>{title} ></h1>
+	</div>
+	<div class="cardRowContent">
 		<slot />
 	</div>
 </div>
@@ -17,21 +16,17 @@
 		display: flex;
 		flex-direction: column;
 	}
-
-	.cardRowTitleLink {
-		text-decoration: none;
-		color: inherit;
+	.cardRowHeader {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 	}
-	.cardRowTitle {
-		margin-bottom: 0.1rem;
-		text-decoration: none;
-	}
-
-	.cardRow {
+	.cardRowContent {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
-		padding: 0;
-		line-height: 1.15;
+		margin-bottom: 1em;
+		margin-left: 1em;
+		margin-right: 1em;
 	}
 </style>
