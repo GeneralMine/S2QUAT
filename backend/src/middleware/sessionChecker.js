@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 
 /** @type {import("@prisma/client").PrismaClient} */
 const prisma = require("../lib/db");
+const { forExternal } = require("../lib/utils");
 
 const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
@@ -23,7 +24,7 @@ module.exports = async (req, res, next) => {
             return next();
         }
 
-        const my_user = await prisma.user.findUnique({ where: { id: decodedToken.id }, select: { password: false } });
+        const my_user = forExternal(await prisma.user.findUnique({ where: { id: decodedToken.id } }));
 
         if (my_user === undefined) {
             console.error("AUTH: User does not exist!");
