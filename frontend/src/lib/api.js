@@ -1,6 +1,6 @@
 import { dev } from '$app/env';
 
-const base = dev ? 'http://localhost:8080' : 'https://s2quat.raiser.dev';
+const base = dev ? 'http://localhost:8080' : 'https://api.raiser.dev';
 
 async function send({ method, path, data, f = fetch }) {
     const opts = { method, headers: {} };
