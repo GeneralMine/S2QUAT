@@ -45,13 +45,15 @@ services:
     db:
         container_name: s2quat-db
         restart: always
-        image: mariadb:latest
+        image: postgres:latest
         volumes: 
-            - ./db:/var/lib/mysql
+            - ./db:/var/lib/postgresql/data
         environment: 
-            - "MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}"
+            - "POSTGRES_PASSWORD=${DATABASE_PASSWORD}"
         networks:
             - backend
+        ports: 
+            - "5432:5432"
 
 networks: 
     frontend:

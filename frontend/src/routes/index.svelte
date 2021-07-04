@@ -1,48 +1,77 @@
+<script context="module">
+	import { get, roflul } from '$lib/api';
+	export async function load({ session }) {
+		if (session.user !== undefined) {
+			let { res, err } = await roflul(() => get(`user/${session.user.id}/projects`));
+			if (res) {
+				return { props: { projects: res.projects } };
+			}
+		}
+		return { status: 400, error: new Error('yeeto? ' + `user/${session.user.id}/projects`) };
+	}
+</script>
+
 <script>
-	/********************************************
-	 * Getting env variables from session store */
-	import { stores } from "@sapper/app";
-	const { session } = stores();
-	$: BACKEND_URL = $session.BACKEND_URL;
-	$: user = $session.user;
 	/*******************************************/
-	import CardRow from "../components/Cards/CardRow.svelte";
-	import NumberCard from "../components/Cards/NumberCard.svelte";
-	import PieCard from "../components/Cards/PieCard.svelte";
-	import { postData, getData, capitalizeFirstLetter } from "../lib";
-	import cardFunctions from "../lib/cardFunctions";
-	import { onMount, onDestroy } from "svelte";
+	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	$crumbs = [];
+	/*******************************************/
+	import { goto } from '$app/navigation';
 
-	let entities = ["actions", "companies", "employees", "models", "projects", "questionAnswers", "questions", "scenarios", "surveyResponses", "testPersons", "users"];
-	let entitiesData = {};
-
-	onMount(async () => {
-		entities.forEach(async (entity) => {
-			const url = BACKEND_URL + "/" + entity;
-			entitiesData[entity] = await (await getData(url)).json();
-			console.log("Loaded:", entity);
-		});
-		console.log("Loaded all data", entitiesData);
-	});
+	import Table from '$lib/Table/Table.svelte';
+	import Surface from '$lib/Common/Surface.svelte';
+	import TableBody from '$lib/Table/TableBody.svelte';
+	import TableAttributes from '$lib/Table/TableAttributes.svelte';
+	import ProjectCard from '$lib/Cards/ProjectCard.svelte';
+	import TemplateCard from '$lib/Cards/TemplateCard.svelte';
+	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
+	import TableBodyItem from '$lib/Table/TableBodyItem.svelte';
+	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
+	import TableAttributesItem from '$lib/Table/TableAttributesItem.svelte';
+	export let projects = [];
+	export let templates = [];
 </script>
 
 <svelte:head>
-	<title>Dashboard</title>
+	<title>Home | S2QUAT</title>
 </svelte:head>
 
-<div class="pageContainer">
-	<CardRow>
-		{#if Object.keys(entitiesData).length === entities.length}
-			{#each entities as entity}
-				<NumberCard title={"Anzahl " + capitalizeFirstLetter(entity)} value={entitiesData[entity].length} icon={entity} />
-			{/each}
-		{:else}{Object.keys(entitiesData)}{/if}
+<div>
+	<Surface title="Projekte">
+		<Table>
+			<TableAttributes>
+				<TableAttributesItem>ID</TableAttributesItem>
+				<TableAttributesItem>Unternehmen</TableAttributesItem>
+				<TableAttributesItem>Status</TableAttributesItem>
+				<TableAttributesItem>Name</TableAttributesItem>
+				<TableAttributesItem>Beschreibung</TableAttributesItem>
+			</TableAttributes>
+			<TableBody>
+				{#each projects as project}
+					<TableBodyRow on:click={async () => await goto('/project/' + project.id)}>
+						<TableBodyItem>{project.id}</TableBodyItem>
+						<TableBodyItem
+							type="img"
+							imgName={project.company !== null ? project.company.logo : '-'}
+						/>
+						<TableBodyItem>{project.status}</TableBodyItem>
+						<TableBodyItem>{project.name}</TableBodyItem>
+						<TableBodyItem>{project.description}</TableBodyItem>
+					</TableBodyRow>
+				{/each}
+			</TableBody>
+		</Table>
+	</Surface>
+
+	<CardRow title="Projekte" url="/company">
+		{#each projects as project}
+			<ProjectCard {project} />
+		{/each}
+	</CardRow>
+	<CardRow title="Qualitätsmodell" url="/model" />
+	<CardRow title="Vorlagen" url="/template">
+		{#each templates as template}
+			<TemplateCard {template} />
+		{/each}
 	</CardRow>
 </div>
-
-<style>
-	.pageContainer {
-	}
-	.cardContainer {
-	}
-</style>

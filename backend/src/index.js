@@ -3,17 +3,13 @@ const express = require('express');
 const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const database = require("./controller/database");
 
+const db = require("./lib/db");
+const dbtester = require("./lib/dbtester");
 // env
 const BACKEND_PORT = process.env.PORT || 8080;
 const FRONTEND_DOMAIN = process.env.FRONTEND_DOMAIN || "localhost";
-const isDebug = FRONTEND_DOMAIN.startsWith("localhost");
-
-startup()
-    .catch(err => {
-        console.error(err);
-    });
+const isDebug = FRONTEND_DOMAIN.startsWith("localhost") || FRONTEND_DOMAIN === "127.0.0.1";
 
 const corsOptionsProduction = {
     methods: "GET, OPTIONS, POST, DELETE",
@@ -28,8 +24,7 @@ const corsOptionsDebug = {
 };
 
 async function startup() {
-    await database.startup();
-
+    await dbtester();
     app.enable('trust proxy');
     app.use(express.json());
     if (!isDebug) {
@@ -40,105 +35,36 @@ async function startup() {
         console.log("CORS loaded in debug!");
     }
     app.use(cookieParser());
-    if (!isDebug) {
-        app.use(require("./middleware/sessionChecker"));
-    }
+    app.use(require("./middleware/sessionChecker"));
     app.options("*", cors());
 
     /*
      * Public Routes
-    */
+     */
 
-    app.post("/users", require("./routes/users/insert"));
-    app.post("/users/login", require("./routes/users/login"));
+    app.post("/auth/register", require("./routes/auth/register"));
+    app.post("/auth/login", require("./routes/auth/login"));
+    app.post("/auth/logout", require("./routes/auth/logout"));
 
     /*
      * Private Routes
-    */
+     */
 
     if (!isDebug) {
         console.log("***** Production Mode *****");
         app.use(require("./middleware/loggedInChecker"));
     }
 
-    // actions
-    app.get("/actions", require("./routes/actions/list"));
-    app.get("/actions/:id", require("./routes/actions/get"));
-
-    // companies
-    app.get("/companies", require("./routes/companies/list"));
-    app.post("/companies", require("./routes/companies/insert"));
-    app.post("/companies/:id", require("./routes/companies/update"));
-    app.get("/companies/:id", require("./routes/companies/get"));
-    app.delete("/companies/:id", require("./routes/companies/remove"));
-
-    // employees
-    app.get("/employees", require("./routes/employees/list"));
-    app.post("/employees", require("./routes/employees/insert"));
-    app.post("/employees/:id", require("./routes/employees/update"));
-    app.get("/employees/:id", require("./routes/employees/get"));
-    app.delete("/employees/:id", require("./routes/employees/remove"));
-
-    // models
-    app.get("/models", require("./routes/models/list"));
-    app.post("/models", require("./routes/models/insert"));
-    app.post("/models/:id", require("./routes/models/update"));
-    app.get("/models/:id", require("./routes/models/get"));
-    app.delete("/models/:id", require("./routes/models/remove"));
-
-    // projects
-    app.get("/projects", require("./routes/projects/list"));
-    app.post("/projects", require("./routes/projects/insert"));
-    app.post("/projects/:id", require("./routes/projects/update"));
-    app.get("/projects/:id", require("./routes/projects/get"));
-    app.delete("/projects/:id", require("./routes/projects/remove"));
-
-    // questionAnswers
-    app.get("/questionAnswers", require("./routes/questionAnswers/list"));
-    app.post("/questionAnswers", require("./routes/questionAnswers/insert"));
-    app.post("/questionAnswers/:id", require("./routes/questionAnswers/update"));
-    app.get("/questionAnswers/:id", require("./routes/questionAnswers/get"));
-    app.delete("/questionAnswers/:id", require("./routes/questionAnswers/remove"));
-
-    // questions
-    app.get("/questions", require("./routes/questions/list"));
-    app.post("/questions", require("./routes/questions/insert"));
-    app.post("/questions/:id", require("./routes/questions/update"));
-    app.get("/questions/:id", require("./routes/questions/get"));
-    app.delete("/questions/:id", require("./routes/questions/remove"));
-
-    // scenarios
-    app.get("/scenarios", require("./routes/scenarios/list"));
-    app.post("/scenarios", require("./routes/scenarios/insert"));
-    app.post("/scenarios/:id", require("./routes/scenarios/update"));
-    app.get("/scenarios/:id", require("./routes/scenarios/get"));
-    app.delete("/scenarios/:id", require("./routes/scenarios/remove"));
-
-    // surveyResponses
-    app.get("/surveyResponses", require("./routes/surveyResponses/list"));
-    app.post("/surveyResponses", require("./routes/surveyResponses/insert"));
-    app.post("/surveyResponses/:id", require("./routes/surveyResponses/update"));
-    app.get("/surveyResponses/:id", require("./routes/surveyResponses/get"));
-    app.delete("/surveyResponses/:id", require("./routes/surveyResponses/remove"));
-
-    // testPersons
-    app.get("/testPersons", require("./routes/testPersons/list"));
-    app.post("/testPersons", require("./routes/testPersons/insert"));
-    app.post("/testPersons/:id", require("./routes/testPersons/update"));
-    app.get("/testPersons/:id", require("./routes/testPersons/get"));
-    app.delete("/testPersons/:id", require("./routes/testPersons/remove"));
-
-    // users
-    app.get("/users", require("./routes/users/list"));
-    app.get("/users/:id", require("./routes/users/get"));
-    app.post("/users/:id", require("./routes/users/update"));
-    app.post("/users/:id/logout", require("./routes/users/logout"));
-    app.delete("/users/:id", require("./routes/users/remove"));
-
-    // surveys
-    app.post("/surveys", require("./routes/surveys/insert"));
+    app.post("/user/update", require("./routes/user/update"));
+    app.get("/user/:userId/projects", require("./routes/user/projects"));
+    app.get("/model/field/:fieldId", require("./routes/model/field"));
 
     app.listen(BACKEND_PORT, () => {
         console.log(`Listening on http://localhost:${BACKEND_PORT}`);
     });
 }
+
+startup()
+    .catch(err => {
+        console.error(err);
+    });
