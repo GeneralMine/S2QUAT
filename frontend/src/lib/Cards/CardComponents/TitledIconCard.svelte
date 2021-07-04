@@ -1,35 +1,25 @@
 <script>
 	import Icon from '$lib/Common/Icon.svelte';
+	import Card from './Card.svelte';
 	export let title;
 	export let icon = 'warning';
 </script>
 
-<div class="cardContainer">
+<Card>
 	<div class="header">
 		<p class="title">{title}</p>
 		<div class="iconCircle">
 			<div class="iconContainer">
-				<Icon title={icon} />
+				<Icon name={icon} />
 			</div>
 		</div>
 	</div>
 	<div class="content">
 		<slot />
 	</div>
-</div>
+</Card>
 
 <style>
-	.cardContainer {
-		display: flex;
-		flex-direction: column;
-		width: 244px;
-		height: 144px;
-		padding-top: 1rem;
-		padding-bottom: 1rem;
-		padding-left: 1.5rem;
-		padding-right: 1.5rem;
-		margin: 0;
-	}
 	.header {
 		display: flex;
 		flex-direction: row;
@@ -50,5 +40,7 @@
 		width: 28px;
 		height: 28px;
 		align-items: center;
+		display: flex;
+		justify-content: center;
 	}
 </style>
