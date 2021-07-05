@@ -1,14 +1,15 @@
 <script>
-	import { onMount } from 'svelte';
-	import { roflul, get } from '$lib/api';
+	import { createEventDispatcher, onMount } from 'svelte';
+	import { get, post } from '$lib/api';
 
 	import List from '$lib/List/List.svelte';
 	import Prompt from './Prompt.svelte';
 	import ListItemRow from '$lib/List/ListItemRow.svelte';
 	import { parseEnumToEmoji } from '$lib/textParser';
 
-	export let open;
+	const dispatch = createEventDispatcher();
 
+	export let open;
 	let companies = [];
 	let stati = ['ACTIVE', 'INACTIVE', 'ARCHIVED'];
 
@@ -21,30 +22,31 @@
 	let projectEnd;
 
 	onMount(async () => {
-		companies = await fetchCompanies();
+		const res = await get('company/list');
+		companies = res.companies;
 	});
 
-	async function fetchCompanies() {
-		let { res, err } = roflul(() => get('company/all'));
-		console.log(res);
-		if (err) console.error(err);
-		if (res) return res.companies || [];
-		return [];
-	}
-
 	async function createCompany() {
-		let { res, err } = roflul(() => post('project/create'));
-		if (err) console.error(err);
+		await post('project/create', {
+			projectName,
+			projectDescription,
+			projectGoal,
+			company,
+			status,
+			projectStart,
+			projectEnd
+		});
 		closePrompt();
 	}
 
 	function closePrompt() {
 		open = false;
+		dispatch('close', {});
 	}
 </script>
 
 <Prompt bind:open on:close={closePrompt}>
-	<slot name="header">
+	<slot slot="header">
 		<h2>Neues Projekt</h2>
 	</slot>
 	<slot>
@@ -87,7 +89,7 @@
 			</ListItemRow>
 		</List>
 	</slot>
-	<slot name="footer">
+	<slot slot="footer">
 		<button on:click={createCompany}>Create</button>
 		<button class="closeButton" on:click={closePrompt}>Cancel</button>
 	</slot>
@@ -99,5 +101,10 @@
 	}
 	.closeButton {
 		background-color: grey;
+	}
+	select {
+		display: flex;
+		align-self: center;
+		width: 20rem;
 	}
 </style>
