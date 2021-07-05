@@ -1,6 +1,4 @@
-import { dev } from '$app/env';
-
-const base = dev ? 'http://localhost:8080' : 'https://api.raiser.dev';
+const base = '';
 
 async function send({ method, path, data, f = fetch }) {
     const opts = { method, headers: {} };

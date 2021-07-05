@@ -8,7 +8,7 @@
 
 <div class="tableContainer">
 	{#if hasHeader}
-		<TableHeader />
+		<TableHeader on:create on:search />
 	{/if}
 	<table class="table" cellspacing="0" cellpadding="0">
 		<slot />

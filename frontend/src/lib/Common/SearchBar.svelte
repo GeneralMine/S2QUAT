@@ -1,13 +1,15 @@
 <script>
 	import Icon from './Icon.svelte';
 	export let placeholder = 'Search';
+
+	export let value = '';
 </script>
 
 <div class="searchBarContainer">
 	<div class="icon">
 		<Icon name="search" />
 	</div>
-	<input class="bar" {placeholder} type="search" />
+	<input on:change bind:value class="bar" {placeholder} type="search" />
 </div>
 
 <style>

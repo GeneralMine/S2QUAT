@@ -14,26 +14,32 @@
     "url": "git+https://github.com/GeneralMine/S2QUAT.git"
   },
   "scripts": {
-    "dev": "svelte-kit dev",
+    "dev": "env-cmd svelte-kit dev",
     "build": "svelte-kit build",
     "preview": "svelte-kit preview",
     "lint": "prettier --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --write --plugin-search-dir=. ."
   },
   "devDependencies": {
+    "@prisma/client": "^2.26.0",
     "@sveltejs/adapter-node": "next",
     "@sveltejs/kit": "next",
+    "bcrypt": "^5.0.1",
+    "chart.js": "^3.4.1",
+    "cookie": "^0.4.1",
+    "dotenv": "^10.0.0",
+    "env-cmd": "^10.1.0",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-svelte3": "^3.2.0",
+    "jsonwebtoken": "^8.5.1",
     "prettier": "~2.2.1",
     "prettier-plugin-svelte": "^2.2.0",
+    "prisma": "^2.26.0",
     "svelte": "^3.34.0"
   },
   "dependencies": {
-    "@fontsource/nunito-sans": "^4.4.5",
-    "chart.js": "^3.4.1",
-    "cookie": "^0.4.1"
+    "@fontsource/nunito-sans": "^4.4.5"
   },
   "type": "module"
 }

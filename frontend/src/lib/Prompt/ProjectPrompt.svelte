@@ -33,10 +33,11 @@
 	}
 
 	async function createCompany() {
-		let data;
-		if (projectName !== '') data.projectName = projectName;
-		if (projectDescription !== '') data.projectDescription = projectDescription;
+		let { res, err } = roflul(() => post('project/create'));
+		if (err) console.error(err);
+		closePrompt();
 	}
+
 	function closePrompt() {
 		open = false;
 	}

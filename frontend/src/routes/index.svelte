@@ -44,13 +44,8 @@
 
 <div>
 	{#if projectsExpanded}
-		<Surface
-			add={true}
-			on:add={() => (projectPrompt = true)}
-			title="Projekte"
-			on:click={() => (projectsExpanded = !projectsExpanded)}
-		>
-			<Table>
+		<Surface title="Projekte" on:click={() => (projectsExpanded = !projectsExpanded)}>
+			<Table on:create={() => (projectPrompt = true)}>
 				<TableAttributes>
 					<TableAttributesItem>ID</TableAttributesItem>
 					<TableAttributesItem>Unternehmen</TableAttributesItem>

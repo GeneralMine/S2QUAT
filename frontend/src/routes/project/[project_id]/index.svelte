@@ -14,22 +14,22 @@
 
 <script>
 	export let project;
-	import Surface from '$lib/Common/Surface.svelte';
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	let companyCrumb;
 	if (project.company) {
-		$crumbs = [
-			...$crumbs,
-			CrumbBuilder.create(project.company.name, '/company/' + project.company.id, 'company').build()
-		];
+		companyCrumb = CrumbBuilder.create(
+			project.company.name,
+			`/company/${project.company.id}`,
+			'company'
+		).build();
 	}
-	$crumbs = [
-		...$crumbs,
-		CrumbBuilder.create(project.name, '/project/' + project.id, 'project').build()
-	];
+	$crumbs = [CrumbBuilder.create(project.name, `/project/${project.id}`, 'project').build()];
+	$crumbs = [companyCrumb, ...$crumbs];
 	/*******************************************/
 	import { goto } from '$app/navigation';
 
+	import Surface from '$lib/Common/Surface.svelte';
 	import Table from '$lib/Table/Table.svelte';
 	import TableAttributes from '$lib/Table/TableAttributes.svelte';
 	import TableAttributesItem from '$lib/Table/TableAttributesItem.svelte';
@@ -53,56 +53,49 @@
 		<PieCard />
 	</CardRow>
 
-	<div class="row">
-		<Surface title="Scenarios">
-			<Table>
-				<TableAttributes>
-					<TableAttributesItem>ID</TableAttributesItem>
-					<TableAttributesItem>Name</TableAttributesItem>
-					<TableAttributesItem>Beschreibung</TableAttributesItem>
-				</TableAttributes>
-				<TableBody>
-					{#each project.scenarios as scenario}
-						<TableBodyRow
-							on:click={async () =>
-								await goto('/project/' + project.id + '/scenario/' + scenario.id)}
-						>
-							<TableBodyItem>{scenario.id}</TableBodyItem>
-							<TableBodyItem>{scenario.name}</TableBodyItem>
-							<TableBodyItem>{scenario.description}</TableBodyItem>
-						</TableBodyRow>
-					{/each}
-				</TableBody>
-			</Table>
-		</Surface>
-		<Surface title="Verantwortliche">
-			<Table>
-				<TableAttributes>
-					<TableAttributesItem>ID</TableAttributesItem>
-					<TableAttributesItem>Name</TableAttributesItem>
-					<TableAttributesItem>Email</TableAttributesItem>
-				</TableAttributes>
-				<TableBody>
-					{#each project.users as user}
-						<TableBodyRow>
-							<TableBodyItem>{user.id}</TableBodyItem>
-							<TableBodyItem>{user.name}</TableBodyItem>
-							<TableBodyItem>{user.description}</TableBodyItem>
-						</TableBodyRow>
-					{/each}
-				</TableBody>
-			</Table>
-		</Surface>
-	</div>
+	<Surface title="Scenarios">
+		<Table>
+			<TableAttributes>
+				<TableAttributesItem>ID</TableAttributesItem>
+				<TableAttributesItem>Name</TableAttributesItem>
+				<TableAttributesItem>Beschreibung</TableAttributesItem>
+			</TableAttributes>
+			<TableBody>
+				{#each project.scenarios as scenario}
+					<TableBodyRow
+						on:click={async () => await goto('/project/' + project.id + '/scenario/' + scenario.id)}
+					>
+						<TableBodyItem>{scenario.id}</TableBodyItem>
+						<TableBodyItem>{scenario.name}</TableBodyItem>
+						<TableBodyItem>{scenario.description}</TableBodyItem>
+					</TableBodyRow>
+				{/each}
+			</TableBody>
+		</Table>
+	</Surface>
+	<Surface title="Verantwortliche">
+		<Table>
+			<TableAttributes>
+				<TableAttributesItem>ID</TableAttributesItem>
+				<TableAttributesItem>Name</TableAttributesItem>
+				<TableAttributesItem>Email</TableAttributesItem>
+			</TableAttributes>
+			<TableBody>
+				{#each project.users as user}
+					<TableBodyRow>
+						<TableBodyItem>{user.id}</TableBodyItem>
+						<TableBodyItem>{user.name}</TableBodyItem>
+						<TableBodyItem>{user.description}</TableBodyItem>
+					</TableBodyRow>
+				{/each}
+			</TableBody>
+		</Table>
+	</Surface>
 </div>
 
 <style>
 	.projectContainer {
 		display: flex;
 		flex-direction: column;
-	}
-	.row {
-		display: flex;
-		flex-direction: row;
 	}
 </style>

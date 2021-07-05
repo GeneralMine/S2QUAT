@@ -1,6 +1,17 @@
 <script>
 	import DropDownButton from '$lib/Common/DropDownButton.svelte';
 	import SearchBar from '$lib/Common/SearchBar.svelte';
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
+
+	let value = '';
+
+	function create() {
+		dispatch('create', {});
+	}
+	function search() {
+		dispatch('search', { value });
+	}
 </script>
 
 <div class="tableHeader">
@@ -8,10 +19,10 @@
 		<DropDownButton name="filter" />
 	</div>
 	<div class="tableHeaderSearch">
-		<SearchBar />
+		<SearchBar bind:value on:change={search} />
 	</div>
 	<div class="tableHeaderCreate">
-		<button> Create </button>
+		<button on:click={create}>Create</button>
 	</div>
 </div>
 
