@@ -1,6 +1,6 @@
 const base = '';
 
-async function send({ method, path, data, user, f = fetch }) {
+async function send({ method, path, data, session, f = fetch }) {
     const opts = { method, headers: {} };
 
     if (data) {
@@ -9,12 +9,19 @@ async function send({ method, path, data, user, f = fetch }) {
     }
 
     opts.credentials = "include";
-    if (user)
-        opts.locals = { user };
+
+    if (session) {
+        opts.headers["Authorization"] = session;
+    }
 
     // TODO: Fix error handling here! In case of 401 no data was returned so the json parsing fails and throws an error!
-    return f(`${base}/${path}`, opts)
-        .then((r) => r.json());
+    let result = await f(`${base}/${path}`, opts);
+
+    try {
+        return await result.json();
+    } catch (error) {
+        return undefined;
+    }
 }
 
 export function get(path, user, f) {
@@ -33,7 +40,7 @@ export function put(path, data, user, f) {
     return send({ method: 'PUT', path, data, user, f });
 }
 
-export async function roflul(func) {
+export async function unpack(func) {
     try {
         let res = await func()
         return { res };

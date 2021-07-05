@@ -1,3 +1,15 @@
+<script context="module">
+	import { get } from '$lib/api.js';
+
+	export async function load({ session }) {
+		if (session.user) {
+			let res = await get(`project/list`, session.token);
+			console.log('Got reply:', res);
+			projects = res.projects;
+		}
+	}
+</script>
+
 <script>
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
@@ -21,6 +33,7 @@
 	import { onMount } from 'svelte';
 	import { session } from '$app/stores';
 	import { get } from '$lib/api.js';
+
 	onMount(async () => {
 		if ($session.user) {
 			let res = await get(`project/list`);

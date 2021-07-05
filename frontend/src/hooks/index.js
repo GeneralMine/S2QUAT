@@ -7,17 +7,25 @@ export async function handle({ request, resolve }) {
     try {
         const cookies = parse(request.headers.cookie || '');
 
-        if (cookies.token === undefined) {
-            console.log("cookie token undefined!", cookies);
+        let my_cookie;
+
+
+        if (my_cookie !== undefined) {
+            my_cookie = cookies.token;
+        } else if (request.headers["Authorization"] !== undefined) {
+            my_cookie = request.headers["Authorization"];
+        } else {
+            console.log("Token missing in both cookie and authorization header", cookies);
             return await resolve(request);
         }
 
-        const decoded = verify(cookies.token, process.env["TOKEN_SECRET"]);
+        const decoded = verify(my_cookie, process.env["TOKEN_SECRET"]);
 
         let my_user = await prisma.user.findUnique({ where: { id: decoded.id } });
 
         if (my_user.last_logout.valueOf() / 1000 < decoded.iat) {
             request.locals.user = decoded;
+            request.locals.token_cookie = my_cookie;
         }
     } catch (err) { console.error("error in handle hook", err); }
 
@@ -34,6 +42,11 @@ export function getSession({ locals }) {
             role: locals.user.role,
             status: locals.user.status,
             last_logout: locals.user.last_logout,
+            token: locals.token_cookie,
         }
     };
+}
+
+export function serverFetch(request) {
+    return fetch(new Request("http://localhost:3000" + request.url, request));
 }
