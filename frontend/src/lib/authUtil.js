@@ -4,8 +4,39 @@ import ms from "ms";
 import { compare, hash } from "bcrypt";
 import { sign } from "jsonwebtoken";
 
-export function isAuthenticated(user, needed_role) {
+export const roles = {
+    USER: 'USER',
+    EDITOR: 'EDITOR',
+    ADMIN: 'ADMIN',
+};
 
+/**
+ * Returns true if 
+ * @param {import("@prisma/client").User | string} user 
+ * @param {import("@prisma/client").UserRole | string} role 
+ * @returns {boolean}
+ */
+export function isAuthenticatedAs(user, role) {
+    const hierachy = ["USER", "EDITOR", "ADMIN"];
+
+    const allowed = () => hierachy.indexOf(a) >= hierachy.indexOf(role) && hierachy.indexOf(role) !== -1;
+
+    if (typeof user.role === "string") {
+        return allowed(user.role);
+    } else if (typeof user === "string") {
+        return allowed(user);
+    }
+
+    console.error("Please have a look at lib/authUtil.js! Encountered unexpected behaviour!", { user, role });
+    return false;
+}
+
+/**
+ * I would recommend this function even though it doesn't return anything. Just for the sake of readability.
+ * @returns {undefined} nothing
+ */
+export function politely_ask_to_back_off() {
+    return;
 }
 
 export function getValidCookie(user) {
