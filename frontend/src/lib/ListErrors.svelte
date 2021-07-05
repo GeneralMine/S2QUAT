@@ -3,11 +3,9 @@
 </script>
 
 {#if errors}
-	<ul class="error-messages">
-		{#each Object.keys(errors) as key}
-			<li>{key} {errors[key]}</li>
-		{/each}
-	</ul>
+	{#each Object.keys(errors) as key}
+		<div class="error-messages">{key} {errors[key]}</div>
+	{/each}
 {/if}
 
 <style>

@@ -27,9 +27,16 @@
 
 		let response;
 		try {
-			response = await post(`auth/register`, { name, email, password });
-			if (response.status === 200) errors = 'Please wait until an admin has approved your request!';
-			errors = null;
+			response = await post(`register/register`, { name, email, password });
+			if (response.id) {
+				console.log('Successfully registered as user', response.id);
+				errors = {};
+				errors[''] = 'Please wait until an admin has approved your request!';
+			} else {
+				console.log('Registration wasnt successfull!', response);
+				errors = null;
+				disabled = false;
+			}
 		} catch (error) {
 			errors = response !== undefined && response.errors !== undefined ? response.errors : {};
 			errors[''] = error;

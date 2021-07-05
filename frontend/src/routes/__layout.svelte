@@ -1,6 +1,7 @@
 <script context="module">
 	export function load({ session }) {
 		if (!session.user) {
+			console.log(session.user.lol);
 			return {
 				status: 302,
 				redirect: `/login`

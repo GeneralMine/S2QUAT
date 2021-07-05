@@ -27,7 +27,7 @@
 
 		let response;
 		try {
-			response = await post(`user/update`, data);
+			response = await post(`account/save`, data);
 			password = '********';
 			if (response.user) {
 				$session.user = response.user;
@@ -43,7 +43,7 @@
 	async function logout() {
 		let response;
 		try {
-			response = await post(`auth/logout`, { email, password });
+			response = await post(`account/logout`, {});
 		} catch (error) {
 			console.log('Logout wasnt successful!');
 		}

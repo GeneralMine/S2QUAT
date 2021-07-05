@@ -29,6 +29,7 @@ export function getSession({ locals }) {
             id: locals.user.id,
             name: locals.user.name,
             email: locals.user.email,
+            role: locals.user.role,
             status: locals.user.status,
             last_logout: locals.user.last_logout,
         }

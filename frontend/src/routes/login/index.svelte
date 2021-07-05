@@ -27,7 +27,7 @@
 		disabled = true;
 		let response;
 		try {
-			response = await post(`auth/login`, { email, password });
+			response = await post(`login/login`, { email, password });
 			console.log(response);
 			if (response.user) {
 				errors = null;
@@ -37,8 +37,8 @@
 				throw new Error('Backend did not send a user back!');
 			}
 		} catch (error) {
-			errors = response !== undefined && response.errors !== undefined ? response.errors : {};
-			errors[''] = error;
+			errors = {};
+			errors[''] = response.error;
 
 			disabled = false;
 		}
