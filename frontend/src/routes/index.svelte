@@ -1,12 +1,30 @@
 <script context="module">
-	import { get } from '$lib/api.js';
+	import { get, unpack } from '$lib/api.js';
 
-	export async function load({ session }) {
+	export async function load({ session, fetch }) {
+		let projects = [];
+		let templates = [];
+
 		if (session.user) {
-			let res = await get(`project/list`, session.token);
-			console.log('Got reply:', res);
-			projects = res.projects;
+			let [{ res: resP, err: errP }, { res: resT, err: errT }] = await Promise.all([
+				unpack(() => get(`project/list`, session.token, fetch)),
+				unpack(() => get(`template/list`, session.token, fetch))
+			]);
+
+			if (resP) {
+				projects = resP.projects;
+			}
+			if (resT) {
+				templates = resT.templates;
+			}
 		}
+
+		return {
+			props: {
+				projects,
+				templates
+			}
+		};
 	}
 </script>
 
@@ -30,19 +48,8 @@
 	import ProjectModal from '$lib/Prompt/ProjectPrompt.svelte';
 	import NumberCard from '$lib/Cards/NumberCard.svelte';
 
-	import { onMount } from 'svelte';
-	import { session } from '$app/stores';
-	import { get } from '$lib/api.js';
-
-	onMount(async () => {
-		if ($session.user) {
-			let res = await get(`project/list`);
-			projects = res.projects;
-		}
-	});
-
-	let projects = [];
-	let templates = [];
+	export let projects = [];
+	export let templates = [];
 
 	let projectsExpanded = false;
 	let projectPrompt = false;

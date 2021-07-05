@@ -4,6 +4,10 @@ import ms from "ms";
 import { compare, hash } from "bcrypt";
 import { sign } from "jsonwebtoken";
 
+export function isAuthenticated(user, needed_role) {
+
+}
+
 export function getValidCookie(user) {
     return [cookie.serialize("token", getToken(user), {
         domain: ".localhost",

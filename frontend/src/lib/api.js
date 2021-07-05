@@ -11,6 +11,7 @@ async function send({ method, path, data, session, f = fetch }) {
     opts.credentials = "include";
 
     if (session) {
+        console.log("setting auth header", session);
         opts.headers["Authorization"] = session;
     }
 

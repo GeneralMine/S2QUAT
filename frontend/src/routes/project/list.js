@@ -15,21 +15,21 @@ export async function get(request) {
     try {
         userId = parseInt(userId);
 
-        let projects = await prisma.project.findMany(
-            {
-                include: {
-                    company: true,
-                    scenarios: true,
-                    users: true
-                },
-                where: {
-                    users: {
-                        some: {
-                            id: userId
-                        }
+        let projects = await prisma.project.findMany({
+            include: {
+                company: true,
+                scenarios: true,
+                users: true
+            },
+            where: {
+                users: {
+                    some: {
+                        id: userId
                     }
                 }
-            });
+            }
+        });
+
         projects = projects.map(el => {
             el.users.map(usr => {
                 delete usr.password;
@@ -38,6 +38,7 @@ export async function get(request) {
             })
             return el;
         });
+
         return send({ projects });
     } catch (err) {
         console.error("Failed to load all projects:", err);
