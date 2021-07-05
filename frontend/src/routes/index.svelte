@@ -1,16 +1,3 @@
-<script context="module">
-	import { get, roflul } from '$lib/api';
-	export async function load({ session }) {
-		if (session.user !== undefined) {
-			let { res, err } = await roflul(() => get(`user/${session.user.id}/projects`));
-			if (res) {
-				return { props: { projects: res.projects } };
-			}
-		}
-		return { status: 400, error: new Error('yeeto? ' + `user/${session.user.id}/projects`) };
-	}
-</script>
-
 <script>
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
@@ -31,8 +18,18 @@
 	import ProjectModal from '$lib/Prompt/ProjectPrompt.svelte';
 	import NumberCard from '$lib/Cards/NumberCard.svelte';
 
-	export let projects = [];
-	export let templates = [];
+	import { onMount } from 'svelte';
+	import { session } from '$app/stores';
+	import { get } from '$lib/api.js';
+	onMount(async () => {
+		if ($session.user) {
+			let res = await get(`project/list`);
+			projects = res.projects;
+		}
+	});
+
+	let projects = [];
+	let templates = [];
 
 	let projectsExpanded = false;
 	let projectPrompt = false;

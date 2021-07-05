@@ -3,7 +3,10 @@
 	import Attribute from './Attribute.svelte';
 	import Collapsable from '$lib/Common/Collapsable.svelte';
 
-	export let field;
+	export let field = {
+		name: 'Feld',
+		attributes: []
+	};
 
 	const newAttribute = {
 		name: 'Name',

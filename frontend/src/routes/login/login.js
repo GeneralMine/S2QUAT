@@ -1,5 +1,5 @@
 /** @type {import("@prisma/client").PrismaClient} */
-import { db as prisma } from "$lib/db";
+import { prisma } from "$lib/db";
 
 import { getValidCookie, fail, forExternal, comparePassword } from "$lib/authUtil";
 

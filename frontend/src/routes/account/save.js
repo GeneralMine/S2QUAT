@@ -1,7 +1,7 @@
 /** @type {import("@prisma/client").PrismaClient} */
-import { db as prisma } from "$lib/db";
+import { prisma } from "$lib/db";
 
-import { forExternal, getValidCookie, hashPassword } from "$lib/authUtil";
+import { forExternal, getValidCookie, hashPassword, fail } from "$lib/authUtil";
 
 /** @type {import("@sveltejs/kit").RequestHandler} */
 export async function post(request) {
@@ -28,14 +28,5 @@ export async function post(request) {
     } catch (err) {
         console.error("while trying to update:", err);
         return fail(401, "Error while trying to update" + err);
-    }
-}
-
-function fail(code, message) {
-    return {
-        status: code,
-        body: {
-            message
-        }
     }
 }

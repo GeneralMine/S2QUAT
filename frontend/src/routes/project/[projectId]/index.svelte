@@ -1,34 +1,50 @@
 <script context="module">
-	import { get, roflul } from '$lib/api';
-	export async function load({ session, page }) {
-		if (session.user !== undefined) {
-			let { res, err } = await roflul(() => get(`user/${session.user.id}/projects`));
-			console.log('fetch', res);
-			if (res) {
-				return { props: { project: res.projects[page.params.project_id] } };
-			}
-		}
-		return { status: 400, error: new Error('yeeto? ' + `user/${session.user.id}/projects`) };
+	export async function load({ page }) {
+		return { props: { projectId: page.params.projectId } };
 	}
 </script>
 
 <script>
-	export let project;
+	export let projectId;
+	let project = {
+		name: 'Projekt',
+		description: 'Beschreibung',
+		goal: '',
+		project_start: new Date(),
+		project_end: new Date(),
+		status: 'ACTIVE',
+		company: {},
+		scenarios: [],
+		users: []
+	};
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
-	let companyCrumb;
-	if (project.company) {
-		companyCrumb = CrumbBuilder.create(
-			project.company.name,
-			`/company/${project.company.id}`,
-			'company'
-		).build();
-	}
-	$crumbs = [CrumbBuilder.create(project.name, `/project/${project.id}`, 'project').build()];
-	$crumbs = [companyCrumb, ...$crumbs];
+	import { onMount } from 'svelte';
+	import { session } from '$app/stores';
+	import { get } from '$lib/api.js';
+	onMount(async () => {
+		if ($session.user) {
+			let res = await get(`project/${projectId}/get`);
+			project = res.project;
+			if (project.company) {
+				$crumbs = [
+					...$crumbs,
+					CrumbBuilder.create(
+						project.company.name,
+						`/company/${project.company.id}`,
+						'company'
+					).build()
+				];
+			}
+			$crumbs = [
+				...$crumbs,
+				CrumbBuilder.create(project.name, `/project/${project.id}`, 'project').build()
+			];
+		}
+	});
 	/*******************************************/
-	import { goto } from '$app/navigation';
 
+	import { goto } from '$app/navigation';
 	import Surface from '$lib/Common/Surface.svelte';
 	import Table from '$lib/Table/Table.svelte';
 	import TableAttributes from '$lib/Table/TableAttributes.svelte';

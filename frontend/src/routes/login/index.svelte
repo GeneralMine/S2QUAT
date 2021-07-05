@@ -22,15 +22,15 @@
 	let errors = null;
 	let disabled = false;
 
-	async function submit(event) {
+	async function login(event) {
 		console.log('Trying to login...');
 		disabled = true;
 		let response;
 		try {
 			response = await post(`login/login`, { email, password });
-			console.log(response);
 			if (response.user) {
 				errors = null;
+				console.log('Got user', response.user);
 				$session.user = response.user;
 				goto('/');
 			} else {
@@ -60,7 +60,7 @@
 
 		<ListErrors bind:errors />
 
-		<form on:submit|preventDefault={submit}>
+		<form on:submit|preventDefault={login}>
 			<label for="email">Email</label>
 			<input
 				autocomplete="email"

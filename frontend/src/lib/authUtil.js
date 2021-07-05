@@ -24,6 +24,13 @@ export function getInvalidCookie() {
     })];
 }
 
+export function send(data) {
+    return {
+        status: 200,
+        body: data
+    }
+}
+
 export function fail(code, message) {
     return {
         status: code,
