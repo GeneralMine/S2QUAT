@@ -27,6 +27,6 @@ export async function post(request) {
         };
     } catch (err) {
         console.error("while trying to update:", err);
-        return fail(401, "Error while trying to update" + err);
+        return fail(401, "Das Ändern der Daten ist fehlgeschlagen! Bitte Eingaben prüfen.");
     }
 }

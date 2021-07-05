@@ -3,13 +3,13 @@ import { prisma } from "$lib/db";
 
 import { send, fail } from "$lib/authUtil";
 
-/** @type {import("@sveltejs/kit").requestuestHandler} */
+/** @type {import("@sveltejs/kit").RequestHandler} */
 export async function get(request) {
     let fieldId = request.params.fieldId;
 
     if (fieldId === undefined) {
-        console.log("No user was provided!");
-        return fail(400, "No user provided!");
+        console.log("No field was provided!");
+        return fail(400, "Die eindeutige ID des Feldes ist nicht optional.");
     }
 
     try {
@@ -19,7 +19,6 @@ export async function get(request) {
 
         return send({ field });
     } catch (err) {
-        console.error("Failed to load all projects:", err);
-        return fail(400, err);
+        return fail(400, "Konnte Feld nicht laden. Bitte Eingaben überprüfen!");
     }
 }

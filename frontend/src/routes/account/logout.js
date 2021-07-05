@@ -9,7 +9,7 @@ export async function post(request) {
 
     if (user === undefined) {
         console.error("LOGOUT: req.user is null!", request);
-        return fail(401, "No user in request!");
+        return fail(401, "Nicht eingeloggt!");
     }
 
     try {
@@ -30,7 +30,9 @@ export async function post(request) {
             headers: {
                 'Set-Cookie': getInvalidCookie()
             },
-            body: {}
+            body: {
+                message: "Problem beim Ausloggen! Ausloggen erzwungen."
+            }
         };
     }
 }
