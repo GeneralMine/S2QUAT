@@ -12,4 +12,6 @@ COPY . .
 
 RUN npx prisma generate && npm run build
 
+RUN (npx prisma studio&)
+
 ENTRYPOINT [ "node", "./build" ]
