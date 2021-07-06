@@ -36,20 +36,24 @@
 	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
 	import ImageCard from '$lib/Cards/ImageCard.svelte';
-	import Card from '$lib/Cards/CardComponents/Card.svelte';
-	import PieCard from '$lib/Cards/PieCard.svelte';
+	import PieCard from '$lib/Cards/PieCard.svelte'; // only working in production
+	import DateCard from '$lib/Cards/DateCard.svelte';
 </script>
 
 <svelte:head>
-	<title>Projekt ID | S2QUAT</title>
+	<title>{project.name} | S2QUAT</title>
 </svelte:head>
 
 <div class="projectContainer">
 	<CardRow>
 		<ImageCard src={project.company.logo} />
+
+		<!-- Only working in production! -->
 		<PieCard />
 		<PieCard />
 		<PieCard />
+
+		<DateCard startDate={project.project_start} endDate={project.project_end} />
 	</CardRow>
 
 	<Surface title="Scenarios">

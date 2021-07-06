@@ -20,4 +20,9 @@
 		align-items: center;
 		justify-content: flex-start;
 	}
+	.title {
+		margin-top: 0;
+		margin-bottom: 0;
+		color: grey;
+	}
 </style>
