@@ -1,11 +1,15 @@
 /** @type {import("@prisma/client").PrismaClient} */
 import { prisma } from "$lib/db";
 
-import { send, fail } from "$lib/authUtil";
+import { send, fail, isAuthenticatedAs } from "$lib/authUtil";
 
 /** @type {import("@sveltejs/kit").requestuestHandler} */
 export async function get(request) {
-    let userId = request.locals.user.id;
+    let { id: userId, role } = request.locals.user;
+
+    if (!isAuthenticatedAs(role, "USER")) {
+        return fail(401, "Du verfügst nicht über die benötigte Berechtigung!");
+    }
 
     if (!userId) {
         console.log("No id was provided!");
