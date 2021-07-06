@@ -1,15 +1,21 @@
+# Internal project files
 .internal
+
+# Env
 .env
+
+# db
 db
 db copy
+
+# Mac for my lovely Julius
+.DS_Store
+
+# Svelte and Node
+node_modules
+.svelte-kit
+build
+functions
+
 # REST file
 test.rest
-
-# Frontend
-
-# Backend
-backend/.env
-frontend/.DS_Store
-backend/node_modules/
-frontend/yarn-error.log
-backend/test.rest

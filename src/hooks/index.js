@@ -1,5 +1,5 @@
 import { parse } from "cookie";
-import { verify } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { prisma } from "$lib/db";
 
 /** @type {import('@sveltejs/kit').Handle} */
@@ -18,7 +18,7 @@ export async function handle({ request, resolve }) {
             return await resolve(request);
         }
 
-        const decoded = verify(my_cookie, process.env["TOKEN_SECRET"]);
+        const decoded = jwt.verify(my_cookie, process.env["TOKEN_SECRET"]);
 
         let my_user = await prisma.user.findUnique({ where: { id: decoded.id } });
 

@@ -1,0 +1,13 @@
+node_modules
+.github
+.internal
+db
+db copy
+docs
+
+configure_nginx.sh
+s2quat.raiser.dev.conf
+.env
+test.test
+docker-compose.yml
+Dockerfile

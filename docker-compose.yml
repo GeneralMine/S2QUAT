@@ -1,39 +1,22 @@
 version: "3"
 
 services:
-    frontend:
-        container_name: s2quat-frontend
+    app:
+        container_name: s2quat
         restart: always
-        image: 127.0.0.1:5000/s2quat-frontend
-        build: ./frontend
+        image: 127.0.0.1:5000/s2quat
+        build: .
+        depends_on: 
+            - db
         environment: 
-            - "PORT=${FRONTEND_PORT}"
-            - "ROOT_DOMAIN=${ROOT_DOMAIN}"
-            - "DOMAIN=${FRONTEND_DOMAIN}"
-            - "PROTOCOL_PREFIX=${PROTOCOL_PREFIX}"
-            - "BACKEND_DOMAIN=${BACKEND_DOMAIN}"
-            - "BACKEND_PORT=${BACKEND_PORT}"
             - "TOKEN_SECRET=${TOKEN_SECRET}"
-        ports: 
-            - "${FRONTEND_PORT}:${FRONTEND_PORT}"
-    backend:
-        container_name: s2quat-backend
-        restart: always
-        image: 127.0.0.1:5000/s2quat-backend
-        build: ./backend
-        environment: 
-            - "PORT=${BACKEND_PORT}"
-            - "ROOT_DOMAIN=${ROOT_DOMAIN}"
-            - "DOMAIN=${BACKEND_DOMAIN}"
             - "PROTOCOL_PREFIX=${PROTOCOL_PREFIX}"
-            - "FRONTEND_DOMAIN=${FRONTEND_DOMAIN}"
-            - "DATABASE_URL=${DATABASE_URL}"
-            - "TOKEN_SECRET=${TOKEN_SECRET}"
+            - "ROOT_DOMAIN=${ROOT_DOMAIN}"
+            - "PORT=${PORT}"
+            - "DATABASE_URL=${DATABASE_SERVER}://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_DB}"
         ports: 
-            - "${BACKEND_PORT}:${BACKEND_PORT}"
-            - "5555:5555"
-        depends_on:
-            - "db"
+            - "${PORT}:${PORT}"
+            - "5555:5555" # for prisma studio
         networks:
             - backend
     db:
@@ -42,12 +25,10 @@ services:
         image: postgres:latest
         volumes: 
             - ./db:/var/lib/postgresql/data
-        environment: 
-            - "POSTGRES_PASSWORD=${DATABASE_PASSWORD}"
         networks:
             - backend
         ports: 
-            - "5432:5432"
+            - "${DATABASE_PORT}:${DATABASE_PORT}"
 
 networks: 
     backend:
