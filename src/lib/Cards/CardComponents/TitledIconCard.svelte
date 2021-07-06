@@ -30,6 +30,8 @@
 		margin-top: 0;
 		margin-bottom: 0;
 		color: grey;
+		font-size: small;
+		font-weight: 100;
 	}
 	.iconCircle {
 		display: flex;
