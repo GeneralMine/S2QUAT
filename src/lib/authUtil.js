@@ -16,7 +16,11 @@ const isSecure = COOKIE_DOMAIN !== ".localhost";
 export function isAuthenticatedAs(user = "", role) {
     const hierachy = ["USER", "EDITOR", "ADMIN"];
 
-    const allowed = (a) => hierachy.indexOf(a) >= hierachy.indexOf(role) && hierachy.indexOf(role) !== -1;
+    const allowed = (a) => {
+        const isAllowed = hierachy.indexOf(a) >= hierachy.indexOf(role) && hierachy.indexOf(role) !== -1;
+        console.log(`${a}:${hierachy.indexOf(a)} ${role}${hierachy.indexOf(role)} ${hierachy.indexOf(role) !== -1}`);
+        return isAllowed;
+    };
 
     if (typeof user.role === "string") {
         return allowed(user.role);

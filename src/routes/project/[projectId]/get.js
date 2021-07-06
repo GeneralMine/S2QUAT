@@ -31,6 +31,16 @@ export async function get(request) {
             delete usr.last_logout;
             return usr;
         })
+
+
+        if (!project.scenarios) {
+            project.scenarios = [];
+        }
+
+        if (!project.users) {
+            project.users = [];
+        }
+
         return send({ project });
     } catch (err) {
         console.error("Failed to load all projects:", err);

@@ -24,6 +24,7 @@
 	.cardRowContent {
 		display: flex;
 		flex-direction: row;
+		align-items: center;
 		flex-wrap: wrap;
 		margin-bottom: 1em;
 		margin-left: 1em;

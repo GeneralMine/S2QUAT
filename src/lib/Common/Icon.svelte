@@ -2,9 +2,11 @@
 	export let name;
 	$: src = '/icons/' + name + '.svg';
 	$: alt = name + ' icon';
+
+	export let fill = false;
 </script>
 
-<img {src} {alt} />
+<img class:fill {src} {alt} />
 
 <style>
 	img {
@@ -13,5 +15,10 @@
 		margin: 0;
 		align-self: center;
 		object-fit: contain;
+	}
+
+	.fill {
+		width: 100%;
+		height: 100%;
 	}
 </style>

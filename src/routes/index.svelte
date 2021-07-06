@@ -40,13 +40,16 @@
 	import TableBody from '$lib/Table/TableBody.svelte';
 	import TableAttributes from '$lib/Table/TableAttributes.svelte';
 	import ProjectCard from '$lib/Cards/ProjectCard.svelte';
-	import TemplateCard from '$lib/Cards/TemplateCard.svelte';
 	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
 	import TableBodyItem from '$lib/Table/TableBodyItem.svelte';
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
 	import TableAttributesItem from '$lib/Table/TableAttributesItem.svelte';
 	import ProjectModal from '$lib/Prompt/ProjectPrompt.svelte';
-	import NumberCard from '$lib/Cards/NumberCard.svelte';
+	import Model from '$lib/Model/Model.svelte';
+	import ListItemRow from '$lib/List/ListItemRow.svelte';
+	import Icon from '$lib/Common/Icon.svelte';
+	import List from '$lib/List/List.svelte';
+	import AddCard from '$lib/Cards/AddCard.svelte';
 
 	export let projects = [];
 	export let templates = [];
@@ -81,7 +84,7 @@
 	<title>Home | S2QUAT</title>
 </svelte:head>
 
-<div>
+<div class="rootContainer">
 	{#if projectsExpanded}
 		<Surface title="Projekte" on:click={() => (projectsExpanded = !projectsExpanded)}>
 			<Table on:create={() => (projectPrompt = true)}>
@@ -110,20 +113,49 @@
 			{#each projects as project}
 				<ProjectCard {project} />
 			{/each}
+			<AddCard on:click={() => (projectPrompt = true)} />
 		</CardRow>
 	{/if}
+	<ProjectModal on:success={refreshProjects} bind:open={projectPrompt} />
 
-	<CardRow title="Qualitätsmodell" on:click={() => goto('/model')}>
-		<NumberCard title="Felder" value={12} />
-		<NumberCard title="Felder" value={33} />
-		<NumberCard title="Felder" value={100} />
-		<NumberCard title="Felder" value={300} />
-	</CardRow>
-	<CardRow title="Vorlagen">
-		{#each templates as template}
-			<TemplateCard {template} />
-		{/each}
-	</CardRow>
-
-	<ProjectModal on:success={refreshProjects} open={projectPrompt} />
+	<div class="row">
+		<Surface title="Qualitätsmodell">
+			<Model />
+		</Surface>
+		<Surface title="Vorlagen" padding={true} add={true}>
+			<List>
+				{#each templates as template}
+					<ListItemRow clickArea={true} flexstart={true}>
+						<div class="templateIcon">
+							<Icon name="template" fill={true} />
+						</div>
+						<p class="templateName">
+							{template.name}
+						</p>
+					</ListItemRow>
+				{/each}
+			</List>
+		</Surface>
+	</div>
 </div>
+
+<style>
+	.rootContainer {
+		display: flex;
+		flex-direction: column;
+	}
+	.row {
+		display: flex;
+		flex-direction: row;
+	}
+	.templateIcon {
+		width: 2rem;
+		height: 2rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.templateName {
+		margin-left: 1rem;
+	}
+</style>

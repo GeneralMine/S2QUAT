@@ -21,8 +21,6 @@
 	let projectStart;
 	let projectEnd;
 
-	$: console.log(projectName);
-
 	onMount(async () => {
 		const res = await get('company/list');
 		companies.push(...res.companies);

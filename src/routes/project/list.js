@@ -5,16 +5,13 @@ import { send, fail, isAuthenticatedAs } from "$lib/authUtil";
 
 /** @type {import("@sveltejs/kit").requestuestHandler} */
 export async function get(request) {
-    let { id: userId, role } = request.locals.user;
+    const { user } = request.locals;
 
-    if (!isAuthenticatedAs(role, "USER")) {
+    if (!isAuthenticatedAs(user, "USER")) {
         return fail(401, "Du verfügst nicht über die benötigte Berechtigung!");
     }
 
-    if (!userId) {
-        console.log("No id was provided!");
-        return fail(400, "No id provided!");
-    }
+    let { id: userId } = user;
 
     try {
         userId = parseInt(userId);

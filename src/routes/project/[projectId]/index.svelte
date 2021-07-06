@@ -1,47 +1,29 @@
 <script context="module">
-	export async function load({ page }) {
-		return { props: { projectId: page.params.projectId } };
+	import { get } from '$lib/api.js';
+	export async function load({ page, session, fetch }) {
+		try {
+			let { project } = await get(`project/${page.params.projectId}/get`, session.token, fetch);
+			return { props: { project } };
+		} catch (err) {
+			return { status: err.code, error: err };
+		}
 	}
 </script>
 
 <script>
-	export let projectId;
-	let project = {
-		name: 'Projekt',
-		description: 'Beschreibung',
-		goal: '',
-		project_start: new Date(),
-		project_end: new Date(),
-		status: 'ACTIVE',
-		company: {},
-		scenarios: [],
-		users: []
-	};
+	export let project;
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
-	import { onMount } from 'svelte';
-	import { session } from '$app/stores';
-	import { get } from '$lib/api.js';
-	onMount(async () => {
-		if ($session.user) {
-			let res = await get(`project/${projectId}/get`);
-			project = res.project;
-			if (project.company) {
-				$crumbs = [
-					...$crumbs,
-					CrumbBuilder.create(
-						project.company.name,
-						`/company/${project.company.id}`,
-						'company'
-					).build()
-				];
-			}
-			$crumbs = [
-				...$crumbs,
-				CrumbBuilder.create(project.name, `/project/${project.id}`, 'project').build()
-			];
-		}
-	});
+	if (project.company) {
+		$crumbs = [
+			...$crumbs,
+			CrumbBuilder.create(project.company.name, `/company/${project.company.id}`, 'company').build()
+		];
+	}
+	$crumbs = [
+		...$crumbs,
+		CrumbBuilder.create(project.name, `/project/${project.id}`, 'project').build()
+	];
 	/*******************************************/
 
 	import { goto } from '$app/navigation';
@@ -53,10 +35,8 @@
 	import TableBodyItem from '$lib/Table/TableBodyItem.svelte';
 	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
-	import NumberCard from '$lib/Cards/NumberCard.svelte';
+	import ImageCard from '$lib/Cards/ImageCard.svelte';
 	import PieCard from '$lib/Cards/PieCard.svelte';
-
-	$: console.log('Project:', project);
 </script>
 
 <svelte:head>
@@ -65,7 +45,7 @@
 
 <div class="projectContainer">
 	<CardRow>
-		<NumberCard title="Szenarien" icon="scenario" />
+		<ImageCard src={project.company.logo} />
 		<PieCard />
 	</CardRow>
 
@@ -85,6 +65,8 @@
 						<TableBodyItem>{scenario.name}</TableBodyItem>
 						<TableBodyItem>{scenario.description}</TableBodyItem>
 					</TableBodyRow>
+				{:else}
+					No scenario provided
 				{/each}
 			</TableBody>
 		</Table>

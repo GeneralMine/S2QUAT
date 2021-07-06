@@ -15,13 +15,21 @@ async function send({ method, path, data, session, f = fetch }) {
         opts.headers["Authorization"] = session;
     }
 
-    // TODO: Fix error handling here! In case of 401 no data was returned so the json parsing fails and throws an error!
     let result = await f(`${base}${path}`, opts);
 
+    let body;
+
     try {
-        return await result.json();
-    } catch (error) {
-        return undefined;
+        body = await result.json();
+    } catch (error) { body = {}; }
+
+    if (result.ok) {
+        return { ...body, code: result.status };
+    } else {
+        const err = new Error();
+        if (body.message) err.message = body.message;
+        err.code = result.status;
+        throw err;
     }
 }
 

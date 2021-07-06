@@ -7,12 +7,13 @@
 	export let add = false;
 	export let edit = false;
 	export let remove = false;
+	export let padding = false;
 </script>
 
 <div class="surfaceContainer">
 	<div class="surfaceHeader">
 		{#if title}
-			<h1 class="clickArea" on:click>{title}</h1>
+			<h1 class="surfaceHeaderTitle clickArea" on:click>{title}</h1>
 		{/if}
 		{#if add || edit || remove}
 			<div class="buttons">
@@ -34,7 +35,7 @@
 			</div>
 		{/if}
 	</div>
-	<div class="surfaceContent">
+	<div class:padding class="surfaceContent">
 		<slot />
 	</div>
 </div>
@@ -48,6 +49,11 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 0.67em;
+	}
+	.surfaceHeaderTitle {
+		margin: 0;
 	}
 	.surfaceContent {
 		border-width: 1px;
@@ -63,7 +69,8 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		padding-right: 3rem;
+		padding-right: 2rem;
+		padding-left: 3rem;
 	}
 	.button {
 		margin-right: 1rem;
@@ -71,5 +78,8 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+	.padding {
+		padding: 2rem;
 	}
 </style>

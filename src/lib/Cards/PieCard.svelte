@@ -1,6 +1,7 @@
 <script>
 	import Pie from 'svelte-chartjs/src/Pie.svelte';
 	import TitledIconCard from './CardComponents/TitledIconCard.svelte';
+
 	export let title = 'Handlungsbedarf';
 	export let icon;
 	export let labels = ['Niedrig', 'Mittel', 'Hoch'];
@@ -43,7 +44,6 @@
 </TitledIconCard>
 
 <style>
-	/* https://stackoverflow.com/questions/37621020/setting-width-and-height */
 	div {
 		height: 95px;
 		width: 247px;

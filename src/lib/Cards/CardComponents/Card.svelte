@@ -1,9 +1,11 @@
 <script>
 	import Surface from '$lib/Common/Surface.svelte';
+
+	export let small;
 </script>
 
 <Surface>
-	<div class="cardContainer">
+	<div class="cardContainer" class:small>
 		<slot />
 	</div>
 </Surface>
@@ -19,5 +21,9 @@
 		padding-left: 1rem;
 		padding-right: 1rem;
 		margin: 0;
+	}
+	.small {
+		width: 122px;
+		height: 72px;
 	}
 </style>
