@@ -125,7 +125,11 @@
 		<Surface title="Vorlagen" padding={true} add={true}>
 			<List>
 				{#each templates as template}
-					<ListItemRow clickArea={true} flexstart={true}>
+					<ListItemRow
+						clickArea={true}
+						flexstart={true}
+						on:click={() => goto(`/template/${template.id}`)}
+					>
 						<div class="templateIcon">
 							<Icon name="template" fill={true} />
 						</div>
