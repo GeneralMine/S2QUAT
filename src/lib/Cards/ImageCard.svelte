@@ -1,13 +1,13 @@
 <script>
-	import Card from './CardComponents/Card.svelte';
-
+	import TitledCard from './CardComponents/TitledCard.svelte';
+	export let title;
 	export let src;
 	export let alt = src + 'image';
 </script>
 
-<Card>
+<TitledCard {title}>
 	<img src={`/logos/${src}.png`} {alt} />
-</Card>
+</TitledCard>
 
 <style>
 	img {

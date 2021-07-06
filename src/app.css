@@ -178,3 +178,16 @@ table th {
     padding: 0.75rem;
     letter-spacing: 0.05em;
 }
+
+/*
+    Flex
+*/
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+}

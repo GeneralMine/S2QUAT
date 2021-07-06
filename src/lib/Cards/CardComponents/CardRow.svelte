@@ -1,12 +1,13 @@
 <script>
 	export let title;
+	export let column = false;
 </script>
 
 <div class="cardRowContainer">
 	<div class="cardRowHeader">
-		<h1 class="clickArea" on:click>{title} ></h1>
+		<h1 class="clickArea" on:click>{title}</h1>
 	</div>
-	<div class="cardRowContent">
+	<div class="cardRowContent" class:column>
 		<slot />
 	</div>
 </div>
@@ -29,5 +30,8 @@
 		margin-bottom: 1em;
 		margin-left: 1em;
 		margin-right: 1em;
+	}
+	.column {
+		flex-direction: column;
 	}
 </style>

@@ -28,16 +28,16 @@
 
 	import { goto } from '$app/navigation';
 	import Surface from '$lib/Common/Surface.svelte';
-	import Table from '$lib/Table/Table.svelte';
-	import TableAttributes from '$lib/Table/TableAttributes.svelte';
-	import TableAttributesItem from '$lib/Table/TableAttributesItem.svelte';
-	import TableBody from '$lib/Table/TableBody.svelte';
-	import TableBodyItem from '$lib/Table/TableBodyItem.svelte';
-	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
+	import List from '$lib/List/List.svelte';
+	import ListItemRow from '$lib/List/ListItemRow.svelte';
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
 	import ImageCard from '$lib/Cards/ImageCard.svelte';
 	import PieCard from '$lib/Cards/PieCard.svelte'; // only working in production
 	import DateCard from '$lib/Cards/DateCard.svelte';
+	import Card from '$lib/Cards/CardComponents/Card.svelte';
+	import EnumCard from '$lib/Cards/EnumCard.svelte';
+	import Icon from '$lib/Common/Icon.svelte';
+	import TitledCard from '$lib/Cards/CardComponents/TitledCard.svelte';
 </script>
 
 <svelte:head>
@@ -45,8 +45,8 @@
 </svelte:head>
 
 <div class="projectContainer">
-	<CardRow>
-		<ImageCard src={project.company.logo} />
+	<CardRow title={project.name}>
+		<ImageCard title="Unternehmen" src={project.company.logo} />
 
 		<!-- Only working in production! -->
 		<PieCard />
@@ -57,51 +57,52 @@
 		<DateCard startDate={project.project_start} endDate={project.project_end} />
 	</CardRow>
 
-	<Surface title="Scenarios">
-		<Table>
-			<TableAttributes>
-				<TableAttributesItem>ID</TableAttributesItem>
-				<TableAttributesItem>Name</TableAttributesItem>
-				<TableAttributesItem>Beschreibung</TableAttributesItem>
-			</TableAttributes>
-			<TableBody>
-				{#each project.scenarios as scenario}
-					<TableBodyRow
-						on:click={async () => await goto('/project/' + project.id + '/scenario/' + scenario.id)}
-					>
-						<TableBodyItem>{scenario.id}</TableBodyItem>
-						<TableBodyItem>{scenario.name}</TableBodyItem>
-						<TableBodyItem>{scenario.description}</TableBodyItem>
-					</TableBodyRow>
-				{:else}
-					No scenario provided
-				{/each}
-			</TableBody>
-		</Table>
-	</Surface>
-	<Surface title="Verantwortliche">
-		<Table>
-			<TableAttributes>
-				<TableAttributesItem>ID</TableAttributesItem>
-				<TableAttributesItem>Name</TableAttributesItem>
-				<TableAttributesItem>Email</TableAttributesItem>
-			</TableAttributes>
-			<TableBody>
-				{#each project.users as user}
-					<TableBodyRow>
-						<TableBodyItem>{user.id}</TableBodyItem>
-						<TableBodyItem>{user.name}</TableBodyItem>
-						<TableBodyItem>{user.description}</TableBodyItem>
-					</TableBodyRow>
-				{/each}
-			</TableBody>
-		</Table>
-	</Surface>
+	<div class="row">
+		<div class="column">
+			<TitledCard title="Projektbeschreibung">
+				<p class="description textBlock">{project.description}</p>
+			</TitledCard>
+		</div>
+		<CardRow title="" column={true}>
+			<EnumCard title={'Zieldefinitionen'} text={project.goal} />
+			<TitledCard title="Betreuer" padding={true}>
+				<List>
+					{#each project.users as user}
+						<ListItemRow clickArea={true} flexstart={true}>
+							<div class="userIcon">
+								<Icon name="user" fill={true} />
+							</div>
+							<p class="userName">
+								{user.name}
+							</p>
+						</ListItemRow>
+					{/each}
+				</List>
+			</TitledCard>
+		</CardRow>
+	</div>
 </div>
 
 <style>
 	.projectContainer {
 		display: flex;
 		flex-direction: column;
+	}
+	.description {
+		padding-left: 1em;
+		padding-right: 1em;
+	}
+	.userIcon {
+		width: 2rem;
+		height: 2rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.column {
+		flex: 1;
+	}
+	.userName {
+		margin-left: 1rem;
 	}
 </style>
