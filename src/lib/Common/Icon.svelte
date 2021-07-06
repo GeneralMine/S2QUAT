@@ -14,6 +14,7 @@
 		padding: 0;
 		margin: 0;
 		align-self: center;
+		justify-self: center;
 		object-fit: contain;
 	}
 
