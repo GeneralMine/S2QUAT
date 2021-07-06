@@ -4,6 +4,8 @@ import ms from "ms";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+const COOKIE_DOMAIN = process.env["COOKIE_DOMAIN"];
+
 export const roles = {
     USER: 'USER',
     EDITOR: 'EDITOR',
@@ -44,7 +46,7 @@ export function politely_ask_to_back_off() {
 
 export function getValidCookie(user) {
     return [cookie.serialize("token", getToken(user), {
-        domain: ".localhost",
+        domain: COOKIE_DOMAIN,
         maxAge: ms("7d"),
         sameSite: "lax",
         secure: false,
@@ -54,7 +56,7 @@ export function getValidCookie(user) {
 
 export function getInvalidCookie() {
     return [cookie.serialize("token", 42, {
-        domain: ".localhost",
+        domain: COOKIE_DOMAIN,
         maxAge: 0,
         sameSite: "lax",
         secure: false,

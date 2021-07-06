@@ -4,6 +4,7 @@ import { prisma } from "$lib/db";
 
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ request, resolve }) {
+    console.log(`${request.method} ${request.path}`);
     try {
         const cookies = parse(request.headers.cookie || '');
 
@@ -56,8 +57,7 @@ export function getSession({ locals }) {
 
 /** @type {import('@sveltejs/kit').ServerFetch} */
 export async function serverFetch(request) {
-    console.log(`serverfetch: ${request.url} -> ${"http://localhost:3000" + request.url}`)
-    request = new Request("http://localhost:3000" + request.url, request);
-
+    console.log(`serverfetch: ${request.url} -> ${"http://localhost:3000/" + request.url}`)
+    request = new Request("http://localhost:3000/" + request.url, request);
     return fetch(request);
 }
