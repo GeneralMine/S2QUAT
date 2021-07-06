@@ -26,6 +26,11 @@
 		align-items: center;
 		justify-content: space-between;
 	}
+	.title {
+		margin-top: 0;
+		margin-bottom: 0;
+		color: grey;
+	}
 	.iconCircle {
 		display: flex;
 		width: 40px;
