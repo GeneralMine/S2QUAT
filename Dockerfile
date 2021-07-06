@@ -12,4 +12,4 @@ COPY . .
 
 RUN npx prisma generate && npm run build
 
-ENTRYPOINT ["/bin/sh", "-c" , "(npx prisma studio)& && node ./build"]
+ENTRYPOINT ["/bin/sh", "-c" , "(npx prisma studio&) && node ./build"]
