@@ -5,18 +5,24 @@
 
 <Card small={true}>
 	<div class="addCardContainer clickArea" on:click>
-		<Icon name="add" />
-		<h2>New</h2>
+		<div class="iconContainer">
+			<Icon name="add" fill={true} />
+		</div>
 	</div>
 </Card>
 
 <style>
 	.addCardContainer {
 		display: flex;
-		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		justify-self: center;
+		align-self: center;
 		width: 100%;
 		height: 100%;
+	}
+	.iconContainer {
+		width: 80%;
+		height: 80%;
 	}
 </style>

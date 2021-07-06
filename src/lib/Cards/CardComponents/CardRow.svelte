@@ -1,11 +1,12 @@
 <script>
-	export let title;
+	export let title = '';
 	export let column = false;
+	export let smallTitle = false;
 </script>
 
 <div class="cardRowContainer">
 	<div class="cardRowHeader">
-		<h1 class="clickArea" on:click>{title}</h1>
+		<h1 class="clickArea" on:click class:smallTitle>{title}</h1>
 	</div>
 	<div class="cardRowContent" class:column>
 		<slot />
@@ -33,5 +34,8 @@
 	}
 	.column {
 		flex-direction: column;
+	}
+	.smallTitle {
+		font-size: 18px;
 	}
 </style>
