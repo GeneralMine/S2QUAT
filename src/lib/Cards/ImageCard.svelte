@@ -6,7 +6,7 @@
 </script>
 
 <Card>
-	<img {src} {alt} />
+	<img src={`/logos/${src}.png`} {alt} />
 </Card>
 
 <style>

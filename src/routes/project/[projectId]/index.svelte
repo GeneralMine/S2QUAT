@@ -36,6 +36,7 @@
 	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
 	import ImageCard from '$lib/Cards/ImageCard.svelte';
+	import Card from '$lib/Cards/CardComponents/Card.svelte';
 	import PieCard from '$lib/Cards/PieCard.svelte';
 </script>
 
@@ -46,6 +47,8 @@
 <div class="projectContainer">
 	<CardRow>
 		<ImageCard src={project.company.logo} />
+		<PieCard />
+		<PieCard />
 		<PieCard />
 	</CardRow>
 
