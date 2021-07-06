@@ -3,7 +3,7 @@
 	export let flexstart;
 </script>
 
-<div class="listItemRowContainer" class:clickArea class:flexstart>
+<div class="listItemRowContainer" class:clickArea class:flexstart on:click>
 	<slot />
 </div>
 
