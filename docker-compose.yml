@@ -18,7 +18,7 @@ services:
             - "${PORT}:${PORT}"
             - "5555:5555" # for prisma studio
         networks:
-            - backend
+            - database
     db:
         container_name: s2quat-db
         restart: always
@@ -26,9 +26,9 @@ services:
         volumes: 
             - ./db:/var/lib/postgresql/data
         networks:
-            - backend
+            - database
         ports: 
             - "${DATABASE_PORT}:${DATABASE_PORT}"
 
 networks: 
-    backend:
+    database:
