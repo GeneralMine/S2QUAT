@@ -23,6 +23,8 @@
   "devDependencies": {
     "@sveltejs/adapter-node": "next",
     "@sveltejs/kit": "next",
+    "cookie": "^0.4.1",
+    "env-cmd": "^10.1.0",
     "eslint": "^7.22.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-svelte3": "^3.2.0",
@@ -30,15 +32,13 @@
     "prettier-plugin-svelte": "^2.2.0",
     "prisma": "^2.26.0",
     "svelte": "^3.34.0",
-    "svelte-chartjs": "^1.0.1",
-    "env-cmd": "^10.1.0",
-    "cookie": "^0.4.1"
+    "svelte-chartjs": "^1.0.1"
   },
   "dependencies": {
-    "bcrypt": "4.0.0",
-    "jsonwebtoken": "^8.5.1",
+    "@fontsource/nunito-sans": "^4.4.5",
     "@prisma/client": "^2.26.0",
-    "@fontsource/nunito-sans": "^4.4.5"
+    "bcrypt": "^5.0.1",
+    "jsonwebtoken": "^8.5.1"
   },
   "type": "module"
 }
