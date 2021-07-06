@@ -18,7 +18,7 @@ export function isAuthenticatedAs(user = "", role) {
 
     const allowed = (a) => {
         const isAllowed = hierachy.indexOf(a) >= hierachy.indexOf(role) && hierachy.indexOf(role) !== -1;
-        console.log(`${a}:${hierachy.indexOf(a)} ${role}${hierachy.indexOf(role)} ${hierachy.indexOf(role) !== -1}`);
+        //console.log(`${a}:${hierachy.indexOf(a)} ${role}${hierachy.indexOf(role)} ${hierachy.indexOf(role) !== -1}`);
         return isAllowed;
     };
 
