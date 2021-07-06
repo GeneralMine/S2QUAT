@@ -1,6 +1,6 @@
 <script>
 	import { createEventDispatcher, onMount } from 'svelte';
-	import { get, post } from '$lib/api';
+	import { get, post, unpack } from '$lib/api';
 
 	import List from '$lib/List/List.svelte';
 	import Prompt from './Prompt.svelte';
@@ -14,29 +14,34 @@
 	let stati = ['ACTIVE', 'INACTIVE', 'ARCHIVED'];
 
 	let projectName = '';
-	let projectDescription = '';
-	let projectGoal = '';
+	let projectDescription;
+	let projectGoal;
 	let company;
 	let status;
 	let projectStart;
 	let projectEnd;
 
+	$: console.log(projectName);
+
 	onMount(async () => {
 		const res = await get('company/list');
-		companies = res.companies;
+		companies.push(...res.companies);
 	});
 
 	async function createCompany() {
-		await post('project/create', {
-			projectName,
-			projectDescription,
-			projectGoal,
-			company,
-			status,
-			projectStart,
-			projectEnd
-		});
-		success();
+		const { res, err } = await unpack(() =>
+			post('project/create', {
+				projectName,
+				projectDescription,
+				projectGoal,
+				company,
+				status,
+				projectStart,
+				projectEnd
+			})
+		);
+
+		success(res.project);
 	}
 
 	function closePrompt() {
@@ -44,8 +49,8 @@
 		open = false;
 	}
 
-	function success() {
-		dispatch('success', {});
+	function success(project) {
+		dispatch('success', project);
 		closePrompt();
 	}
 </script>
@@ -57,7 +62,7 @@
 	<slot>
 		<List>
 			<ListItemRow>
-				<p>Name</p>
+				<p>Name*</p>
 				<input required type="text" placeholder="Projektname" bind:value={projectName} />
 			</ListItemRow>
 			<ListItemRow>
@@ -71,6 +76,7 @@
 			<ListItemRow>
 				<p>Unternehmen</p>
 				<select bind:value={company}>
+					<option selected value={null}>Keine</option>
 					{#each companies as com}
 						<option value={com.id}>{com.name}</option>
 					{/each}

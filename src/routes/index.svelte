@@ -55,18 +55,25 @@
 	let projectPrompt = false;
 
 	async function refreshTemplates() {
+		console.log('Refreshing templates');
 		let { res, err } = await unpack(() => get(`template/list`, session.token, fetch));
+
 		if (res) {
 			templates = res.templates;
 		}
 	}
 
-	async function refreshProjects() {
-		let { res, err } = await unpack(() => get(`project/list`, session.token, fetch));
+	async function refreshProjects(ev) {
+		console.log('Refreshing projects');
+		// let { res, err } = await unpack(() => get(`project/list`, session.token, fetch));
 
-		if (res) {
-			projects = res.projects;
-		}
+		// if (res) {
+		// 	projects = res.projects;
+		// }
+
+		projects = [...projects, ev.detail];
+
+		console.log('Projects now:', projects);
 	}
 </script>
 
@@ -89,10 +96,7 @@
 					{#each projects as project}
 						<TableBodyRow on:click={async () => await goto('/project/' + project.id)}>
 							<TableBodyItem>{project.id}</TableBodyItem>
-							<TableBodyItem
-								type="img"
-								imgName={project.company !== null ? project.company.logo : '-'}
-							/>
+							<TableBodyItem type="img" imgName={project.company ? project.company.logo : '-'} />
 							<TableBodyItem>{project.status}</TableBodyItem>
 							<TableBodyItem>{project.name}</TableBodyItem>
 							<TableBodyItem>{project.description}</TableBodyItem>
