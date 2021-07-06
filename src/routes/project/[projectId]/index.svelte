@@ -38,6 +38,10 @@
 	import EnumCard from '$lib/Cards/EnumCard.svelte';
 	import Icon from '$lib/Common/Icon.svelte';
 	import TitledCard from '$lib/Cards/CardComponents/TitledCard.svelte';
+	import ScenarioCard from '$lib/Cards/ScenarioCard.svelte';
+	import AddCard from '$lib/Cards/AddCard.svelte';
+
+	export let scenarioPrompt = false;
 </script>
 
 <svelte:head>
@@ -46,7 +50,11 @@
 
 <div class="projectContainer">
 	<CardRow title={project.name}>
-		<ImageCard title="Unternehmen" src={project.company.logo} />
+		<ImageCard
+			title="Unternehmen"
+			src={project.company.logo}
+			on:click={goto(`/company/${project.company.id}`)}
+		/>
 
 		<!-- Only working in production! -->
 		<PieCard />
@@ -62,13 +70,23 @@
 			<TitledCard title="Projektbeschreibung">
 				<p class="description textBlock">{project.description}</p>
 			</TitledCard>
+			<CardRow title="Szenarien" smallTitle={true}>
+				{#each project.scenarios as scenario}
+					<ScenarioCard
+						name={scenario.name}
+						description={scenario.description}
+						on:click={goto(`/project/${project.id}/scenario/${scenario.id}`)}
+					/>
+				{/each}
+				<AddCard on:click={() => (scenarioPrompt = true)} />
+			</CardRow>
 		</div>
-		<CardRow title="" column={true}>
+		<CardRow column={true}>
 			<EnumCard title={'Zieldefinitionen'} text={project.goal} />
 			<TitledCard title="Betreuer" padding={true}>
 				<List>
 					{#each project.users as user}
-						<ListItemRow clickArea={true} flexstart={true}>
+						<ListItemRow clickArea={true} flexstart={true} on:click={goto(`/user/${user.id}`)}>
 							<div class="userIcon">
 								<Icon name="user" fill={true} />
 							</div>
