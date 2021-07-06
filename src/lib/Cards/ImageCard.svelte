@@ -6,7 +6,7 @@
 </script>
 
 <TitledCard {title}>
-	<img src={`/logos/${src}.png`} {alt} />
+	<img on:click class="clickArea" src={`/logos/${src}.png`} {alt} />
 </TitledCard>
 
 <style>
