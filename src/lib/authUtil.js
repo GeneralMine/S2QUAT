@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const COOKIE_DOMAIN = process.env["COOKIE_DOMAIN"];
+const isSecure = COOKIE_DOMAIN !== ".localhost";
 
 export const roles = {
     USER: 'USER',
@@ -49,7 +50,7 @@ export function getValidCookie(user) {
         domain: COOKIE_DOMAIN,
         maxAge: ms("7d"),
         sameSite: "lax",
-        secure: false,
+        secure: isSecure,
         path: "/"
     })];
 }
@@ -59,7 +60,7 @@ export function getInvalidCookie() {
         domain: COOKIE_DOMAIN,
         maxAge: 0,
         sameSite: "lax",
-        secure: false,
+        secure: isSecure,
         path: "/"
     })];
 }
