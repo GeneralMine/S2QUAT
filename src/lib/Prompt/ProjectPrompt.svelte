@@ -36,12 +36,17 @@
 			projectStart,
 			projectEnd
 		});
-		closePrompt();
+		success();
 	}
 
 	function closePrompt() {
-		open = false;
 		dispatch('close', {});
+		open = false;
+	}
+
+	function success() {
+		dispatch('success', {});
+		closePrompt();
 	}
 </script>
 

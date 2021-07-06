@@ -53,6 +53,21 @@
 
 	let projectsExpanded = false;
 	let projectPrompt = false;
+
+	async function refreshTemplates() {
+		let { res, err } = await unpack(() => get(`template/list`, session.token, fetch));
+		if (res) {
+			templates = res.templates;
+		}
+	}
+
+	async function refreshProjects() {
+		let { res, err } = await unpack(() => get(`project/list`, session.token, fetch));
+
+		if (res) {
+			projects = res.projects;
+		}
+	}
 </script>
 
 <svelte:head>
@@ -106,5 +121,5 @@
 		{/each}
 	</CardRow>
 
-	<ProjectModal open={projectPrompt} />
+	<ProjectModal on:success={refreshProjects} open={projectPrompt} />
 </div>
