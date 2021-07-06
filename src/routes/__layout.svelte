@@ -21,7 +21,7 @@
 
 <svelte:window bind:innerWidth={width} />
 
-<div id="layout">
+<div class="layout">
 	{#if $navigating}
 		<PreloadingIndicator />
 	{/if}
@@ -40,7 +40,7 @@
 		padding: 3rem;
 	}
 
-	#layout {
+	.layout {
 		width: 100%;
 		height: 100%;
 
@@ -49,17 +49,16 @@
 		grid-template:
 			'nav main' 1fr
 			'nav footer' 1fr /
-			12rem 1fr;
+			13rem 1fr;
 	}
 
 	@media (max-width: 768px) {
-		#layout {
+		.layout {
 			display: grid;
 			grid-template:
 				'nav' 4rem
 				'main' 1fr
-				'footer' 1fr /
-				1fr;
+				'footer' 4rem;
 		}
 	}
 </style>
