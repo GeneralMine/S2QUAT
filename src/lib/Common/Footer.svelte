@@ -13,11 +13,9 @@
 		display: flex;
 		flex-direction: column;
 		padding: 2rem;
-		padding-bottom: unset;
+		padding-bottom: 0;
 		align-items: center;
 		grid-area: footer;
-		width: auto;
-		height: auto;
 	}
 	.linkContainer {
 		display: flex;
