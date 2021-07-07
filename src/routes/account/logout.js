@@ -13,7 +13,7 @@ export async function post(request) {
     }
 
     try {
-        await prisma.user.update({ where: { id: user.id }, data: { last_logout: new Date() } });
+        await prisma.user.update({ where: { id: user.id }, data: { lastLogout: new Date() } });
 
         console.log("LOGOUT: User " + user.name + " logged out successfully!");
         return {

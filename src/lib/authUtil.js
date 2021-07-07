@@ -68,12 +68,12 @@ export function fail(code, message) {
     }
 }
 
-export function forExternal({ id, email, name, last_logout, status, role, }) {
+export function forExternal({ id, email, name, lastLogout, status, role, }) {
     return {
         id,
         email,
         name,
-        last_logout,
+        lastLogout,
         status,
         role,
     }

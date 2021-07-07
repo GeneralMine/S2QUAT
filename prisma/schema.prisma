@@ -186,14 +186,14 @@ model Project {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name          String
-  description   String?
-  goal          String?
-  project_start DateTime?
-  project_end   DateTime?
-  users         User[]
-  scenarios     Scenario[]
-  status        ProjectStatus @default(ACTIVE)
+  name        String
+  description String?
+  goal        String?
+  start       DateTime?
+  end         DateTime?
+  users       User[]
+  scenarios   Scenario[]
+  status      ProjectStatus @default(ACTIVE)
 
   companyId Int?
   company   Company? @relation(fields: [companyId], references: [id])
@@ -347,15 +347,15 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  email       String     @unique
-  name        String
-  password    String
-  last_logout DateTime   @default(now())
-  status      UserStatus @default(NOT_VERIFIED)
-  role        UserRole   @default(USER)
-  actions     Action[]
-  project     Project[]
-  response    Response[]
+  email      String     @unique
+  name       String
+  password   String
+  lastLogout DateTime   @default(now())
+  status     UserStatus @default(NOT_VERIFIED)
+  role       UserRole   @default(USER)
+  actions    Action[]
+  project    Project[]
+  response   Response[]
 }
 
 enum UserStatus {

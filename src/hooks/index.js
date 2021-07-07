@@ -23,7 +23,7 @@ export async function handle({ request, resolve }) {
 
         let my_user = await prisma.user.findUnique({ where: { id: decoded.id } });
 
-        if (my_user.last_logout.valueOf() / 1000 < decoded.iat) {
+        if (my_user.lastLogout.valueOf() / 1000 < decoded.iat) {
             request.locals.user = decoded;
             request.locals.token_cookie = my_cookie;
         }
@@ -44,7 +44,7 @@ export function getSession({ locals }) {
             email: locals.user.email,
             role: locals.user.role,
             status: locals.user.status,
-            last_logout: locals.user.last_logout,
+            lastLogout: locals.user.lastLogout,
         };
     }
 

@@ -71,7 +71,7 @@
 		<PieCard />
 		<!-- /Only working in production! -->
 
-		<DateCard startDate={project.project_start} endDate={project.project_end} />
+		<DateCard startDate={project.start} endDate={project.end} />
 	</CardRow>
 
 	<div class="row">

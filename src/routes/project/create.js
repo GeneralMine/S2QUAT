@@ -30,8 +30,8 @@ export async function post(request) {
     if (goal) data.goal = goal;
     if (company) data.company = { connect: { id: company } };
     if (status) data.status = status;
-    if (projectStart) data.project_start = new Date(Date.parse(projectStart));
-    if (projectEnd) data.project_end = new Date(Date.parse(projectEnd));
+    if (projectStart) data.start = new Date(Date.parse(projectStart));
+    if (projectEnd) data.end = new Date(Date.parse(projectEnd));
 
     console.log("Project/Create:", data);
 

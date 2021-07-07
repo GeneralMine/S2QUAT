@@ -35,7 +35,7 @@ export async function get(request) {
 
         project.users.map(usr => {
             delete usr.password;
-            delete usr.last_logout;
+            delete usr.lastLogout;
             return usr;
         })
 
