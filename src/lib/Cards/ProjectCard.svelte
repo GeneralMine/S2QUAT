@@ -3,17 +3,7 @@
 	import CardNumber from '$lib/Cards/CardComponents/CardNumber.svelte';
 	import CardSubtitle from '$lib/Cards/CardComponents/CardSubtitle.svelte';
 
-	export let project = {
-		id: 0,
-		name: 'Penguin',
-		company: {
-			id: 0,
-			name: 'Company',
-			logo: 'default'
-		},
-		scenarios: [],
-		users: []
-	};
+	export let project;
 </script>
 
 <Card>
@@ -30,13 +20,13 @@
 		</a>
 		<div class="cardSeperator seperator" />
 		<div class="body">
-			<a class="users bodyhalf clickArea" href="/project/{project.id}/scenario">
-				<CardNumber value={project.scenarios ? project.scenarios.length : 0} />
+			<a class="users bodyhalf clickArea" href="/project/{project.id}">
+				<CardNumber value={project.scenarios.length} />
 				<CardSubtitle title="Szenarien" />
 			</a>
 			<div class="bodySeperator seperator" />
-			<a class="projects bodyhalf clickArea" href="/project/{project.id}/users">
-				<CardNumber value={project.users ? project.users.length : 0} />
+			<a class="projects bodyhalf clickArea" href="/project/{project.id}">
+				<CardNumber value={project.users.length} />
 				<CardSubtitle title="Verantwortliche" />
 			</a>
 		</div>

@@ -113,7 +113,7 @@
 					<ListItemRow
 						clickArea={true}
 						flexstart={true}
-						on:click={() => goto(`/template/${template.id}`)}
+						on:click={goto(`/template/${template.id}`)}
 					>
 						<div class="templateIcon">
 							<Icon name="template" fill={true} />
