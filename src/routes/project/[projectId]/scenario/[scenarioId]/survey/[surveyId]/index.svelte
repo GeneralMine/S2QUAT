@@ -28,26 +28,20 @@
 	export let survey;
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	$crumbs = [];
 	if (project.company) {
 		$crumbs = [
-			...$crumbs,
 			CrumbBuilder.create(project.company.name, `/company/${project.company.id}`, 'company').build()
 		];
 	}
 	$crumbs = [
 		...$crumbs,
-		CrumbBuilder.create(project.name, `/project/${project.id}`, 'project').build()
-	];
-	$crumbs = [
-		...$crumbs,
+		CrumbBuilder.create(project.name, `/project/${project.id}`, 'project').build(),
 		CrumbBuilder.create(
 			scenario.name,
 			`/project/${project.id}/scenario/${scenario.id}`,
 			'scenario'
-		).build()
-	];
-	$crumbs = [
-		...$crumbs,
+		).build(),
 		CrumbBuilder.create(
 			survey.name,
 			`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}`,

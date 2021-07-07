@@ -14,9 +14,9 @@
 	export let project;
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	$crumbs = [];
 	if (project.company) {
 		$crumbs = [
-			...$crumbs,
 			CrumbBuilder.create(project.company.name, `/company/${project.company.id}`, 'company').build()
 		];
 	}
