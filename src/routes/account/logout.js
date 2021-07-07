@@ -1,11 +1,14 @@
 /** @type {import("@prisma/client").PrismaClient} */
 import { prisma } from "$lib/db";
 
-import { getInvalidCookie, fail } from "$lib/authUtil";
+import { getInvalidCookie, fail, isAuthenticatedAs } from "$lib/authUtil";
 
 /** @type {import("@sveltejs/kit").RequestHandler} */
 export async function post(request) {
-    let { user } = request.locals;
+    const { user } = request.locals;
+    if (!isAuthenticatedAs(user, "USER")) {
+        return fail(401, "Du verfügst nicht über die benötigte Berechtigung!");
+    }
 
     if (user === undefined) {
         console.error("LOGOUT: req.user is null!", request);

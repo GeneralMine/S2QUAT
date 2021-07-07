@@ -1,10 +1,15 @@
 /** @type {import("@prisma/client").PrismaClient} */
 import { prisma } from "$lib/db";
 
-import { forExternal, getValidCookie, hashPassword, fail } from "$lib/authUtil";
+import { forExternal, getValidCookie, hashPassword, fail, isAuthenticatedAs } from "$lib/authUtil";
 
 /** @type {import("@sveltejs/kit").RequestHandler} */
 export async function post(request) {
+    const { user } = request.locals;
+    if (!isAuthenticatedAs(user, "USER")) {
+        return fail(401, "Du verfügst nicht über die benötigte Berechtigung!");
+    }
+
     let { name, email, password } = request.body;
 
     try {

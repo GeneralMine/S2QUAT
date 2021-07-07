@@ -1,10 +1,15 @@
 /** @type {import("@prisma/client").PrismaClient} */
 import { prisma } from "$lib/db";
 
-import { send, fail } from "$lib/authUtil";
+import { send, fail, isAuthenticatedAs } from "$lib/authUtil";
 
 /** @type {import("@sveltejs/kit").RequestHandler} */
 export async function get(request) {
+    const { user } = request.locals;
+    if (!isAuthenticatedAs(user, "USER")) {
+        return fail(401, "Du verfügst nicht über die benötigte Berechtigung!");
+    }
+
     let fieldId = request.params.fieldId;
 
     if (fieldId === undefined) {
