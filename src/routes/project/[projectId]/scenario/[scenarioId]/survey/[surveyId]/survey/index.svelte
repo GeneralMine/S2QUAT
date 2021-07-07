@@ -79,7 +79,6 @@
 	let testperson = {
 		signature: false
 	};
-	$: console.log('testperson is', testperson);
 	let place;
 	let feedback;
 
