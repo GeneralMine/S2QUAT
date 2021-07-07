@@ -23,7 +23,7 @@ export async function get(request) {
         let scenario = await prisma.scenario.findUnique(
             {
                 include: {
-                    survey: true
+                    surveys: true
                 },
                 where: {
                     id: scenarioId

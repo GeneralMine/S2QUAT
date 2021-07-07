@@ -27,5 +27,7 @@
 	}
 	h2 {
 		font-size: 2.25rem;
+		padding-left: 0.5em;
+		padding-top: 0.5em;
 	}
 </style>
