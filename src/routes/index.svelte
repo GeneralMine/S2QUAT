@@ -35,12 +35,15 @@
 	import Icon from '$lib/Common/Icon.svelte';
 	import List from '$lib/List/List.svelte';
 	import AddCard from '$lib/Cards/AddCard.svelte';
+	import ListItemRowAdd from '$lib/List/ListItemRowAdd.svelte';
 
 	export let projects = [];
 	export let templates = [];
 
 	let projectsExpanded = false;
 	let projectPrompt = false;
+
+	let templatePrompt = false;
 
 	async function refreshTemplates() {
 		console.log('Refreshing templates');
@@ -107,7 +110,7 @@
 		<Surface title="Qualitätsmodell">
 			<Model />
 		</Surface>
-		<Surface title="Vorlagen" padding={true} add={true}>
+		<Surface title="Vorlagen" smallTitle={true} padding={true}>
 			<List>
 				{#each templates as template}
 					<ListItemRow
@@ -123,6 +126,7 @@
 						</p>
 					</ListItemRow>
 				{/each}
+				<ListItemRowAdd on:click={() => (templatePrompt = true)} text={'Neues Template'} />
 			</List>
 		</Surface>
 	</div>

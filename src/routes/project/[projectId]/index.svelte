@@ -95,6 +95,7 @@
 							</p>
 						</ListItemRow>
 					{/each}
+					<ListItemRowAdd text={'Betreuer hinzufügen'} />
 				</List>
 			</TitledCard>
 		</CardRow>
