@@ -7,9 +7,21 @@ To startup the database use: `docker run --name mariadb -e MYSQL_ROOT_PASSWORD=p
 
 ### How to update schema on production server?
 Dont recreate the last image! Abort the github action and pull locally!
-> Take care of data loss! So make a backup in advance: `zip -r db.zip db`
-Then copy the new schema file into the container: `docker cp schema.prisma s2quat:/app/prisma/schema.prisma`
-And push the changes `docker exec -it s2quat npx prisma db push`
+Take care of data loss! So make a backup in advance
+
+`sudo zip -r db.zip db`
+
+Get the new schema
+
+`git pull`
+
+Then copy the new schema file into the container: 
+
+`docker cp prisma/schema.prisma s2quat:/app/prisma/schema.prisma`
+
+And push the changes 
+
+`docker exec -it s2quat npx prisma db push`
 
 ## Danke
 Danke an den Svelte Magier Julius Weber!
