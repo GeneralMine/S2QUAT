@@ -1,30 +1,15 @@
 <script context="module">
-	import { get, unpack } from '$lib/api.js';
-
+	import { get } from '$lib/api.js';
 	export async function load({ session, fetch }) {
-		let projects = [];
-		let templates = [];
-
-		if (session.user) {
-			let [{ res: resP, err: errP }, { res: resT, err: errT }] = await Promise.all([
-				unpack(() => get(`project/list`, session.token, fetch)),
-				unpack(() => get(`template/list`, session.token, fetch))
+		try {
+			let [{ projects }, { templates }] = await Promise.all([
+				get(`project/list`, session.token, fetch),
+				get(`template/list`, session.token, fetch)
 			]);
-
-			if (resP) {
-				projects = resP.projects;
-			}
-			if (resT) {
-				templates = resT.templates;
-			}
+			return { props: { projects, templates } };
+		} catch (err) {
+			return { status: err.code, error: err };
 		}
-
-		return {
-			props: {
-				projects,
-				templates
-			}
-		};
 	}
 </script>
 
@@ -36,14 +21,14 @@
 	import { goto } from '$app/navigation';
 
 	import Table from '$lib/Table/Table.svelte';
-	import Surface from '$lib/Common/Surface.svelte';
-	import TableBody from '$lib/Table/TableBody.svelte';
 	import TableAttributes from '$lib/Table/TableAttributes.svelte';
-	import ProjectCard from '$lib/Cards/ProjectCard.svelte';
+	import TableAttributesItem from '$lib/Table/TableAttributesItem.svelte';
+	import TableBody from '$lib/Table/TableBody.svelte';
 	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
 	import TableBodyItem from '$lib/Table/TableBodyItem.svelte';
+	import Surface from '$lib/Common/Surface.svelte';
+	import ProjectCard from '$lib/Cards/ProjectCard.svelte';
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
-	import TableAttributesItem from '$lib/Table/TableAttributesItem.svelte';
 	import ProjectModal from '$lib/Prompt/ProjectPrompt.svelte';
 	import Model from '$lib/Model/Model.svelte';
 	import ListItemRow from '$lib/List/ListItemRow.svelte';

@@ -1,10 +1,10 @@
 <script>
 	/*******************************************/
-	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	import { crumbs } from '$lib/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [];
 	/*******************************************/
 	import { session } from '$app/stores';
-	import { goto, prefetch } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import Surface from '$lib/Common/Surface.svelte';
 	import { post } from '$lib/api.js';
 	import List from '$lib/List/List.svelte';
@@ -52,6 +52,10 @@
 		goto('/login');
 	}
 </script>
+
+<svelte:head>
+	<title>Account | S2QUAT</title>
+</svelte:head>
 
 <Surface title="Dein Account">
 	<div class="l">
