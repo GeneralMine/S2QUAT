@@ -64,7 +64,7 @@ model Answer {
   score       Int?
   text        String?
   boolean     Boolean?
-  checkbox    Boolean[]
+  checkboxes  Boolean[]
   radiobutton Int?
 
   questionId Int
@@ -271,7 +271,7 @@ model Scenario {
 
   name        String
   description String?
-  survey      Survey[]
+  surveys     Survey[]
 
   projectId Int
   project   Project @relation(fields: [projectId], references: [id])
@@ -354,8 +354,8 @@ model User {
   status     UserStatus @default(NOT_VERIFIED)
   role       UserRole   @default(USER)
   actions    Action[]
-  project    Project[]
-  response   Response[]
+  projects   Project[]
+  responses  Response[]
 }
 
 enum UserStatus {
