@@ -2,7 +2,7 @@ node_modules
 .github
 .internal
 db
-db copy
+db.zip
 docs
 
 configure_nginx.sh
