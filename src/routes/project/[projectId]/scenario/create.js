@@ -25,7 +25,6 @@ export async function post(request) {
     try {
         let scenario = await prisma.scenario.create({ data });
         scenario.surveys = [];
-        scenario.project = null;
 
         return send({ scenario });
     } catch (err) {

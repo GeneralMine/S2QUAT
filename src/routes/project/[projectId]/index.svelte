@@ -31,9 +31,7 @@
 	import ListItemRow from '$lib/List/ListItemRow.svelte';
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
 	import ImageCard from '$lib/Cards/ImageCard.svelte';
-	import PieCard from '$lib/Cards/PieCard.svelte'; // only working in production
 	import DateCard from '$lib/Cards/DateCard.svelte';
-	import Card from '$lib/Cards/CardComponents/Card.svelte';
 	import EnumCard from '$lib/Cards/EnumCard.svelte';
 	import Icon from '$lib/Common/Icon.svelte';
 	import TitledCard from '$lib/Cards/CardComponents/TitledCard.svelte';
@@ -42,7 +40,7 @@
 	import ListItemRowAdd from '$lib/List/ListItemRowAdd.svelte';
 	import ScenarioPrompt from '$lib/Prompt/ScenarioPrompt.svelte';
 
-	export let scenarioPrompt = false;
+	let scenarioPrompt = false;
 
 	async function refreshScenarios(ev) {
 		project.scenarios = [...project.scenarios, ev.detail];
@@ -65,11 +63,9 @@
 			<AddCard title="Verknüpfe Unternehmen" />
 		{/if}
 
-		<!-- Only working in production! -->
-		<PieCard />
-		<PieCard />
-		<PieCard />
-		<!-- /Only working in production! -->
+		<TitledCard title="Handlungsbedarf">Charts kommen erst in v2.1.0</TitledCard>
+		<TitledCard title="Szenarien und ihre Antworten">Charts kommen erst in v2.1.0</TitledCard>
+		<TitledCard title="---">Charts kommen erst in v2.1.0</TitledCard>
 
 		<DateCard startDate={project.start} endDate={project.end} />
 	</CardRow>
@@ -82,8 +78,7 @@
 			<CardRow title="Szenarien" smallTitle={true}>
 				{#each project.scenarios as scenario}
 					<ScenarioCard
-						name={scenario.name}
-						description={scenario.description}
+						{scenario}
 						on:click={goto(`/project/${project.id}/scenario/${scenario.id}`)}
 					/>
 				{/each}

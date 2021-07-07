@@ -2,7 +2,7 @@
 	import Surface from '$lib/Common/Surface.svelte';
 
 	export let small;
-	export let clickArea;
+	export let clickArea = false;
 	export let responsiveHeight = false;
 </script>
 

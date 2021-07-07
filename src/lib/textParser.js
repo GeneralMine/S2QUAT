@@ -14,6 +14,8 @@ export function parseEnumToEmoji(str) {
     // ProjectStatus
     if (str === 'INACTIVE') return '🔒';
     if (str === 'ARCHIVED') return '🗄️';
+    // SurveyStatus
+    if (str === 'CLOSED') return '🔒';
     // TestPersonSex
     if (str === 'FEMALE') return '♀️';
     if (str === 'MALE') return '♂️';

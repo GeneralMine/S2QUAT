@@ -3,14 +3,16 @@
 	import Card from './Card.svelte';
 	export let title;
 	export let icon = 'warning';
+	export let emoji = false;
+	export let clickArea = false;
 </script>
 
-<Card>
+<Card on:click {clickArea}>
 	<div class="header">
 		<p class="title">{title}</p>
 		<div class="iconCircle">
 			<div class="iconContainer">
-				<Icon name={icon} />
+				<Icon name={icon} {emoji} />
 			</div>
 		</div>
 	</div>

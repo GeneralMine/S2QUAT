@@ -1,13 +1,12 @@
 <script>
 	import Card from './CardComponents/Card.svelte';
-	export let name;
-	export let description;
+	export let scenario;
 </script>
 
-<Card>
-	<div class="column clickArea" on:click>
-		<h2>{name}</h2>
-		<p class="textBlock">{description}</p>
+<Card clickArea={true} on:click>
+	<div class="column">
+		<h2>{scenario.name}</h2>
+		<p class="textBlock">{scenario.description}</p>
 	</div>
 </Card>
 

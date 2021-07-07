@@ -21,9 +21,13 @@
 <script>
 	export let project;
 	export let scenario;
+	import AddCard from '$lib/Cards/AddCard.svelte';
 	import NumberCard from '$lib/Cards/NumberCard.svelte';
+	import SurveyCard from '$lib/Cards/SurveyCard.svelte';
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	import SurveyPrompt from '$lib/Prompt/SurveyPrompt.svelte';
+	import { goto } from '$app/navigation';
 	$crumbs = [];
 	if (project.company) {
 		$crumbs = [
@@ -40,6 +44,13 @@
 		).build()
 	];
 	/*******************************************/
+
+	let surveyPrompt = false;
+
+	async function refreshSurveys(ev) {
+		scenario.surveys = [...scenario.surveys, ev.detail];
+		console.log(scenario.surveys);
+	}
 </script>
 
 <svelte:head>
@@ -51,7 +62,23 @@
 		<NumberCard title="Anzahl Umfragen" value={scenario.surveys.length} />
 		<NumberCard title="Anzahl Durchläufe" value={scenario.surveys.length} />
 	</CardRow>
+	<CardRow title="Umfragen" smallTitle={true}>
+		{#each scenario.surveys as survey}
+			<SurveyCard
+				{survey}
+				on:click={goto(`project${project.id}/scenario/${scenario.id}/survey/${survey.id}`)}
+			/>
+		{/each}
+		<AddCard on:click={() => (surveyPrompt = true)} />
+	</CardRow>
 </div>
+<SurveyPrompt
+	project={project.id}
+	scenario={scenario.id}
+	scenariosDisabled={true}
+	on:success={refreshSurveys}
+	bind:open={surveyPrompt}
+/>
 
 <style>
 	.scenarioContainer {
