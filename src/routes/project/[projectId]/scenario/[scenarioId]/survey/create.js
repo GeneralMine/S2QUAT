@@ -1,5 +1,6 @@
+import { prisma as p } from "$lib/db";
 /** @type {import("@prisma/client").PrismaClient} */
-import { prisma } from "$lib/db";
+const prisma = p;
 
 import { send, fail, isAuthenticatedAs } from "$lib/authUtil";
 
@@ -31,13 +32,74 @@ export async function post(request) {
     if (template) data.template = { connect: { id: template } };
 
     try {
-        let survey = await prisma.survey.create({ data });
-        survey.surveys = [];
-        survey.responses = [];
-        survey.pages = [];
-        survey.categories = [];
-        survey.questions = [];
+        if (template) {
+            let templateObject = await prisma.template.findUnique({
+                where: {
+                    id: template
+                },
+                include: {
+                    attributes: true,
+                    criterias: true,
+                    factors: {
+                        include: {
+                            criterias: true,
+                        }
+                    },
+                    fields: true
+                }
+            });
 
+            const pages = templateObject.fields.map(field => {
+                return {
+                    name: field.name,
+                    description: field.description
+                }
+            });
+
+            const categories = templateObject.attributes.map(attribute => {
+                return {
+                    name: attribute.name,
+                    description: attribute.description
+                }
+            });
+
+            const questions = templateObject.factors.flatMap(factor => {
+                if (factor.criterias.length > 1) {
+                    return factor.criterias.map(criteria => (
+                        {
+                            name: criteria.name,
+                            description: criteria.description
+                        }
+                    ));
+                } else {
+                    return [{
+                        name: factor.name,
+                        description: factor.description
+                    }];
+                }
+            });
+
+            data.questions = {
+                createMany: { data: questions }
+            };
+            data.categories = {
+                createMany: { data: categories }
+            };
+            data.pages = {
+                createMany: { data: pages }
+            };
+        }
+
+        let survey = await prisma.survey.create({
+            data,
+            include: {
+                categories: true,
+                responses: true,
+                pages: true,
+                questions: true
+            }
+        });
+        console.log(survey);
         return send({ survey });
     } catch (err) {
         console.error("Failed to create survey:", err);
