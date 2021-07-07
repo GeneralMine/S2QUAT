@@ -40,6 +40,7 @@
 	import TitledCard from '$lib/Cards/CardComponents/TitledCard.svelte';
 	import ScenarioCard from '$lib/Cards/ScenarioCard.svelte';
 	import AddCard from '$lib/Cards/AddCard.svelte';
+	import ListItemRowAdd from '$lib/List/ListItemRowAdd.svelte';
 
 	export let scenarioPrompt = false;
 </script>
