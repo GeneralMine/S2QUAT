@@ -27,7 +27,6 @@
 	/*******************************************/
 
 	import { goto } from '$app/navigation';
-	import Surface from '$lib/Common/Surface.svelte';
 	import List from '$lib/List/List.svelte';
 	import ListItemRow from '$lib/List/ListItemRow.svelte';
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
@@ -41,8 +40,13 @@
 	import ScenarioCard from '$lib/Cards/ScenarioCard.svelte';
 	import AddCard from '$lib/Cards/AddCard.svelte';
 	import ListItemRowAdd from '$lib/List/ListItemRowAdd.svelte';
+	import ScenarioPrompt from '$lib/Prompt/ScenarioPrompt.svelte';
 
 	export let scenarioPrompt = false;
+
+	async function refreshScenarios(ev) {
+		project.scenarios = [...project.scenarios, ev.detail];
+	}
 </script>
 
 <svelte:head>
@@ -51,11 +55,15 @@
 
 <div class="projectContainer">
 	<CardRow title={project.name}>
-		<ImageCard
-			title="Unternehmen"
-			src={project.company.logo}
-			on:click={goto(`/company/${project.company.id}`)}
-		/>
+		{#if project.company}
+			<ImageCard
+				title="Unternehmen"
+				src={project.company.logo}
+				on:click={goto(`/company/${project.company.id}`)}
+			/>
+		{:else}
+			<AddCard title="Verknüpfe Unternehmen" />
+		{/if}
 
 		<!-- Only working in production! -->
 		<PieCard />
@@ -102,6 +110,12 @@
 		</CardRow>
 	</div>
 </div>
+<ScenarioPrompt
+	project={project.id}
+	projectsDisabled={true}
+	on:success={refreshScenarios}
+	bind:open={scenarioPrompt}
+/>
 
 <style>
 	.projectContainer {

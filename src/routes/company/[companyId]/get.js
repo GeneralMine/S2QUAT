@@ -11,37 +11,29 @@ export async function get(request) {
         return fail(401, "Du verfügst nicht über die benötigte Berechtigung!");
     }
 
-    let projectId = request.params.projectId;
+    let companyId = request.params.companyId;
 
-    if (!projectId) {
+    if (!companyId) {
         console.log("No id was provided!");
-        return fail(400, "No project id provided!");
+        return fail(400, "No company id provided!");
     }
 
     try {
-        projectId = parseInt(projectId);
+        companyId = parseInt(companyId);
 
-        let project = await prisma.project.findUnique(
+        let company = await prisma.company.findUnique(
             {
                 include: {
-                    company: true,
-                    scenarios: true,
-                    users: true
+                    projects: true,
                 },
                 where: {
-                    id: projectId
+                    id: companyId
                 }
             });
 
-        project.users.map(usr => {
-            delete usr.password;
-            delete usr.last_logout;
-            return usr;
-        })
-
-        return send({ project });
+        return send({ company });
     } catch (err) {
-        console.error("Failed to load all projects:", err);
+        console.error("Failed to load all companys:", err);
         return fail(400, err);
     }
 }

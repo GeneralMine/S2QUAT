@@ -1,12 +1,25 @@
+<script context="module">
+	import { get } from '$lib/api.js';
+	export async function load({ page, session, fetch }) {
+		try {
+			let { company } = await get(`company/${page.params.companyId}/get`, session.token, fetch);
+			return { props: { company } };
+		} catch (err) {
+			return { status: err.code, error: err };
+		}
+	}
+</script>
+
 <script>
+	export let company;
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
-	$crumbs = [CrumbBuilder.create('Unternehmen ID', '/company/ID', 'company').build()];
+	$crumbs = [CrumbBuilder.create(company.name, `/company/${company.id}`, 'company').build()];
 	/*******************************************/
 </script>
 
 <svelte:head>
-	<title>Unternehmen ID | S2QUAT</title>
+	<title>{company.name} | S2QUAT</title>
 </svelte:head>
 
-Unternehmen ID
+Will be implemented in v2.2.0

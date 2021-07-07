@@ -30,13 +30,14 @@ export async function get(request) {
                 }
             }
         });
-
-        projects = projects.map(el => {
+        projects.map(el => {
             el.users.map(usr => {
                 delete usr.password;
                 delete usr.last_logout;
                 return usr;
             })
+            if (!el.scenarios)
+                el.scenarios = [];
             return el;
         });
 

@@ -29,7 +29,7 @@
 	import Surface from '$lib/Common/Surface.svelte';
 	import ProjectCard from '$lib/Cards/ProjectCard.svelte';
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
-	import ProjectModal from '$lib/Prompt/ProjectPrompt.svelte';
+	import ProjectPrompt from '$lib/Prompt/ProjectPrompt.svelte';
 	import Model from '$lib/Model/Model.svelte';
 	import ListItemRow from '$lib/List/ListItemRow.svelte';
 	import Icon from '$lib/Common/Icon.svelte';
@@ -55,15 +55,7 @@
 	}
 
 	async function refreshProjects(ev) {
-		console.log('Refreshing projects');
-		// let { res, err } = await unpack(() => get(`project/list`, session.token, fetch));
-
-		// if (res) {
-		// 	projects = res.projects;
-		// }
-
 		projects = [...projects, ev.detail];
-
 		console.log('Projects now:', projects);
 	}
 </script>
@@ -104,13 +96,13 @@
 			<AddCard on:click={() => (projectPrompt = true)} />
 		</CardRow>
 	{/if}
-	<ProjectModal on:success={refreshProjects} bind:open={projectPrompt} />
+	<ProjectPrompt on:success={refreshProjects} bind:open={projectPrompt} />
 
 	<div class="row">
 		<Surface title="Qualitätsmodell">
 			<Model />
 		</Surface>
-		<Surface title="Vorlagen" smallTitle={true} padding={true}>
+		<Surface title="Vorlagen" padding={true}>
 			<List>
 				{#each templates as template}
 					<ListItemRow

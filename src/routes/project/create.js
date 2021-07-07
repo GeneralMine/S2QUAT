@@ -11,23 +11,23 @@ export async function post(request) {
         return fail(401, "Nicht genug Berechtigungen.");
     }
 
-    let { projectName,
-        projectDescription,
-        projectGoal,
+    let { name,
+        description,
+        goal,
         company,
         status,
         projectStart,
         projectEnd } = request.body;
 
-    if (!projectName) {
+    if (!name) {
         console.log("No name was provided!");
         return fail(400, "No project name was provided!");
     }
 
     let data = {};
-    if (projectName) data.name = projectName;
-    if (projectDescription) data.description = projectDescription;
-    if (projectGoal) data.goal = projectGoal;
+    if (name) data.name = name;
+    if (description) data.description = description;
+    if (goal) data.goal = goal;
     if (company) data.company = { connect: { id: company } };
     if (status) data.status = status;
     if (projectStart) data.project_start = new Date(Date.parse(projectStart));
@@ -43,6 +43,10 @@ export async function post(request) {
 
     try {
         let project = await prisma.project.create({ data });
+        project.scenarios = [];
+        project.users = [];
+        project.company = null;
+
         return send({ project });
     } catch (err) {
         console.error("Failed to create project:", err);
