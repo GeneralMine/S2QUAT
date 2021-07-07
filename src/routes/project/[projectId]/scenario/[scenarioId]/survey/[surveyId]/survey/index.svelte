@@ -59,6 +59,7 @@
 		).build()
 	];
 	/*******************************************/
+	import { post, unpack } from '$lib/api.js';
 
 	// Tabs
 	let page_index = -1;
@@ -83,9 +84,10 @@
 	let feedback;
 
 	// Send
-	function send() {
+	let submitted = undefined;
+	async function send() {
 		let newResponse = {
-			surveyId: survey.id,
+			survey: survey.id,
 			testperson,
 			place,
 			feedback,
@@ -103,7 +105,7 @@
 							question.answer.radiobutton)
 					) {
 						newResponse.answers.push({
-							questionId: question.id,
+							question: question.id,
 							score: question.answer.score,
 							text: question.answer.text,
 							boolean: question.answer.boolean,
@@ -115,6 +117,19 @@
 			}
 		}
 		console.log('Send newResponse:', newResponse);
+		const { res, err } = await unpack(() =>
+			post(
+				`project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/survey/submission`,
+				newResponse
+			)
+		);
+		if (res) {
+			console.log('Successfull submitted!');
+			submitted = 'Erfolgreich eingereicht! Danke für Ihre Teilnehme.';
+		} else {
+			console.err('There was an error submitting the survey!');
+			submitted = err;
+		}
 	}
 </script>
 
@@ -123,6 +138,11 @@
 </svelte:head>
 
 <div class="surveyContainer">
+	{#if submitted}
+		<div class="hintBox">
+			{submitted}
+		</div>
+	{/if}
 	<div class="surveyInnerContainer">
 		<Surface
 			title={page_index === -1
@@ -169,5 +189,8 @@
 		flex-direction: row;
 		justify-content: space-between;
 		padding: 1em;
+	}
+	.hintBox {
+		background-color: white;
 	}
 </style>
