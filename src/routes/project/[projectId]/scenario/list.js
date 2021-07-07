@@ -10,8 +10,15 @@ export async function get(request) {
         return fail(401, "Du verfügst nicht über die benötigte Berechtigung!");
     }
 
+    let projectId = request.params.projectId;
+
+    if (!projectId) {
+        console.log("No project id was provided!");
+        return fail(400, "No project id was provided!");
+    }
+
     try {
-        const projectId = parseInt(request.params.projectId);
+        projectId = parseInt(projectId);
 
         let scenarios = await prisma.scenario.findMany({
             include: {

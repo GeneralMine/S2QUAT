@@ -28,7 +28,7 @@ export async function get(request) {
                     questions: true,
                     responses: true,
                     scenario: true,
-                    tempalte: true
+                    template: true
                 },
                 where: {
                     id: surveyId

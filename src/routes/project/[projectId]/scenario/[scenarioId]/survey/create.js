@@ -105,7 +105,7 @@ export async function post(request) {
                 questions: true
             }
         });
-        console.log(survey);
+
         return send({ survey });
     } catch (err) {
         console.error("Failed to create survey:", err);
