@@ -1,71 +1,50 @@
 <script context="module">
-	export async function load({ page }) {
-		return { props: { projectId: page.params.projectId, scenarioId: page.params.scenarioId } };
+	import { get } from '$lib/api.js';
+	export async function load({ page, session, fetch }) {
+		try {
+			let [{ project }, { scenario }] = await Promise.all([
+				get(`project/${page.params.projectId}/get`, session.token, fetch),
+				get(
+					`project/${page.params.projectId}/scenario/${page.params.scenarioId}/get`,
+					session.token,
+					fetch
+				)
+			]);
+			return { props: { project, scenario } };
+		} catch (err) {
+			return { status: err.code, error: err };
+		}
 	}
 </script>
 
 <script>
-	export let projectId;
-	export let scenarioId;
-	let project = {
-		name: 'Projekt',
-		description: 'Beschreibung',
-		goal: '',
-		project_start: new Date(),
-		project_end: new Date(),
-		status: 'ACTIVE',
-		company: {},
-		scenarios: [],
-		users: []
-	};
-	let scenario = {
-		name: 'Projekt',
-		description: 'Beschreibung'
-	};
+	export let project;
+	export let scenario;
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
-	import { onMount } from 'svelte';
-	import { session } from '$app/stores';
-	import { get } from '$lib/api.js';
-	onMount(async () => {
-		if ($session.user) {
-			let [resProject, resScenario] = await Promise.all([
-				get(`project/${projectId}/get`),
-				get(`project/${projectId}/scenario/${scenarioId}/get`)
-			]);
-			project = resProject.project;
-			scenario = resScenario.scenario;
-			if (project.company) {
-				$crumbs = [
-					...$crumbs,
-					CrumbBuilder.create(
-						project.company.name,
-						`/company/${project.company.id}`,
-						'company'
-					).build()
-				];
-			}
-			$crumbs = [
-				...$crumbs,
-				CrumbBuilder.create(project.name, `/project/${project.id}`, 'project').build()
-			];
-			$crumbs = [
-				...$crumbs,
-				CrumbBuilder.create(
-					scenario.name,
-					`/project/${project.id}/scenario/${scenario.id}`,
-					'scenario'
-				).build()
-			];
-		}
-	});
+	if (project.company) {
+		$crumbs = [
+			...$crumbs,
+			CrumbBuilder.create(project.company.name, `/company/${project.company.id}`, 'company').build()
+		];
+	}
+	$crumbs = [
+		...$crumbs,
+		CrumbBuilder.create(project.name, `/project/${project.id}`, 'project').build()
+	];
+	$crumbs = [
+		...$crumbs,
+		CrumbBuilder.create(
+			scenario.name,
+			`/project/${project.id}/scenario/${scenario.id}`,
+			'scenario'
+		).build()
+	];
 	/*******************************************/
-	$: console.log('Project:', project);
-	$: console.log('Scenario:', scenario);
 </script>
 
 <svelte:head>
-	<title>Szenario ID | S2QUAT</title>
+	<title>{scenario.name} | S2QUAT</title>
 </svelte:head>
 
 {scenario.name} | {project.name}
