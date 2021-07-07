@@ -27,11 +27,12 @@
 	/*******************************************/
 
 	import { goto } from '$app/navigation';
+	import Surface from '$lib/Common/Surface.svelte';
 	import List from '$lib/List/List.svelte';
 	import ListItemRow from '$lib/List/ListItemRow.svelte';
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
 	import ImageCard from '$lib/Cards/ImageCard.svelte';
-	//import PieCard from '$lib/Cards/PieCard.svelte'; // only working in production
+	import PieCard from '$lib/Cards/PieCard.svelte'; // only working in production
 	import DateCard from '$lib/Cards/DateCard.svelte';
 	import Card from '$lib/Cards/CardComponents/Card.svelte';
 	import EnumCard from '$lib/Cards/EnumCard.svelte';
@@ -56,14 +57,10 @@
 		/>
 
 		<!-- Only working in production! -->
-		<!-- <PieCard />
 		<PieCard />
-		<PieCard /> -->
+		<PieCard />
+		<PieCard />
 		<!-- /Only working in production! -->
-
-		<Card />
-		<Card />
-		<Card />
 
 		<DateCard startDate={project.project_start} endDate={project.project_end} />
 	</CardRow>
