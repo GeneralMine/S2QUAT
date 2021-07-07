@@ -316,8 +316,8 @@ model Template {
   fields     Field[]
   attributes Attribute[]
   factors    Factor[]
-  criteria   Criteria[]
-  survey     Survey?
+  criterias  Criteria[]
+  surveys    Survey[]
 }
 
 // TestPerson

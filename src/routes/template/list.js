@@ -18,7 +18,7 @@ export async function get(request) {
                     criteria: true,
                     factors: true,
                     fields: true,
-                    survey: true
+                    surveys: true
                 },
             });
         return send({ templates });
