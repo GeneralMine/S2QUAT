@@ -10,8 +10,17 @@ export async function get(request) {
         return fail(401, "Du verfügst nicht über die benötigte Berechtigung!");
     }
 
+    let templateId = request.params.templateId;
+
+    if (!templateId) {
+        console.log("No id was provided!");
+        return fail(400, "No template id provided!");
+    }
+
     try {
-        let templates = await prisma.template.findMany(
+        templateId = parseInt(templateId);
+
+        let template = await prisma.template.findUnique(
             {
                 include: {
                     attributes: true,
@@ -20,8 +29,12 @@ export async function get(request) {
                     fields: true,
                     surveys: true
                 },
+                where: {
+                    id: templateId
+                }
             });
-        return send({ templates });
+
+        return send({ template });
     } catch (err) {
         console.error("Failed to load all templates:", err);
         return fail(400, err);
