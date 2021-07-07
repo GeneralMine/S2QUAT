@@ -3,10 +3,11 @@
 
 	export let small;
 	export let clickArea;
+	export let responsiveHeight = false;
 </script>
 
 <Surface>
-	<div class="cardContainer" class:small class:clickArea on:click>
+	<div class="cardContainer" class:small class:clickArea class:responsiveHeight on:click>
 		<slot />
 	</div>
 </Surface>
@@ -26,5 +27,8 @@
 	.small {
 		width: 122px;
 		height: 72px;
+	}
+	.responsiveHeight {
+		height: unset;
 	}
 </style>

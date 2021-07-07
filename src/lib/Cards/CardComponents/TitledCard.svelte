@@ -2,9 +2,10 @@
 	import Card from './Card.svelte';
 
 	export let title;
+	export let responsiveHeight;
 </script>
 
-<Card>
+<Card {responsiveHeight}>
 	<div class="header">
 		<p class="title">{title}</p>
 	</div>
