@@ -2,6 +2,7 @@
 	import TitledCard from './CardComponents/TitledCard.svelte';
 	export let title;
 	export let text;
+	export let responsiveHeight;
 
 	function parseTextToEnum(text) {
 		let parsed = [];
@@ -13,7 +14,7 @@
 	}
 </script>
 
-<TitledCard {title}>
+<TitledCard {title} {responsiveHeight}>
 	<ul>
 		{#each parseTextToEnum(text) as item}
 			<li>{item}</li>

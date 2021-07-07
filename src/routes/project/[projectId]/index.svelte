@@ -91,7 +91,7 @@
 			</CardRow>
 		</div>
 		<CardRow column={true}>
-			<EnumCard title={'Zieldefinitionen'} text={project.goal} />
+			<EnumCard title={'Zieldefinitionen'} text={project.goal} responsiveHeight={true} />
 			<TitledCard title="Betreuer" padding={true} responsiveHeight={true}>
 				<List>
 					{#each project.users as user}
