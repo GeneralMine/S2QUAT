@@ -59,10 +59,10 @@
 
 <div class="scenarioContainer">
 	<CardRow title={scenario.name}>
-		<NumberCard title="Anzahl Umfragen" value={scenario.surveys.length} />
 		<NumberCard title="Anzahl Durchläufe" value={scenario.surveys.length} />
+		<NumberCard title="Anzahl Fragebögen" value={scenario.surveys.length} />
 	</CardRow>
-	<CardRow title="Umfragen" smallTitle={true}>
+	<CardRow title="Fragebögen" smallTitle={true}>
 		{#each scenario.surveys as survey}
 			<SurveyCard
 				{survey}

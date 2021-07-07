@@ -62,7 +62,7 @@
 
 <Prompt bind:open on:close={closePrompt}>
 	<slot slot="header">
-		<h2>Neue Umfrage</h2>
+		<h2>Neuer Fragebogen</h2>
 	</slot>
 	<slot>
 		<List>
@@ -73,14 +73,14 @@
 					class:requiredWarning
 					required
 					type="text"
-					placeholder="Umfragenname"
+					placeholder="Fragebogenname"
 					bind:value={name}
 					on:change={() => (requiredWarning = false)}
 				/>
 			</ListItemRow>
 			<ListItemRow>
 				<p>Beschreibung</p>
-				<textarea rows="4" placeholder="Umfragenbeschreibung" bind:value={description} />
+				<textarea rows="4" placeholder="Fragebogenbeschreibung" bind:value={description} />
 			</ListItemRow>
 			<ListItemRow>
 				<p>Reihenfolge</p>
