@@ -9,7 +9,7 @@
 <Card>
 	<div class="container">
 		<a class="header clickArea" href="/project/{project.id}">
-			{#if project.company !== null}
+			{#if project.company}
 				<img
 					class="logoImg"
 					src="logos/{project.company.logo}.png"

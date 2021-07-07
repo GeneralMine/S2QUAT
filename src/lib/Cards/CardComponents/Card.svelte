@@ -2,10 +2,11 @@
 	import Surface from '$lib/Common/Surface.svelte';
 
 	export let small;
+	export let clickArea;
 </script>
 
 <Surface>
-	<div class="cardContainer" class:small>
+	<div class="cardContainer" class:small class:clickArea on:click>
 		<slot />
 	</div>
 </Surface>
