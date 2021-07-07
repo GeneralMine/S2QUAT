@@ -14,10 +14,7 @@
 	export let companies;
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
-	$crumbs = [
-		CrumbBuilder.create('Home', '/', 'home').build(),
-		CrumbBuilder.create('Unternehmen', '/company', 'company').build()
-	];
+	$crumbs = [CrumbBuilder.create('Unternehmen', '/company', 'company').build()];
 	/*******************************************/
 	import { goto } from '$app/navigation';
 	import Table from '$lib/Table/Table.svelte';

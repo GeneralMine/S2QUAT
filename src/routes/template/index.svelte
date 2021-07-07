@@ -14,10 +14,7 @@
 	export let templates;
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
-	$crumbs = [
-		CrumbBuilder.create('Home', '/', 'home').build(),
-		CrumbBuilder.create('Vorlagen', '/template', 'template').build()
-	];
+	$crumbs = [CrumbBuilder.create('Vorlagen', '/template', 'template').build()];
 	/*******************************************/
 	import { goto } from '$app/navigation';
 	import Table from '$lib/Table/Table.svelte';
