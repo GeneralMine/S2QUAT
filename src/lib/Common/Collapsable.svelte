@@ -6,6 +6,9 @@
 
 	export let expanded = false;
 	export let title;
+	export let add = false;
+	export let edit = false;
+	export let remove = false;
 </script>
 
 <div class="container">
@@ -16,15 +19,21 @@
 		</div>
 		{#if expanded}
 			<div class="buttons">
-				<div class="add button clickArea" on:click={() => dispatch('add', {})}>
-					<Icon name="add" />
-				</div>
-				<div class="edit button clickArea" on:click={() => dispatch('edit', {})}>
-					<Icon name="edit" />
-				</div>
-				<div class="delete button clickArea" on:click={() => dispatch('delete', {})}>
-					<Icon name="delete" />
-				</div>
+				{#if add}
+					<div class="add button clickArea" on:click={() => dispatch('add', {})}>
+						<Icon name="add" />
+					</div>
+				{/if}
+				{#if edit}
+					<div class="edit button clickArea" on:click={() => dispatch('edit', {})}>
+						<Icon name="edit" />
+					</div>
+				{/if}
+				{#if remove}
+					<div class="delete button clickArea" on:click={() => dispatch('delete', {})}>
+						<Icon name="delete" />
+					</div>
+				{/if}
 			</div>
 		{/if}
 	</div>

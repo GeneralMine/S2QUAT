@@ -25,7 +25,15 @@ export async function get(request) {
             {
                 include: {
                     categories: true,
-                    pages: true,
+                    pages: {
+                        include: {
+                            categories: {
+                                include: {
+                                    questions: true
+                                }
+                            }
+                        }
+                    },
                     questions: true,
                     responses: true,
                     scenario: true,

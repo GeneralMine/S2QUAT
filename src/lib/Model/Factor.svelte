@@ -8,7 +8,7 @@
 <div class="container">
 	<p class="textBlock">{factor.description}</p>
 	{#each factor.criterias as criteria}
-		<Collapsable title={criteria.name} expanded={true}>
+		<Collapsable title={criteria.name} expanded={true} add={true} edit={true} remove={true}>
 			<Criteria {criteria} />
 		</Collapsable>
 	{/each}

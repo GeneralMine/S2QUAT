@@ -106,6 +106,10 @@ input {
     box-sizing: border-box;
 }
 
+input[type="radio"] {
+    background-color: red;
+}
+
 select {
     height: 30px;
 }
@@ -200,4 +204,9 @@ table th {
 .column {
     display: flex;
     flex-direction: column;
+}
+
+.flexCenter {
+    justify-content: center;
+    align-items: center;
 }

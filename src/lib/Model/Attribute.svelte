@@ -12,7 +12,15 @@
 <div class="container">
 	<p class="textBlock">{attribute.description}</p>
 	{#each attribute.factors as factor}
-		<Collapsable title={factor.name} on:add={add} on:edit={edit} on:delete={remove}>
+		<Collapsable
+			title={factor.name}
+			add={true}
+			edit={true}
+			remove={true}
+			on:add={add}
+			on:edit={edit}
+			on:delete={remove}
+		>
 			<Factor {factor} />
 		</Collapsable>
 	{/each}

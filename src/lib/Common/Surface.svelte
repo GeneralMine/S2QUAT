@@ -8,13 +8,14 @@
 	export let edit = false;
 	export let remove = false;
 	export let padding = false;
+	export let clickArea = false;
 	export let smallTitle = false;
 </script>
 
 <div class="surfaceContainer">
 	<div class="surfaceHeader">
 		{#if title}
-			<h1 class="surfaceHeaderTitle clickArea" class:smallTitle on:click>{title}</h1>
+			<h1 class="surfaceHeaderTitle" class:clickArea class:smallTitle on:click>{title}</h1>
 		{/if}
 		{#if add || edit || remove}
 			<div class="buttons">

@@ -26,6 +26,9 @@
 	export let project;
 	export let scenario;
 	export let survey;
+	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
+	import TitledCard from '$lib/Cards/CardComponents/TitledCard.svelte';
+	import NumberCard from '$lib/Cards/NumberCard.svelte';
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [];
@@ -55,4 +58,15 @@
 	<title>{survey.name} | S2QUAT</title>
 </svelte:head>
 
-{survey.name} | {scenario.name} | {project.name}
+<div class="surveyContainer">
+	<CardRow title={survey.name}>
+		<NumberCard title="Anzahl Abgaben" value={survey.responses.lenth} />
+		<TitledCard title="Valide Abgaben">Charts kommen erst in v2.1.0</TitledCard>
+		<TitledCard title="Handlungsbedarf">Charts kommen erst in v2.1.0</TitledCard>
+	</CardRow>
+	<CardRow title="Fragebogen" smallTitle={true}>
+		<NumberCard title="Seiten" value={survey.pages.length} />
+		<NumberCard title="Kategorien" value={survey.categories.length} />
+		<NumberCard title="Fragen" value={survey.questions.length} />
+	</CardRow>
+</div>

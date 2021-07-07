@@ -253,8 +253,8 @@ model Response {
   surveyId Int?
   survey   Survey? @relation(fields: [surveyId], references: [id])
 
-  testPersonId Int?
-  person       Testperson? @relation(fields: [testPersonId], references: [id])
+  testpersonId Int?
+  testperson   Testperson? @relation(fields: [testpersonId], references: [id])
 }
 
 enum ResponseType {

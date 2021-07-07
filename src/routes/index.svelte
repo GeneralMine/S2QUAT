@@ -77,7 +77,7 @@
 				</TableAttributes>
 				<TableBody>
 					{#each projects as project}
-						<TableBodyRow on:click={async () => await goto('/project/' + project.id)}>
+						<TableBodyRow on:click={() => goto('/project/' + project.id)}>
 							<TableBodyItem>{project.id}</TableBodyItem>
 							<TableBodyItem type="img" imgName={project.company ? project.company.logo : '-'} />
 							<TableBodyItem>{project.status}</TableBodyItem>
@@ -99,10 +99,10 @@
 	<ProjectPrompt on:success={refreshProjects} bind:open={projectPrompt} />
 
 	<div class="row">
-		<Surface title="Qualitätsmodell">
+		<Surface title="Qualitätsmodell" clickArea={true} on:click={() => goto('/model')}>
 			<Model />
 		</Surface>
-		<Surface title="Vorlagen" padding={true}>
+		<Surface title="Vorlagen" padding={true} clickArea={true} on:click={() => goto('/template')}>
 			<List>
 				{#each templates as template}
 					<ListItemRow

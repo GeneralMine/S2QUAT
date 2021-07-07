@@ -31,6 +31,9 @@
 				on:add={attributeAdd}
 				on:edit={attributeEdit}
 				on:delete={attributeRemove}
+				add={true}
+				edit={true}
+				remove={true}
 				title={attribute.name}
 			>
 				<Attribute {attribute} />
