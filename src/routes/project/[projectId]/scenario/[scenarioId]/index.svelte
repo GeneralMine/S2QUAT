@@ -66,7 +66,7 @@
 		{#each scenario.surveys as survey}
 			<SurveyCard
 				{survey}
-				on:click={goto(`project${project.id}/scenario/${scenario.id}/survey/${survey.id}`)}
+				on:click={goto(`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}`)}
 			/>
 		{/each}
 		<AddCard on:click={() => (surveyPrompt = true)} />
