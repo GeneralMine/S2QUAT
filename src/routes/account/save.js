@@ -1,5 +1,6 @@
+import { prisma as p } from "$lib/db";
 /** @type {import("@prisma/client").PrismaClient} */
-import { prisma } from "$lib/db";
+const prisma = p;
 
 import { forExternal, getValidCookie, hashPassword, fail, isAuthenticatedAs } from "$lib/authUtil";
 
