@@ -215,7 +215,7 @@ model Question {
   name        String
   description String?
   typeOptions String[]
-  answer      Answer?
+  answers     Answer[]
   typ         QuestionType @default(SCORE)
 
   categoryId Int?
@@ -337,7 +337,7 @@ model Testperson {
 enum TestpersonSex {
   MALE
   FEMALE
-  NOT_BINARY
+  NON_BINARY
 }
 
 // User

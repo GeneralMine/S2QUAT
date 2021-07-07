@@ -127,7 +127,7 @@
 			console.log('Successfull submitted!');
 			submitted = 'Erfolgreich eingereicht! Danke für Ihre Teilnehme.';
 		} else {
-			console.err('There was an error submitting the survey!');
+			console.error('There was an error submitting the survey!');
 			submitted = err;
 		}
 	}
