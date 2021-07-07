@@ -92,7 +92,7 @@
 		</div>
 		<CardRow column={true}>
 			<EnumCard title={'Zieldefinitionen'} text={project.goal} />
-			<TitledCard title="Betreuer" padding={true}>
+			<TitledCard title="Betreuer" padding={true} responsiveHeight={true}>
 				<List>
 					{#each project.users as user}
 						<ListItemRow clickArea={true} flexstart={true} on:click={goto(`/user/${user.id}`)}>
