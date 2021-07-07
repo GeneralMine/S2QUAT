@@ -3,9 +3,10 @@
 
 	export let title;
 	export let responsiveHeight;
+	export let responsiveWidth;
 </script>
 
-<Card {responsiveHeight}>
+<Card {responsiveHeight} {responsiveWidth}>
 	<div class="header">
 		<p class="title">{title}</p>
 	</div>
