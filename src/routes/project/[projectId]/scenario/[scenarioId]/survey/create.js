@@ -49,6 +49,12 @@ export async function post(request) {
                 }
             });
 
+            /**
+             * TODO: Keep the relationships in the copy!
+             * Thats kinda hard to implement, because there are some special cases.
+             * Deplayed to v2.3.0
+             */
+
             const pages = templateObject.fields.map(field => {
                 return {
                     name: field.name,
