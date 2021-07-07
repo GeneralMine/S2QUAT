@@ -297,7 +297,7 @@ model Survey {
   scenario   Scenario @relation(fields: [scenarioId], references: [id])
 
   templateId Int?
-  tempalte   Template? @relation(fields: [templateId], references: [id])
+  template   Template? @relation(fields: [templateId], references: [id])
 }
 
 enum SurveyStatus {
