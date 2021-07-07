@@ -3,19 +3,21 @@
 	import { get, post, unpack } from '$lib/api';
 
 	import List from '$lib/List/List.svelte';
-	import Prompt from './Prompt.svelte';
 	import ListItemRow from '$lib/List/ListItemRow.svelte';
 	import { parseEnumToEmoji } from '$lib/textParser';
+
+	import Prompt from './Prompt.svelte';
 
 	const dispatch = createEventDispatcher();
 
 	export let open;
+	let requiredWarning = false;
 	let companies = [];
 	let stati = ['ACTIVE', 'INACTIVE', 'ARCHIVED'];
 
-	let projectName = '';
-	let projectDescription;
-	let projectGoal;
+	let name;
+	let description;
+	let goal;
 	let company;
 	let status;
 	let projectStart;
@@ -23,23 +25,26 @@
 
 	onMount(async () => {
 		const res = await get('company/list');
-		companies.push(...res.companies);
+		companies = res.companies;
 	});
 
 	async function createCompany() {
-		const { res, err } = await unpack(() =>
-			post('project/create', {
-				projectName,
-				projectDescription,
-				projectGoal,
-				company,
-				status,
-				projectStart,
-				projectEnd
-			})
-		);
-
-		success(res.project);
+		if (document.getElementById('projectPromptName').validity.valid) {
+			const { res, err } = await unpack(() =>
+				post('project/create', {
+					name,
+					description,
+					goal,
+					company,
+					status,
+					projectStart,
+					projectEnd
+				})
+			);
+			success(res.project);
+		} else {
+			requiredWarning = true;
+		}
 	}
 
 	function closePrompt() {
@@ -61,15 +66,23 @@
 		<List>
 			<ListItemRow>
 				<p>Name*</p>
-				<input required type="text" placeholder="Projektname" bind:value={projectName} />
+				<input
+					id="projectPromptName"
+					class:requiredWarning
+					required
+					type="text"
+					placeholder="Projektname"
+					bind:value={name}
+					on:change={() => (requiredWarning = false)}
+				/>
 			</ListItemRow>
 			<ListItemRow>
 				<p>Beschreibung</p>
-				<input type="text" placeholder="Projektbeschreibung" bind:value={projectDescription} />
+				<textarea rows="4" placeholder="Projektbeschreibung" bind:value={description} />
 			</ListItemRow>
 			<ListItemRow>
 				<p>Ziel</p>
-				<input type="text" placeholder="Projektziel" bind:value={projectGoal} />
+				<input type="text" placeholder="Projektziel" bind:value={goal} />
 			</ListItemRow>
 			<ListItemRow>
 				<p>Unternehmen</p>
@@ -99,13 +112,14 @@
 		</List>
 	</slot>
 	<slot slot="footer">
-		<button on:click={createCompany}>Create</button>
-		<button class="closeButton" on:click={closePrompt}>Cancel</button>
+		<button on:click={createCompany}>Erstellen</button>
+		<button class="closeButton" on:click={closePrompt}>Abbruch</button>
 	</slot>
 </Prompt>
 
 <style>
-	input {
+	input,
+	textarea {
 		width: 20rem;
 	}
 	.closeButton {
@@ -115,5 +129,8 @@
 		display: flex;
 		align-self: center;
 		width: 20rem;
+	}
+	.requiredWarning {
+		border-color: red;
 	}
 </style>
