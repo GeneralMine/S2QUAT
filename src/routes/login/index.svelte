@@ -70,7 +70,7 @@
 				id="email"
 				type="email"
 				required
-				placeholder="test@tester.com"
+				placeholder="Email Adresse"
 				bind:value={email}
 			/>
 
@@ -80,7 +80,7 @@
 				id="password"
 				type="password"
 				required
-				placeholder="not123456"
+				placeholder="Passwort"
 				bind:value={password}
 			/>
 			<button {disabled} type="submit"> Sign in </button>
@@ -104,6 +104,9 @@
 <style>
 	.areaContainer {
 		display: flex;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
 	}
 	.loginArea {
 		flex: 3;

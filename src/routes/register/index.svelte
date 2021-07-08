@@ -100,6 +100,9 @@
 <style>
 	.areaContainer {
 		display: flex;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
 	}
 	.loginArea {
 		flex: 3;
