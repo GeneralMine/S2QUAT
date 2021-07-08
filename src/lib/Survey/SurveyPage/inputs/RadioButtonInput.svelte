@@ -3,7 +3,6 @@
 	export let radioButton;
 </script>
 
-<p>Aktuell ausgewählt {radioButton}</p>
 <div class="row">
 	{#each options as value}
 		<div class="column">

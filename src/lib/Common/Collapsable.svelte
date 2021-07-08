@@ -30,7 +30,7 @@
 					</div>
 				{/if}
 				{#if remove}
-					<div class="delete button clickArea" on:click={() => dispatch('delete', {})}>
+					<div class="delete button clickArea" on:click={() => dispatch('remove', {})}>
 						<Icon name="delete" />
 					</div>
 				{/if}
@@ -46,8 +46,8 @@
 
 <style>
 	.container {
-		margin-top: 0.5rem;
-		margin-bottom: 0.5rem;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
 		margin-left: 0rem;
 		margin-right: 0rem;
 		display: flex;

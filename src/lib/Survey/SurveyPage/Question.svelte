@@ -6,6 +6,7 @@
 	import RadioButtonInput from './inputs/RadioButtonInput.svelte';
 
 	export let question;
+	export let edit;
 
 	if (!question.answer) {
 		question.answer = {};
@@ -15,21 +16,22 @@
 <div class="content">
 	<p class="textBlock">{question.description}</p>
 
-	{#if question.typ === 'SCORE'}
-		<ScoreInput bind:score={question.answer.score} />
-	{:else if question.typ === 'TEXT'}
-		<TextInput bind:text={question.answer.text} />
-	{:else if question.typ === 'SCORE_TEXT'}
-		<ScoreInput bind:score={question.answer.score} />
-		<TextInput bind:text={question.answer.text} />
-	{:else if question.typ === 'BOOLEAN'}
-		<BooleanInput bind:boolean={question.answer.boolean} options={question.typeOptions} />
-	{:else if question.typ === 'CHECKBOX'}
-		<CheckBoxInput bind:checkbox={question.answer.checkbox} options={question.typeOptions} />
-	{:else if question.typ === 'RADIOBUTTON'}
+	{#if question.type === 'SCORE'}
+		<ScoreInput bind:score={question.answer.score} {edit} />
+	{:else if question.type === 'TEXT'}
+		<TextInput bind:text={question.answer.text} {edit} />
+	{:else if question.type === 'SCORE_TEXT'}
+		<ScoreInput bind:score={question.answer.score} {edit} />
+		<TextInput bind:text={question.answer.text} {edit} />
+	{:else if question.type === 'BOOLEAN'}
+		<BooleanInput bind:boolean={question.answer.boolean} {edit} options={question.typeOptions} />
+	{:else if question.type === 'CHECKBOX'}
+		<CheckBoxInput bind:checkbox={question.answer.checkbox} {edit} options={question.typeOptions} />
+	{:else if question.type === 'RADIOBUTTON'}
 		<RadioButtonInput
 			bind:radiobutton={question.answer.radiobutton}
 			options={question.typeOptions}
+			{edit}
 		/>
 	{/if}
 </div>

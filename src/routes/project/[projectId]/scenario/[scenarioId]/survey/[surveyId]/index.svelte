@@ -29,8 +29,12 @@
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
 	import TitledCard from '$lib/Cards/CardComponents/TitledCard.svelte';
 	import NumberCard from '$lib/Cards/NumberCard.svelte';
+	import Surface from '$lib/Common/Surface.svelte';
+	import ListItemRowAdd from '$lib/List/ListItemRowAdd.svelte';
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	import Page from '$lib/Survey/SurveyPage/Page.svelte';
+	import PagePrompt from '$lib/Prompt/PagePrompt.svelte';
 	$crumbs = [];
 	if (project.company) {
 		$crumbs = [
@@ -52,6 +56,43 @@
 		).build()
 	];
 	/*******************************************/
+	import { del, unpack } from '$lib/api.js';
+	let pagePrompt = false;
+	let selectedPage;
+
+	async function refreshPages(ev) {
+		if (ev.detail.updated) {
+			for (let index = 0; index < survey.pages.length; index++) {
+				if (survey.pages[index].id === ev.detail.page.id) {
+					survey.pages[index].name = ev.detail.page.name;
+					survey.pages[index].description = ev.detail.page.description;
+					break;
+				}
+			}
+		} else {
+			survey.pages = [...survey.pages, ev.detail.page];
+		}
+	}
+
+	async function removePage(page) {
+		const { res, err } = await unpack(() =>
+			del(`project/${project}/scenario/${scenario}/survey/${survey}/page/${page.id}`)
+		);
+		if (res.id) {
+			for (let index = 0; index < survey.pages.length; index++) {
+				if (survey.pages[index].id === res.id) {
+					survey.pages.splice(index, 1);
+					survey.pages = [...survey.pages];
+					break;
+				}
+			}
+		}
+	}
+
+	function sort() {
+		survey.pages.sort((a, b) => a.order - b.order);
+	}
+	sort();
 </script>
 
 <svelte:head>
@@ -60,13 +101,44 @@
 
 <div class="surveyContainer">
 	<CardRow title={survey.name}>
-		<NumberCard title="Anzahl Abgaben" value={survey.responses.lenth} />
+		<NumberCard title="Anzahl Abgaben" value={survey.responses.length} />
 		<TitledCard title="Valide Abgaben">Charts kommen erst in v2.1.0</TitledCard>
 		<TitledCard title="Handlungsbedarf">Charts kommen erst in v2.1.0</TitledCard>
 	</CardRow>
-	<CardRow title="Fragebogen" smallTitle={true}>
-		<NumberCard title="Seiten" value={survey.pages.length} />
-		<NumberCard title="Kategorien" value={survey.categories.length} />
-		<NumberCard title="Fragen" value={survey.questions.length} />
-	</CardRow>
+
+	<Surface smallTitle={true} title="Fragebogen" padding={true}>
+		{#each survey.pages as page}
+			<Surface
+				title={page.name}
+				edit={true}
+				on:edit={() => {
+					selectedPage = page;
+					console.log('Now selected', selectedPage);
+					pagePrompt = true;
+				}}
+				remove={true}
+				on:remove={() => {
+					removePage(page);
+				}}
+			>
+				<Page bind:page edit={true} {survey} {project} {scenario} />
+				<hr />
+			</Surface>
+		{/each}
+		<ListItemRowAdd text="Neue Seite hinzufügen" on:click={() => (pagePrompt = true)} />
+	</Surface>
 </div>
+<PagePrompt
+	project={project.id}
+	scenario={scenario.id}
+	survey={survey.id}
+	bind:page={selectedPage}
+	on:success={refreshPages}
+	bind:open={pagePrompt}
+/>
+
+<style>
+	.editPageName {
+		padding: 2em;
+	}
+</style>

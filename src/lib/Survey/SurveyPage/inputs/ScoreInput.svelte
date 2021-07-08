@@ -4,7 +4,6 @@
 	let values = [1, 2, 3, 4, 5];
 </script>
 
-<p>Aktuell ausgewählt {score}</p>
 <div class="row">
 	{#each values as value}
 		<div class="column">

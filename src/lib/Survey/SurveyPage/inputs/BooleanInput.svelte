@@ -1,22 +1,13 @@
 <script>
+	import RadioButtonInput from './RadioButtonInput.svelte';
+
 	export let options = ['Ja', 'Nein'];
 	export let bool;
+
+	export let edit;
 </script>
 
-<div class="row">
-	<div class="column">
-		<label>
-			<input type="radio" bind:group={bool} value={true} />
-			{options[0]}
-		</label>
-	</div>
-	<div class="column">
-		<label>
-			<input type="radio" bind:group={bool} value={false} />
-			{options[1]}
-		</label>
-	</div>
-</div>
+<RadioButtonInput {options} bind:radioButton={bool} {edit} />
 
 <style>
 	.row {

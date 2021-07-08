@@ -4,7 +4,6 @@
 	const dispatch = createEventDispatcher();
 
 	export let title;
-	export let add = false;
 	export let edit = false;
 	export let remove = false;
 	export let padding = false;
@@ -17,20 +16,15 @@
 		{#if title}
 			<h1 class="surfaceHeaderTitle" class:clickArea class:smallTitle on:click>{title}</h1>
 		{/if}
-		{#if add || edit || remove}
+		{#if edit || remove}
 			<div class="buttons">
-				{#if add}
-					<div class="add button clickArea" on:click={() => dispatch('add', {})}>
-						<Icon name="add" />
-					</div>
-				{/if}
 				{#if edit}
 					<div class="edit button clickArea" on:click={() => dispatch('edit', {})}>
 						<Icon name="edit" />
 					</div>
 				{/if}
 				{#if remove}
-					<div class="delete button clickArea" on:click={() => dispatch('delete', {})}>
+					<div class="delete button clickArea" on:click={() => dispatch('remove', {})}>
 						<Icon name="delete" />
 					</div>
 				{/if}
