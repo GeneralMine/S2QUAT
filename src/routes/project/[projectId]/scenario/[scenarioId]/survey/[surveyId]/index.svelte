@@ -142,9 +142,3 @@
 	on:success={refreshPages}
 	bind:open={pagePrompt}
 />
-
-<style>
-	.editPageName {
-		padding: 2em;
-	}
-</style>
