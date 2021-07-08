@@ -99,6 +99,7 @@ model Category {
 
   name        String
   description String?
+  order       Int?
   questions   Question[]
 
   pageId Int?
@@ -173,6 +174,7 @@ model Page {
 
   name        String
   description String?
+  order       Int?
   categories  Category[]
 
   surveyId Int
@@ -215,8 +217,9 @@ model Question {
   name        String
   description String?
   typeOptions String[]
+  order       Int?
   answers     Answer[]
-  typ         QuestionType @default(SCORE)
+  type        QuestionType @default(SCORE)
 
   categoryId Int?
   category   Category? @relation(fields: [categoryId], references: [id])
