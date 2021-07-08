@@ -66,7 +66,11 @@
 
 <div class="rootContainer">
 	{#if projectsExpanded}
-		<Surface title="Projekte" on:click={() => (projectsExpanded = !projectsExpanded)}>
+		<Surface
+			title="Projekte"
+			clickArea={true}
+			on:click={() => (projectsExpanded = !projectsExpanded)}
+		>
 			<Table on:create={() => (projectPrompt = true)}>
 				<TableAttributes>
 					<TableAttributesItem>ID</TableAttributesItem>
@@ -89,7 +93,11 @@
 			</Table>
 		</Surface>
 	{:else}
-		<CardRow title="Projekte" on:click={() => (projectsExpanded = !projectsExpanded)}>
+		<CardRow
+			title="Projekte"
+			clickArea={true}
+			on:click={() => (projectsExpanded = !projectsExpanded)}
+		>
 			{#each projects as project}
 				<ProjectCard {project} />
 			{/each}
