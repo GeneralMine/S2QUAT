@@ -49,7 +49,7 @@
 		background-color: var(--background-color);
 		grid-template:
 			'nav main' 1fr
-			'nav footer' 1fr /
+			'nav footer' 10rem /
 			13.75rem 1fr;
 	}
 

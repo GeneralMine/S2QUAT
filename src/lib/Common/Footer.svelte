@@ -13,7 +13,6 @@
 		display: flex;
 		flex-direction: column;
 		padding: 2rem;
-		padding-bottom: 0;
 		align-items: center;
 		grid-area: footer;
 	}

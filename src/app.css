@@ -16,6 +16,10 @@
     --column-margin-top: 4rem;
 }
 
+html {
+    overflow-y: scroll;
+}
+
 body {
     background-color: var(--background-color);
     margin: 0;
