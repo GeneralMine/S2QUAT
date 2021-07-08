@@ -1,7 +1,5 @@
 <footer class="footerContainer">
-	<a class="version" href="https://github.com/GeneralMine/S2QUAT"
-		>{process.env['npm_package_version']}</a
-	>
+	<a class="version" href="https://github.com/GeneralMine/S2QUAT">__APP_VERSION__</a>
 	<div class="linkContainer">
 		<a href="impressum">Impressum</a>
 		<a href="privacy">Datenschutz</a>

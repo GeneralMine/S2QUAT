@@ -6,6 +6,11 @@ const config = {
 		target: '#svelte',
 		// deployment adapter using node
 		adapter: node({}),
+		vite: {
+			define: {
+				__APP_VERSION__: process.env["npm_package_version"],
+			}
+		}
 	}
 };
 
