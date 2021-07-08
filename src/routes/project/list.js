@@ -28,6 +28,9 @@ export async function get(request) {
                         id: userId
                     }
                 }
+            },
+            orderBy: {
+                updatedAt: "desc",
             }
         });
         projects.map(el => {
