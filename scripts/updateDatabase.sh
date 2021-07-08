@@ -1,8 +1,12 @@
+#!/bin/bash
+
 echo "WARNING: Update Database using db push! This can cause data loss!"
-read -p "Are you sure? " -n 1 -r
-echo # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    # do dangerous stuff
+
+echo -n "Do you want to run $*? [N/y] "
+read REPLY
+echo
+
+if test "$REPLY" = "y" -o "$REPLY" = "Y"; then
 
     echo "Updating Database..."
     sudo zip -r ../db.zip ../db
@@ -12,5 +16,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "Finished updating database! Please restart the app now."
 
 else
+
     echo "Abort."
+
 fi
