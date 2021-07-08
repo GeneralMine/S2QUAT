@@ -13,7 +13,7 @@ export async function post(request) {
 
     let { name,
         description,
-        survey, category, type, typeOptions id } = request.body;
+        survey, category, type, typeOptions, id } = request.body;
 
     if (!name) {
         console.log("No question name was provided!");
