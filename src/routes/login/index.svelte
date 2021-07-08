@@ -21,6 +21,7 @@
 	let password = '';
 	let errors = null;
 	let disabled = false;
+	let width;
 
 	async function login(event) {
 		console.log('Trying to login...');
@@ -44,6 +45,8 @@
 		}
 	}
 </script>
+
+<svelte:window bind:innerWidth={width} />
 
 <svelte:head>
 	<title>Login | S2QUAT</title>
@@ -89,9 +92,13 @@
 		<Footer />
 	</div>
 
-	<div class="pictureArea">
-		<img class="picture" src="loginPicture.jpg" alt="Italian Trulli" />
-	</div>
+	{#if width < 756}
+		<!-- content here -->
+	{:else}
+		<div class="pictureArea">
+			<img class="picture" src="loginPicture.jpg" alt="Italian Trulli" />
+		</div>
+	{/if}
 </div>
 
 <style>
