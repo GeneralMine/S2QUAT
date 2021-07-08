@@ -27,6 +27,7 @@
 		} else {
 			page.categories = [...page.categories, ev.detail.category];
 		}
+		sort();
 	}
 
 	async function removeCategory(category) {
@@ -42,6 +43,7 @@
 				}
 			}
 		}
+		sort();
 	}
 	function sort() {
 		page.categories.sort((a, b) => a.order - b.order);
@@ -57,19 +59,19 @@
 				(accumulator, currentValue) => accumulator + currentValue.x,
 				0
 			)}/${category.questions.length})`}
-			remove={true}
-			expanded={true}
+			remove={edit}
+			expanded={edit}
 			on:remove={() => {
 				removeCategory(category);
 			}}
-			edit={true}
+			{edit}
 			on:edit={() => {
 				selectedCategory = category;
 				console.log('Now selected', selectedCategory);
 				categoryPrompt = true;
 			}}
 		>
-			<Category bind:category edit={true} {survey} {project} {scenario} />
+			<Category bind:category {edit} {survey} {project} {scenario} />
 		</Collapsable>
 	{/each}
 	{#if edit}
@@ -79,15 +81,17 @@
 		/>
 	{/if}
 </div>
-<CategoryPrompt
-	project={project.id}
-	scenario={scenario.id}
-	survey={survey.id}
-	page={page.id}
-	on:success={refreshCategories}
-	bind:open={categoryPrompt}
-	bind:category={selectedCategory}
-/>
+{#if edit}
+	<CategoryPrompt
+		project={project.id}
+		scenario={scenario.id}
+		survey={survey.id}
+		page={page.id}
+		on:success={refreshCategories}
+		bind:open={categoryPrompt}
+		bind:category={selectedCategory}
+	/>
+{/if}
 
 <style>
 	.surveyPageContainer {

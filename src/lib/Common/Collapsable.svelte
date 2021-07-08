@@ -17,7 +17,7 @@
 			<DropDownIcon {expanded} />
 			<p class="title">{title}</p>
 		</div>
-		{#if expanded}
+		{#if expanded && (edit || add || remove)}
 			<div class="buttons">
 				{#if add}
 					<div class="add button clickArea" on:click={() => dispatch('add', {})}>

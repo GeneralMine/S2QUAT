@@ -106,7 +106,10 @@
 		<TitledCard title="Handlungsbedarf">Charts kommen erst in v2.1.0</TitledCard>
 	</CardRow>
 
-	<Surface smallTitle={true} title="Fragebogen" padding={true}>
+	<Surface smallTitle={true} title="Fragebogen" padding={true} margin={true}>
+		<div slot="header">
+			<button>Fragebogen starten</button>
+		</div>
 		{#each survey.pages as page}
 			<Surface
 				title={page.name}
@@ -121,13 +124,16 @@
 					removePage(page);
 				}}
 			>
-				<Page bind:page edit={true} {survey} {project} {scenario} />
-				<hr />
+				<div>
+					<Page bind:page edit={true} {survey} {project} {scenario} />
+					<hr />
+				</div>
 			</Surface>
 		{/each}
 		<ListItemRowAdd text="Neue Seite hinzufügen" on:click={() => (pagePrompt = true)} />
 	</Surface>
 </div>
+
 <PagePrompt
 	project={project.id}
 	scenario={scenario.id}

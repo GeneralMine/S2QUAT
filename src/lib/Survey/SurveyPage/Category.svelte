@@ -27,6 +27,7 @@
 		} else {
 			category.questions = [...category.questions, ev.detail.question];
 		}
+		sort();
 	}
 
 	async function removeQuestion(question) {
@@ -42,6 +43,7 @@
 				}
 			}
 		}
+		sort();
 	}
 
 	function sort() {
@@ -56,11 +58,11 @@
 		<Collapsable
 			title={question.name}
 			expanded={true}
-			remove={true}
+			remove={edit}
 			on:remove={() => {
 				removeQuestion(question);
 			}}
-			edit={true}
+			{edit}
 			on:edit={() => {
 				selectedQuestion = question;
 				console.log('Now selected', selectedQuestion);
@@ -77,16 +79,17 @@
 		/>
 	{/if}
 </div>
-
-<QuestionPrompt
-	project={project.id}
-	scenario={scenario.id}
-	survey={survey.id}
-	category={category.id}
-	bind:question={selectedQuestion}
-	on:success={refreshQuestions}
-	bind:open={questionPrompt}
-/>
+{#if edit}
+	<QuestionPrompt
+		project={project.id}
+		scenario={scenario.id}
+		survey={survey.id}
+		category={category.id}
+		bind:question={selectedQuestion}
+		on:success={refreshQuestions}
+		bind:open={questionPrompt}
+	/>
+{/if}
 
 <style>
 	.container {

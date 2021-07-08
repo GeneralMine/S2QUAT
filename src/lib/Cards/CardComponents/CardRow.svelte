@@ -29,9 +29,6 @@
 		flex-direction: row;
 		align-items: center;
 		flex-wrap: wrap;
-		margin-bottom: 1em;
-		margin-left: 1em;
-		margin-right: 1em;
 	}
 	.column {
 		flex-direction: column;

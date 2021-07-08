@@ -27,6 +27,7 @@
 					id: page.id,
 					name: page.name,
 					description: page.description,
+					order: page.order,
 					survey
 				})
 			);
@@ -69,6 +70,10 @@
 			<ListItemRow>
 				<p>Beschreibung</p>
 				<textarea rows="4" placeholder="Seitenbeschreibung" bind:value={page.description} />
+			</ListItemRow>
+			<ListItemRow>
+				<p>Reihenfolge</p>
+				<input type="number" bind:value={page.order} />
 			</ListItemRow>
 		</List>
 	</slot>

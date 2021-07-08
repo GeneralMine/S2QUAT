@@ -11,9 +11,7 @@ export async function post(request) {
         return fail(401, "Du verfügst nicht über die benötigte Berechtigung!");
     }
 
-    let { name,
-        description,
-        survey, page, id } = request.body;
+    let { name, description, order, survey, page, id } = request.body;
 
     if (!name) {
         console.log("No category name was provided!");
@@ -23,6 +21,7 @@ export async function post(request) {
     let data = {};
     if (name) data.name = name;
     if (description) data.description = description;
+    if (order) data.order = order;
     if (survey) data.survey = { connect: { id: survey } };
     if (page) data.page = { connect: { id: page } };
 

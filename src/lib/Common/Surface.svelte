@@ -4,8 +4,6 @@
 	const dispatch = createEventDispatcher();
 
 	export let title;
-	export let edit = false;
-	export let remove = false;
 	export let padding = false;
 	export let clickArea = false;
 	export let smallTitle = false;
@@ -16,20 +14,7 @@
 		{#if title}
 			<h1 class="surfaceHeaderTitle" class:clickArea class:smallTitle on:click>{title}</h1>
 		{/if}
-		{#if edit || remove}
-			<div class="buttons">
-				{#if edit}
-					<div class="edit button clickArea" on:click={() => dispatch('edit', {})}>
-						<Icon name="edit" />
-					</div>
-				{/if}
-				{#if remove}
-					<div class="delete button clickArea" on:click={() => dispatch('remove', {})}>
-						<Icon name="delete" />
-					</div>
-				{/if}
-			</div>
-		{/if}
+		<slot name="header" />
 	</div>
 	<div class:padding class="surfaceContent">
 		<slot />
@@ -62,21 +47,6 @@
 		margin-left: 1em;
 		margin-right: 1em;
 		background-color: var(--surface-color);
-	}
-	.buttons {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		padding-right: 2rem;
-		padding-left: 3rem;
-	}
-	.button {
-		margin-right: 1rem;
-		padding: 0.5rem;
-		display: flex;
-		justify-content: center;
-		align-items: center;
 	}
 	.padding {
 		padding: 2rem;

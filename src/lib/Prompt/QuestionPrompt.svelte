@@ -25,18 +25,32 @@
 
 	async function createCompany() {
 		if (document.getElementById('questionPromptName').validity.valid) {
+			let options = [];
+			if (question.typeOptions) {
+				if (Array.isArray(question.typeOptions)) {
+					options = question.typeOptions;
+				} else {
+					options = question.typeOptions.split(',').map((el) => el.trim());
+				}
+			}
+			question.typeOptions = options;
 			const { res, err } = await unpack(() =>
 				post(`project/${project}/scenario/${scenario}/survey/${survey}/question`, {
 					id: question.id,
 					name: question.name,
 					description: question.description,
 					type: question.type,
-					typeOptions: question.typeOptions,
+					typeOptions: options,
+					order: question.order,
 					survey,
 					category
 				})
 			);
-			success(res.question, res.updated);
+			if (res && res.question) {
+				success(res.question, res.updated);
+			} else {
+				console.log(err);
+			}
 		} else {
 			requiredWarning = true;
 		}
@@ -84,6 +98,16 @@
 					{/each}
 				</select>
 			</ListItemRow>
+			<ListItemRow>
+				<p>Reihenfolge</p>
+				<input type="number" bind:value={question.order} />
+			</ListItemRow>
+			{#if question.type === 'BOOLEAN' || question.type === 'CHECKBOX' || question.type === 'RADIOBUTTON'}
+				<ListItemRow>
+					<p>Typ Optionen (kommagetrennt)</p>
+					<input type="text" placeholder="Ja, Nein, Vielleicht" bind:value={question.typeOptions} />
+				</ListItemRow>
+			{/if}
 		</List>
 	</slot>
 	<slot slot="footer">

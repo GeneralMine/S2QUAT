@@ -28,6 +28,7 @@
 					id: category.id,
 					name: category.name,
 					description: category.description,
+					order: category.order,
 					survey,
 					page
 				})
@@ -71,6 +72,10 @@
 			<ListItemRow>
 				<p>Beschreibung</p>
 				<textarea rows="4" placeholder="Kategorienbeschreibung" bind:value={category.description} />
+			</ListItemRow>
+			<ListItemRow>
+				<p>Reihenfolge</p>
+				<input type="number" bind:value={category.order} />
 			</ListItemRow>
 		</List>
 	</slot>

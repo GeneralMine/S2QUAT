@@ -125,9 +125,9 @@
 		);
 		if (res) {
 			console.log('Successfull submitted!');
-			submitted = 'Erfolgreich eingereicht! Danke für Ihre Teilnehme.';
+			submitted = '✅ Erfolgreich eingereicht! Danke für Ihre Teilnehme.';
 		} else {
-			console.error('There was an error submitting the survey!');
+			console.error('❌ There was an error submitting the survey! ');
 			submitted = err;
 		}
 	}
@@ -158,7 +158,7 @@
 					<SurveySendPage bind:testperson />
 				{:else}
 					{#each [survey.pages[page_index]] as page (page_index)}
-						<Page bind:page />
+						<Page bind:page {survey} {scenario} {project} />
 					{/each}
 				{/if}
 			</div>
@@ -192,5 +192,7 @@
 	}
 	.hintBox {
 		background-color: white;
+		box-shadow: 2px 2px 2px 2px gray;
+		padding: 1em;
 	}
 </style>
