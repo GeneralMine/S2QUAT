@@ -24,6 +24,7 @@
 		font-size: 0.75rem;
 		line-height: 1.15;
 		text-align: center;
+		flex-wrap: nowrap;
 	}
 	a {
 		padding-left: 1rem;
@@ -32,6 +33,7 @@
 		color: #2e5bff;
 		font-size: 0.75rem;
 		line-height: 1.15;
+		text-align: center;
 	}
 	.copyright {
 		color: rgba(0, 0, 0, 0.8);
