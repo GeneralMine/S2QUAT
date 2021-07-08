@@ -105,7 +105,7 @@
 			{#if question.type === 'BOOLEAN' || question.type === 'CHECKBOX' || question.type === 'RADIOBUTTON'}
 				<ListItemRow>
 					<p>Typ Optionen (kommagetrennt)</p>
-					<input type="text" placeholder="Ja, Nein, Vielleicht" bind:value={question.typeOptions} />
+					<textarea rows="3" type="text" placeholder="Ja, Nein, Vielleicht" bind:value={question.typeOptions} />
 				</ListItemRow>
 			{/if}
 		</List>

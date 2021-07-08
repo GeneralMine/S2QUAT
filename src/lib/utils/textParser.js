@@ -22,8 +22,8 @@ export function parseEnumToEmoji(str) {
     if (str === 'NON_BINARY') return '⚧️';
     // QuestionType
     if (str === 'SCORE') return '🔢';
-    if (str === 'TEXT') return '🔢📝';
-    if (str === 'SCORE_TEXT') return '📝';
+    if (str === 'TEXT') return '📝';
+    if (str === 'SCORE_TEXT') return '🔢📝';
     if (str === 'BOOLEAN') return '0️⃣1️⃣';
     if (str === 'CHECKBOX') return '☑️';
     if (str === 'RADIOBUTTON') return '🔘';
