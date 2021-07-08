@@ -1,6 +1,6 @@
 import { parse } from "cookie";
 import jwt from "jsonwebtoken";
-import { prisma } from "$lib/db";
+import { prisma } from "$lib/utils/db";
 
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ request, resolve }) {

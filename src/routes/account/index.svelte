@@ -1,15 +1,15 @@
 <script>
 	/*******************************************/
-	import { crumbs } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	import { crumbs } from '$lib/Layout/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [];
 	/*******************************************/
 	import { session } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import Surface from '$lib/Common/Surface.svelte';
-	import { post } from '$lib/api.js';
+	import { post } from '$lib/utils/api.js';
 	import List from '$lib/List/List.svelte';
 	import ListItemRow from '$lib/List/ListItemRow.svelte';
-	import { parseEnumToEmoji } from '$lib/textParser';
+	import { parseEnumToEmoji } from '$lib/utils/textParser';
 
 	let name = $session.user.name;
 	let email = $session.user.email;

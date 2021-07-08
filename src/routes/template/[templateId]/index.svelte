@@ -1,5 +1,5 @@
 <script context="module">
-	import { get } from '$lib/api.js';
+	import { get } from '$lib/utils/api.js';
 	export async function load({ page, session, fetch }) {
 		try {
 			let { template } = await get(`template/${page.params.templateId}/get`, session.token, fetch);
@@ -13,7 +13,7 @@
 <script>
 	export let template;
 	/*******************************************/
-	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	import { crumbs, CrumbBuilder } from '$lib/Layout/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [
 		CrumbBuilder.create('Vorlagen', '/template', 'template').build(),
 		CrumbBuilder.create('Vorlagen ID', '/template', 'template').build()

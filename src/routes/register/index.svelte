@@ -11,9 +11,9 @@
 </script>
 
 <script>
-	import { post } from '$lib/api.js';
+	import { post } from '$lib/utils/api.js';
 	import Footer from '$lib/Common/Footer.svelte';
-	import ListErrors from '$lib/ListErrors.svelte';
+	import ListErrors from '$lib/Layout/ListErrors.svelte';
 
 	let name = '';
 	let email = '';

@@ -1,7 +1,7 @@
 <script>
 	import Question from './Question.svelte';
 	import Collapsable from '$lib/Common/Collapsable.svelte';
-	import { del, unpack } from '$lib/api.js';
+	import { del, unpack } from '$lib/utils/api.js';
 	import ListItemRowAdd from '$lib/List/ListItemRowAdd.svelte';
 	import QuestionPrompt from '$lib/Prompt/QuestionPrompt.svelte';
 

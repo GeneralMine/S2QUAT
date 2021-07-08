@@ -13,8 +13,8 @@
 <script>
 	import { session } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import { post } from '$lib/api.js';
-	import ListErrors from '$lib/ListErrors.svelte';
+	import { post } from '$lib/utils/api.js';
+	import ListErrors from '$lib/Layout/ListErrors.svelte';
 	import Footer from '$lib/Common/Footer.svelte';
 
 	let email = '';

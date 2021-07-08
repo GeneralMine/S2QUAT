@@ -1,5 +1,5 @@
 <script context="module">
-	import { get } from '$lib/api.js';
+	import { get } from '$lib/utils/api.js';
 	export async function load({ page, session, fetch }) {
 		try {
 			let [{ project }, { scenario }, { survey }] = await Promise.all([
@@ -32,7 +32,7 @@
 	import Surface from '$lib/Common/Surface.svelte';
 	import ListItemRowAdd from '$lib/List/ListItemRowAdd.svelte';
 	/*******************************************/
-	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	import { crumbs, CrumbBuilder } from '$lib/Layout/Nav/Breadcrumbs/breadcrumbs';
 	import Page from '$lib/Survey/SurveyPage/Page.svelte';
 	import PagePrompt from '$lib/Prompt/PagePrompt.svelte';
 	$crumbs = [];
@@ -56,7 +56,7 @@
 		).build()
 	];
 	/*******************************************/
-	import { del, unpack } from '$lib/api.js';
+	import { del, unpack } from '$lib/utils/api.js';
 	let pagePrompt = false;
 	let selectedPage;
 

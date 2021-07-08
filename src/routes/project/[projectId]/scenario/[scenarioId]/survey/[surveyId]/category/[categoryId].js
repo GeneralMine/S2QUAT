@@ -1,8 +1,8 @@
-import { prisma as p } from "$lib/db";
+import { prisma as p } from "$lib/utils/db";
 /** @type {import("@prisma/client").PrismaClient} */
 const prisma = p;
 
-import { send, fail, isAuthenticatedAs } from "$lib/authUtil";
+import { send, fail, isAuthenticatedAs } from "$lib/utils/auth";
 
 /** @type {import("@sveltejs/kit").RequestHandler} */
 export async function del(request) {

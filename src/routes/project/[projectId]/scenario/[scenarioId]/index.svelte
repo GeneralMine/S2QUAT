@@ -1,5 +1,5 @@
 <script context="module">
-	import { get } from '$lib/api.js';
+	import { get } from '$lib/utils/api.js';
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
 	export async function load({ page, session, fetch }) {
 		try {
@@ -25,7 +25,7 @@
 	import NumberCard from '$lib/Cards/NumberCard.svelte';
 	import SurveyCard from '$lib/Cards/SurveyCard.svelte';
 	/*******************************************/
-	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	import { crumbs, CrumbBuilder } from '$lib/Layout/Nav/Breadcrumbs/breadcrumbs';
 	import SurveyPrompt from '$lib/Prompt/SurveyPrompt.svelte';
 	import { goto } from '$app/navigation';
 	$crumbs = [];

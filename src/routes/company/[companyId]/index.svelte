@@ -1,5 +1,5 @@
 <script context="module">
-	import { get } from '$lib/api.js';
+	import { get } from '$lib/utils/api.js';
 	export async function load({ page, session, fetch }) {
 		try {
 			let { company } = await get(`company/${page.params.companyId}/get`, session.token, fetch);
@@ -13,7 +13,7 @@
 <script>
 	export let company;
 	/*******************************************/
-	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	import { crumbs, CrumbBuilder } from '$lib/Layout/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [CrumbBuilder.create(company.name, `/company/${company.id}`, 'company').build()];
 	/*******************************************/
 </script>

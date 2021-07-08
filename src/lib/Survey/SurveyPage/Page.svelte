@@ -3,7 +3,7 @@
 	import ListItemRowAdd from '$lib/List/ListItemRowAdd.svelte';
 	import CategoryPrompt from '$lib/Prompt/CategoryPrompt.svelte';
 	import Category from './Category.svelte';
-	import { del, unpack } from '$lib/api.js';
+	import { del, unpack } from '$lib/utils/api.js';
 
 	export let project;
 	export let scenario;

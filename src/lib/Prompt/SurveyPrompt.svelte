@@ -1,12 +1,12 @@
 <script>
 	import { createEventDispatcher, onMount } from 'svelte';
-	import { get, post, unpack } from '$lib/api';
+	import { get, post, unpack } from '$lib/utils/api';
 
 	import List from '$lib/List/List.svelte';
 	import ListItemRow from '$lib/List/ListItemRow.svelte';
 
 	import Prompt from './Prompt.svelte';
-	import { parseEnumToEmoji } from '$lib/textParser';
+	import { parseEnumToEmoji } from '$lib/utils/textParser';
 
 	const dispatch = createEventDispatcher();
 	export let open;

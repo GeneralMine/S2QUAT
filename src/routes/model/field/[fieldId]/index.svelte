@@ -1,5 +1,5 @@
 <script context="module">
-	import { get } from '$lib/api.js';
+	import { get } from '$lib/utils/api.js';
 	export async function load({ page, session, fetch }) {
 		try {
 			let { field } = await get(`model/field/${page.params.fieldId}/get`, session.token, fetch);
@@ -13,7 +13,7 @@
 <script>
 	export let field;
 	/*******************************************/
-	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	import { crumbs, CrumbBuilder } from '$lib/Layout/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [
 		CrumbBuilder.create('Modell', '/model', 'model').build(),
 		CrumbBuilder.create(`Feld ${field.id}`, `/model/field/${field.id}`, 'field').build()

@@ -1,8 +1,8 @@
 <script>
-	import BreadcrumbsItem from '$lib/Nav/Breadcrumbs/BreadcrumbsItem.svelte';
-	import BreadcrumbsSeperator from '$lib/Nav/Breadcrumbs/BreadcrumbsSeperator.svelte';
+	import BreadcrumbsItem from '$lib/Layout/Nav/Breadcrumbs/BreadcrumbsItem.svelte';
+	import BreadcrumbsSeperator from '$lib/Layout/Nav/Breadcrumbs/BreadcrumbsSeperator.svelte';
 
-	import { crumbs } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	import { crumbs } from '$lib/Layout/Nav/Breadcrumbs/breadcrumbs';
 </script>
 
 <div class="breadcrumbsContainer">

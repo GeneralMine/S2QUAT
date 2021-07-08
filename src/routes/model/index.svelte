@@ -1,6 +1,6 @@
 <script>
 	/*******************************************/
-	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	import { crumbs, CrumbBuilder } from '$lib/Layout/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [CrumbBuilder.create('Modell', '/model', 'model').build()];
 	/*******************************************/
 	import Surface from '$lib/Common/Surface.svelte';

@@ -1,5 +1,5 @@
 <script>
-	import { parseEnumToEmoji } from '$lib/textParser';
+	import { parseEnumToEmoji } from '$lib/utils/textParser';
 
 	export let type;
 	export let imgName;

@@ -1,5 +1,5 @@
 <script context="module">
-	import { get } from '$lib/api.js';
+	import { get } from '$lib/utils/api.js';
 	export async function load({ session, fetch }) {
 		try {
 			let [{ projects }, { templates }] = await Promise.all([
@@ -15,7 +15,7 @@
 
 <script>
 	/*******************************************/
-	import { crumbs, CrumbBuilder } from '$lib/Nav/Breadcrumbs/breadcrumbs';
+	import { crumbs, CrumbBuilder } from '$lib/Layout/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [];
 	/*******************************************/
 	import { goto } from '$app/navigation';
