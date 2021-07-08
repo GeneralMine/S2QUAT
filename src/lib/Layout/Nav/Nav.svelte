@@ -3,31 +3,32 @@
 	import Logo from './Logo.svelte';
 	import { page } from '$app/stores';
 	import BreadcrumbsItem from './Breadcrumbs/BreadcrumbsItem.svelte';
-	import Menu from './Menu.svelte';
+	import IconButton from '$lib/Common/IconButton.svelte';
 
 	let width;
 </script>
 
 <svelte:window bind:innerWidth={width} />
-{#if width > 768}
+
+{#if width < 768}
+	<div class="navContainerMobile">
+		<IconButton name="menu" />
+		<Logo />
+		<IconButton name="account" />
+	</div>
+{:else}
 	<div class="navContainer">
 		<Logo />
-
 		<Breadcrumbs />
 		<div class="spacer" />
 		<BreadcrumbsItem
 			isLast={$page.path === '/account'}
 			crumb={{
 				name: 'Account',
-				icon: 'account_circle',
+				icon: 'account',
 				url: '/account'
 			}}
 		/>
-	</div>
-{:else}
-	<div class="navContainerMobile">
-		<Menu />
-		<Logo />
 	</div>
 {/if}
 
@@ -45,7 +46,14 @@
 	.spacer {
 		margin-top: auto;
 	}
-
-	@media (max-width: 768px) {
+	.navContainerMobile {
+		position: fixed;
+		grid-area: nav;
+		display: flex;
+		width: 100%;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		background-color: var(--surface-color);
 	}
 </style>
