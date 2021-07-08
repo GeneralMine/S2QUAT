@@ -28,7 +28,7 @@
 		grid-area: nav;
 		display: flex;
 		height: 100%;
-		width: 11.5%;
+		width: 13.75rem;
 		flex-direction: column;
 		align-items: center;
 		/* padding-left: 1rem;

@@ -38,6 +38,7 @@
 	main {
 		grid-area: main;
 		padding: 3rem;
+		padding-top: 2rem;
 	}
 
 	.layout {
@@ -49,7 +50,7 @@
 		grid-template:
 			'nav main' 1fr
 			'nav footer' 1fr /
-			13rem 1fr;
+			13.75rem 1fr;
 	}
 
 	@media (max-width: 768px) {

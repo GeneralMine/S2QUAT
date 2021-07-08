@@ -1,3 +1,15 @@
+<script context="module">
+	export function load({ session }) {
+		if (!session.user) {
+			return {
+				status: 302,
+				redirect: `/login`
+			};
+		}
+		return {};
+	}
+</script>
+
 <script>
 	import '../../../../../../../../app.css';
 	import Nav from '$lib/Nav.svelte';
@@ -37,7 +49,7 @@
 		grid-template:
 			'nav main' 1fr
 			'nav footer' 1fr /
-			13rem 1fr;
+			13.75rem 1fr;
 	}
 
 	@media (max-width: 768px) {
