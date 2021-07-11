@@ -59,7 +59,7 @@
 	}
 
 	async function removePage(page) {
-		const { res, err } = await unpack(() => del(`project/${project}/scenario/${scenario}/survey/${survey}/page/${page.id}`));
+		const { res, err } = await unpack(() => del(`project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/page/${page.id}`));
 		if (res.id) {
 			for (let index = 0; index < survey.pages.length; index++) {
 				if (survey.pages[index].id === res.id) {
@@ -91,7 +91,7 @@
 
 	<Surface smallTitle={true} title="Der Fragebogen" padding={true} margin={true}>
 		<div slot="header">
-			<button on:click={() => goto('survey')}>Fragebogen starten</button>
+			<button on:click={() => goto(`project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/survey`)}>Fragebogen starten</button>
 		</div>
 		{#each survey.pages as page}
 			<Surface
