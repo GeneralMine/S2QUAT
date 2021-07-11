@@ -31,9 +31,7 @@
 	}
 
 	async function removeCategory(category) {
-		const { res, err } = await unpack(() =>
-			del(`project/${project}/scenario/${scenario}/survey/${survey}/category/${category.id}`)
-		);
+		const { res, err } = await unpack(() => del(`project/${project}/scenario/${scenario}/survey/${survey}/category/${category.id}`));
 		if (res.id) {
 			for (let index = 0; index < page.categories.length; index++) {
 				if (page.categories[index].id === res.id) {
@@ -52,13 +50,12 @@
 </script>
 
 <div class="surveyPageContainer">
-	<p>{page.description}</p>
+	<p class="surveyPageDescription">{page.description}</p>
 	{#each page.categories as category, i}
 		<Collapsable
-			title={`${category.name} (${category.questions.reduce(
-				(accumulator, currentValue) => accumulator + currentValue.x,
-				0
-			)}/${category.questions.length})`}
+			title={`${category.name} (${category.questions.reduce((accumulator, currentValue) => accumulator + currentValue.x, 0)}/${
+				category.questions.length
+			})`}
 			remove={edit}
 			expanded={edit}
 			on:remove={() => {
@@ -75,10 +72,7 @@
 		</Collapsable>
 	{/each}
 	{#if edit}
-		<ListItemRowAdd
-			text="Neue Kategorie hinzufügen"
-			on:click={() => (categoryPrompt = categoryPrompt = true)}
-		/>
+		<ListItemRowAdd text="Neue Kategorie hinzufügen" on:click={() => (categoryPrompt = categoryPrompt = true)} />
 	{/if}
 </div>
 {#if edit}
@@ -96,5 +90,10 @@
 <style>
 	.surveyPageContainer {
 		padding: 2em;
+		padding-top: 1em;
+	}
+	.surveyPageDescription {
+		padding-top: 0;
+		margin-top: 0;
 	}
 </style>
