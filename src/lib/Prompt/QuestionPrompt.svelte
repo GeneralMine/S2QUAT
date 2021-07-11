@@ -12,7 +12,7 @@
 
 	export let open;
 	let requiredWarning = false;
-	let types = ['SCORE', 'TEXT', 'SCORE_TEXT', 'BOOLEAN', 'CHECKBOX', 'RADIOBUTTON'];
+	let types = ['SCORE', 'TEXT', 'SCORE_TEXT', 'BOOLEAN', 'CHECKBOX', 'RADIOBUTTON', 'CHECKBOX_OTHER'];
 
 	// For edit an existing!
 	export let question;
