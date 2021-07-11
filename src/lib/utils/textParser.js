@@ -27,5 +27,6 @@ export function parseEnumToEmoji(str) {
     if (str === 'BOOLEAN') return '0️⃣1️⃣';
     if (str === 'CHECKBOX') return '☑️';
     if (str === 'RADIOBUTTON') return '🔘';
+    if (str === 'CHECKBOX_OTHER') return '☑️📝';
     return str;
 }

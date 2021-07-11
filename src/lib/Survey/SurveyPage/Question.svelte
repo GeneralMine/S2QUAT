@@ -28,11 +28,10 @@
 	{:else if question.type === 'CHECKBOX'}
 		<CheckBoxInput bind:checkbox={question.answer.checkbox} {edit} options={question.typeOptions} />
 	{:else if question.type === 'RADIOBUTTON'}
-		<RadioButtonInput
-			bind:radiobutton={question.answer.radiobutton}
-			options={question.typeOptions}
-			{edit}
-		/>
+		<RadioButtonInput bind:radiobutton={question.answer.radiobutton} options={question.typeOptions} {edit} />
+	{:else if question.type === 'CHECKBOX_OTHER'}
+		<CheckBoxInput bind:checkbox={question.answer.checkbox} {edit} options={question.typeOptions} />
+		<TextInput rows="2" placeholder="Sonstiges..." bind:text={question.answer.text} {edit} />
 	{/if}
 </div>
 
