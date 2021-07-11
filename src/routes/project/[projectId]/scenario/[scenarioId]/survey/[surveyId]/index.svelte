@@ -72,6 +72,7 @@
 		} else {
 			survey.pages = [...survey.pages, ev.detail.page];
 		}
+		sort();
 	}
 
 	async function removePage(page) {
@@ -87,6 +88,7 @@
 				}
 			}
 		}
+		sort();
 	}
 
 	function sort() {
@@ -106,7 +108,7 @@
 		<TitledCard title="Handlungsbedarf">Charts kommen erst in v2.1.0</TitledCard>
 	</CardRow>
 
-	<Surface smallTitle={true} title="Fragebogen" padding={true} margin={true}>
+	<Surface smallTitle={true} title="Der Fragebogen" padding={true} margin={true}>
 		<div slot="header">
 			<button>Fragebogen starten</button>
 		</div>

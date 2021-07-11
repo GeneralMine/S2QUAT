@@ -62,7 +62,7 @@
 		<NumberCard title="Anzahl Durchläufe" value={scenario.surveys.length} />
 		<NumberCard title="Anzahl Fragebögen" value={scenario.surveys.length} />
 	</CardRow>
-	<CardRow title="Fragebögen" smallTitle={true}>
+	<CardRow title="Fragebogen" smallTitle={true}>
 		{#each scenario.surveys as survey}
 			<SurveyCard
 				{survey}
