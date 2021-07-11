@@ -1,15 +1,3 @@
-<script context="module">
-	export function load({ session }) {
-		if (!session.user) {
-			return {
-				status: 302,
-				redirect: `/login`
-			};
-		}
-		return {};
-	}
-</script>
-
 <script>
 	import '../../../../../../../../app.css';
 	import Nav from '$lib/Layout/Nav/Nav.svelte';
