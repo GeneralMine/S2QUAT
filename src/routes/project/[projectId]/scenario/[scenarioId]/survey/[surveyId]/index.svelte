@@ -91,7 +91,7 @@
 
 	<Surface smallTitle={true} title="Der Fragebogen" padding={true} margin={true}>
 		<div slot="header">
-			<button on:click={() => goto(`project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/survey`)}>Fragebogen starten</button>
+			<button on:click={() => goto(`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/survey`)}>Fragebogen starten</button>
 		</div>
 		{#each survey.pages as page}
 			<Surface
