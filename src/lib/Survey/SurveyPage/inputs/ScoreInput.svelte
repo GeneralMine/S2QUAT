@@ -1,15 +1,15 @@
 <script>
 	export let score;
-
-	let values = [1, 2, 3, 4, 5];
+	let values = [5, 4, 3, 2, 1];
+	let text = ['Trifft zu', 'Trifft eher zu', 'Unentschieden', 'Trifft eher nicht zu', 'Trifft nicht zu'];
 </script>
 
 <div class="row">
-	{#each values as value}
+	{#each values as value, i}
 		<div class="column">
 			<label>
 				<input type="radio" bind:group={score} {value} />
-				{value}
+				{text[i]}
 			</label>
 		</div>
 	{/each}
@@ -31,5 +31,8 @@
 	}
 	label {
 		text-align: center;
+		user-select: none;
+		-moz-user-select: none;
+		-webkit-user-select: none;
 	}
 </style>
