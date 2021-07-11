@@ -1,5 +1,7 @@
 <script>
 	import ModelItem from '$lib/Model/ModelItem.svelte';
+
+	export let clickable = true;
 </script>
 
 <div class="container">
@@ -11,21 +13,21 @@
 		<div class="grid-column">Ergebnis</div>
 		<div class="grid-rowBar">Leistungsbestandteile</div>
 		<div class="grid-row">Koordination</div>
-		<ModelItem fieldId={10} />
-		<ModelItem fieldId={11} />
-		<ModelItem fieldId={12} />
+		<ModelItem {clickable} fieldId={10} />
+		<ModelItem {clickable} fieldId={11} />
+		<ModelItem {clickable} fieldId={12} />
 		<div class="grid-row">Persönliche Dienstleistung</div>
-		<ModelItem fieldId={7} />
-		<ModelItem fieldId={8} />
-		<ModelItem fieldId={9} />
+		<ModelItem {clickable} fieldId={7} />
+		<ModelItem {clickable} fieldId={8} />
+		<ModelItem {clickable} fieldId={9} />
 		<div class="grid-row">Digitaler Dienst</div>
-		<ModelItem fieldId={4} />
-		<ModelItem fieldId={5} />
-		<ModelItem fieldId={6} />
+		<ModelItem {clickable} fieldId={4} />
+		<ModelItem {clickable} fieldId={5} />
+		<ModelItem {clickable} fieldId={6} />
 		<div class="grid-row">Technologie & Daten</div>
-		<ModelItem fieldId={1} />
-		<ModelItem fieldId={2} />
-		<ModelItem fieldId={3} />
+		<ModelItem {clickable} fieldId={1} />
+		<ModelItem {clickable} fieldId={2} />
+		<ModelItem {clickable} fieldId={3} />
 	</div>
 </div>
 

@@ -1,13 +1,16 @@
 <script>
 	import { goto } from '$app/navigation';
 	export let fieldId;
+	export let clickable;
 
 	function click() {
-		goto('/model/field/' + fieldId);
+		if (clickable) {
+			goto('/model/field/' + fieldId);
+		}
 	}
 </script>
 
-<div class="grid-item clickArea" on:click={click}>
+<div class="grid-item" class:clickArea={clickable} on:click={click}>
 	<p class="text">
 		Feld {fieldId}
 	</p>

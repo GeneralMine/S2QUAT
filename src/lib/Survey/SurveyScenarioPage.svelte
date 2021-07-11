@@ -1,5 +1,4 @@
 <script>
-	import Surface from '$lib/Common/Surface.svelte';
 	import Model from '$lib/Model/Model.svelte';
 
 	export let scenario;
@@ -9,7 +8,7 @@
 	<p class="textBlock">{scenario.description}</p>
 
 	<div class="dataModel">
-		<Model />
+		<Model clickable={false} />
 	</div>
 </div>
 
@@ -21,8 +20,8 @@
 	.dataModel {
 		width: 100%;
 		height: 350px;
-		transform: scale(0.5);
-		-webkit-transform: scale(0.5);
+		transform: scale(0.6);
+		-webkit-transform: scale(0.6);
 		display: flex;
 		flex-direction: column;
 		align-content: center;
