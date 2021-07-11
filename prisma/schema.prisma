@@ -287,14 +287,15 @@ model Survey {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name        String
-  description String?
-  order       Int          @default(0)
-  status      SurveyStatus @default(ACTIVE)
-  responses   Response[]
-  pages       Page[]
-  categories  Category[]
-  questions   Question[]
+  name                  String
+  description           String?
+  order                 Int          @default(0)
+  canRegisterTestperson Boolean      @default(false)
+  status                SurveyStatus @default(ACTIVE)
+  responses             Response[]
+  pages                 Page[]
+  categories            Category[]
+  questions             Question[]
 
   scenarioId Int
   scenario   Scenario @relation(fields: [scenarioId], references: [id])
