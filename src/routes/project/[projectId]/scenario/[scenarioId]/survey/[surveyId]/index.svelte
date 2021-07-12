@@ -115,7 +115,7 @@
 						<TableBodyItem>{parseEnumToEmoji(response.typ)}</TableBodyItem>
 						<TableBodyItem>{response.testperson.name}</TableBodyItem>
 						<TableBodyItem>{response.user.name}</TableBodyItem>
-						<TableBodyItem>{response.answers.length}</TableBodyItem>
+						<TableBodyItem>{response.answers.length} / {survey.questions.length}</TableBodyItem>
 						<TableBodyItem>{response.location}</TableBodyItem>
 						<TableBodyItem>{response.feedback}</TableBodyItem>
 						<TableBodyItem>{response.notes}</TableBodyItem>
