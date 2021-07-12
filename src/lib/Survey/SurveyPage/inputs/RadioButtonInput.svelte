@@ -1,13 +1,13 @@
 <script>
 	export let options;
-	export let radioButton;
+	export let radiobutton;
 </script>
 
 <div class="row">
 	{#each options as value}
 		<div class="column">
 			<label>
-				<input type="radio" bind:group={radioButton} {value} />
+				<input type="radio" bind:group={radiobutton} {value} />
 				{value}
 			</label>
 		</div>

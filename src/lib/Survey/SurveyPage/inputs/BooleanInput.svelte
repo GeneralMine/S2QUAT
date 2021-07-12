@@ -2,9 +2,9 @@
 	import RadioButtonInput from './RadioButtonInput.svelte';
 
 	export let options = ['Ja', 'Nein'];
-	export let bool;
+	export let boolean;
 
 	export let edit;
 </script>
 
-<RadioButtonInput {options} bind:radioButton={bool} {edit} />
+<RadioButtonInput {options} bind:radiobutton={boolean} {edit} />

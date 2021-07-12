@@ -1,11 +1,11 @@
 <script>
 	export let options;
-	export let selection;
+	export let checkbox;
 
 	let raw = [];
 
 	function updateSelection() {
-		selection = options.map((el, index) => raw.includes(index));
+		checkbox = options.map((el, index) => raw.includes(index));
 	}
 </script>
 
