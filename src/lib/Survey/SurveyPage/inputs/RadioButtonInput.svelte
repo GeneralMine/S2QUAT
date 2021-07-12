@@ -27,8 +27,13 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		cursor: pointer;
 	}
 	label {
+		cursor: pointer;
 		text-align: center;
+		user-select: none;
+		-moz-user-select: none;
+		-webkit-user-select: none;
 	}
 </style>

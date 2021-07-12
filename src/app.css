@@ -111,7 +111,7 @@ input {
 }
 
 input[type="radio"] {
-    background-color: red;
+    cursor: pointer;
 }
 
 select {
