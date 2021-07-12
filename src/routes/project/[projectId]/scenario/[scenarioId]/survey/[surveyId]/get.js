@@ -35,7 +35,13 @@ export async function get(request) {
                         }
                     },
                     questions: true,
-                    responses: true,
+                    responses: {
+                        include: {
+                            testperson: true,
+                            user: true,
+                            answers: true
+                        }
+                    },
                     scenario: true,
                     template: true
                 },

@@ -40,6 +40,13 @@
 	/*******************************************/
 	import { del, unpack } from '$lib/utils/api.js';
 	import { goto } from '$app/navigation';
+	import Table from '$lib/Table/Table.svelte';
+	import TableAttributes from '$lib/Table/TableAttributes.svelte';
+	import TableAttributesItem from '$lib/Table/TableAttributesItem.svelte';
+	import TableBody from '$lib/Table/TableBody.svelte';
+	import TableBodyItem from '$lib/Table/TableBodyItem.svelte';
+	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
+	import { parseEnumToEmoji } from '$lib/utils/textParser';
 	let pagePrompt = false;
 	let selectedPage;
 
@@ -89,7 +96,34 @@
 		<TitledCard title="Handlungsbedarf">Charts kommen erst in v2.1.0</TitledCard>
 	</CardRow>
 
-	<Surface smallTitle={true} title="Der Fragebogen" padding={true} margin={true}>
+	<Surface title="Antworten" smallTitle={true}>
+		<Table>
+			<TableAttributes>
+				<TableAttributesItem>Valide</TableAttributesItem>
+				<TableAttributesItem>Testperson</TableAttributesItem>
+				<TableAttributesItem>Protokollant</TableAttributesItem>
+				<TableAttributesItem>Beantwortete Fragen</TableAttributesItem>
+				<TableAttributesItem>Ort</TableAttributesItem>
+				<TableAttributesItem>Feedback</TableAttributesItem>
+				<TableAttributesItem>Notes</TableAttributesItem>
+			</TableAttributes>
+			<TableBody>
+				{#each survey.responses as response}
+					<TableBodyRow>
+						<TableBodyItem>{parseEnumToEmoji(response.typ)}</TableBodyItem>
+						<TableBodyItem>{response.testperson.name}</TableBodyItem>
+						<TableBodyItem>{response.user.name}</TableBodyItem>
+						<TableBodyItem>{response.answers.length}</TableBodyItem>
+						<TableBodyItem>{response.location}</TableBodyItem>
+						<TableBodyItem>{response.feedback}</TableBodyItem>
+						<TableBodyItem>{response.notes}</TableBodyItem>
+					</TableBodyRow>
+				{/each}
+			</TableBody>
+		</Table>
+	</Surface>
+
+	<Surface title="Der Fragebogen" smallTitle={true} padding={true} margin={true}>
 		<div slot="header">
 			<button on:click={() => goto(`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/survey`)}>Fragebogen starten</button>
 		</div>

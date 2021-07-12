@@ -1,7 +1,7 @@
 export function parseEnumToEmoji(str) {
     // ActionStatus
-    if (str === 'SUCCESS') return '✅';
-    if (str === 'ERROR') return '❌';
+    if (str === 'SUCCESS' || str === 'VALID') return '✅';
+    if (str === 'ERROR' || str === 'INVALID') return '❌';
     if (str === 'RUNNING') return '⏳';
     // UserRole
     if (str === 'USER') return '🧍';
