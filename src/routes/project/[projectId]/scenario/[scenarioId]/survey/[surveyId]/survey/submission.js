@@ -13,7 +13,7 @@ export async function post(request) {
 
     let { survey,
         testperson,
-        place,
+        location,
         feedback,
         answers } = request.body;
 
@@ -34,7 +34,7 @@ export async function post(request) {
         // Create Response
         let responseData = {};
         if (survey) responseData.survey = { connect: { id: survey } };
-        if (place) responseData.place = place;
+        if (location) responseData.location = location;
         if (feedback) responseData.feedback = feedback;
         responseData.user = { connect: { id: user.id } };
         responseData.testperson = { connect: { id: testpersonObject.id } };

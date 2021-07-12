@@ -58,7 +58,7 @@
 	let testperson = {
 		signature: false
 	};
-	let place;
+	let location;
 	let feedback;
 
 	// Send
@@ -67,7 +67,7 @@
 		let newResponse = {
 			survey: survey.id,
 			testperson,
-			place,
+			location,
 			feedback,
 			answers: []
 		};
@@ -122,7 +122,7 @@
 				{#if page_index === -1}
 					<SurveyScenarioPage {scenario} />
 				{:else if page_index === max_index}
-					<SurveySendPage bind:testperson />
+					<SurveySendPage bind:testperson bind:location bind:feedback />
 				{:else}
 					{#each [survey.pages[page_index]] as page (page_index)}
 						<Page bind:page {survey} {scenario} {project} />

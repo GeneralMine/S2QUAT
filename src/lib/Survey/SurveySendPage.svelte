@@ -1,6 +1,6 @@
 <script>
 	export let testperson;
-	export let place;
+	export let location;
 	export let feedback;
 
 	function check() {
@@ -11,10 +11,7 @@
 <div class="sendPageContainer">
 	<h3>Fast geschafft!</h3>
 	<p>Um die Evaluation abzuschließen müssen deine Daten noch abgesendet werden.</p>
-	<p>
-		Du kannst Angaben zu deiner Person machen, um bei der Analyse und Verbesserung des Smart
-		Services vollends mitzuwirken
-	</p>
+	<p>Du kannst Angaben zu deiner Person machen, um bei der Analyse und Verbesserung des Smart Services vollends mitzuwirken</p>
 	<div class="testPersonForm">
 		<div class="testPersonFormName">
 			<label>
@@ -43,23 +40,13 @@
 		<div class="testPersonFormName">
 			<label>
 				Ort oder Situation:
-				<textarea
-					cols="2"
-					type="text"
-					bind:value={place}
-					placeholder="Wo oder in welcher Situation befinden sie sich aktuell?"
-				/>
+				<textarea cols="2" type="text" bind:value={location} placeholder="Wo oder in welcher Situation befinden sie sich aktuell?" />
 			</label>
 		</div>
 		<div class="testPersonFormName">
 			<label>
 				Feedback zum Fragebogen:
-				<textarea
-					cols="2"
-					type="text"
-					bind:value={feedback}
-					placeholder="Haben Sie noch zusätzliches Feedback?"
-				/>
+				<textarea cols="2" type="text" bind:value={feedback} placeholder="Haben Sie noch zusätzliches Feedback?" />
 			</label>
 		</div>
 		<div class="testPersonFormPrivacy">
@@ -67,9 +54,9 @@
 				<input type="checkbox" on:change={check} />
 			</div>
 			<p class="privacyNotice">
-				Mit einem Klick auf die Checkbox und auf Senden werden deine Informationen entsprechend
-				unserer <a href="/privacy"> Datenschutzvereinbarung </a> verarbeitet und gespeichert. Du kannst
-				der Speicherung jederzeit widersprechen.
+				Mit einem Klick auf die Checkbox und auf Senden werden deine Informationen entsprechend unserer <a href="/privacy">
+					Datenschutzvereinbarung
+				</a> verarbeitet und gespeichert. Du kannst der Speicherung jederzeit widersprechen.
 			</p>
 		</div>
 	</div>
