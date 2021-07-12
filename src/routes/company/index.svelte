@@ -33,7 +33,7 @@
 </svelte:head>
 
 <Surface>
-	<Table on:create={() => (companyPrompt = true)}>
+	<Table count={companies.length} on:create={() => (companyPrompt = true)}>
 		<TableAttributes>
 			<TableAttributesItem>Logo</TableAttributesItem>
 			<TableAttributesItem>Name</TableAttributesItem>

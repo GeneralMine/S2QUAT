@@ -33,7 +33,7 @@
 </svelte:head>
 
 <Surface>
-	<Table on:create={() => (templatePrompt = true)}>
+	<Table count={templates.length} on:create={() => (templatePrompt = true)}>
 		<TableAttributes>
 			<TableAttributesItem>Name</TableAttributesItem>
 			<TableAttributesItem>Anzahl Bewertungsfelder</TableAttributesItem>

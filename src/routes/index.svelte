@@ -2,10 +2,7 @@
 	import { get } from '$lib/utils/api.js';
 	export async function load({ session, fetch }) {
 		try {
-			let [{ projects }, { templates }] = await Promise.all([
-				get(`project/list`, session.token, fetch),
-				get(`template/list`, session.token, fetch)
-			]);
+			let [{ projects }, { templates }] = await Promise.all([get(`project/list`, session.token, fetch), get(`template/list`, session.token, fetch)]);
 			return { props: { projects, templates } };
 		} catch (err) {
 			return { status: err.code, error: err };
@@ -66,12 +63,8 @@
 
 <div class="rootContainer">
 	{#if projectsExpanded}
-		<Surface
-			title="Projekte"
-			clickArea={true}
-			on:click={() => (projectsExpanded = !projectsExpanded)}
-		>
-			<Table on:create={() => (projectPrompt = true)}>
+		<Surface title="Projekte" clickArea={true} on:click={() => (projectsExpanded = !projectsExpanded)}>
+			<Table count={projects.length} on:create={() => (projectPrompt = true)}>
 				<TableAttributes>
 					<TableAttributesItem>ID</TableAttributesItem>
 					<TableAttributesItem>Unternehmen</TableAttributesItem>
@@ -93,11 +86,7 @@
 			</Table>
 		</Surface>
 	{:else}
-		<CardRow
-			title="Projekte"
-			clickArea={true}
-			on:click={() => (projectsExpanded = !projectsExpanded)}
-		>
+		<CardRow title="Projekte" clickArea={true} on:click={() => (projectsExpanded = !projectsExpanded)}>
 			{#each projects as project}
 				<ProjectCard {project} />
 			{/each}
@@ -113,11 +102,7 @@
 		<Surface title="Vorlagen" padding={true} clickArea={true} on:click={() => goto('/template')}>
 			<List>
 				{#each templates as template}
-					<ListItemRow
-						clickArea={true}
-						flexstart={true}
-						on:click={goto(`/template/${template.id}`)}
-					>
+					<ListItemRow clickArea={true} flexstart={true} on:click={goto(`/template/${template.id}`)}>
 						<div class="templateIcon">
 							<Icon name="template" fill={true} />
 						</div>
