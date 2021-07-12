@@ -11,8 +11,6 @@
 	if (!question.answer) {
 		question.answer = {};
 	}
-
-	$: console.log(question.answer);
 </script>
 
 <div class="content">

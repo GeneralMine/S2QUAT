@@ -4,16 +4,8 @@
 		try {
 			let [{ project }, { scenario }, { survey }] = await Promise.all([
 				get(`project/${page.params.projectId}/get`, session.token, fetch),
-				get(
-					`project/${page.params.projectId}/scenario/${page.params.scenarioId}/get`,
-					session.token,
-					fetch
-				),
-				get(
-					`project/${page.params.projectId}/scenario/${page.params.scenarioId}/survey/${page.params.surveyId}/get`,
-					session.token,
-					fetch
-				)
+				get(`project/${page.params.projectId}/scenario/${page.params.scenarioId}/get`, session.token, fetch),
+				get(`project/${page.params.projectId}/scenario/${page.params.scenarioId}/survey/${page.params.surveyId}/get`, session.token, fetch)
 			]);
 			return { props: { project, scenario, survey } };
 		} catch (err) {
@@ -33,30 +25,16 @@
 	import Page from '$lib/Survey/SurveyPage/Page.svelte';
 	import SurveyScenarioPage from '$lib/Survey/SurveyScenarioPage.svelte';
 	import SurveySendPage from '$lib/Survey/SurveySendPage.svelte';
-	$crumbs = [
-		CrumbBuilder.create(
-			survey.name,
-			`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/survey`,
-			'survey'
-		).build()
-	];
+	$crumbs = [CrumbBuilder.create(survey.name, `/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/survey`, 'survey').build()];
 	for (const page of survey.pages) {
 		$crumbs = [
 			...$crumbs,
-			CrumbBuilder.create(
-				page.name,
-				`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/survey`,
-				'survey'
-			).build()
+			CrumbBuilder.create(page.name, `/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/survey`, 'survey').build()
 		];
 	}
 	$crumbs = [
 		...$crumbs,
-		CrumbBuilder.create(
-			'Send Page',
-			`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/survey`,
-			'survey'
-		).build()
+		CrumbBuilder.create('Send Page', `/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/survey`, 'survey').build()
 	];
 	/*******************************************/
 	import { post, unpack } from '$lib/utils/api.js';
@@ -100,7 +78,7 @@
 						question.answer &&
 						(question.answer.score ||
 							question.answer.text ||
-							question.answer.boolean ||
+							question.answer.boolean != null ||
 							question.answer.checkbox ||
 							question.answer.radiobutton)
 					) {
@@ -117,12 +95,7 @@
 			}
 		}
 		console.log('Send newResponse:', newResponse);
-		const { res, err } = await unpack(() =>
-			post(
-				`project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/survey/submission`,
-				newResponse
-			)
-		);
+		const { res, err } = await unpack(() => post(`project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/survey/submission`, newResponse));
 		if (res) {
 			console.log('Successfull submitted!');
 			submitted = '✅ Erfolgreich eingereicht! Danke für Ihre Teilnehme.';
@@ -144,13 +117,7 @@
 		</div>
 	{/if}
 	<div class="surveyInnerContainer">
-		<Surface
-			title={page_index === -1
-				? scenario.name
-				: page_index === max_index
-				? 'Abschicken'
-				: survey.pages[page_index].name}
-		>
+		<Surface title={page_index === -1 ? scenario.name : page_index === max_index ? 'Abschicken' : survey.pages[page_index].name}>
 			<div class="content">
 				{#if page_index === -1}
 					<SurveyScenarioPage {scenario} />

@@ -64,8 +64,8 @@ model Answer {
   score       Int?
   text        String?
   boolean     Boolean?
-  checkboxes  Boolean[]
-  radiobutton Int?
+  checkbox    Boolean[]
+  radiobutton String?
 
   questionId Int
   question   Question @relation(fields: [questionId], references: [id])

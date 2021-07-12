@@ -3,7 +3,6 @@
 	export let checkbox;
 
 	let raw = [];
-
 	function updateSelection() {
 		checkbox = options.map((el, index) => raw.includes(index));
 	}
