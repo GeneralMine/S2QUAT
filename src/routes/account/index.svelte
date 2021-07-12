@@ -15,8 +15,7 @@
 	let email = $session.user.email;
 	let password = '********';
 	let role = $session.user.role;
-	$: disabled =
-		name === $session.user.name && email === $session.user.email && password === '********';
+	$: disabled = name === $session.user.name && email === $session.user.email && password === '********';
 	$: console.log(disabled);
 
 	async function save() {

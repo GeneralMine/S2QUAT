@@ -83,8 +83,6 @@
 		survey.pages.sort((a, b) => a.order - b.order);
 	}
 	sort();
-
-	console.log(survey);
 </script>
 
 <svelte:head>

@@ -14,9 +14,7 @@
 
 	<Surface title="Impressum">
 		<div class="content">
-			<h3>
-				Angaben gemäß § 5 TMG, Betreiber und Verantwortlicher für den Inhalt nach § 55 Abs. 2 RStV
-			</h3>
+			<h3>Angaben gemäß § 5 TMG, Betreiber und Verantwortlicher für den Inhalt nach § 55 Abs. 2 RStV</h3>
 			<div>
 				Marvin Raiser
 				<br />
@@ -43,8 +41,7 @@
 				70569 Stuttgart
 				<br />
 				<br />
-				ist eine rechtlich nicht selbständige Einrichtung der Fraunhofer-Gesellschaft zur Förderung der
-				angewandten Forschung e.V.
+				ist eine rechtlich nicht selbständige Einrichtung der Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
 				<br />
 				<br />
 				Hansastraße 27 c
@@ -120,13 +117,11 @@
 				<br />
 				<br />
 
-				Die Urheberrechte dieser Web-Site liegen vollständig beim Betreiber und der
-				Fraunhofer-Gesellschaft.
+				Die Urheberrechte dieser Web-Site liegen vollständig beim Betreiber und der Fraunhofer-Gesellschaft.
 				<br />
-				Ein Download oder Ausdruck dieser Veröffentlichungen ist ausschließlich für den persönlichen
-				Gebrauch gestattet. Alle darüber hinaus gehenden Verwendungen, insbesondere die kommerzielle
-				Nutzung und Verbreitung, sind grundsätzlich nicht gestattet und bedürfen der schriftlichen Genehmigung.
-				Anfragen richten Sie Bitte an folgende Adresse:
+				Ein Download oder Ausdruck dieser Veröffentlichungen ist ausschließlich für den persönlichen Gebrauch gestattet. Alle darüber hinaus gehenden Verwendungen,
+				insbesondere die kommerzielle Nutzung und Verbreitung, sind grundsätzlich nicht gestattet und bedürfen der schriftlichen Genehmigung. Anfragen
+				richten Sie Bitte an folgende Adresse:
 				<br />
 				<br />
 
@@ -140,40 +135,35 @@
 				<br />
 				<br />
 
-				Ein Download oder Ausdruck ist darüber hinaus lediglich zum Zweck der Berichterstattung über
-				den Betreiber Marvin Raiser und der Fraunhofer-Gesellschaft und Ihrer Institute nach Maßgabe
-				untenstehender Nutzungsbedingungen gestattet:
+				Ein Download oder Ausdruck ist darüber hinaus lediglich zum Zweck der Berichterstattung über den Betreiber Marvin Raiser und der
+				Fraunhofer-Gesellschaft und Ihrer Institute nach Maßgabe untenstehender Nutzungsbedingungen gestattet:
 				<br />
-				Grafische Veränderungen an Bildmotiven - außer zum Freistellen des Hauptmotivs - sind nicht gestattet.
-				Es ist stets die Quellenangabe und Übersendung von zwei kostenlosen Belegexemplaren an die oben
-				genannte Adresse erforderlich. Die Verwendung ist honorarfrei.
+				Grafische Veränderungen an Bildmotiven - außer zum Freistellen des Hauptmotivs - sind nicht gestattet. Es ist stets die Quellenangabe und Übersendung
+				von zwei kostenlosen Belegexemplaren an die oben genannte Adresse erforderlich. Die Verwendung ist honorarfrei.
 				<br />
 				<br />
 
 				<b> Haftungshinweis </b>
 				<br />
 
-				Wir übernehmen keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten
-				Seiten sind ausschließlich deren Betreiber verantwortlich.
+				Wir übernehmen keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber
+				verantwortlich.
 				<br />
 				<br />
 
-				Wir sind bemüht, das Webangebot stets aktuell und inhaltlich richtig sowie vollständig
-				anzubieten. Dennoch ist das Auftreten von Fehlern nicht völlig auszuschließen. Der Betreiber
-				und das
+				Wir sind bemüht, das Webangebot stets aktuell und inhaltlich richtig sowie vollständig anzubieten. Dennoch ist das Auftreten von Fehlern nicht
+				völlig auszuschließen. Der Betreiber und das
 				<br />
 				<br />
 
-				Fraunhofer-Institut bzw. die Fraunhofer-Gesellschaft übernimmt keine Haftung für die
-				Aktualität, die inhaltliche Richtigkeit sowie für die Vollständigkeit der in ihrem
-				Webangebot eingestellten Informationen. Dies bezieht sich auf eventuelle Schäden materieller
-				oder ideeller Art Dritter, die durch die Nutzung dieses Webangebotes verursacht wurden.
+				Fraunhofer-Institut bzw. die Fraunhofer-Gesellschaft übernimmt keine Haftung für die Aktualität, die inhaltliche Richtigkeit sowie für die
+				Vollständigkeit der in ihrem Webangebot eingestellten Informationen. Dies bezieht sich auf eventuelle Schäden materieller oder ideeller Art
+				Dritter, die durch die Nutzung dieses Webangebotes verursacht wurden.
 				<br />
 				<br />
 
-				Geschützte Marken und Namen, Bilder und Texte werden auf unseren Seiten in der Regel nicht
-				als solche kenntlich gemacht. Das Fehlen einer solchen Kennzeichnung bedeutet jedoch nicht,
-				dass es sich um einen freien Namen, ein freies Bild oder einen freien Text im Sinne des
+				Geschützte Marken und Namen, Bilder und Texte werden auf unseren Seiten in der Regel nicht als solche kenntlich gemacht. Das Fehlen einer
+				solchen Kennzeichnung bedeutet jedoch nicht, dass es sich um einen freien Namen, ein freies Bild oder einen freien Text im Sinne des
 				Markenzeichenrechts handelt.
 				<br />
 			</div>

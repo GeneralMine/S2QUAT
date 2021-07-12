@@ -65,24 +65,10 @@
 
 		<form on:submit|preventDefault={login}>
 			<label for="email">Email</label>
-			<input
-				autocomplete="email"
-				id="email"
-				type="email"
-				required
-				placeholder="Email Adresse"
-				bind:value={email}
-			/>
+			<input autocomplete="email" id="email" type="email" required placeholder="Email Adresse" bind:value={email} />
 
 			<label for="password">Password</label>
-			<input
-				autocomplete="current-password"
-				id="password"
-				type="password"
-				required
-				placeholder="Passwort"
-				bind:value={password}
-			/>
+			<input autocomplete="current-password" id="password" type="password" required placeholder="Passwort" bind:value={password} />
 			<button {disabled} type="submit"> Sign in </button>
 		</form>
 		<a class="requestAccess" href="/register">Request access</a>

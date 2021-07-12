@@ -31,9 +31,7 @@
 	}
 
 	async function removeQuestion(question) {
-		const { res, err } = await unpack(() =>
-			del(`project/${project}/scenario/${scenario}/survey/${survey}/question/${question.id}`)
-		);
+		const { res, err } = await unpack(() => del(`project/${project}/scenario/${scenario}/survey/${survey}/question/${question.id}`));
 		if (res.id) {
 			for (let index = 0; index < category.questions.length; index++) {
 				if (category.questions[index].id === res.id) {
@@ -73,10 +71,7 @@
 		</Collapsable>
 	{/each}
 	{#if edit}
-		<ListItemRowAdd
-			text="Neue Frage hinzufügen"
-			on:click={() => (questionPrompt = questionPrompt = true)}
-		/>
+		<ListItemRowAdd text="Neue Frage hinzufügen" on:click={() => (questionPrompt = questionPrompt = true)} />
 	{/if}
 </div>
 {#if edit}

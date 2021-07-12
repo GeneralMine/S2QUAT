@@ -16,14 +16,9 @@
 	import { crumbs, CrumbBuilder } from '$lib/Layout/Nav/Breadcrumbs/breadcrumbs';
 	$crumbs = [];
 	if (project.company) {
-		$crumbs = [
-			CrumbBuilder.create(project.company.name, `/company/${project.company.id}`, 'company').build()
-		];
+		$crumbs = [CrumbBuilder.create(project.company.name, `/company/${project.company.id}`, 'company').build()];
 	}
-	$crumbs = [
-		...$crumbs,
-		CrumbBuilder.create(project.name, `/project/${project.id}`, 'project').build()
-	];
+	$crumbs = [...$crumbs, CrumbBuilder.create(project.name, `/project/${project.id}`, 'project').build()];
 	/*******************************************/
 
 	import { goto } from '$app/navigation';
@@ -54,11 +49,7 @@
 <div class="projectContainer">
 	<CardRow title={project.name}>
 		{#if project.company}
-			<ImageCard
-				title="Unternehmen"
-				src={project.company.logo}
-				on:click={goto(`/company/${project.company.id}`)}
-			/>
+			<ImageCard title="Unternehmen" src={project.company.logo} on:click={goto(`/company/${project.company.id}`)} />
 		{:else}
 			<AddCard title="Verknüpfe Unternehmen" />
 		{/if}
@@ -77,10 +68,7 @@
 			</TitledCard>
 			<CardRow title="Szenarien" smallTitle={true}>
 				{#each project.scenarios as scenario}
-					<ScenarioCard
-						{scenario}
-						on:click={goto(`/project/${project.id}/scenario/${scenario.id}`)}
-					/>
+					<ScenarioCard {scenario} on:click={goto(`/project/${project.id}/scenario/${scenario.id}`)} />
 				{/each}
 				<AddCard on:click={() => (scenarioPrompt = true)} />
 			</CardRow>
@@ -105,12 +93,7 @@
 		</CardRow>
 	</div>
 </div>
-<ScenarioPrompt
-	project={project.id}
-	projectsDisabled={true}
-	on:success={refreshScenarios}
-	bind:open={scenarioPrompt}
-/>
+<ScenarioPrompt project={project.id} projectsDisabled={true} on:success={refreshScenarios} bind:open={scenarioPrompt} />
 
 <style>
 	.projectContainer {

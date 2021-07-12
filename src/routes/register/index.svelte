@@ -71,13 +71,7 @@
 			<input id="femail" type="email" required placeholder="test@tester.com" bind:value={email} />
 
 			<label for="fpassword">Password</label>
-			<input
-				id="fpassword"
-				type="password"
-				required
-				placeholder="not123456"
-				bind:value={password}
-			/>
+			<input id="fpassword" type="password" required placeholder="not123456" bind:value={password} />
 
 			<button {disabled} type="submit"> Request Access </button>
 		</form>

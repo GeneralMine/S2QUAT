@@ -14,10 +14,7 @@
 	export let template;
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Layout/Nav/Breadcrumbs/breadcrumbs';
-	$crumbs = [
-		CrumbBuilder.create('Vorlagen', '/template', 'template').build(),
-		CrumbBuilder.create('Vorlagen ID', '/template', 'template').build()
-	];
+	$crumbs = [CrumbBuilder.create('Vorlagen', '/template', 'template').build(), CrumbBuilder.create('Vorlagen ID', '/template', 'template').build()];
 	/*******************************************/
 </script>
 
