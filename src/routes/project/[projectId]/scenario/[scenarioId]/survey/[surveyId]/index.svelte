@@ -83,6 +83,8 @@
 		survey.pages.sort((a, b) => a.order - b.order);
 	}
 	sort();
+
+	console.log(survey);
 </script>
 
 <svelte:head>
@@ -97,7 +99,7 @@
 	</CardRow>
 
 	<Surface title="Antworten" smallTitle={true}>
-		<Table>
+		<Table count={survey.responses.length}>
 			<TableAttributes>
 				<TableAttributesItem>Valide</TableAttributesItem>
 				<TableAttributesItem>Testperson</TableAttributesItem>

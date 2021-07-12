@@ -2,8 +2,9 @@
 	import TableFooter from './TableFooter.svelte';
 	import TableHeader from './TableHeader.svelte';
 
-	export let count = null;
+	export let count;
 	export let hasHeader = true;
+	export let hasFooter = true;
 </script>
 
 <div class="tableContainer">
@@ -13,8 +14,8 @@
 	<table class="table" cellspacing="0" cellpadding="0">
 		<slot />
 	</table>
-	{#if count}
-		<TableFooter />
+	{#if hasFooter}
+		<TableFooter {count} />
 	{/if}
 </div>
 
