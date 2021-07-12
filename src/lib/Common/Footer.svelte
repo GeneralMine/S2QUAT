@@ -1,5 +1,5 @@
 <footer class="footerContainer">
-	<a class="version" href="https://github.com/GeneralMine/S2QUAT">v2.0.1</a>
+	<a class="version" href="https://github.com/GeneralMine/S2QUAT">v2.0.2</a>
 	<div class="linkContainer">
 		<a href="impressum">Impressum</a>
 		<a href="privacy">Datenschutz</a>
