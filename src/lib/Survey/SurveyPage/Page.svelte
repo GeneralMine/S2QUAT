@@ -53,9 +53,10 @@
 	<p class="surveyPageDescription">{page.description}</p>
 	{#each page.categories as category, i}
 		<Collapsable
-			title={`${category.name} (${category.questions.reduce((accumulator, currentValue) => accumulator + currentValue.x, 0)}/${
-				category.questions.length
-			})`}
+			title={`${category.name} (${category.questions.reduce(
+				(accumulator, question) => accumulator + (question.answer && Object.keys(question.answer).length ? 1 : 0),
+				0
+			)}/${category.questions.length})`}
 			remove={edit}
 			expanded={edit}
 			on:remove={() => {
