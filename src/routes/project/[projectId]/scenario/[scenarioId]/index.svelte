@@ -5,11 +5,7 @@
 		try {
 			let [{ project }, { scenario }] = await Promise.all([
 				get(`project/${page.params.projectId}/get`, session.token, fetch),
-				get(
-					`project/${page.params.projectId}/scenario/${page.params.scenarioId}/get`,
-					session.token,
-					fetch
-				)
+				get(`project/${page.params.projectId}/scenario/${page.params.scenarioId}/get`, session.token, fetch)
 			]);
 			return { props: { project, scenario } };
 		} catch (err) {
@@ -30,18 +26,12 @@
 	import { goto } from '$app/navigation';
 	$crumbs = [];
 	if (project.company) {
-		$crumbs = [
-			CrumbBuilder.create(project.company.name, `/company/${project.company.id}`, 'company').build()
-		];
+		$crumbs = [CrumbBuilder.create(project.company.name, `/company/${project.company.id}`, 'company').build()];
 	}
 	$crumbs = [
 		...$crumbs,
 		CrumbBuilder.create(project.name, `/project/${project.id}`, 'project').build(),
-		CrumbBuilder.create(
-			scenario.name,
-			`/project/${project.id}/scenario/${scenario.id}`,
-			'scenario'
-		).build()
+		CrumbBuilder.create(scenario.name, `/project/${project.id}/scenario/${scenario.id}`, 'scenario').build()
 	];
 	/*******************************************/
 
@@ -59,26 +49,17 @@
 
 <div class="scenarioContainer">
 	<CardRow title={scenario.name}>
-		<NumberCard title="Anzahl Durchläufe" value={scenario.surveys.length} />
+		<NumberCard title="Anzahl Durchläufe" value={0} />
 		<NumberCard title="Anzahl Fragebögen" value={scenario.surveys.length} />
 	</CardRow>
 	<CardRow title="Fragebogen" smallTitle={true}>
 		{#each scenario.surveys as survey}
-			<SurveyCard
-				{survey}
-				on:click={goto(`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}`)}
-			/>
+			<SurveyCard {survey} on:click={goto(`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}`)} />
 		{/each}
 		<AddCard on:click={() => (surveyPrompt = true)} />
 	</CardRow>
 </div>
-<SurveyPrompt
-	project={project.id}
-	scenario={scenario.id}
-	scenariosDisabled={true}
-	on:success={refreshSurveys}
-	bind:open={surveyPrompt}
-/>
+<SurveyPrompt project={project.id} scenario={scenario.id} scenariosDisabled={true} on:success={refreshSurveys} bind:open={surveyPrompt} />
 
 <style>
 	.scenarioContainer {
