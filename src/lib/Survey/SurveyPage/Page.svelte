@@ -12,6 +12,8 @@
 	export let page;
 
 	export let edit;
+	export let expanded = false;
+
 	let categoryPrompt = false;
 	let selectedCategory;
 
@@ -58,7 +60,7 @@
 				0
 			)}/${category.questions.length})`}
 			remove={edit}
-			expanded={edit}
+			{expanded}
 			on:remove={() => {
 				removeCategory(category);
 			}}

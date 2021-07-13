@@ -109,7 +109,7 @@
 			</TableAttributes>
 			<TableBody>
 				{#each survey.responses as response}
-					<TableBodyRow>
+					<TableBodyRow on:click={() => goto(`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/response/${response.id}`)}>
 						<TableBodyItem>{parseEnumToEmoji(response.typ)}</TableBodyItem>
 						<TableBodyItem>{response.testperson.name}</TableBodyItem>
 						<TableBodyItem>{response.user.name}</TableBodyItem>
@@ -133,7 +133,6 @@
 				edit={true}
 				on:edit={() => {
 					selectedPage = page;
-					console.log('Now selected', selectedPage);
 					pagePrompt = true;
 				}}
 				remove={true}
@@ -142,7 +141,7 @@
 				}}
 			>
 				<div>
-					<Page bind:page edit={true} {survey} {project} {scenario} />
+					<Page bind:page edit={true} expanded={true} {survey} {project} {scenario} />
 					<hr />
 				</div>
 			</Surface>

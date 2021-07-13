@@ -28,7 +28,7 @@ export async function post(request) {
         testpersonData.name = testperson.name;
         testpersonData.signature = testperson.signature;
         testpersonData.age = testperson.age;
-        testpersonData.testPersonSex = testperson.gender;
+        testpersonData.testpersonSex = testperson.testpersonSex;
         const testpersonObject = await prisma.testperson.create({ data: testpersonData });
 
         // Create Response

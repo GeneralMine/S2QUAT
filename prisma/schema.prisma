@@ -336,7 +336,7 @@ model Testperson {
   signature     Boolean
   age           Int?
   response      Response[]
-  testPersonSex TestpersonSex?
+  testpersonSex TestpersonSex?
 }
 
 enum TestpersonSex {

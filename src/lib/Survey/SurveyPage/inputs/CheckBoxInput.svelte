@@ -3,6 +3,13 @@
 	export let checkbox;
 
 	let raw = [];
+	if (checkbox) {
+		for (let index = 0; index < checkbox.length; index++) {
+			if (checkbox[index]) {
+				raw.push(index);
+			}
+		}
+	}
 	function updateSelection() {
 		checkbox = options.map((el, index) => raw.includes(index));
 	}

@@ -26,13 +26,14 @@
 					<input type="number" bind:value={testperson.age} placeholder="23" label="Alter" />
 				</label>
 			</div>
-			<div class="testPersonFormGender">
+			<div class="testPersonFormSex">
 				<label>
 					Geschlecht:
-					<select bind:value={testperson.gender}>
-						<option>MALE</option>
-						<option>FEMALE</option>
-						<option>NON_BINARY</option>
+					<select bind:value={testperson.testpersonSex}>
+						<option value={null}>Keine Angabe</option>
+						<option value="FEMALE">Frau</option>
+						<option value="MALE">Mann</option>
+						<option value="NON_BINARY">Nicht binär</option>
 					</select>
 				</label>
 			</div>
@@ -85,7 +86,7 @@
 		height: 100%;
 		width: 40%;
 	}
-	.testPersonFormGender {
+	.testPersonFormSex {
 		display: flex;
 		justify-content: center;
 		align-items: center;
