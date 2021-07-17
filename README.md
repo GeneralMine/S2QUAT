@@ -1,27 +1,37 @@
-# S2QUAT
-![Test](https://github.com/GeneralMine/S2QUAT/workflows/Test/badge.svg)
-S2QUAT an Integrative Quality Framework for Developing Industrial Smart Services 
+![S2QUAT](https://github.com/GeneralMine/GeneralMine/blob/master/static/logo-width.png")
 
-## Database
-To startup the database use: `docker run --name mariadb -e MYSQL_ROOT_PASSWORD=password -d -v ./db:/var/lib/mysql -p 3306:3306 mariadb:latest`
+<div align="center">
+    <h1>S2QUAT</h1>
+    <p>An Integrative Quality Framework for Developing Industrial Smart Services</p>
+    <a href="https://github.com/GeneralMine/S2QUAT/actions"><img src="https://github.com/GeneralMine/S2QUAT/workflows/Test/badge.svg" /></a>
+    <a href="https://github.com/GeneralMine/S2QUAT/releases"><img src="https://img.shields.io/github/package-json/v/generalmine/s2quat" /></a>
+    <a href="https://github.com/GeneralMine/S2QUAT/commits/master"><img src="https://img.shields.io/github/last-commit/generalmine/s2quat" /></a>
+    <br />
+    <br />
+    <a href="https://s2quat.raiser.dev/">Website</a>
+    <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+    <a href="https://www.iao.fraunhofer.de/">Fraunhofer IAO</a>
+    <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+    <a href="https://biec.iao.fraunhofer.de/">Business Innovation Engineering Center</a>
+    <span>&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+    <a href="https://s2quat.raiser.dev/about">About</a>
+    <br />
+    <hr />
+</div>
 
-### How to update schema on production server?
-Dont recreate the last image! Abort the github action and pull locally!
-Take care of data loss! So make a backup in advance
+README under construction...
 
-`sudo zip -r db.zip db`
+## Contributors
+> I want to thank all contributors for their help shaping S2QUAT!
 
-Get the new schema
+#### Svelte Magician
+[**Julius Weber**](https://github.com/ciearius) thank you for the amazing and massive support in development! You are a beautiful coding partner in pair-programming and my best rubber duck! Your great advices made all this possible! You were and always be an awesome and funny mentor teaching me all that Full-Stack about Node, PRISMA, JS, HTML, CSS, Svelte and all its extensions!
 
-`git pull`
+#### Server Maintenance
+[**Adrian Raiser**](https://github.com/raisierer) you did an awesome job keeping our servers almost always up and running! Directing our traffic to the right endpoints unside our server cluster using load balancing and Docker.
 
-Then copy the new schema file into the container: 
+#### Concept and Design
+Thanks [**Louisa Loew**](https://de.linkedin.com/in/louisa-loew-73a55a176) for the big support in the beginning of the project! Your concept ideas as well as your design mockups were amazing! Your designs shaped the entire project.
 
-`docker cp prisma/schema.prisma s2quat:/app/prisma/schema.prisma`
-
-And push the changes 
-
-`docker exec -it s2quat npx prisma db push`
-
-## Danke
-Danke an den Svelte Magier Julius Weber!
+#### UX, Testing and Database Maintenance
+[**Tatjana Ossig**](https://github.com/TADDII) thank you for giving great advice regarding design and user experience. While testing you have uncovered bugs where none should have been and discovered potential for fine-tuning. Together with [**Christian Ankele**](https://www.instagram.com/chrisnkle/) you helped maintaining the structure of non-critical data keeping them in the right shape!
