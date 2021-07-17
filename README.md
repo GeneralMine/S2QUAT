@@ -1,4 +1,4 @@
-![S2QUAT](https://github.com/GeneralMine/GeneralMine/blob/master/static/logo-width.png)
+![S2QUAT](https://github.com/GeneralMine/S2QUAT/blob/master/static/logo-width.png)
 
 <div align="center">
     <h1>S2QUAT</h1>
