@@ -1,4 +1,5 @@
-![S2QUAT](https://github.com/GeneralMine/S2QUAT/blob/master/static/logo-width.png)
+<a href="https://s2quat.raiser.dev"><img src="https://github.com/GeneralMine/S2QUAT/blob/master/static/logo-width.png)
+" /></a>
 
 <div align="center">
     <h1>S2QUAT</h1>
