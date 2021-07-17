@@ -30,15 +30,15 @@
     "eslint-plugin-svelte3": "^3.2.0",
     "prettier": "~2.2.1",
     "prettier-plugin-svelte": "^2.2.0",
-    "prisma": "^2.26.0",
+    "prisma": "^2.27.0",
     "svelte": "^3.34.0"
   },
   "dependencies": {
-    "svelte-chartjs": "^1.0.1",
     "@fontsource/nunito-sans": "^4.4.5",
-    "@prisma/client": "^2.26.0",
+    "@prisma/client": "^2.27.0",
     "bcrypt": "^5.0.1",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "svelte-chartjs": "^1.0.1"
   },
   "type": "module"
 }
