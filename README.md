@@ -1,7 +1,6 @@
-<a href="https://s2quat.raiser.dev"><img src="https://github.com/GeneralMine/S2QUAT/blob/master/static/logo-width.png)
-" /></a>
-
 <div align="center">
+    <a href="https://s2quat.raiser.dev"><img src="https://github.com/GeneralMine/S2QUAT/blob/master/static/logo-width.png")
+" /></a>
     <h1>S2QUAT</h1>
     <p>An Integrative Quality Framework for Developing Industrial Smart Services</p>
     <a href="https://github.com/GeneralMine/S2QUAT/actions"><img src="https://github.com/GeneralMine/S2QUAT/workflows/Test/badge.svg" /></a>
