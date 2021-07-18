@@ -1,10 +1,11 @@
-![S2QUAT](https://github.com/GeneralMine/GeneralMine/blob/master/static/logo-width.png")
-
 <div align="center">
+    <a href="https://s2quat.raiser.dev"><img src="https://github.com/GeneralMine/S2QUAT/blob/master/static/logo-width.png")
+" /></a>
     <h1>S2QUAT</h1>
     <p>An Integrative Quality Framework for Developing Industrial Smart Services</p>
-    <a href="https://github.com/GeneralMine/S2QUAT/actions"><img src="https://github.com/GeneralMine/S2QUAT/workflows/Test/badge.svg" /></a>
     <a href="https://github.com/GeneralMine/S2QUAT/releases"><img src="https://img.shields.io/github/package-json/v/generalmine/s2quat" /></a>
+    <a href="https://github.com/GeneralMine/S2QUAT/actions"><img src="https://github.com/GeneralMine/S2QUAT/workflows/Test/badge.svg" /></a>
+    <a href="https://github.com/GeneralMine/S2QUAT/releases"><img src="https://img.shields.io/github/workflow/status/generalmine/s2quat/CodeQL?label=Code%20Quality" /></a>
     <a href="https://github.com/GeneralMine/S2QUAT/commits/master"><img src="https://img.shields.io/github/last-commit/generalmine/s2quat" /></a>
     <br />
     <br />
