@@ -83,6 +83,7 @@ model Attribute {
 
   name        String
   description String?
+  order       Int?
   factors     Factor[]
   templates   Template[]
 
@@ -130,6 +131,7 @@ model Criteria {
 
   name        String
   description String?
+  order       Int?
   templates   Template[]
 
   factorId Int?
@@ -145,6 +147,7 @@ model Factor {
 
   name        String
   description String?
+  order       Int?
   criterias   Criteria[]
   templates   Template[]
 
@@ -161,6 +164,7 @@ model Field {
 
   name        String
   description String?
+  order       Int?
   attributes  Attribute[]
   templates   Template[]
 }
