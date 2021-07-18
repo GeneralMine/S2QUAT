@@ -29,7 +29,7 @@ README under construction...
 [**Julius Weber**](https://github.com/ciearius) thank you for the amazing and massive support in development! You are a beautiful coding partner in pair-programming and my best rubber duck! Your great advices made all this possible! You were and always be an awesome and funny mentor teaching me all that Full-Stack about Node, PRISMA, JS, HTML, CSS, Svelte and all its extensions!
 
 #### Server Maintenance
-[**Adrian Raiser**](https://github.com/raisierer) you did an awesome job keeping our servers almost always up and running! Directing our traffic to the right endpoints unside our server cluster using load balancing and Docker.
+[**Adrian Raiser**](https://github.com/raisierer) you did an awesome job keeping our servers almost always up and running! Directing our traffic to the right endpoints inside our server cluster using load balancing and Docker.
 
 #### Concept and Design
 Thanks [**Louisa Loew**](https://de.linkedin.com/in/louisa-loew-73a55a176) for the big support in the beginning of the project! Your concept ideas as well as your design mockups were amazing! Your designs shaped the entire project.
