@@ -3,8 +3,9 @@
 " /></a>
     <h1>S2QUAT</h1>
     <p>An Integrative Quality Framework for Developing Industrial Smart Services</p>
-    <a href="https://github.com/GeneralMine/S2QUAT/actions"><img src="https://github.com/GeneralMine/S2QUAT/workflows/Test/badge.svg" /></a>
     <a href="https://github.com/GeneralMine/S2QUAT/releases"><img src="https://img.shields.io/github/package-json/v/generalmine/s2quat" /></a>
+    <a href="https://github.com/GeneralMine/S2QUAT/actions"><img src="https://github.com/GeneralMine/S2QUAT/workflows/Test/badge.svg" /></a>
+    <a href="https://github.com/GeneralMine/S2QUAT/releases"><img src="https://github.com/generalmine/s2quat/actions?query=workflow%3ACodeQL" /></a>
     <a href="https://github.com/GeneralMine/S2QUAT/commits/master"><img src="https://img.shields.io/github/last-commit/generalmine/s2quat" /></a>
     <br />
     <br />
