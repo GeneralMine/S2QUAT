@@ -6,11 +6,14 @@
 	import Surface from '$lib/Common/Surface.svelte';
 	import ModelItem from '$lib/Model/ModelItem.svelte';
 	import Model from '$lib/Model/Model.svelte';
+	import Overview from '$lib/Model/Overview.svelte';
 </script>
 
 <svelte:head>
 	<title>Modell | S2QUAT</title>
 </svelte:head>
+
+<Overview />
 
 <Surface>
 	<Model />
