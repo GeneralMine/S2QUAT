@@ -133,6 +133,7 @@ model Criteria {
   description String?
   order       Int?
   templates   Template[]
+  questions   Question[]
 
   factorId Int?
   factor   Factor? @relation(fields: [factorId], references: [id])
@@ -150,6 +151,7 @@ model Factor {
   order       Int?
   criterias   Criteria[]
   templates   Template[]
+  questions   Question[]
 
   attributeId Int?
   attribute   Attribute? @relation(fields: [attributeId], references: [id])
@@ -228,18 +230,30 @@ model Question {
   categoryId Int?
   category   Category? @relation(fields: [categoryId], references: [id])
 
-  surveyId Int?
-  survey   Survey? @relation(fields: [surveyId], references: [id])
+  surveyId Int
+  survey   Survey @relation(fields: [surveyId], references: [id])
+
+  factorId Int?
+  factor   Factor? @relation(fields: [factorId], references: [id])
+
+  criteriaId Int?
+  criteria   Criteria? @relation(fields: [criteriaId], references: [id])
 }
 
 enum QuestionType {
-  SCORE
   TEXT
+
+  SCORE
   SCORE_TEXT
+
   BOOLEAN
+  BOOLEAN_TEXT
+
   CHECKBOX
+  CHECKBOX_TEXT
+
   RADIOBUTTON
-  CHECKBOX_OTHER
+  RADIOBUTTON_TEXT
 }
 
 // Response
@@ -253,16 +267,16 @@ model Response {
   feedback String?
   notes    String?
   answers  Answer[]
-  typ      ResponseType @default(VALID)
+  type     ResponseType @default(VALID)
 
   userId Int
   user   User @relation(fields: [userId], references: [id])
 
-  surveyId Int?
-  survey   Survey? @relation(fields: [surveyId], references: [id])
+  surveyId Int
+  survey   Survey @relation(fields: [surveyId], references: [id])
 
-  testpersonId Int?
-  testperson   Testperson? @relation(fields: [testpersonId], references: [id])
+  testpersonId Int
+  testperson   Testperson @relation(fields: [testpersonId], references: [id])
 }
 
 enum ResponseType {
@@ -292,15 +306,15 @@ model Survey {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name                  String
-  description           String?
-  order                 Int          @default(0)
-  canRegisterTestperson Boolean      @default(false)
-  status                SurveyStatus @default(ACTIVE)
-  responses             Response[]
-  pages                 Page[]
-  categories            Category[]
-  questions             Question[]
+  name                String
+  description         String?
+  order               Int?
+  openForRegistration Boolean      @default(false)
+  status              SurveyStatus @default(ACTIVE)
+  responses           Response[]
+  pages               Page[]
+  categories          Category[]
+  questions           Question[]
 
   scenarioId Int
   scenario   Scenario @relation(fields: [scenarioId], references: [id])
@@ -321,12 +335,13 @@ model Template {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name       String
-  fields     Field[]
-  attributes Attribute[]
-  factors    Factor[]
-  criterias  Criteria[]
-  surveys    Survey[]
+  name        String
+  description String?
+  fields      Field[]
+  attributes  Attribute[]
+  factors     Factor[]
+  criterias   Criteria[]
+  surveys     Survey[]
 }
 
 // TestPerson
