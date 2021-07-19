@@ -12,7 +12,7 @@
 
 	export let open;
 	let requiredWarning = false;
-	let types = ['SCORE', 'TEXT', 'SCORE_TEXT', 'BOOLEAN', 'CHECKBOX', 'RADIOBUTTON', 'CHECKBOX_OTHER'];
+	let types = ['TEXT', 'SCORE', 'SCORE_TEXT', 'BOOLEAN', 'BOOLEAN_TEXT', 'CHECKBOX', 'CHECKBOX_TEXT', 'RADIOBUTTON', 'RADIOBUTTON_TEXT'];
 
 	// For edit an existing!
 	export let question;
@@ -42,6 +42,7 @@
 					type: question.type,
 					typeOptions: options,
 					order: question.order,
+					negate: question.negate,
 					survey,
 					category
 				})
@@ -97,6 +98,10 @@
 						<option value={type}>{parseEnumToEmoji(type)} - {type}</option>
 					{/each}
 				</select>
+			</ListItemRow>
+			<ListItemRow>
+				<p>Negierte Frage?</p>
+				<input type="checkbox" bind:checked={question.negate} />
 			</ListItemRow>
 			<ListItemRow>
 				<p>Reihenfolge</p>

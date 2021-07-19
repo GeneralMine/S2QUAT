@@ -11,7 +11,7 @@ export async function post(request) {
         return fail(401, "Du verfügst nicht über die benötigte Berechtigung!");
     }
 
-    let { name, description, order, survey, category, type, typeOptions, id } = request.body;
+    let { name, description, order, survey, category, type, typeOptions, negate, id } = request.body;
 
     if (!name) {
         console.log("No question name was provided!");
@@ -24,6 +24,7 @@ export async function post(request) {
     if (order) data.order = order;
     if (type) data.type = type;
     if (typeOptions) data.typeOptions = typeOptions;
+    if (negate) data.negate = negate;
     if (survey) data.survey = { connect: { id: survey } };
     if (category) data.category = { connect: { id: category } };
 
