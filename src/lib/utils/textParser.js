@@ -30,3 +30,7 @@ export function parseEnumToEmoji(str) {
     if (str === 'CHECKBOX_OTHER') return '☑️📝';
     return str;
 }
+
+export function parseDate(date) {
+    return new Date(date).toLocaleDateString();
+}

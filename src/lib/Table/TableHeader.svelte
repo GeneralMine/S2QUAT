@@ -4,6 +4,8 @@
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
+	export let createButton;
+
 	let value = '';
 
 	function create() {
@@ -22,7 +24,9 @@
 		<SearchBar bind:value on:change={search} />
 	</div>
 	<div class="tableHeaderCreate">
-		<button on:click={create}>Create</button>
+		{#if createButton}
+			<button on:click={create}>Create</button>
+		{/if}
 	</div>
 </div>
 

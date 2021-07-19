@@ -1,7 +1,8 @@
 <script>
 	export let count;
+	export let limit;
 	export let from = 1;
-	export let to = count;
+	export let to = limit || count;
 </script>
 
 <div class="tableFooter">
