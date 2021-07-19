@@ -46,12 +46,6 @@
 		align-items: center;
 	}
 
-	.logoImg {
-		width: 30%;
-		object-fit: contain;
-		padding-right: 1rem;
-	}
-
 	.name {
 		font-weight: 500;
 		font-size: 1.15rem;
