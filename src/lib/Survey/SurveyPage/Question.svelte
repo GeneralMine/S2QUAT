@@ -16,22 +16,28 @@
 <div class="content">
 	<p class="textBlock">{question.description}</p>
 
-	{#if question.type === 'SCORE'}
-		<ScoreInput bind:score={question.answer.score} {edit} />
-	{:else if question.type === 'TEXT'}
+	{#if question.type === 'TEXT'}
 		<TextInput bind:text={question.answer.text} {edit} />
+	{:else if question.type === 'SCORE'}
+		<ScoreInput bind:score={question.answer.score} {edit} />
 	{:else if question.type === 'SCORE_TEXT'}
 		<ScoreInput bind:score={question.answer.score} {edit} />
 		<TextInput bind:text={question.answer.text} {edit} />
 	{:else if question.type === 'BOOLEAN'}
 		<BooleanInput bind:boolean={question.answer.boolean} {edit} options={question.typeOptions} />
+	{:else if question.type === 'BOOLEAN_TEXT'}
+		<BooleanInput bind:boolean={question.answer.boolean} {edit} options={question.typeOptions} />
+		<TextInput bind:text={question.answer.text} {edit} />
 	{:else if question.type === 'CHECKBOX'}
 		<CheckBoxInput bind:checkbox={question.answer.checkbox} {edit} options={question.typeOptions} />
+	{:else if question.type === 'CHECKBOX_TEXT'}
+		<CheckBoxInput bind:checkbox={question.answer.checkbox} {edit} options={question.typeOptions} />
+		<TextInput bind:text={question.answer.text} {edit} />
 	{:else if question.type === 'RADIOBUTTON'}
 		<RadioButtonInput bind:radiobutton={question.answer.radiobutton} options={question.typeOptions} {edit} />
-	{:else if question.type === 'CHECKBOX_OTHER'}
-		<CheckBoxInput bind:checkbox={question.answer.checkbox} {edit} options={question.typeOptions} />
-		<TextInput rows="2" placeholder="Sonstiges..." bind:text={question.answer.text} {edit} />
+	{:else if question.type === 'RADIOBUTTON_TEXT'}
+		<RadioButtonInput bind:radiobutton={question.answer.radiobutton} options={question.typeOptions} {edit} />
+		<TextInput bind:text={question.answer.text} {edit} />
 	{/if}
 </div>
 
