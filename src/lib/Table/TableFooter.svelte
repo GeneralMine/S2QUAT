@@ -2,7 +2,7 @@
 	export let count;
 	export let limit;
 	export let from = 1;
-	export let to = limit || count;
+	export let to = limit > count ? count : limit;
 </script>
 
 <div class="tableFooter">
