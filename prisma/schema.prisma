@@ -224,6 +224,7 @@ model Question {
   description String?
   typeOptions String[]
   order       Int?
+  negate      Boolean?
   answers     Answer[]
   type        QuestionType @default(SCORE)
 
