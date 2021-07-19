@@ -40,6 +40,9 @@ export async function get(request) {
                             testperson: true,
                             user: true,
                             answers: true
+                        },
+                        orderBy: {
+                            updatedAt: "desc"
                         }
                     },
                     scenario: true,

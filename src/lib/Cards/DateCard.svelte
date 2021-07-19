@@ -1,12 +1,10 @@
 <script>
+	import { parseDate } from '$lib/utils/textParser';
+
 	import TitledCard from './CardComponents/TitledCard.svelte';
 
 	export let startDate;
 	export let endDate;
-
-	function parseDate(date) {
-		return new Date(date).toLocaleDateString();
-	}
 </script>
 
 <TitledCard title="Zeitraum">

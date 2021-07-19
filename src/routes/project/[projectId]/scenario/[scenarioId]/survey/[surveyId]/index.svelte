@@ -46,7 +46,7 @@
 	import TableBody from '$lib/Table/TableBody.svelte';
 	import TableBodyItem from '$lib/Table/TableBodyItem.svelte';
 	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
-	import { parseEnumToEmoji } from '$lib/utils/textParser';
+	import { parseDate, parseEnumToEmoji } from '$lib/utils/textParser';
 	let pagePrompt = false;
 	let selectedPage;
 
@@ -97,7 +97,7 @@
 	</CardRow>
 
 	<Surface title="Antworten" smallTitle={true}>
-		<Table count={survey.responses.length}>
+		<Table count={survey.responses.length} limit={5}>
 			<TableAttributes>
 				<TableAttributesItem>Valide</TableAttributesItem>
 				<TableAttributesItem>Testperson</TableAttributesItem>
@@ -106,17 +106,19 @@
 				<TableAttributesItem>Ort</TableAttributesItem>
 				<TableAttributesItem>Feedback</TableAttributesItem>
 				<TableAttributesItem>Notes</TableAttributesItem>
+				<TableAttributesItem>Updated</TableAttributesItem>
 			</TableAttributes>
 			<TableBody>
-				{#each survey.responses as response}
+				{#each survey.responses.slice(0, 5) as response}
 					<TableBodyRow on:click={() => goto(`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/response/${response.id}`)}>
-						<TableBodyItem>{parseEnumToEmoji(response.typ)}</TableBodyItem>
+						<TableBodyItem>{parseEnumToEmoji(response.type)}</TableBodyItem>
 						<TableBodyItem>{response.testperson.name}</TableBodyItem>
 						<TableBodyItem>{response.user.name}</TableBodyItem>
 						<TableBodyItem>{response.answers.length} / {survey.questions.length}</TableBodyItem>
 						<TableBodyItem>{response.location}</TableBodyItem>
 						<TableBodyItem>{response.feedback}</TableBodyItem>
 						<TableBodyItem>{response.notes}</TableBodyItem>
+						<TableBodyItem>{parseDate(response.updatedAt)}</TableBodyItem>
 					</TableBodyRow>
 				{/each}
 			</TableBody>
