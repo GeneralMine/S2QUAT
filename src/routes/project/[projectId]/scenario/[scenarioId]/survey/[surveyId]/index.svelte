@@ -83,6 +83,8 @@
 		survey.pages.sort((a, b) => a.order - b.order);
 	}
 	sort();
+
+	let limit = 50;
 </script>
 
 <svelte:head>
@@ -97,7 +99,7 @@
 	</CardRow>
 
 	<Surface title="Antworten" smallTitle={true}>
-		<Table count={survey.responses.length} limit={5}>
+		<Table count={survey.responses.length} {limit}>
 			<TableAttributes>
 				<TableAttributesItem>Valide</TableAttributesItem>
 				<TableAttributesItem>Testperson</TableAttributesItem>
@@ -109,7 +111,7 @@
 				<TableAttributesItem>Updated</TableAttributesItem>
 			</TableAttributes>
 			<TableBody>
-				{#each survey.responses.slice(0, 5) as response}
+				{#each survey.responses.slice(0, limit) as response}
 					<TableBodyRow on:click={() => goto(`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/response/${response.id}`)}>
 						<TableBodyItem>{parseEnumToEmoji(response.type)}</TableBodyItem>
 						<TableBodyItem>{response.testperson.name}</TableBodyItem>
