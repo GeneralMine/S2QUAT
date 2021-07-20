@@ -6,6 +6,7 @@
     <a href="https://github.com/GeneralMine/S2QUAT/releases"><img src="https://img.shields.io/github/package-json/v/generalmine/s2quat" /></a>
     <a href="https://github.com/GeneralMine/S2QUAT/actions"><img src="https://github.com/GeneralMine/S2QUAT/workflows/Test/badge.svg" /></a>
     <a href="https://github.com/GeneralMine/S2QUAT/releases"><img src="https://img.shields.io/github/workflow/status/generalmine/s2quat/CodeQL?label=Code%20Quality" /></a>
+    <a href="https://www.codacy.com/gh/GeneralMine/S2QUAT/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=GeneralMine/S2QUAT&amp;utm_campaign=Badge_Grade"><img src="https://img.shields.io/codacy/grade/ac36f1d0dee9494697b81e022617e37a" /></a>
     <a href="https://github.com/GeneralMine/S2QUAT/commits/master"><img src="https://img.shields.io/github/last-commit/generalmine/s2quat" /></a>
     <br />
     <br />
