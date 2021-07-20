@@ -68,7 +68,7 @@
 		</Collapsable>
 	{/each}
 	{#if edit}
-		<ListItemRowAdd text="Neue Frage hinzufügen" on:click={() => (factorPrompt = factorPrompt = true)} />
+		<ListItemRowAdd text="Neuen Faktor hinzufügen" on:click={() => (factorPrompt = factorPrompt = true)} />
 	{/if}
 </div>
 

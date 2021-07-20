@@ -50,7 +50,7 @@
 
 <Prompt bind:open on:close={closePrompt}>
 	<slot slot="header">
-		<h2>Kriterium</h2>
+		<h2>Bewertungskriterium</h2>
 	</slot>
 	<slot>
 		<List>
@@ -68,11 +68,11 @@
 			</ListItemRow>
 			<ListItemRow>
 				<p>Beschreibung</p>
-				<textarea rows="4" placeholder="Kriteriumbeschreibung" bind:value={criteria.description} />
+				<textarea rows="4" placeholder="Beschreibung des Kriteriums" bind:value={criteria.description} />
 			</ListItemRow>
 			<ListItemRow>
 				<p>Reihenfolge</p>
-				<input type="number" bind:value={criteria.order} />
+				<input type="number" placeholder="0" bind:value={criteria.order} />
 			</ListItemRow>
 		</List>
 	</slot>

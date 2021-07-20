@@ -60,18 +60,18 @@
 					class:requiredWarning
 					required
 					type="text"
-					placeholder="Name der neuen Kategorie"
+					placeholder="Name des Faktors"
 					bind:value={factor.name}
 					on:change={() => (requiredWarning = false)}
 				/>
 			</ListItemRow>
 			<ListItemRow>
 				<p>Beschreibung</p>
-				<textarea rows="4" placeholder="Kategorienbeschreibung" bind:value={factor.description} />
+				<textarea rows="4" placeholder="Beschreibung des Faktors" bind:value={factor.description} />
 			</ListItemRow>
 			<ListItemRow>
 				<p>Reihenfolge</p>
-				<input type="number" bind:value={factor.order} />
+				<input type="number" placeholder="0" bind:value={factor.order} />
 			</ListItemRow>
 		</List>
 	</slot>

@@ -43,7 +43,7 @@
 
 <Prompt bind:open on:close={closePrompt}>
 	<slot slot="header">
-		<h2>Aktualisiere Feld</h2>
+		<h2>Bewertungsfeld</h2>
 	</slot>
 	<slot>
 		<List>
@@ -65,7 +65,7 @@
 			</ListItemRow>
 			<ListItemRow>
 				<p>Reihenfolge</p>
-				<input type="number" bind:value={field.order} />
+				<input type="number" placeholder="0" bind:value={field.order} />
 			</ListItemRow>
 		</List>
 	</slot>
