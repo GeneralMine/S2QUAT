@@ -1,4 +1,8 @@
 <script>
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+
 	export let count;
 	export let limit;
 	export let from;
@@ -8,12 +12,14 @@
 		if (from - limit >= 0) {
 			from -= limit;
 			to -= limit;
+			dispatch('update');
 		}
 	}
 	function next() {
 		if (to + limit <= count) {
 			from += limit;
 			to += limit;
+			dispatch('update');
 		}
 	}
 </script>

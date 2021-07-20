@@ -86,11 +86,21 @@
 
 	let limit = 5;
 	let from = 0;
-	let to;
+	let to = limit > survey.responses.length ? survey.responses.length : limit;
 
-	$: tableEntries = updateList(from, to);
-	const updateList = (from, to) => (tableEntries = survey.responses.slice(from, to));
-	$: updateList(from, to);
+	let weirdo = true;
+
+	let tableEntries = survey.responses.slice(from, to);
+
+	function updateTable() {
+		weirdo = false;
+		tableEntries = survey.responses.slice(from, to);
+
+		Promise.resolve().then(() => {
+			weirdo = true;
+		});
+	}
+
 	$: console.log(tableEntries);
 </script>
 
@@ -106,7 +116,7 @@
 	</CardRow>
 
 	<Surface title="Antworten" smallTitle={true}>
-		<Table count={survey.responses.length} {limit} bind:from bind:to>
+		<Table count={survey.responses.length} {limit} on:update={updateTable} bind:from bind:to>
 			<TableAttributes>
 				<TableAttributesItem>Valide</TableAttributesItem>
 				<TableAttributesItem>Testperson</TableAttributesItem>
@@ -118,18 +128,20 @@
 				<TableAttributesItem>Updated</TableAttributesItem>
 			</TableAttributes>
 			<TableBody>
-				{#each tableEntries as response, index}
-					<TableBodyRow on:click={() => goto(`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/response/${response.id}`)}>
-						<TableBodyItem>{parseEnumToEmoji(response.type)}</TableBodyItem>
-						<TableBodyItem>{response.testperson.name}</TableBodyItem>
-						<TableBodyItem>{response.user.name}</TableBodyItem>
-						<TableBodyItem>{response.answers.length} / {survey.questions.length}</TableBodyItem>
-						<TableBodyItem>{response.location}</TableBodyItem>
-						<TableBodyItem>{response.feedback}</TableBodyItem>
-						<TableBodyItem>{response.notes}</TableBodyItem>
-						<TableBodyItem>{parseDate(response.updatedAt)}</TableBodyItem>
-					</TableBodyRow>
-				{/each}
+				{#if weirdo}
+					{#each tableEntries as response}
+						<TableBodyRow on:click={() => goto(`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/response/${response.id}`)}>
+							<TableBodyItem>{parseEnumToEmoji(response.type)}</TableBodyItem>
+							<TableBodyItem>{response.testperson.name}</TableBodyItem>
+							<TableBodyItem>{response.user.name}</TableBodyItem>
+							<TableBodyItem>{response.answers.length} / {survey.questions.length}</TableBodyItem>
+							<TableBodyItem>{response.location}</TableBodyItem>
+							<TableBodyItem>{response.feedback}</TableBodyItem>
+							<TableBodyItem>{response.notes}</TableBodyItem>
+							<TableBodyItem>{parseDate(response.updatedAt)}</TableBodyItem>
+						</TableBodyRow>
+					{/each}
+				{/if}
 			</TableBody>
 		</Table>
 	</Surface>

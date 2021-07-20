@@ -20,7 +20,7 @@
 		<slot />
 	</table>
 	{#if hasFooter}
-		<TableFooter {count} {limit} bind:from bind:to />
+		<TableFooter on:update {count} {limit} bind:from bind:to />
 	{/if}
 </div>
 

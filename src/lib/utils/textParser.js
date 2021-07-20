@@ -34,5 +34,5 @@ export function parseEnumToEmoji(str) {
 }
 
 export function parseDate(date) {
-    return new Date(date).toLocaleDateString();
+    return new Date(date).toLocaleDateString().replaceAll("/", ".");
 }
