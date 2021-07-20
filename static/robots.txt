@@ -1,3 +1,4 @@
- https://www.robotstxt.org/robotstxt.html
- User-Agent: *
- Disallow: /project
+https://www.robotstxt.org/robotstxt.html
+User-Agent: *
+Disallow: /project 
+Disallow: /model
