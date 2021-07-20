@@ -84,7 +84,14 @@
 	}
 	sort();
 
-	let limit = 50;
+	let limit = 5;
+	let from = 0;
+	let to;
+
+	$: tableEntries = updateList(from, to);
+	const updateList = (from, to) => (tableEntries = survey.responses.slice(from, to));
+	$: updateList(from, to);
+	$: console.log(tableEntries);
 </script>
 
 <svelte:head>
@@ -99,7 +106,7 @@
 	</CardRow>
 
 	<Surface title="Antworten" smallTitle={true}>
-		<Table count={survey.responses.length} {limit}>
+		<Table count={survey.responses.length} {limit} bind:from bind:to>
 			<TableAttributes>
 				<TableAttributesItem>Valide</TableAttributesItem>
 				<TableAttributesItem>Testperson</TableAttributesItem>
@@ -111,7 +118,7 @@
 				<TableAttributesItem>Updated</TableAttributesItem>
 			</TableAttributes>
 			<TableBody>
-				{#each survey.responses.slice(0, limit) as response}
+				{#each tableEntries as response, index}
 					<TableBodyRow on:click={() => goto(`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/response/${response.id}`)}>
 						<TableBodyItem>{parseEnumToEmoji(response.type)}</TableBodyItem>
 						<TableBodyItem>{response.testperson.name}</TableBodyItem>

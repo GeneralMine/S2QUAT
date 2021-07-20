@@ -3,7 +3,10 @@
 	import TableHeader from './TableHeader.svelte';
 
 	export let count;
-	export let limit = 15;
+	export let limit;
+	export let from;
+	export let to;
+
 	export let hasHeader = true;
 	export let hasFooter = true;
 	export let createButton = false;
@@ -17,7 +20,7 @@
 		<slot />
 	</table>
 	{#if hasFooter}
-		<TableFooter {count} {limit} />
+		<TableFooter {count} {limit} bind:from bind:to />
 	{/if}
 </div>
 

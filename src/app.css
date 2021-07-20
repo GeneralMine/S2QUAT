@@ -145,6 +145,8 @@ label {
     cursor: pointer;
     touch-action: manipulation;
     user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
 }
 .clickArea:hover {
     background-color: #35a7e00e;
