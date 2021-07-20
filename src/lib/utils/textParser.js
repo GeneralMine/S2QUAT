@@ -21,13 +21,15 @@ export function parseEnumToEmoji(str) {
     if (str === 'MALE') return '♂️';
     if (str === 'NON_BINARY') return '⚧️';
     // QuestionType
-    if (str === 'SCORE') return '🔢';
     if (str === 'TEXT') return '📝';
+    if (str === 'SCORE') return '🔢';
     if (str === 'SCORE_TEXT') return '🔢📝';
     if (str === 'BOOLEAN') return '0️⃣1️⃣';
+    if (str === 'BOOLEAN_TEXT') return '0️⃣1️⃣📝';
     if (str === 'CHECKBOX') return '☑️';
+    if (str === 'CHECKBOX_TEXT') return '☑️📝';
     if (str === 'RADIOBUTTON') return '🔘';
-    if (str === 'CHECKBOX_OTHER') return '☑️📝';
+    if (str === 'RADIOBUTTON_TEXT') return '🔘📝';
     return str;
 }
 

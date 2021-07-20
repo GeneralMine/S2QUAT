@@ -107,7 +107,7 @@
 				<p>Reihenfolge</p>
 				<input type="number" bind:value={question.order} />
 			</ListItemRow>
-			{#if question.type === 'BOOLEAN' || question.type === 'CHECKBOX' || question.type === 'RADIOBUTTON' || question.type === 'CHECKBOX_OTHER'}
+			{#if question.type === 'BOOLEAN' || question.type === 'BOOLEAN_TEXT' || question.type === 'CHECKBOX' || question.type === 'CHECKBOX_TEXT' || question.type === 'RADIOBUTTON' || question.type === 'RADIOBUTTON_TEXT'}
 				<ListItemRow>
 					<p>Typ Optionen (kommagetrennt)</p>
 					<textarea rows="5" type="text" placeholder="Ja, Nein, Vielleicht" bind:value={question.typeOptions} />
