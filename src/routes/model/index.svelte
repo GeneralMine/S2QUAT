@@ -4,7 +4,6 @@
 	$crumbs = [CrumbBuilder.create('Modell', '/model', 'model').build()];
 	/*******************************************/
 	import Surface from '$lib/Common/Surface.svelte';
-	import ModelItem from '$lib/Model/ModelItem.svelte';
 	import Model from '$lib/Model/Model.svelte';
 	import Overview from '$lib/Model/Overview.svelte';
 </script>
