@@ -34,6 +34,7 @@
 	import AddCard from '$lib/Cards/AddCard.svelte';
 	import ListItemRowAdd from '$lib/List/ListItemRowAdd.svelte';
 	import ScenarioPrompt from '$lib/Prompt/ScenarioPrompt.svelte';
+	import PieCard from '$lib/Cards/PieCard.svelte';
 
 	let scenarioPrompt = false;
 
@@ -54,9 +55,8 @@
 			<AddCard title="Verknüpfe Unternehmen" />
 		{/if}
 
-		<TitledCard title="Handlungsbedarf">Charts kommen erst in v2.1.0</TitledCard>
-		<TitledCard title="Szenarien und ihre Antworten">Charts kommen erst in v2.1.0</TitledCard>
-		<TitledCard title="---">Charts kommen erst in v2.1.0</TitledCard>
+		<PieCard title="Handlungsbedarf" />
+		<PieCard title="Szenarien und ihre Antworten" />
 
 		<DateCard startDate={project.start} endDate={project.end} />
 	</CardRow>

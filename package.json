@@ -37,8 +37,8 @@
     "@fontsource/nunito-sans": "^4.4.5",
     "@prisma/client": "^2.27.0",
     "bcrypt": "^5.0.1",
-    "jsonwebtoken": "^8.5.1",
-    "svelte-chartjs": "^1.0.1"
+    "chart.js": "^3.5.0",
+    "jsonwebtoken": "^8.5.1"
   },
   "type": "module"
 }

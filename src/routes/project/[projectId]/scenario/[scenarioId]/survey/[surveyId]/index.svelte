@@ -47,6 +47,7 @@
 	import TableBodyItem from '$lib/Table/TableBodyItem.svelte';
 	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
 	import { parseDate, parseEnumToEmoji } from '$lib/utils/textParser';
+	import PieCard from '$lib/Cards/PieCard.svelte';
 	let pagePrompt = false;
 	let selectedPage;
 
@@ -100,8 +101,6 @@
 			weirdo = true;
 		});
 	}
-
-	$: console.log(tableEntries);
 </script>
 
 <svelte:head>
@@ -111,8 +110,8 @@
 <div class="surveyContainer">
 	<CardRow title={survey.name}>
 		<NumberCard title="Anzahl Abgaben" value={survey.responses.length} />
-		<TitledCard title="Valide Abgaben">Charts kommen erst in v2.1.0</TitledCard>
-		<TitledCard title="Handlungsbedarf">Charts kommen erst in v2.1.0</TitledCard>
+		<PieCard title="Valide Abgaben" />
+		<PieCard title="Handlungsbedarf" />
 	</CardRow>
 
 	<Surface title="Antworten" smallTitle={true}>

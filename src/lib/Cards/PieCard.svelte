@@ -1,6 +1,7 @@
 <script>
-	import Pie from 'svelte-chartjs/src/Pie.svelte';
 	import TitledIconCard from './CardComponents/TitledIconCard.svelte';
+	import Chart from 'chart.js/auto/auto.esm';
+	import { onDestroy, onMount } from 'svelte';
 
 	export let title = 'Handlungsbedarf';
 	export let icon;
@@ -13,6 +14,8 @@
 		'#11755E', // grün
 		'#C5F6EB' // hellblau
 	];
+
+	let id = randomID();
 
 	let data = {
 		labels,
@@ -35,16 +38,28 @@
 			}
 		}
 	};
+
+	onMount(async () => {
+		let ctx = document.getElementById(id).getContext('2d');
+		let chart = new Chart(ctx, {
+			type: 'pie',
+			data,
+			options
+		});
+		return () => chart.cleanup();
+	});
+
+	function randomID() {
+		return 'chart-' + Math.floor(Math.random() * 1000);
+	}
 </script>
 
 <TitledIconCard {title} {icon}>
-	<div class="chart">
-		<Pie {data} {options} />
-	</div>
+	<canvas {id} />
 </TitledIconCard>
 
 <style>
-	div {
+	canvas {
 		height: 95px;
 		width: 247px;
 	}
