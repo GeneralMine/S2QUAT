@@ -36,4 +36,4 @@ README under construction...
 Thanks [**Louisa Loew**](https://de.linkedin.com/in/louisa-loew-73a55a176) for the big support in the beginning of the project! Your concept ideas as well as your design mockups were amazing! Your designs shaped the entire project.
 
 #### UX, Testing and Database Maintenance
-[**Tatjana Ossig**](https://github.com/TADDII) thank you for giving great advice regarding design and user experience. While testing you have uncovered bugs where none should have been and discovered potential for fine-tuning. Together with [**Christian Ankele**](https://www.instagram.com/chrisnkle/) you helped maintaining the structure of non-critical data keeping them in the right shape!
+[**Tatjana Ossig**](https://github.com/TADDII) thank you for giving great advice regarding design and user experience. While testing you have uncovered bugs where none should have been and discovered potential for fine-tuning. Together with [**Christian Ankele**](https://www.instagram.com/chrisnkle/) and [**Tim Schäfer**](https://github.com/timsch4fer) you helped maintaining the structure of non-critical data keeping them in the right shape!

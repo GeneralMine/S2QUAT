@@ -18,15 +18,24 @@
 	export let project;
 	export let scenario;
 	export let survey;
+	import { del, unpack } from '$lib/utils/api.js';
+	import { goto } from '$app/navigation';
+	import Page from '$lib/Survey/SurveyPage/Page.svelte';
+	import PagePrompt from '$lib/Prompt/PagePrompt.svelte';
 	import CardRow from '$lib/Cards/CardComponents/CardRow.svelte';
-	import TitledCard from '$lib/Cards/CardComponents/TitledCard.svelte';
 	import NumberCard from '$lib/Cards/NumberCard.svelte';
 	import Surface from '$lib/Common/Surface.svelte';
 	import ListItemRowAdd from '$lib/List/ListItemRowAdd.svelte';
+	import Table from '$lib/Table/Table.svelte';
+	import TableAttributes from '$lib/Table/TableAttributes.svelte';
+	import TableAttributesItem from '$lib/Table/TableAttributesItem.svelte';
+	import TableBody from '$lib/Table/TableBody.svelte';
+	import TableBodyItem from '$lib/Table/TableBodyItem.svelte';
+	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
+	import { parseDate, parseEnumToEmoji } from '$lib/utils/textParser';
+	import PieCard from '$lib/Cards/PieCard.svelte';
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Layout/Nav/Breadcrumbs/breadcrumbs';
-	import Page from '$lib/Survey/SurveyPage/Page.svelte';
-	import PagePrompt from '$lib/Prompt/PagePrompt.svelte';
 	$crumbs = [];
 	if (project.company) {
 		$crumbs = [CrumbBuilder.create(project.company.name, `/company/${project.company.id}`, 'company').build()];
@@ -38,16 +47,6 @@
 		CrumbBuilder.create(survey.name, `/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}`, 'survey').build()
 	];
 	/*******************************************/
-	import { del, unpack } from '$lib/utils/api.js';
-	import { goto } from '$app/navigation';
-	import Table from '$lib/Table/Table.svelte';
-	import TableAttributes from '$lib/Table/TableAttributes.svelte';
-	import TableAttributesItem from '$lib/Table/TableAttributesItem.svelte';
-	import TableBody from '$lib/Table/TableBody.svelte';
-	import TableBodyItem from '$lib/Table/TableBodyItem.svelte';
-	import TableBodyRow from '$lib/Table/TableBodyRow.svelte';
-	import { parseDate, parseEnumToEmoji } from '$lib/utils/textParser';
-	import PieCard from '$lib/Cards/PieCard.svelte';
 	let pagePrompt = false;
 	let selectedPage;
 
@@ -111,7 +110,11 @@
 	<CardRow title={survey.name}>
 		<NumberCard title="Anzahl Abgaben" value={survey.responses.length} />
 		<PieCard title="Valide Abgaben" />
-		<PieCard title="Handlungsbedarf" />
+		<PieCard
+			clickArea={true}
+			on:click={() => goto(`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/evaluation`)}
+			title="Handlungsbedarf"
+		/>
 	</CardRow>
 
 	<Surface title="Antworten" smallTitle={true}>

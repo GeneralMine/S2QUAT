@@ -3,6 +3,7 @@
 	import Chart from 'chart.js/auto/auto.esm';
 	import { onDestroy, onMount } from 'svelte';
 
+	export let clickArea;
 	export let title = 'Handlungsbedarf';
 	export let icon;
 	export let labels = ['Niedrig', 'Mittel', 'Hoch'];
@@ -54,7 +55,7 @@
 	}
 </script>
 
-<TitledIconCard {title} {icon}>
+<TitledIconCard on:click {clickArea} {title} {icon}>
 	<canvas {id} />
 </TitledIconCard>
 
