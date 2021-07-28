@@ -20,7 +20,7 @@ export function relativeFrequency(list) {
     let freq = absoluteFrequency(list);
 
     for (let i = 1; i <= 5; i++) {
-        freq["" + i] = freq["" + i] / list.length;
+        freq["" + i] = round(freq["" + i] / list.length);
     }
 
     return freq;
@@ -28,9 +28,9 @@ export function relativeFrequency(list) {
 
 // Mittelwert
 export function average(list) {
-    return list.reduce(function (a, b) {
+    return round(list.reduce(function (a, b) {
         return a + b;
-    }) / list.length;
+    }) / list.length);
 }
 
 // Median
@@ -59,7 +59,7 @@ export function variance(list) {
         sum += Math.pow(num - avg, 2);
     }
 
-    return Math.sqrt(sum / (list.length - 1));
+    return round(Math.sqrt(sum / (list.length - 1)));
 }
 
 // Minimum
@@ -80,4 +80,9 @@ export function lowerQuartile(list) {
 // oberes Quartil
 export function upperQuartile(list) {
     return list[Math.floor(list.length / 4 * 3)];
+}
+
+// rounds a float to two decimals
+function round(float) {
+    return Math.round((float + Number.EPSILON) * 100) / 100;
 }

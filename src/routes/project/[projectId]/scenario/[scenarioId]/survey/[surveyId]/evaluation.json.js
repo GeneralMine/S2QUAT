@@ -83,7 +83,6 @@ export async function get(request) {
             else
                 return el.criteria.factor.attribute.fieldId;
         }).filter(el => el);
-        console.log(fieldIds);
         let attributeIds = survey.questions.map(el => {
             if (el.factor)
                 return el.factor.attributeId;
@@ -91,6 +90,7 @@ export async function get(request) {
                 return el.criteria.factor.attributeId;
         }).filter(el => el);
         let factorIds = survey.questions.map(el => el.factorId).filter(el => el);
+        let criteriaIds = survey.questions.map(el => el.criteriaId).filter(el => el);
         let questionIds = survey.questions.map(el => el.id).filter(el => el);
 
         // 1: Build tree based on model
@@ -132,8 +132,22 @@ export async function get(request) {
                                 },
                                 criterias: {
                                     where: {
+                                        OR: [
+                                            {
+                                                id: { in: criteriaIds }
+                                            },
+                                            {
+                                                questions: {
+                                                    some: {
+                                                        id: { in: questionIds }
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    include: {
                                         questions: {
-                                            some: {
+                                            where: {
                                                 id: { in: questionIds }
                                             }
                                         }
@@ -168,20 +182,44 @@ export async function get(request) {
                 data.sort();
 
                 for (const field of evaluation) {
+                    // add field check
                     for (const attribute of field.attributes) {
+                        // add attribute check
                         for (const factor of attribute.factors) {
-                            for (const ques of factor.questions) {
-                                ques.absoluteFrequency = absoluteFrequency(data);
-                                ques.relativeFrequency = relativeFrequency(data);
-                                ques.average = average(data);
-                                ques.median = median(data);
-                                ques.modus = modus(data);
-                                ques.variance = variance(data);
-                                ques.min = min(data);
-                                ques.max = max(data);
-                                ques.lowerQuartile = lowerQuartile(data);
-                                ques.upperQuartile = upperQuartile(data);
-                                ques.n = data.length;
+                            // add factor check
+                            if (factor.questions.length > 0) {
+                                factor.question = factor.questions[0];
+                                console.log(factor.question);
+                                console.log(data);
+                                delete factor.questions;
+                                factor.question.absoluteFrequency = absoluteFrequency(data);
+                                factor.question.relativeFrequency = relativeFrequency(data);
+                                factor.question.average = average(data);
+                                factor.question.median = median(data);
+                                factor.question.modus = modus(data);
+                                factor.question.variance = variance(data);
+                                factor.question.min = min(data);
+                                factor.question.max = max(data);
+                                factor.question.lowerQuartile = lowerQuartile(data);
+                                factor.question.upperQuartile = upperQuartile(data);
+                                factor.question.n = data.length;
+                            } else {
+                                for (const criteria of factor.criterias) {
+                                    criteria.question = criteria.questions[0];
+                                    delete criteria.questions;
+                                    console.log(criteria.question);
+                                    criteria.question.absoluteFrequency = absoluteFrequency(data);
+                                    criteria.question.relativeFrequency = relativeFrequency(data);
+                                    criteria.question.average = average(data);
+                                    criteria.question.median = median(data);
+                                    criteria.question.modus = modus(data);
+                                    criteria.question.variance = variance(data);
+                                    criteria.question.min = min(data);
+                                    criteria.question.max = max(data);
+                                    criteria.question.lowerQuartile = lowerQuartile(data);
+                                    criteria.question.upperQuartile = upperQuartile(data);
+                                    criteria.question.n = data.length;
+                                }
                             }
                         }
                     }
@@ -191,7 +229,7 @@ export async function get(request) {
 
         return send({ survey, evaluation });
     } catch (err) {
-        console.error("Failed to load all surveys:", err);
+        console.error("Failed to load evaluation of survey:", err);
         return fail(400, err);
     }
 }

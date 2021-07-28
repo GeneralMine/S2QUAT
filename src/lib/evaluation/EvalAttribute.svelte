@@ -1,5 +1,7 @@
 <script>
 	import Collapsable from '$lib/Common/Collapsable.svelte';
+	import EvalFactor from './EvalFactor.svelte';
+	import EvalQuestion from './EvalQuestion.svelte';
 
 	export let field;
 	export let attribute;
@@ -9,7 +11,13 @@
 	<p class="textBlock">{attribute.description}</p>
 	{#each attribute.factors as factor}
 		<Collapsable title={factor.name} expanded={true}>
-			<Factor bind:factor {field} {attribute} />
+			{#if factor.questions.length > 0}
+				{#each factor.questions as question}
+					<EvalQuestion bind:question {field} {attribute} {factor} />
+				{/each}
+			{:else}
+				<EvalFactor bind:factor {field} {attribute} />
+			{/if}
 		</Collapsable>
 	{/each}
 </div>
