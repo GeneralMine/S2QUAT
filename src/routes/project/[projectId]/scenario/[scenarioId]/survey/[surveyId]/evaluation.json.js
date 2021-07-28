@@ -77,74 +77,65 @@ export async function get(request) {
             }
         });
 
+        let fieldIds = survey.questions.map(el => {
+            if (el.factor)
+                return el.factor.attribute.fieldId;
+            else
+                return el.criteria.factor.attribute.fieldId;
+        }).filter(el => el);
+        console.log(fieldIds);
+        let attributeIds = survey.questions.map(el => {
+            if (el.factor)
+                return el.factor.attributeId;
+            else
+                return el.criteria.factor.attributeId;
+        }).filter(el => el);
         let factorIds = survey.questions.map(el => el.factorId).filter(el => el);
-        let criteriaIds = survey.questions.map(el => el.criteriaId).filter(el => el);
         let questionIds = survey.questions.map(el => el.id).filter(el => el);
 
         // 1: Build tree based on model
 
         let evaluation = await prisma.field.findMany({
             where: {
-                attributes: {
-                    some: {
-                        factors: {
-                            some: {
-                                id: { in: factorIds },
-                                OR: {
-                                    criterias: {
-                                        some: {
-                                            id: { in: criteriaIds }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                id: { in: fieldIds }
             },
             include: {
                 attributes: {
+                    where: {
+                        id: { in: attributeIds }
+                    },
                     include: {
                         factors: {
-                            include: {
-                                criterias: {
-                                    include: {
-                                        questions: {
-                                            where: {
-                                                id: { in: questionIds },
-                                                type: {
-                                                    in: ["SCORE", "SCORE_TEXT"]
+                            where: {
+                                OR: [
+                                    {
+                                        id: { in: factorIds }
+                                    },
+                                    {
+                                        criterias: {
+                                            some: {
+                                                questions: {
+                                                    some: {
+                                                        id: { in: questionIds }
+                                                    }
                                                 }
                                             }
                                         }
-                                    },
-                                    where: {
-                                        id: { in: criteriaIds }
                                     }
-                                }
+                                ]
                             },
-                            where: {
-                                some: {
-                                    id: { in: factorIds },
-                                    OR: {
-                                        criterias: {
-                                            some: {
-                                                id: { in: criteriaIds }
-                                            }
-                                        }
+                            include: {
+                                questions: {
+                                    where: {
+                                        id: { in: questionIds }
                                     }
-                                }
-                            }
-                        }
-                    },
-                    where: {
-                        factors: {
-                            some: {
-                                id: { in: factorIds },
-                                OR: {
-                                    criterias: {
-                                        some: {
-                                            id: { in: criteriaIds }
+                                },
+                                criterias: {
+                                    where: {
+                                        questions: {
+                                            some: {
+                                                id: { in: questionIds }
+                                            }
                                         }
                                     }
                                 }
@@ -153,50 +144,10 @@ export async function get(request) {
                     }
                 }
             },
+            orderBy: {
+                order: "asc"
+            }
         });
-
-        // let evaluation = await prisma.field.findMany({
-        //     where: {
-        //         attributes: {
-        //             some: {
-        //                 factors: {
-        //                     some: {
-        //                         id: { in: factorIds },
-        //                         OR: {
-        //                             criterias: {
-        //                                 some: {
-        //                                     id: { in: criteriaIds }
-        //                                 }
-        //                             }
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     },
-        //     include: {
-        //         attributes: {
-        //             include: {
-        //                 factors: {
-        //                     include: {
-        //                         questions: {
-        //                             where: {
-        //                                 id: { in: questionIds },
-        //                                 AND: {
-        //                                     type: {
-        //                                         in: ["SCORE", "SCORE_TEXT"],
-        //                                     }
-        //                                 }
-        //                             }
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-        // });
-
-        console.log("after 1", evaluation);
 
         // 2: Merge with questions
         for (const question of survey.questions) {
@@ -237,8 +188,6 @@ export async function get(request) {
                 }
             }
         }
-
-        console.log("after 2", evaluation);
 
         return send({ survey, evaluation });
     } catch (err) {
