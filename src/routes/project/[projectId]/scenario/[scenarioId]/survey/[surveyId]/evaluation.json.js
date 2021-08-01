@@ -182,43 +182,51 @@ export async function get(request) {
                 data.sort();
 
                 for (const field of evaluation) {
-                    // add field check
-                    for (const attribute of field.attributes) {
-                        // add attribute check
-                        for (const factor of attribute.factors) {
-                            // add factor check
-                            if (factor.questions.length > 0) {
-                                factor.question = factor.questions[0];
-                                console.log(factor.question);
-                                console.log(data);
-                                delete factor.questions;
-                                factor.question.absoluteFrequency = absoluteFrequency(data);
-                                factor.question.relativeFrequency = relativeFrequency(data);
-                                factor.question.average = average(data);
-                                factor.question.median = median(data);
-                                factor.question.modus = modus(data);
-                                factor.question.variance = variance(data);
-                                factor.question.min = min(data);
-                                factor.question.max = max(data);
-                                factor.question.lowerQuartile = lowerQuartile(data);
-                                factor.question.upperQuartile = upperQuartile(data);
-                                factor.question.n = data.length;
-                            } else {
-                                for (const criteria of factor.criterias) {
-                                    criteria.question = criteria.questions[0];
-                                    delete criteria.questions;
-                                    console.log(criteria.question);
-                                    criteria.question.absoluteFrequency = absoluteFrequency(data);
-                                    criteria.question.relativeFrequency = relativeFrequency(data);
-                                    criteria.question.average = average(data);
-                                    criteria.question.median = median(data);
-                                    criteria.question.modus = modus(data);
-                                    criteria.question.variance = variance(data);
-                                    criteria.question.min = min(data);
-                                    criteria.question.max = max(data);
-                                    criteria.question.lowerQuartile = lowerQuartile(data);
-                                    criteria.question.upperQuartile = upperQuartile(data);
-                                    criteria.question.n = data.length;
+                    // find field
+                    if ((question.criteria && question.criteria.factor.attribute.fieldId === field.id) || (question.factor && question.factor.attribute.fieldId === field.id)) {
+                        for (const attribute of field.attributes) {
+                            // find attribute
+                            if ((question.criteria && question.criteria.factor.attributeId === attribute.id) || (question.factor && question.factor.attributeId === attribute.id)) {
+                                for (const factor of attribute.factors) {
+                                    // find factor
+                                    if ((question.criteria && question.criteria.factorId === factor.id) || (question.factor && question.factorId === factor.id)) {
+                                        if (factor.questions.length > 0) {
+                                            factor.question = factor.questions[0];
+                                            delete factor.questions;
+                                            factor.question.data = data;
+                                            factor.question.absoluteFrequency = absoluteFrequency(data);
+                                            factor.question.relativeFrequency = relativeFrequency(data);
+                                            factor.question.average = average(data);
+                                            factor.question.median = median(data);
+                                            factor.question.modus = modus(data);
+                                            factor.question.variance = variance(data);
+                                            factor.question.min = min(data);
+                                            factor.question.max = max(data);
+                                            factor.question.lowerQuartile = lowerQuartile(data);
+                                            factor.question.upperQuartile = upperQuartile(data);
+                                            factor.question.n = data.length;
+                                        } else {
+                                            for (const criteria of factor.criterias) {
+                                                // find criteria
+                                                if (question.criteriaId === criteria.id) {
+                                                    criteria.question = criteria.questions[0];
+                                                    delete criteria.questions;
+                                                    criteria.question.data = data;
+                                                    criteria.question.absoluteFrequency = absoluteFrequency(data);
+                                                    criteria.question.relativeFrequency = relativeFrequency(data);
+                                                    criteria.question.average = average(data);
+                                                    criteria.question.median = median(data);
+                                                    criteria.question.modus = modus(data);
+                                                    criteria.question.variance = variance(data);
+                                                    criteria.question.min = min(data);
+                                                    criteria.question.max = max(data);
+                                                    criteria.question.lowerQuartile = lowerQuartile(data);
+                                                    criteria.question.upperQuartile = upperQuartile(data);
+                                                    criteria.question.n = data.length;
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }

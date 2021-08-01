@@ -11,10 +11,8 @@
 	<p class="textBlock">{attribute.description}</p>
 	{#each attribute.factors as factor}
 		<Collapsable title={factor.name} expanded={true}>
-			{#if factor.questions.length > 0}
-				{#each factor.questions as question}
-					<EvalQuestion bind:question {field} {attribute} {factor} />
-				{/each}
+			{#if factor.question}
+				<EvalQuestion bind:question={factor.question} {field} {attribute} {factor} />
 			{:else}
 				<EvalFactor bind:factor {field} {attribute} />
 			{/if}

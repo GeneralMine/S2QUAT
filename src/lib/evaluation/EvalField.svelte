@@ -10,12 +10,7 @@
 	<div class="container">
 		<p class="textBlock">{field.description}</p>
 		{#each field.attributes as attribute}
-			<Collapsable
-				title={`${attribute.name} (${attribute.factors.reduce(
-					(accumulator, question) => accumulator + (question.answer && Object.keys(question.answer).length ? 1 : 0),
-					0
-				)}/${attribute.factors.length})`}
-			>
+			<Collapsable title={`${attribute.name}`}>
 				<EvalAttribute bind:attribute {field} expanded={true} />
 			</Collapsable>
 		{/each}

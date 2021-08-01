@@ -36,6 +36,9 @@
 				{/if}
 			</div>
 		{/if}
+		<div>
+			<slot name="header" />
+		</div>
 	</div>
 	<div class="content">
 		{#if expanded}

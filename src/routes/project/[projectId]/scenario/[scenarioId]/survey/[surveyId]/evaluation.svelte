@@ -52,13 +52,9 @@
 <Overview />
 
 <Surface title="Der Fragebogen" smallTitle={true} padding={true} margin={true}>
-	{#each survey.fields as field}
-		<Surface title={field.name} edit={true}>
-			<div>
-				<EvalField bind:field expanded={true} />
-				<hr />
-			</div>
-		</Surface>
+	{#each evaluation as field}
+		<EvalField bind:field expanded={true} />
+		<hr />
 	{/each}
 </Surface>
 
