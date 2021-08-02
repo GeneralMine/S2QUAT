@@ -109,7 +109,21 @@
 <div class="surveyContainer">
 	<CardRow title={survey.name}>
 		<NumberCard title="Anzahl Abgaben" value={survey.responses.length} />
-		<PieCard title="Valide Abgaben" />
+		<PieCard
+			title="Valide Abgaben"
+			dataset={Object.values(
+				survey.responses.reduce(
+					(acc, el) => {
+						if (el.type === 'VALID') acc.valid++;
+						else if (el.type === 'INVALID') acc.invalid++;
+						return acc;
+					},
+					{ valid: 0, invalid: 0 }
+				)
+			)}
+			labels={['Valide', 'Invalide']}
+			colorset={2}
+		/>
 		<PieCard
 			clickArea={true}
 			on:click={() => goto(`/project/${project.id}/scenario/${scenario.id}/survey/${survey.id}/evaluation`)}

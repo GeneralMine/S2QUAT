@@ -7,9 +7,9 @@
 	export let dataset = [32, 10, 8];
 	let colors = [
 		[
-			'#B60A1C', // rot
+			'#309143', // grün
 			'#F0BD27', // gelb
-			'#309143' // grün
+			'#B60A1C' // rot
 		],
 		[
 			'#B60A1C', // rot
@@ -17,6 +17,10 @@
 			'#F0BD27', // gelb
 			'#51B364', // blau
 			'#309143' // grün
+		],
+		[
+			'#309143', // grün
+			'#B60A1C' // rot
 		]
 	];
 	export let colorset = 0;
