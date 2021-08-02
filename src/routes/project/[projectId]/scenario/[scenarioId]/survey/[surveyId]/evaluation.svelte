@@ -24,13 +24,13 @@
 	export let scenario;
 	export let survey;
 	export let evaluation;
-	console.log(evaluation);
 
 	import Overview from '$lib/Model/Overview.svelte';
 	/*******************************************/
 	import { crumbs, CrumbBuilder } from '$lib/Layout/Nav/Breadcrumbs/breadcrumbs';
 	import Surface from '$lib/Common/Surface.svelte';
 	import EvalField from '$lib/evaluation/EvalField.svelte';
+	import Model from '$lib/Model/Model.svelte';
 	$crumbs = [];
 	if (project.company) {
 		$crumbs = [CrumbBuilder.create(project.company.name, `/company/${project.company.id}`, 'company').build()];
@@ -46,10 +46,16 @@
 </script>
 
 <svelte:head>
-	<title>Modell | S2QUAT</title>
+	<title>Evaluation - {survey.name} | S2QUAT</title>
 </svelte:head>
+<h1>Evaluation - {survey.name}</h1>
 
-<Overview />
+<Surface>
+	<Overview />
+	<div class="dataModel">
+		<Model />
+	</div>
+</Surface>
 
 <Surface title="Der Fragebogen" smallTitle={true} padding={true} margin={true}>
 	{#each evaluation as field}
@@ -59,4 +65,14 @@
 </Surface>
 
 <style>
+	.dataModel {
+		width: 100%;
+		height: 400px;
+		transform: scale(0.6);
+		-webkit-transform: scale(0.6);
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+		justify-content: center;
+	}
 </style>

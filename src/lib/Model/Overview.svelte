@@ -5,7 +5,7 @@
 	const levels = ['Bewertungsfelder', 'Qualitätsmerkmale', 'Qualitätsbestimmende Faktoren', 'Bewertungskriterien'];
 </script>
 
-<Surface>
+<div class="overviewContainer">
 	<div style="display: flex; flex-direction: row; align-items: center; padding: 1em;">
 		<div style="flex-flow: 1; flex-grow: 1; display: flex; flex-direction: row; align-items: center;">
 			{#each colors as color, i}
@@ -20,4 +20,12 @@
 			{/each}
 		</div>
 	</div>
-</Surface>
+</div>
+
+<style>
+	.overviewContainer {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+</style>

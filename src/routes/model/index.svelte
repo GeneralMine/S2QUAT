@@ -12,7 +12,9 @@
 	<title>Modell | S2QUAT</title>
 </svelte:head>
 
-<Overview />
+<Surface>
+	<Overview />
+</Surface>
 
 <Surface>
 	<Model />

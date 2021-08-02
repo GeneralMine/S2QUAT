@@ -31,7 +31,7 @@
 				<div class="chart">
 					<PieChart
 						dataset={Object.values(question.absoluteFrequency)}
-						labels={Object.keys(question.absoluteFrequency).map((el) => el + ' ' + (question.relativeFrequency[el] + 100) + '%')}
+						labels={Object.keys(question.absoluteFrequency).map((el) => el + ' ' + (question.relativeFrequency[el] * 100).toFixed(0) + '%')}
 						position="right"
 						align="center"
 						title="Häufigkeit"
