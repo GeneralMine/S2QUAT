@@ -6,11 +6,11 @@
 	export let labels = ['Niedrig', 'Mittel', 'Hoch'];
 	export let dataset = [32, 10, 8];
 	export let colors = [
-		'#C72B1C', // rot
-		'#E07626', // hellblau
-		'#F7C137', // gelb
-		'#E0D826', // blau
-		'#70FC2B' // grün
+		'#B60A1C', // rot
+		'#E03531', // hellblau
+		'#F0BD27', // gelb
+		'#51B364', // blau
+		'#309143' // grün
 	];
 	export let position = 'left';
 	export let align = 'start';
