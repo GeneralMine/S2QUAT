@@ -94,6 +94,7 @@ button:hover:not(:disabled) {
 
 button:disabled {
     background-color: #444444;
+    cursor: default;
 }
 
 /* 
