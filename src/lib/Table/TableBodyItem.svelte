@@ -5,7 +5,7 @@
 	export let imgName;
 	let item;
 
-	$: item !== 'null' ? (item !== undefined ? (item.textContent = parseEnumToEmoji(item.textContent)) : item) : '-';
+	$: item !== undefined ? (item.textContent !== 'null' ? (item.textContent = parseEnumToEmoji(item.textContent)) : (item.textContent = '-')) : item;
 </script>
 
 <td>
