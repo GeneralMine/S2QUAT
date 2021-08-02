@@ -31,8 +31,8 @@
 					Geschlecht:
 					<select bind:value={testperson.testpersonSex}>
 						<option value={null}>Keine Angabe</option>
-						<option value="FEMALE">Frau</option>
-						<option value="MALE">Mann</option>
+						<option value="FEMALE">Weiblich</option>
+						<option value="MALE">Männlich</option>
 						<option value="NON_BINARY">Nicht binär</option>
 					</select>
 				</label>
