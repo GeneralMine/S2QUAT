@@ -80,13 +80,13 @@ export async function get(request) {
         let fieldIds = survey.questions.map(el => {
             if (el.factor)
                 return el.factor.attribute.fieldId;
-            else
+            else if (el.criteria)
                 return el.criteria.factor.attribute.fieldId;
         }).filter(el => el);
         let attributeIds = survey.questions.map(el => {
             if (el.factor)
                 return el.factor.attributeId;
-            else
+            else if (el.criteria)
                 return el.criteria.factor.attributeId;
         }).filter(el => el);
         let factorIds = survey.questions.map(el => el.factorId).filter(el => el);
