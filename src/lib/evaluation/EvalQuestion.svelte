@@ -35,6 +35,7 @@
 						position="right"
 						align="center"
 						title="Häufigkeit"
+						colorset={1}
 					/>
 				</div>
 				<div class="boxplot">

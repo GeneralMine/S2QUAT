@@ -5,16 +5,24 @@
 	export let title;
 	export let labels = ['Niedrig', 'Mittel', 'Hoch'];
 	export let dataset = [32, 10, 8];
-	export let colors = [
-		'#B60A1C', // rot
-		'#E03531', // hellblau
-		'#F0BD27', // gelb
-		'#51B364', // blau
-		'#309143' // grün
+	let colors = [
+		[
+			'#B60A1C', // rot
+			'#F0BD27', // gelb
+			'#309143' // grün
+		],
+		[
+			'#B60A1C', // rot
+			'#E03531', // hellblau
+			'#F0BD27', // gelb
+			'#51B364', // blau
+			'#309143' // grün
+		]
 	];
+	export let colorset = 0;
 	export let position = 'left';
 	export let align = 'start';
-
+	colorset = colors[colorset];
 	let id = randomID();
 
 	let data = {
@@ -23,7 +31,7 @@
 			{
 				label: title,
 				data: dataset,
-				backgroundColor: colors,
+				backgroundColor: colorset,
 				borderWidth: 1
 			}
 		]

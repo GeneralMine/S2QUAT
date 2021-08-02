@@ -7,11 +7,12 @@
 	export let icon;
 	export let labels = ['Niedrig', 'Mittel', 'Hoch'];
 	export let dataset = [32, 10, 8];
+	export let colorset = 0;
 </script>
 
 <TitledIconCard on:click {clickArea} {title} {icon}>
 	<div class="chart">
-		<PieChart {dataset} {labels} />
+		<PieChart {dataset} {labels} {colorset} />
 	</div>
 </TitledIconCard>
 
