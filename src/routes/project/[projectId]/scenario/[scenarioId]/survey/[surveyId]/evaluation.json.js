@@ -190,7 +190,8 @@ export async function get(request) {
                                 for (const factor of attribute.factors) {
                                     // find factor
                                     if ((question.criteria && question.criteria.factorId === factor.id) || (question.factor && question.factorId === factor.id)) {
-                                        if (factor.questions.length > 0) {
+                                        // checking for questions, because when a factor got transformed it loses the questions field so the if was throwing an error! Its connected to issue #65
+                                        if (factor.questions && factor.questions.length > 0) {
                                             factor.question = factor.questions[0];
                                             delete factor.questions;
                                             factor.question.data = data;
