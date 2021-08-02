@@ -52,7 +52,7 @@
 	}
 	.row {
 		align-items: center;
-		justify-content: space-between;
+		justify-content: space-evenly;
 		padding-left: 0.5rem;
 		padding-right: 0.5rem;
 	}
