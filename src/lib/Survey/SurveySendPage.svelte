@@ -52,7 +52,7 @@
 		</div>
 		<div class="testPersonFormPrivacy">
 			<div class="testPersonFormSignature">
-				<input type="checkbox" on:change={check} />
+				<input class="testPersonFormSignatureCheckbox" type="checkbox" on:change={check} />
 			</div>
 			<p class="privacyNotice">
 				Mit einem Klick auf die Checkbox und auf Senden werden deine Informationen entsprechend unserer <a href="/privacy">
@@ -100,6 +100,9 @@
 		align-items: center;
 	}
 	.testPersonFormSignature {
+		height: 100%;
+	}
+	.testPersonFormSignatureCheckbox {
 		height: 100%;
 	}
 	.privacyNotice {
