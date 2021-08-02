@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 
 	export let title = 'Handlungsbedarf';
-	export let labels = ['First'];
+	export let labels = [''];
 	export let dataArray;
 	export let position = 'left';
 	export let align = 'start';
