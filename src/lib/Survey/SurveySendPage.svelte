@@ -104,6 +104,7 @@
 	}
 	.testPersonFormSignatureCheckbox {
 		height: 100%;
+		width: auto;
 	}
 	.privacyNotice {
 		height: 100%;
