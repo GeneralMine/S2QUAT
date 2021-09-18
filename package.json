@@ -3,15 +3,15 @@
   "version": "2.1.0",
   "description": "Frontend for S2QUAT an Integrative Quality Framework for Developing Industrial Smart Services",
   "keywords": [],
-  "homepage": "https://github.com/GeneralMine/S2QUAT#readme",
-  "bugs": {
-    "url": "https://github.com/GeneralMine/S2QUAT/issues"
-  },
   "license": "GPL-3.0-or-later",
   "author": "Marvin Raiser <marvin@raiser.dev> (https://github.com/GeneralMine)",
+  "homepage": "https://github.com/GeneralMine/S2QUAT#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GeneralMine/S2QUAT.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GeneralMine/S2QUAT/issues"
   },
   "scripts": {
     "dev": "env-cmd svelte-kit dev",
