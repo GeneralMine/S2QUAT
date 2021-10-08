@@ -56,8 +56,6 @@
 		font-size: 18px;
 	}
 	.surfaceContent {
-		border-width: 1px;
-		border-color: #2e5bff;
 		border-radius: 12px;
 		margin-bottom: 1em;
 		margin-left: 1em;
