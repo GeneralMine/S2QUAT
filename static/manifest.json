@@ -1,11 +1,12 @@
 {
-	"background_color": "#ffffff",
-	"theme_color": "#333333",
 	"name": "S2QUAT",
 	"short_name": "S2QUAT",
+	"description": "S2QUAT an Integrative Quality Framework for Developing Industrial Smart Services",
+	"background_color": "#ffffff",
+	"theme_color": "#333333",
 	"display": "minimal-ui",
-	"start_url": "/",
 	"scope": "/",
+	"start_url": "/",
 	"icons": [
 		{
 			"src": "logo-192.png",
@@ -91,6 +92,5 @@
 				}
 			]
 		}
-	],
-	"description": "S2QUAT an Integrative Quality Framework for Developing Industrial Smart Services"
+	]
 }
